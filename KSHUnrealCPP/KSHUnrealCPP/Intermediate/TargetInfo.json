@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "KSHUnrealCPP",
+			"Path": "..\\Source\\KSHUnrealCPP.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "KSHUnrealCPPEditor",
+			"Path": "..\\Source\\KSHUnrealCPPEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

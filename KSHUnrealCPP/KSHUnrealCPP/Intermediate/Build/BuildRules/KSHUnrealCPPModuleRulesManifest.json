@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"C:\\Users\\KGA\\Documents\\Unreal Projects\\KSHUnrealCPP\\KSHUnrealCPP\\Source\\KSHUnrealCPP\\KSHUnrealCPP.Build.cs",
+		"C:\\Users\\KGA\\Documents\\Unreal Projects\\KSHUnrealCPP\\KSHUnrealCPP\\Source\\KSHUnrealCPP.Target.cs",
+		"C:\\Users\\KGA\\Documents\\Unreal Projects\\KSHUnrealCPP\\KSHUnrealCPP\\Source\\KSHUnrealCPPEditor.Target.cs"
+	],
+	"EngineVersion": "5.5.4"
+}
