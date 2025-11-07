@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\KSHUnrealCPP.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\KSHUnrealCPP.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\KSHUnrealCPPEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.editorconfig" />
+    <None Include="..\..\.vsconfig" />
+    <None Include="..\..\shadertoolsconfig.json" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\KSHUnrealCPP">
+      <UniqueIdentifier>{5C36DF1E-D8A6-3145-BB0B-7225D2B95B35}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\KSHUnrealCPP\KSHUnrealCPP.Build.cs">
+      <Filter>Source\KSHUnrealCPP</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\KSHUnrealCPP.cpp">
+      <Filter>Source\KSHUnrealCPP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\KSHUnrealCPP.h">
+      <Filter>Source\KSHUnrealCPP</Filter>
+    </ClCompile>
+    <Filter Include="Source\KSHUnrealCPP\Private">
+      <UniqueIdentifier>{EBE8FCA5-167C-3FA5-980A-2C0D2E44A175}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\TestActor.cpp">
+      <Filter>Source\KSHUnrealCPP\Private</Filter>
+    </ClCompile>
+    <Filter Include="Source\KSHUnrealCPP\Public">
+      <UniqueIdentifier>{D8B4268F-54F4-3015-9571-AEC72300CA74}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\TestActor.h">
+      <Filter>Source\KSHUnrealCPP\Public</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
