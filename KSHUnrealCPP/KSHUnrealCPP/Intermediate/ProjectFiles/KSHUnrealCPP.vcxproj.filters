@@ -44,14 +44,32 @@
     <Filter Include="Source\KSHUnrealCPP\Private">
       <UniqueIdentifier>{EBE8FCA5-167C-3FA5-980A-2C0D2E44A175}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\TestActor.cpp">
-      <Filter>Source\KSHUnrealCPP\Private</Filter>
+    <Filter Include="Source\KSHUnrealCPP\Private\Test">
+      <UniqueIdentifier>{B2A58F7B-DA69-3DAD-B946-C5FEA4E33CA6}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\Test\FloatingActor2.cpp">
+      <Filter>Source\KSHUnrealCPP\Private\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\Test\FloatingActor_Curve.cpp">
+      <Filter>Source\KSHUnrealCPP\Private\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\Test\TestActor.cpp">
+      <Filter>Source\KSHUnrealCPP\Private\Test</Filter>
     </ClCompile>
     <Filter Include="Source\KSHUnrealCPP\Public">
       <UniqueIdentifier>{D8B4268F-54F4-3015-9571-AEC72300CA74}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\TestActor.h">
-      <Filter>Source\KSHUnrealCPP\Public</Filter>
+    <Filter Include="Source\KSHUnrealCPP\Public\Test">
+      <UniqueIdentifier>{D237FB67-9A16-319C-A0CD-F619E6771EFE}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\Test\FloatingActor2.h">
+      <Filter>Source\KSHUnrealCPP\Public\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\Test\FloatingActor_Curve.h">
+      <Filter>Source\KSHUnrealCPP\Public\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\Test\TestActor.h">
+      <Filter>Source\KSHUnrealCPP\Public\Test</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

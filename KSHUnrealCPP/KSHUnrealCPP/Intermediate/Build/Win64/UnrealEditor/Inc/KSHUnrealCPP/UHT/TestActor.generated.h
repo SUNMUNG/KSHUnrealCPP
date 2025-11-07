@@ -4,7 +4,7 @@
 	DO NOT modify this manually! Edit the corresponding .h files instead!
 ===========================================================================*/
 
-// IWYU pragma: private, include "TestActor.h"
+// IWYU pragma: private, include "Test/TestActor.h"
 #include "UObject/ObjectMacros.h"
 #include "UObject/ScriptMacros.h"
 
@@ -14,7 +14,14 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define KSHUNREALCPP_TestActor_generated_h
 
-#define FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_TestActor_h_12_INCLASS_NO_PURE_DECLS \
+#define FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Test_TestActor_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual void Test_BlueprintNativeEvent_Implementation(); \
+	DECLARE_FUNCTION(execTest_BlueprintNativeEvent); \
+	DECLARE_FUNCTION(execTest_UFunction);
+
+
+#define FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Test_TestActor_h_16_CALLBACK_WRAPPERS
+#define FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Test_TestActor_h_16_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesATestActor(); \
 	friend struct Z_Construct_UClass_ATestActor_Statics; \
@@ -23,7 +30,7 @@ public: \
 	DECLARE_SERIALIZER(ATestActor)
 
 
-#define FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_TestActor_h_12_ENHANCED_CONSTRUCTORS \
+#define FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Test_TestActor_h_16_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	ATestActor(ATestActor&&); \
@@ -35,12 +42,14 @@ public: \
 	NO_API virtual ~ATestActor();
 
 
-#define FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_TestActor_h_9_PROLOG
-#define FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_TestActor_h_12_GENERATED_BODY \
+#define FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Test_TestActor_h_13_PROLOG
+#define FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Test_TestActor_h_16_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_TestActor_h_12_INCLASS_NO_PURE_DECLS \
-	FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_TestActor_h_12_ENHANCED_CONSTRUCTORS \
+	FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Test_TestActor_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Test_TestActor_h_16_CALLBACK_WRAPPERS \
+	FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Test_TestActor_h_16_INCLASS_NO_PURE_DECLS \
+	FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Test_TestActor_h_16_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -48,7 +57,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> KSHUNREALCPP_API UClass* StaticClass<class ATestActor>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_TestActor_h
+#define CURRENT_FILE_ID FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Test_TestActor_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
