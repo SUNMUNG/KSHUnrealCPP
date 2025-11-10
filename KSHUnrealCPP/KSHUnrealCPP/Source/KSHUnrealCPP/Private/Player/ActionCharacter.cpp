@@ -5,6 +5,7 @@
 #include "EnhancedInputComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
 AActionCharacter::AActionCharacter()
@@ -22,18 +23,21 @@ AActionCharacter::AActionCharacter()
 	Camera->SetRelativeRotation(FRotator(-20.0f, 0.0f, 0.0f));
 	
 	SpringArm->bUsePawnControlRotation = true;
+	bUseControllerRotationYaw = false;
 	
-	//Camera->AddLocalOffset(FVector(0, 0, 150));
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+	GetCharacterMovement()->RotationRate = FRotator(0,360,0);
+	
+
+
+	
+	
 }
 
 // Called when the game starts or when spawned
 void AActionCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	
-
-	
 }
 
 // Called every frame
@@ -51,7 +55,6 @@ void AActionCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	UEnhancedInputComponent* enhanced = Cast< UEnhancedInputComponent>(PlayerInputComponent);
 	if (enhanced) { //입력 컴포넌트가 향상된 입력 컴포넌트일 때 
 		enhanced->BindAction(IA_Move, ETriggerEvent::Triggered, this, &AActionCharacter::OnMoveInput);
-		enhanced->BindAction(IA_Look, ETriggerEvent::Triggered, this, &AActionCharacter::OnCameraLook);
 
 	}
 }
@@ -59,11 +62,9 @@ void AActionCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 void AActionCharacter::OnMoveInput(const FInputActionValue& Invalue)
 {
 	FVector2D inputDir = Invalue.Get<FVector2d>();
-	FVector CameraForward = Camera->GetForwardVector();
-	FVector CameraRight = Camera->GetRightVector();
 
-	FVector DirWS = inputDir.Y * CameraForward;
-	FVector DirAD = inputDir.X * CameraRight;
+	FVector DirWS = inputDir.Y * Camera->GetForwardVector();
+	FVector DirAD = inputDir.X * Camera->GetRightVector();
 
 	FVector Dir = DirWS + DirAD;
 
@@ -71,16 +72,5 @@ void AActionCharacter::OnMoveInput(const FInputActionValue& Invalue)
 	AddMovementInput(Dir);
 }
 
-void AActionCharacter::OnCameraLook(const FInputActionValue& Invalue)
-{
-	FVector2D lookDir = Invalue.Get<FVector2d>();
-	UE_LOG(LogTemp, Log, TEXT("Dir : (%.1f, %.1f)"), lookDir.X, lookDir.Y);
-	UE_LOG(LogTemp, Log, TEXT("Dir : (%s)"), *lookDir.ToString());
 
-
-	//AddControllerRollInput(lookDir.X);
-	AddControllerYawInput(lookDir.X);
-	AddControllerPitchInput(-lookDir.Y);
-
-}
 

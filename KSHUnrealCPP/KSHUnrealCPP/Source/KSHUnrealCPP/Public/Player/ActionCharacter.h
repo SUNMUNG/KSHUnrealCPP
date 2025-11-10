@@ -6,7 +6,6 @@
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
 #include "ActionCharacter.generated.h"
-
 class UInputAction;
 class USpringArmComponent;
 class UCameraComponent;
@@ -31,15 +30,12 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 protected:
 	void OnMoveInput(const FInputActionValue& Invalue);
-	void OnCameraLook(const FInputActionValue& Invalue);
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USpringArmComponent* SpringArm;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UCameraComponent* Camera;
 	UPROPERTY(EditAnywhere,BlueprintReadOnly)
 	TObjectPtr<UInputAction> IA_Move;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TObjectPtr<UInputAction> IA_Look;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float Speed = 5;
 

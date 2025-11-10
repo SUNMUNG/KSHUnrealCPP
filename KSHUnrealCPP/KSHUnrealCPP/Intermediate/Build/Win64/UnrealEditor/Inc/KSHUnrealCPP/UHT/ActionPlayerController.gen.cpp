@@ -11,6 +11,7 @@ void EmptyLinkFunctionForGeneratedCodeActionPlayerController() {}
 
 // Begin Cross Module References
 ENGINE_API UClass* Z_Construct_UClass_APlayerController();
+ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputAction_NoRegister();
 ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputMappingContext_NoRegister();
 KSHUNREALCPP_API UClass* Z_Construct_UClass_AActionPlayerController();
 KSHUNREALCPP_API UClass* Z_Construct_UClass_AActionPlayerController_NoRegister();
@@ -37,12 +38,27 @@ struct Z_Construct_UClass_AActionPlayerController_Statics
 		{ "IncludePath", "Player/ActionPlayerController.h" },
 		{ "ModuleRelativePath", "Public/Player/ActionPlayerController.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_IA_Look_MetaData[] = {
+		{ "Category", "ActionPlayerController" },
+		{ "ModuleRelativePath", "Public/Player/ActionPlayerController.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DefaultMappingContext_MetaData[] = {
 		{ "Category", "ActionPlayerController" },
 		{ "ModuleRelativePath", "Public/Player/ActionPlayerController.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ViewMax_MetaData[] = {
+		{ "Category", "ActionPlayerController" },
+		{ "ModuleRelativePath", "Public/Player/ActionPlayerController.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ViewMin_MetaData[] = {
+		{ "Category", "ActionPlayerController" },
+		{ "ModuleRelativePath", "Public/Player/ActionPlayerController.h" },
+	};
 #endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_IA_Look;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_DefaultMappingContext;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_ViewMax;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_ViewMin;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -50,9 +66,15 @@ struct Z_Construct_UClass_AActionPlayerController_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AActionPlayerController_Statics::NewProp_IA_Look = { "IA_Look", nullptr, (EPropertyFlags)0x0124080000000015, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionPlayerController, IA_Look), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_IA_Look_MetaData), NewProp_IA_Look_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AActionPlayerController_Statics::NewProp_DefaultMappingContext = { "DefaultMappingContext", nullptr, (EPropertyFlags)0x0124080000000015, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionPlayerController, DefaultMappingContext), Z_Construct_UClass_UInputMappingContext_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DefaultMappingContext_MetaData), NewProp_DefaultMappingContext_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionPlayerController_Statics::NewProp_ViewMax = { "ViewMax", nullptr, (EPropertyFlags)0x0020080000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionPlayerController, ViewMax), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ViewMax_MetaData), NewProp_ViewMax_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionPlayerController_Statics::NewProp_ViewMin = { "ViewMin", nullptr, (EPropertyFlags)0x0020080000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionPlayerController, ViewMin), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ViewMin_MetaData), NewProp_ViewMin_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AActionPlayerController_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionPlayerController_Statics::NewProp_IA_Look,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionPlayerController_Statics::NewProp_DefaultMappingContext,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionPlayerController_Statics::NewProp_ViewMax,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionPlayerController_Statics::NewProp_ViewMin,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AActionPlayerController_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_AActionPlayerController_Statics::DependentSingletons[])() = {
@@ -96,10 +118,10 @@ AActionPlayerController::~AActionPlayerController() {}
 struct Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionPlayerController_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AActionPlayerController, AActionPlayerController::StaticClass, TEXT("AActionPlayerController"), &Z_Registration_Info_UClass_AActionPlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AActionPlayerController), 1950488313U) },
+		{ Z_Construct_UClass_AActionPlayerController, AActionPlayerController::StaticClass, TEXT("AActionPlayerController"), &Z_Registration_Info_UClass_AActionPlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AActionPlayerController), 130174742U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionPlayerController_h_2789467541(TEXT("/Script/KSHUnrealCPP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionPlayerController_h_3679357143(TEXT("/Script/KSHUnrealCPP"),
 	Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionPlayerController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionPlayerController_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
