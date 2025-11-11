@@ -63,13 +63,19 @@ void AActionCharacter::OnMoveInput(const FInputActionValue& Invalue)
 {
 	FVector2D inputDir = Invalue.Get<FVector2d>();
 
-	FVector DirWS = inputDir.Y * Camera->GetForwardVector();
-	FVector DirAD = inputDir.X * Camera->GetRightVector();
+	FVector CameraForward = FVector(Camera->GetForwardVector().X, Camera->GetForwardVector().Y, 0);
+	FVector CameraRight = FVector(Camera->GetRightVector().X, Camera->GetRightVector().Y, 0);
+
+	FVector DirWS = inputDir.Y * CameraForward;
+	FVector DirAD = inputDir.X * CameraRight;
 
 	FVector Dir = DirWS + DirAD;
 
+	Dir.Normalize(0.001f);
+	
+
 	//SetActorLocation(GetActorLocation() + FVector(inputDir.Y* Speed, inputDir.X* Speed, 0));
-	AddMovementInput(Dir);
+	AddMovementInput(FVector(Dir.X,Dir.Y,0));
 }
 
 

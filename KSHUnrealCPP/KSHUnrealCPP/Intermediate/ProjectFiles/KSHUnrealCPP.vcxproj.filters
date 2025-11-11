@@ -47,6 +47,9 @@
     <Filter Include="Source\KSHUnrealCPP\Private\Player">
       <UniqueIdentifier>{79423BB3-B3A1-3931-A3C6-668BD67968FC}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\Player\ActionAnimInstance.cpp">
+      <Filter>Source\KSHUnrealCPP\Private\Player</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\Player\ActionCharacter.cpp">
       <Filter>Source\KSHUnrealCPP\Private\Player</Filter>
     </ClCompile>
@@ -74,6 +77,9 @@
     <Filter Include="Source\KSHUnrealCPP\Public\Player">
       <UniqueIdentifier>{5110FA7F-C971-36BE-8607-23F33A2DB1E3}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\Player\ActionAnimInstance.h">
+      <Filter>Source\KSHUnrealCPP\Public\Player</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\Player\ActionCharacter.h">
       <Filter>Source\KSHUnrealCPP\Public\Player</Filter>
     </ClCompile>

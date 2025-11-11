@@ -29,9 +29,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TObjectPtr< UInputMappingContext> DefaultMappingContext = nullptr;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float ViewMax = 30.0f;
+	float ViewMax = 50.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float ViewMin = -40.0f;
+	float ViewMin = -50.0f;
 
 private:
 	int32 GameInputPriority=1;
