@@ -30,13 +30,36 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 protected:
 	void OnMoveInput(const FInputActionValue& Invalue);
+	
+
+	void SetSprintMode();
+	void SetWalkMode();
+
+	void SetSprintModeF();
+	void SetWalkModeF();
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	USpringArmComponent* SpringArm;
+	USpringArmComponent* SpringArm = nullptr;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UCameraComponent* Camera;
+	UCameraComponent* Camera = nullptr;
+
 	UPROPERTY(EditAnywhere,BlueprintReadOnly)
-	TObjectPtr<UInputAction> IA_Move;
+	TObjectPtr<UInputAction> IA_Move= nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TObjectPtr<UInputAction> IA_Sprint= nullptr;
+
+	UPROPERTY(EditAnywhere,BlueprintReadOnly)
+
+	float SprintSpeed = 1200.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+
+	float WalkSpeed = 600.0f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float Speed = 5;
 
+	float time = 0.0f;
 };

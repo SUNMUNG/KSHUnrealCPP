@@ -25,6 +25,6 @@ protected:
 
 	
 private:
-	TWeakObjectPtr<const UPawnMovementComponent> OwnerMovementComponent;
+	TWeakObjectPtr<const UPawnMovementComponent> OwnerMovementComponent=nullptr;
 	
 };

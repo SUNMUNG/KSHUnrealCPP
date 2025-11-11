@@ -27,7 +27,8 @@ AActionCharacter::AActionCharacter()
 	
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0,360,0);
-	
+	GetCharacterMovement()->MaxAcceleration = 1000.0f;
+
 
 
 	
@@ -45,6 +46,7 @@ void AActionCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	time = DeltaTime;
 }
 
 // Called to bind functionality to input
@@ -55,6 +57,12 @@ void AActionCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	UEnhancedInputComponent* enhanced = Cast< UEnhancedInputComponent>(PlayerInputComponent);
 	if (enhanced) { //입력 컴포넌트가 향상된 입력 컴포넌트일 때 
 		enhanced->BindAction(IA_Move, ETriggerEvent::Triggered, this, &AActionCharacter::OnMoveInput);
+		enhanced->BindActionValueLambda(IA_Sprint, ETriggerEvent::Started, [this](const FInputActionValue& _) {
+				SetSprintModeF();
+			});
+		enhanced->BindActionValueLambda(IA_Sprint, ETriggerEvent::Completed, [this](const FInputActionValue& _) {
+				SetWalkModeF();
+			});
 
 	}
 }
@@ -76,6 +84,29 @@ void AActionCharacter::OnMoveInput(const FInputActionValue& Invalue)
 
 	//SetActorLocation(GetActorLocation() + FVector(inputDir.Y* Speed, inputDir.X* Speed, 0));
 	AddMovementInput(FVector(Dir.X,Dir.Y,0));
+}
+
+
+void AActionCharacter::SetSprintMode()
+{	
+	GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
+}
+
+void AActionCharacter::SetWalkMode()
+{	
+	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+}
+
+void AActionCharacter::SetSprintModeF()
+{
+	float Speed1 = FMath::FInterpTo(GetCharacterMovement()->MaxWalkSpeed, SprintSpeed, time, 8.0f);
+	GetCharacterMovement()->MaxWalkSpeed = Speed1;
+}
+
+void AActionCharacter::SetWalkModeF()
+{
+	float Speed2 = FMath::FInterpTo(GetCharacterMovement()->MaxWalkSpeed,WalkSpeed, time, 10.0f);
+	GetCharacterMovement()->MaxWalkSpeed = Speed2;
 }
 
 
