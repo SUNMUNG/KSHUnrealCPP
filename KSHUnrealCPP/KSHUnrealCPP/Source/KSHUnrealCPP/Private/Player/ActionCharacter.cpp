@@ -39,6 +39,8 @@ AActionCharacter::AActionCharacter()
 void AActionCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	AnimInstance = GetMesh()->GetAnimInstance();
 }
 
 // Called every frame
@@ -58,11 +60,12 @@ void AActionCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	if (enhanced) { //입력 컴포넌트가 향상된 입력 컴포넌트일 때 
 		enhanced->BindAction(IA_Move, ETriggerEvent::Triggered, this, &AActionCharacter::OnMoveInput);
 		enhanced->BindActionValueLambda(IA_Sprint, ETriggerEvent::Started, [this](const FInputActionValue& _) {
-				SetSprintModeF();
+				SetSprintMode();
 			});
 		enhanced->BindActionValueLambda(IA_Sprint, ETriggerEvent::Completed, [this](const FInputActionValue& _) {
-				SetWalkModeF();
+				SetWalkMode();
 			});
+		enhanced->BindAction(IA_Roll, ETriggerEvent::Triggered, this, &AActionCharacter::OnRollInput);
 
 	}
 }
@@ -84,6 +87,25 @@ void AActionCharacter::OnMoveInput(const FInputActionValue& Invalue)
 
 	//SetActorLocation(GetActorLocation() + FVector(inputDir.Y* Speed, inputDir.X* Speed, 0));
 	AddMovementInput(FVector(Dir.X,Dir.Y,0));
+}
+
+void AActionCharacter::OnRollInput(const FInputActionValue& Invalue)
+{
+	if (AnimInstance.IsValid()) {
+
+		/*if (!AnimInstance->Montage_IsPlaying(RollMontage)) {
+			PlayAnimMontage(RollMontage);
+			UE_LOG(LogTemp, Warning, TEXT("play"));
+		}*/
+
+		if (!AnimInstance->IsAnyMontagePlaying()) {
+			SetActorRotation(GetLastMovementInputVector().Rotation());
+			PlayAnimMontage(RollMontage);
+		}
+
+	}
+	
+	
 }
 
 

@@ -30,6 +30,8 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 protected:
 	void OnMoveInput(const FInputActionValue& Invalue);
+
+	void OnRollInput(const FInputActionValue& Invalue);
 	
 
 	void SetSprintMode();
@@ -50,6 +52,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TObjectPtr<UInputAction> IA_Sprint= nullptr;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TObjectPtr<UInputAction> IA_Roll = nullptr;
+
 	UPROPERTY(EditAnywhere,BlueprintReadOnly)
 
 	float SprintSpeed = 1200.0f;
@@ -61,5 +66,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float Speed = 5;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TObjectPtr<UAnimMontage> RollMontage = nullptr;
+
+	
 	float time = 0.0f;
+private:
+	UPROPERTY()
+	TWeakObjectPtr<UAnimInstance> AnimInstance = nullptr;
 };
