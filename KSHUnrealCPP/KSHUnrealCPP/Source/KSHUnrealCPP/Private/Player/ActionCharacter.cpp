@@ -48,7 +48,22 @@ void AActionCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	time = DeltaTime;
+	//UE_LOG(LogTemp, Warning, TEXT("%.1f"), Stamina);
+	if (bisSprint) {
+		RDeltatime = DeltaTime;
+	}
+	else {
+		WalkStateTime += DeltaTime;
+	}
+	
+
+	if (WalkStateTime > HealStaminaTime && Stamina<= MaxStamina) {
+		Stamina += DeltaTime * StaminaRate;
+	}
+	UE_LOG(LogTemp, Warning, TEXT("%.1f"), Stamina);
+	UE_LOG(LogTemp, Warning, TEXT("%.1f"), WalkStateTime);
+	UE_LOG(LogTemp, Warning, TEXT("%d"), bisSprint);
+
 }
 
 // Called to bind functionality to input
@@ -61,6 +76,9 @@ void AActionCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 		enhanced->BindAction(IA_Move, ETriggerEvent::Triggered, this, &AActionCharacter::OnMoveInput);
 		enhanced->BindActionValueLambda(IA_Sprint, ETriggerEvent::Started, [this](const FInputActionValue& _) {
 				SetSprintMode();
+			});
+		enhanced->BindActionValueLambda(IA_Sprint, ETriggerEvent::Triggered, [this](const FInputActionValue& _) {
+				Runtime();
 			});
 		enhanced->BindActionValueLambda(IA_Sprint, ETriggerEvent::Completed, [this](const FInputActionValue& _) {
 				SetWalkMode();
@@ -98,8 +116,12 @@ void AActionCharacter::OnRollInput(const FInputActionValue& Invalue)
 			UE_LOG(LogTemp, Warning, TEXT("play"));
 		}*/
 
-		if (!AnimInstance->IsAnyMontagePlaying()) {
-			SetActorRotation(GetLastMovementInputVector().Rotation());
+		if (!AnimInstance->IsAnyMontagePlaying() &&Stamina >= RollStamina) {
+			if (!GetLastMovementInputVector().IsNearlyZero()) {
+				SetActorRotation(GetLastMovementInputVector().Rotation());
+			}
+			WalkStateTime = 0.0f;
+			Stamina -= RollStamina;
 			PlayAnimMontage(RollMontage);
 		}
 
@@ -111,25 +133,46 @@ void AActionCharacter::OnRollInput(const FInputActionValue& Invalue)
 
 void AActionCharacter::SetSprintMode()
 {	
-	GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
+	if (Stamina >= 0) {
+		bisSprint = true;
+		WalkStateTime = 0.0f;
+
+		GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
+	}
+
 }
 
 void AActionCharacter::SetWalkMode()
 {	
+	bisSprint = false;
+	WalkStateTime = 0.0f;
+
 	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 }
 
-void AActionCharacter::SetSprintModeF()
+void AActionCharacter::Runtime()
 {
-	float Speed1 = FMath::FInterpTo(GetCharacterMovement()->MaxWalkSpeed, SprintSpeed, time, 8.0f);
-	GetCharacterMovement()->MaxWalkSpeed = Speed1;
+	if (bisSprint) {
+		if (Stamina >= 0) {
+			Stamina -= RDeltatime * StaminaRate;
+		}
+		else {
+			SetWalkMode();
+		}
+	}
 }
 
-void AActionCharacter::SetWalkModeF()
-{
-	float Speed2 = FMath::FInterpTo(GetCharacterMovement()->MaxWalkSpeed,WalkSpeed, time, 10.0f);
-	GetCharacterMovement()->MaxWalkSpeed = Speed2;
-}
+//void AActionCharacter::SetSprintModeF()
+//{
+//	float Speed1 = FMath::FInterpTo(GetCharacterMovement()->MaxWalkSpeed, SprintSpeed, time, 8.0f);
+//	GetCharacterMovement()->MaxWalkSpeed = Speed1;
+//}
+//
+//void AActionCharacter::SetWalkModeF()
+//{
+//	float Speed2 = FMath::FInterpTo(GetCharacterMovement()->MaxWalkSpeed,WalkSpeed, time, 10.0f);
+//	GetCharacterMovement()->MaxWalkSpeed = Speed2;
+//}
 
 
 

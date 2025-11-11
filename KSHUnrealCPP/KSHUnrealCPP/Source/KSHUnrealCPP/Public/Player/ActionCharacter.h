@@ -36,6 +36,7 @@ protected:
 
 	void SetSprintMode();
 	void SetWalkMode();
+	void Runtime();
 
 	void SetSprintModeF();
 	void SetWalkModeF();
@@ -67,10 +68,18 @@ protected:
 	float Speed = 5;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float Stamina = 100;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TObjectPtr<UAnimMontage> RollMontage = nullptr;
 
-	
-	float time = 0.0f;
+	bool bisSprint = false;
+	float RollStamina = 30.0f;
+	float MaxStamina = 100.0f;
+	float StaminaRate = 10.0f;
+	float RDeltatime = 0.0f;
+	float WalkStateTime = 0.0f;
+	float HealStaminaTime = 3.0f;
 private:
 	UPROPERTY()
 	TWeakObjectPtr<UAnimInstance> AnimInstance = nullptr;
