@@ -72,9 +72,75 @@ struct Z_Construct_UClass_AActionCharacter_Statics
 		{ "Category", "ActionCharacter" },
 		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Stamina_MetaData[] = {
-		{ "Category", "ActionCharacter" },
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentStamina_MetaData[] = {
+		{ "Category", "Player|Resource" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// \xed\x98\x84\xec\x9e\xac \xec\x8a\xa4\xed\x83\x9c\xeb\xaf\xb8\xeb\x84\x88\n" },
+#endif
 		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "\xed\x98\x84\xec\x9e\xac \xec\x8a\xa4\xed\x83\x9c\xeb\xaf\xb8\xeb\x84\x88" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MaxStamina_MetaData[] = {
+		{ "Category", "Player|Resource" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// \xec\xb5\x9c\xeb\x8c\x80 \xec\x8a\xa4\xed\x83\x9c\xeb\xaf\xb8\xeb\x84\x88\n" },
+#endif
+		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "\xec\xb5\x9c\xeb\x8c\x80 \xec\x8a\xa4\xed\x83\x9c\xeb\xaf\xb8\xeb\x84\x88" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SprintStaminaRate_MetaData[] = {
+		{ "Category", "Player|Resource" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// \xeb\x8b\xac\xeb\xa6\xac\xea\xb8\xb0 \xec\x83\x81\xed\x83\x9c\xec\x9d\xbc \xeb\x95\x8c \xec\xb4\x88\xeb\x8b\xb9 \xec\x8a\xa4\xed\x85\x8c\xeb\xaf\xb8\xeb\x84\x88 \xeb\xb9\x84\xec\x9a\xa9\n" },
+#endif
+		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "\xeb\x8b\xac\xeb\xa6\xac\xea\xb8\xb0 \xec\x83\x81\xed\x83\x9c\xec\x9d\xbc \xeb\x95\x8c \xec\xb4\x88\xeb\x8b\xb9 \xec\x8a\xa4\xed\x85\x8c\xeb\xaf\xb8\xeb\x84\x88 \xeb\xb9\x84\xec\x9a\xa9" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bisSprint_MetaData[] = {
+		{ "Category", "Player|State" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// \xed\x94\x8c\xeb\xa0\x88\xec\x9d\xb4\xec\x96\xb4\xea\xb0\x80 \xeb\x9b\xb0\xea\xb3\xa0 \xec\x9e\x88\xeb\x8a\x94 \xec\xa4\x91\xec\x9d\xb8\xec\xa7\x80 \xed\x91\x9c\xec\x8b\x9c \xed\x95\xb4\xeb\x86\x93\xec\x9d\x80 \xeb\xb3\x80\xec\x88\x98\n" },
+#endif
+		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "\xed\x94\x8c\xeb\xa0\x88\xec\x9d\xb4\xec\x96\xb4\xea\xb0\x80 \xeb\x9b\xb0\xea\xb3\xa0 \xec\x9e\x88\xeb\x8a\x94 \xec\xa4\x91\xec\x9d\xb8\xec\xa7\x80 \xed\x91\x9c\xec\x8b\x9c \xed\x95\xb4\xeb\x86\x93\xec\x9d\x80 \xeb\xb3\x80\xec\x88\x98" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RollStamina_MetaData[] = {
+		{ "Category", "Player|Resource" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//\xea\xb5\xac\xeb\xa5\xb4\xea\xb8\xb0 \xec\x8a\xa4\xed\x83\x9c\xeb\xaf\xb8\xeb\x82\x98 \xec\x86\x8c\xeb\xaa\xa8\xeb\x9f\x89\n" },
+#endif
+		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "\xea\xb5\xac\xeb\xa5\xb4\xea\xb8\xb0 \xec\x8a\xa4\xed\x83\x9c\xeb\xaf\xb8\xeb\x82\x98 \xec\x86\x8c\xeb\xaa\xa8\xeb\x9f\x89" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_HealStaminaTime_MetaData[] = {
+		{ "Category", "Player|Resource" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//\xec\x8a\xa4\xed\x83\x9c\xeb\xaf\xb8\xeb\x82\x98 \xec\x9e\x90\xeb\x8f\x99 \xed\x9a\x8c\xeb\xb3\xb5\xec\x97\x90 \xea\xb1\xb8\xeb\xa6\xac\xeb\x8a\x94 \xec\x8b\x9c\xea\xb0\x84\n" },
+#endif
+		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "\xec\x8a\xa4\xed\x83\x9c\xeb\xaf\xb8\xeb\x82\x98 \xec\x9e\x90\xeb\x8f\x99 \xed\x9a\x8c\xeb\xb3\xb5\xec\x97\x90 \xea\xb1\xb8\xeb\xa6\xac\xeb\x8a\x94 \xec\x8b\x9c\xea\xb0\x84" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_HealRate_MetaData[] = {
+		{ "Category", "ActionCharacter" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// \xec\x8a\xa4\xed\x83\x9c\xeb\xaf\xb8\xeb\x82\x98 \xed\x9a\x8c\xeb\xb3\xb5\xeb\x9f\x89\n" },
+#endif
+		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "\xec\x8a\xa4\xed\x83\x9c\xeb\xaf\xb8\xeb\x82\x98 \xed\x9a\x8c\xeb\xb3\xb5\xeb\x9f\x89" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RollMontage_MetaData[] = {
 		{ "Category", "ActionCharacter" },
@@ -92,7 +158,14 @@ struct Z_Construct_UClass_AActionCharacter_Statics
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_SprintSpeed;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_WalkSpeed;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_Speed;
-	static const UECodeGen_Private::FFloatPropertyParams NewProp_Stamina;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_CurrentStamina;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_MaxStamina;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_SprintStaminaRate;
+	static void NewProp_bisSprint_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_bisSprint;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_RollStamina;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_HealStaminaTime;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_HealRate;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_RollMontage;
 	static const UECodeGen_Private::FWeakObjectPropertyParams NewProp_AnimInstance;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -110,7 +183,17 @@ const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AActionCharact
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_SprintSpeed = { "SprintSpeed", nullptr, (EPropertyFlags)0x0020080000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, SprintSpeed), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SprintSpeed_MetaData), NewProp_SprintSpeed_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_WalkSpeed = { "WalkSpeed", nullptr, (EPropertyFlags)0x0020080000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, WalkSpeed), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_WalkSpeed_MetaData), NewProp_WalkSpeed_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_Speed = { "Speed", nullptr, (EPropertyFlags)0x0020080000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, Speed), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Speed_MetaData), NewProp_Speed_MetaData) };
-const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_Stamina = { "Stamina", nullptr, (EPropertyFlags)0x0020080000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, Stamina), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Stamina_MetaData), NewProp_Stamina_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_CurrentStamina = { "CurrentStamina", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, CurrentStamina), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentStamina_MetaData), NewProp_CurrentStamina_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_MaxStamina = { "MaxStamina", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, MaxStamina), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MaxStamina_MetaData), NewProp_MaxStamina_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_SprintStaminaRate = { "SprintStaminaRate", nullptr, (EPropertyFlags)0x0020080000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, SprintStaminaRate), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SprintStaminaRate_MetaData), NewProp_SprintStaminaRate_MetaData) };
+void Z_Construct_UClass_AActionCharacter_Statics::NewProp_bisSprint_SetBit(void* Obj)
+{
+	((AActionCharacter*)Obj)->bisSprint = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_bisSprint = { "bisSprint", nullptr, (EPropertyFlags)0x0020080000020005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AActionCharacter), &Z_Construct_UClass_AActionCharacter_Statics::NewProp_bisSprint_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bisSprint_MetaData), NewProp_bisSprint_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_RollStamina = { "RollStamina", nullptr, (EPropertyFlags)0x0020080000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, RollStamina), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RollStamina_MetaData), NewProp_RollStamina_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_HealStaminaTime = { "HealStaminaTime", nullptr, (EPropertyFlags)0x0020080000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, HealStaminaTime), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_HealStaminaTime_MetaData), NewProp_HealStaminaTime_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_HealRate = { "HealRate", nullptr, (EPropertyFlags)0x0020080000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, HealRate), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_HealRate_MetaData), NewProp_HealRate_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_RollMontage = { "RollMontage", nullptr, (EPropertyFlags)0x0124080000000015, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, RollMontage), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RollMontage_MetaData), NewProp_RollMontage_MetaData) };
 const UECodeGen_Private::FWeakObjectPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_AnimInstance = { "AnimInstance", nullptr, (EPropertyFlags)0x0044000000000000, UECodeGen_Private::EPropertyGenFlags::WeakObject, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, AnimInstance), Z_Construct_UClass_UAnimInstance_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AnimInstance_MetaData), NewProp_AnimInstance_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AActionCharacter_Statics::PropPointers[] = {
@@ -122,7 +205,13 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AActionCh
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_SprintSpeed,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_WalkSpeed,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_Speed,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_Stamina,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_CurrentStamina,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_MaxStamina,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_SprintStaminaRate,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_bisSprint,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_RollStamina,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_HealStaminaTime,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_HealRate,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_RollMontage,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_AnimInstance,
 };
@@ -167,10 +256,10 @@ AActionCharacter::~AActionCharacter() {}
 struct Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AActionCharacter, AActionCharacter::StaticClass, TEXT("AActionCharacter"), &Z_Registration_Info_UClass_AActionCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AActionCharacter), 2503019592U) },
+		{ Z_Construct_UClass_AActionCharacter, AActionCharacter::StaticClass, TEXT("AActionCharacter"), &Z_Registration_Info_UClass_AActionCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AActionCharacter), 1467428081U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_790801948(TEXT("/Script/KSHUnrealCPP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_4246558498(TEXT("/Script/KSHUnrealCPP"),
 	Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

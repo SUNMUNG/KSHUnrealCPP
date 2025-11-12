@@ -29,10 +29,6 @@ AActionCharacter::AActionCharacter()
 	GetCharacterMovement()->RotationRate = FRotator(0,360,0);
 	GetCharacterMovement()->MaxAcceleration = 1000.0f;
 
-
-
-	
-	
 }
 
 // Called when the game starts or when spawned
@@ -40,6 +36,8 @@ void AActionCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	CurrentStamina = MaxStamina;
+	bisSprint = false;
 	AnimInstance = GetMesh()->GetAnimInstance();
 }
 
@@ -52,17 +50,6 @@ void AActionCharacter::Tick(float DeltaTime)
 	if (bisSprint) {
 		RDeltatime = DeltaTime;
 	}
-	else {
-		WalkStateTime += DeltaTime;
-	}
-	
-
-	if (WalkStateTime > HealStaminaTime && Stamina<= MaxStamina) {
-		Stamina += DeltaTime * StaminaRate;
-	}
-	UE_LOG(LogTemp, Warning, TEXT("%.1f"), Stamina);
-	UE_LOG(LogTemp, Warning, TEXT("%.1f"), WalkStateTime);
-	UE_LOG(LogTemp, Warning, TEXT("%d"), bisSprint);
 
 }
 
@@ -111,17 +98,11 @@ void AActionCharacter::OnRollInput(const FInputActionValue& Invalue)
 {
 	if (AnimInstance.IsValid()) {
 
-		/*if (!AnimInstance->Montage_IsPlaying(RollMontage)) {
-			PlayAnimMontage(RollMontage);
-			UE_LOG(LogTemp, Warning, TEXT("play"));
-		}*/
-
-		if (!AnimInstance->IsAnyMontagePlaying() &&Stamina >= RollStamina) {
+		if (!AnimInstance->IsAnyMontagePlaying() && CurrentStamina >= RollStamina) {
 			if (!GetLastMovementInputVector().IsNearlyZero()) {
 				SetActorRotation(GetLastMovementInputVector().Rotation());
 			}
-			WalkStateTime = 0.0f;
-			Stamina -= RollStamina;
+			CurrentStamina -= RollStamina;
 			PlayAnimMontage(RollMontage);
 		}
 
@@ -133,10 +114,8 @@ void AActionCharacter::OnRollInput(const FInputActionValue& Invalue)
 
 void AActionCharacter::SetSprintMode()
 {	
-	if (Stamina >= 0) {
+	if (CurrentStamina >= 0 && GetMovementComponent()->GetLastInputVector().Length() > 0) {
 		bisSprint = true;
-		WalkStateTime = 0.0f;
-
 		GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 	}
 
@@ -144,35 +123,62 @@ void AActionCharacter::SetSprintMode()
 
 void AActionCharacter::SetWalkMode()
 {	
-	bisSprint = false;
-	WalkStateTime = 0.0f;
+	if (bisSprint) {
+		bisSprint = false;
+		StaminaRegenTimerSet();
+		GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+	}
+	
+}
 
-	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+void AActionCharacter::StaminaRegenTimerSet()
+{
+	GetWorldTimerManager().SetTimer(
+		StaminaCoolTimer,
+		[this]() {
+			bRegenStamina = true;
+			GetWorldTimerManager().SetTimer(
+				StaminaRegenTimer,
+				this,
+				&AActionCharacter::StaminaRegenPerTick,
+				0.1f,	// 실행 간격
+				true,	// 반복 재생 여부
+				0.1f);
+		},
+		HealStaminaTime,
+		false);
+}
+
+void AActionCharacter::StaminaRegenPerTick()
+{
+	CurrentStamina += MaxStamina * HealRate;
+
+	if (CurrentStamina > MaxStamina)
+	{
+		CurrentStamina = MaxStamina;
+		GetWorldTimerManager().ClearTimer(StaminaRegenTimer);
+	}
 }
 
 void AActionCharacter::Runtime()
 {
 	if (bisSprint) {
-		if (Stamina >= 0) {
-			Stamina -= RDeltatime * StaminaRate;
+		if (CurrentStamina >= 0) {
+			CurrentStamina -= RDeltatime * SprintStaminaRate;
 		}
 		else {
+			CurrentStamina = 0.0f;
 			SetWalkMode();
 		}
 	}
-}
 
-//void AActionCharacter::SetSprintModeF()
-//{
-//	float Speed1 = FMath::FInterpTo(GetCharacterMovement()->MaxWalkSpeed, SprintSpeed, time, 8.0f);
-//	GetCharacterMovement()->MaxWalkSpeed = Speed1;
-//}
-//
-//void AActionCharacter::SetWalkModeF()
-//{
-//	float Speed2 = FMath::FInterpTo(GetCharacterMovement()->MaxWalkSpeed,WalkSpeed, time, 10.0f);
-//	GetCharacterMovement()->MaxWalkSpeed = Speed2;
-//}
+	if (GetMovementComponent()->GetLastInputVector().Length() > 0) {
+		SetSprintMode();
+	}
+	else {
+		SetWalkMode();
+	}
+}
 
 
 
