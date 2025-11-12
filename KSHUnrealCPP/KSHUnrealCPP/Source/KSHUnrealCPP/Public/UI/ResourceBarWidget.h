@@ -19,7 +19,6 @@ class KSHUNREALCPP_API UResourceBarWidget : public UUserWidget
 public:
 	UFUNCTION()
 	void RefreshWidget(float InCurrent, float InMax);
-
 	void ColorChange(FLinearColor inColor);
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Resource", meta = (BindWidget));
