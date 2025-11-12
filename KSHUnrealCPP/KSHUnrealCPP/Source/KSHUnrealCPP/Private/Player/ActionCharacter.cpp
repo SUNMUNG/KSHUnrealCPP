@@ -102,6 +102,8 @@ void AActionCharacter::OnRollInput(const FInputActionValue& Invalue)
 			if (!GetLastMovementInputVector().IsNearlyZero()) {
 				SetActorRotation(GetLastMovementInputVector().Rotation());
 			}
+			GetWorldTimerManager().ClearTimer(StaminaRegenTimer);
+			StaminaRegenTimerSet();
 			CurrentStamina -= RollStamina;
 			PlayAnimMontage(RollMontage);
 		}
@@ -116,6 +118,7 @@ void AActionCharacter::SetSprintMode()
 {	
 	if (CurrentStamina >= 0 && GetMovementComponent()->GetLastInputVector().Length() > 0) {
 		bisSprint = true;
+		GetWorldTimerManager().ClearTimer(StaminaRegenTimer);
 		GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 	}
 
@@ -125,6 +128,7 @@ void AActionCharacter::SetWalkMode()
 {	
 	if (bisSprint) {
 		bisSprint = false;
+		GetWorldTimerManager().ClearTimer(StaminaRegenTimer);
 		StaminaRegenTimerSet();
 		GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 	}
