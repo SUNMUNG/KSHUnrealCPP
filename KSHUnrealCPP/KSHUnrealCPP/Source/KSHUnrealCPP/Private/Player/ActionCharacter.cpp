@@ -4,31 +4,31 @@
 #include "Player/ActionCharacter.h"
 #include "EnhancedInputComponent.h"
 #include "GameFramework/SpringArmComponent.h"
-#include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Camera/CameraComponent.h"
+#include "Player/ResourceComponent.h"
 
 // Sets default values
 AActionCharacter::AActionCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->SetupAttachment(RootComponent);
-	SpringArm->TargetArmLength=350.0f;
+	SpringArm->TargetArmLength = 350.0f;
 	SpringArm->SocketOffset = FVector(0, 0, 250);
+	SpringArm->bUsePawnControlRotation = true;	// 스프링암의 회전을 컨트롤러에 맞춤
 
-	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-	Camera->SetupAttachment(SpringArm);
-	Camera->SetRelativeRotation(FRotator(-20.0f, 0.0f, 0.0f));
-	
-	SpringArm->bUsePawnControlRotation = true;
-	bUseControllerRotationYaw = false;
-	
-	GetCharacterMovement()->bOrientRotationToMovement = true;
-	GetCharacterMovement()->RotationRate = FRotator(0,360,0);
-	GetCharacterMovement()->MaxAcceleration = 1000.0f;
+	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
+	PlayerCamera->SetupAttachment(SpringArm);
+	PlayerCamera->SetRelativeRotation(FRotator(-20.0f, 0.0f, 0.0f));
 
+	Resource = CreateDefaultSubobject<UResourceComponent>(TEXT("PlayerResource"));
+
+	bUseControllerRotationYaw = false;	// 컨트롤러의 Yaw 회전 사용 안함
+	GetCharacterMovement()->bOrientRotationToMovement = true;	// 이동 방향으로 캐릭터 회전
+	GetCharacterMovement()->RotationRate = FRotator(0, 360, 0);
 }
 
 // Called when the game starts or when spawned
@@ -36,9 +36,17 @@ void AActionCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	CurrentStamina = MaxStamina;
-	bisSprint = false;
-	AnimInstance = GetMesh()->GetAnimInstance();
+	if (GetMesh())
+	{
+		AnimInstance = GetMesh()->GetAnimInstance();	// ABP 객체 가져오기
+	}
+	if (Resource)
+	{
+		Resource->OnStaminaEmpty.AddDynamic(this, &AActionCharacter::SetWalkMode);
+	}
+
+	// 게임 진행 중에 자주 변경되는 값은 시작 시점에서 리셋을 해주는 것이 좋다.
+	bIsSprint = false;
 }
 
 // Called every frame
@@ -46,11 +54,10 @@ void AActionCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	//UE_LOG(LogTemp, Warning, TEXT("%.1f"), Stamina);
-	if (bisSprint) {
-		RDeltatime = DeltaTime;
+	if (bIsSprint && !GetVelocity().IsNearlyZero())	// 달리기 모드인 상태에서 움직이면 스태미너를 소비한다.
+	{
+		Resource->AddStamina(-SprintStaminaCost * DeltaTime);	// 스태미너 감소
 	}
-
 }
 
 // Called to bind functionality to input
@@ -58,131 +65,65 @@ void AActionCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	UEnhancedInputComponent* enhanced = Cast< UEnhancedInputComponent>(PlayerInputComponent);
-	if (enhanced) { //입력 컴포넌트가 향상된 입력 컴포넌트일 때 
+	UEnhancedInputComponent* enhanced = Cast<UEnhancedInputComponent>(PlayerInputComponent);
+	if (enhanced)	// 입력 컴포넌트가 향상된 입력 컴포넌트일 때
+	{
 		enhanced->BindAction(IA_Move, ETriggerEvent::Triggered, this, &AActionCharacter::OnMoveInput);
-		enhanced->BindActionValueLambda(IA_Sprint, ETriggerEvent::Started, [this](const FInputActionValue& _) {
+		enhanced->BindActionValueLambda(IA_Sprint, ETriggerEvent::Started,
+			[this](const FInputActionValue& _) {
 				SetSprintMode();
 			});
-		enhanced->BindActionValueLambda(IA_Sprint, ETriggerEvent::Triggered, [this](const FInputActionValue& _) {
-				Runtime();
-			});
-		enhanced->BindActionValueLambda(IA_Sprint, ETriggerEvent::Completed, [this](const FInputActionValue& _) {
+		enhanced->BindActionValueLambda(IA_Sprint, ETriggerEvent::Completed,
+			[this](const FInputActionValue& _) {
 				SetWalkMode();
 			});
 		enhanced->BindAction(IA_Roll, ETriggerEvent::Triggered, this, &AActionCharacter::OnRollInput);
-
 	}
 }
 
-void AActionCharacter::OnMoveInput(const FInputActionValue& Invalue)
+void AActionCharacter::OnMoveInput(const FInputActionValue& InValue)
 {
-	FVector2D inputDir = Invalue.Get<FVector2d>();
+	FVector2D inputDirection = InValue.Get<FVector2D>();
+	//UE_LOG(LogTemp, Log, TEXT("Dir : (%.1f, %.1f)"), inputDirection.X, inputDirection.Y);
+	//UE_LOG(LogTemp, Log, TEXT("Dir : (%s)"), *inputDirection.ToString());
+	FVector moveDirection(inputDirection.Y, inputDirection.X, 0.0f);
 
-	FVector CameraForward = FVector(Camera->GetForwardVector().X, Camera->GetForwardVector().Y, 0);
-	FVector CameraRight = FVector(Camera->GetRightVector().X, Camera->GetRightVector().Y, 0);
+	FQuat controlYawRotation = FQuat(FRotator(0, GetControlRotation().Yaw, 0));	// 컨트롤러의 Yaw회전을 따로 뽑아와서
+	moveDirection = controlYawRotation.RotateVector(moveDirection);	// 이동 방향에 적용
 
-	FVector DirWS = inputDir.Y * CameraForward;
-	FVector DirAD = inputDir.X * CameraRight;
+	AddMovementInput(moveDirection);
 
-	FVector Dir = DirWS + DirAD;
-
-	Dir.Normalize(0.001f);
-	
-
-	//SetActorLocation(GetActorLocation() + FVector(inputDir.Y* Speed, inputDir.X* Speed, 0));
-	AddMovementInput(FVector(Dir.X,Dir.Y,0));
 }
 
-void AActionCharacter::OnRollInput(const FInputActionValue& Invalue)
+void AActionCharacter::OnRollInput(const FInputActionValue& InValue)
 {
-	if (AnimInstance.IsValid()) {
-
-		if (!AnimInstance->IsAnyMontagePlaying() && CurrentStamina >= RollStamina) {
-			if (!GetLastMovementInputVector().IsNearlyZero()) {
-				SetActorRotation(GetLastMovementInputVector().Rotation());
-			}
-			GetWorldTimerManager().ClearTimer(StaminaRegenTimer);
-			StaminaRegenTimerSet();
-			CurrentStamina -= RollStamina;
+	if (AnimInstance.IsValid())
+	{
+		if (!AnimInstance->IsAnyMontagePlaying()
+			&& Resource->HasEnoughStamina(RollStaminaCost))	// 몽타주 재생중이 아니고 충분한 스태미너가 있을 때만 작동
+		{
+			//if (!GetLastMovementInputVector().IsNearlyZero())	// 입력을 하는 중에만 즉시 회전
+			//{
+			//	SetActorRotation(GetLastMovementInputVector().Rotation());	// 마지막 입력 방향으로 즉시 회전 시키기
+			//}
+			Resource->TimerClear();
+			Resource->AddStamina(-RollStaminaCost);	// 스태미너 감소
 			PlayAnimMontage(RollMontage);
 		}
-
 	}
-	
-	
 }
 
-
 void AActionCharacter::SetSprintMode()
-{	
-	if (CurrentStamina >= 0 && GetMovementComponent()->GetLastInputVector().Length() > 0) {
-		bisSprint = true;
-		GetWorldTimerManager().ClearTimer(StaminaRegenTimer);
-		GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
-	}
-
+{
+	//UE_LOG(LogTemp, Warning, TEXT("달리기 모드"));
+	GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
+	Resource->TimerClear();
+	bIsSprint = true;
 }
 
 void AActionCharacter::SetWalkMode()
-{	
-	if (bisSprint) {
-		bisSprint = false;
-		GetWorldTimerManager().ClearTimer(StaminaRegenTimer);
-		StaminaRegenTimerSet();
-		GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
-	}
-	
-}
-
-void AActionCharacter::StaminaRegenTimerSet()
 {
-	GetWorldTimerManager().SetTimer(
-		StaminaCoolTimer,
-		[this]() {
-			bRegenStamina = true;
-			GetWorldTimerManager().SetTimer(
-				StaminaRegenTimer,
-				this,
-				&AActionCharacter::StaminaRegenPerTick,
-				0.1f,	// 실행 간격
-				true,	// 반복 재생 여부
-				0.1f);
-		},
-		HealStaminaTime,
-		false);
+	//UE_LOG(LogTemp, Warning, TEXT("걷기 모드"));
+	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+	bIsSprint = false;
 }
-
-void AActionCharacter::StaminaRegenPerTick()
-{
-	CurrentStamina += MaxStamina * HealRate;
-
-	if (CurrentStamina > MaxStamina)
-	{
-		CurrentStamina = MaxStamina;
-		GetWorldTimerManager().ClearTimer(StaminaRegenTimer);
-	}
-}
-
-void AActionCharacter::Runtime()
-{
-	if (bisSprint) {
-		if (CurrentStamina >= 0) {
-			CurrentStamina -= RDeltatime * SprintStaminaRate;
-		}
-		else {
-			CurrentStamina = 0.0f;
-			SetWalkMode();
-		}
-	}
-
-	if (GetMovementComponent()->GetLastInputVector().Length() > 0) {
-		SetSprintMode();
-	}
-	else {
-		SetWalkMode();
-	}
-}
-
-
-

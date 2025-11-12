@@ -6,9 +6,11 @@
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
 #include "ActionCharacter.generated.h"
+
 class UInputAction;
-class USpringArmComponent;
-class UCameraComponent;
+class UResourceComponent;
+//class USpringArmComponent;
+
 UCLASS()
 class KSHUNREALCPP_API AActionCharacter : public ACharacter
 {
@@ -22,96 +24,73 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	UResourceComponent* GetResourceComponent() { return Resource; }
+
 protected:
-	void OnMoveInput(const FInputActionValue& Invalue);
+	// 이동 방향 입력 받기
+	void OnMoveInput(const FInputActionValue& InValue);
 
-	void OnRollInput(const FInputActionValue& Invalue);
-	
+	// 구르기 입력 받기
+	void OnRollInput(const FInputActionValue& InValue);
 
+	// 달리기 모드 설정
 	void SetSprintMode();
+
+	// 걷기 모드 설정(다이나믹 델리게이트에 바인드하기 위해 UFUNCTION 추가)
+	UFUNCTION()
 	void SetWalkMode();
-	void StaminaRegenTimerSet();
-	void StaminaRegenPerTick();
-	void Runtime();
+
 private:
 
-public:
 
 protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player|Camera")
+	TObjectPtr<class USpringArmComponent> SpringArm = nullptr;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player|Camera")
+	TObjectPtr<class UCameraComponent> PlayerCamera = nullptr;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player|Resource")
+	TObjectPtr<UResourceComponent> Resource = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	USpringArmComponent* SpringArm = nullptr;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UCameraComponent* Camera = nullptr;
-
-	UPROPERTY(EditAnywhere,BlueprintReadOnly)
-	TObjectPtr<UInputAction> IA_Move= nullptr;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TObjectPtr<UInputAction> IA_Sprint= nullptr;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	// 인풋 액션들
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<UInputAction> IA_Move = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<UInputAction> IA_Sprint = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> IA_Roll = nullptr;
 
-	UPROPERTY(EditAnywhere,BlueprintReadOnly)
-
+	// 달리기 속도
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player|Movement")
 	float SprintSpeed = 1200.0f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-
+	// 걷기 속도
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player|Movement")
 	float WalkSpeed = 600.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float Speed = 5;
+	// 구르기 몽타주
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation|Montage")
+	TObjectPtr<UAnimMontage> RollMontage = nullptr;
 
-	// 현재 스태미너
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player|Resource")
-	float CurrentStamina = 100.0f;
-
-	// 최대 스태미너
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player|Resource")
-	float MaxStamina = 100.0f;
-
-	// 달리기 상태일 때 초당 스테미너 비용
+	// 달리기 상태일 때 초당 스태미너 비용
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player|Resource")
-	float SprintStaminaRate = 20.0f;
+	float SprintStaminaCost = 20.0f;
+
+	// 구르기를 하기 위해 필요한 스태미너 비용
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player|Resource")
+	float RollStaminaCost = 50.0f;
 
 	// 플레이어가 뛰고 있는 중인지 표시 해놓은 변수
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Player|State")
-	bool bisSprint = false;
+	bool bIsSprint = false;
 
-	//구르기 스태미나 소모량
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player|Resource")
-	float RollStamina = 30.0f;
-
-	//스태미나 자동 회복에 걸리는 시간
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player|Resource")
-	float HealStaminaTime = 3.0f;
-
-	// 스태미나 회복량
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float HealRate = 0.01f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TObjectPtr<UAnimMontage> RollMontage = nullptr;
-	
-	
 private:
 	UPROPERTY()
 	TWeakObjectPtr<UAnimInstance> AnimInstance = nullptr;
 
-	FTimerHandle StaminaCoolTimer;
-	FTimerHandle StaminaRegenTimer;
-
-	float RDeltatime = 0.0f;
-	float bRegenStamina = false;
-
-	
 };
