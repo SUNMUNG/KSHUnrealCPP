@@ -86,14 +86,13 @@ void AActionCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 			});
 		enhanced->BindAction(IA_Roll, ETriggerEvent::Triggered, this, &AActionCharacter::OnRollInput);
 		enhanced->BindAction(IA_Attack, ETriggerEvent::Triggered, this, &AActionCharacter::OnAttackInput);
+		enhanced->BindAction(IA_MeleeAttack, ETriggerEvent::Triggered, this, &AActionCharacter::OnMeleeAttackInput);
 	}
 }
 
 void AActionCharacter::OnMoveInput(const FInputActionValue& InValue)
 {
 	FVector2D inputDirection = InValue.Get<FVector2D>();
-	//UE_LOG(LogTemp, Log, TEXT("Dir : (%.1f, %.1f)"), inputDirection.X, inputDirection.Y);
-	//UE_LOG(LogTemp, Log, TEXT("Dir : (%s)"), *inputDirection.ToString());
 	FVector moveDirection(inputDirection.Y, inputDirection.X, 0.0f);
 
 	FQuat controlYawRotation = FQuat(FRotator(0, GetControlRotation().Yaw, 0));	// 컨트롤러의 Yaw회전을 따로 뽑아와서
@@ -136,26 +135,81 @@ void AActionCharacter::OnAttackInput(const FInputActionValue& InValue)
 		else if (AnimInstance->GetCurrentActiveMontage()==AttackMontage) {
 				// 스태미너 감소
 			
-			SectionJumpForCombo();
+			SectionJumpForCombo(AttackStaminaCost);
+		}
+	}
+}
+
+void AActionCharacter::OnMeleeAttackInput(const FInputActionValue& InValue)
+{
+	if (AnimInstance.IsValid() && Resource->HasEnoughStamina(MeleeAttackStaminaCost))
+	{
+		if (!AnimInstance->IsAnyMontagePlaying())	// 몽타주 재생중이 아니고 충분한 스태미너가 있을 때만 작동
+		{
+			if (!GetLastMovementInputVector().IsNearlyZero())	// 입력을 하는 중에만 즉시 회전
+			{
+				SetActorRotation(GetLastMovementInputVector().Rotation());	// 마지막 입력 방향으로 즉시 회전 시키기
+			}
+			Resource->AddStamina(-MeleeAttackStaminaCost);	// 스태미너 감소
+			PlayAnimMontage(MeleeAttackMontage);
+		}
+		else if (AnimInstance->GetCurrentActiveMontage() == MeleeAttackMontage) {
+			// 스태미너 감소
+
+			SectionJumpForCombo(MeleeAttackStaminaCost);
 		}
 	}
 }
 
 void AActionCharacter::SetSprintMode()
 {
+	UWorld* world = GetWorld();
+	FTimerManager& timerManager = world->GetTimerManager();
 	//UE_LOG(LogTemp, Warning, TEXT("달리기 모드"));
+	timerManager.ClearTimer(UpdateWalkSpeed);
 	GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 	bIsSprint = true;
 }
 
+void AActionCharacter::UpdatePlayerWalkSpeed()
+{
+	UWorld* world = GetWorld();
+	FTimerManager& timerManager = world->GetTimerManager();
+	if (FMath::IsNearlyEqual(GetCharacterMovement()->MaxWalkSpeed, WalkSpeed,50.0f)) {
+		GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+		UE_LOG(LogTemp, Warning, TEXT("타이머종료"));
+		timerManager.ClearTimer(UpdateWalkSpeed);
+	}
+
+	float CurrentSpeed = GetCharacterMovement()->MaxWalkSpeed;
+	UE_LOG(LogTemp, Warning, TEXT("%.1f"), CurrentSpeed);
+
+	CurrentSpeed = FMath::FInterpTo(CurrentSpeed, WalkSpeed, 0.016f, 1.0f);
+	GetCharacterMovement()->MaxWalkSpeed = CurrentSpeed;
+
+}
+
+
+
 void AActionCharacter::SetWalkMode()
 {
 	//UE_LOG(LogTemp, Warning, TEXT("걷기 모드"));
-	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+	//GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 	bIsSprint = false;
+
+	UWorld* world = GetWorld();
+	FTimerManager& timerManager = world->GetTimerManager();
+
+	timerManager.ClearTimer(UpdateWalkSpeed);
+	timerManager.SetTimer(UpdateWalkSpeed,this,
+		&AActionCharacter::UpdatePlayerWalkSpeed,
+		0.016f,
+		true
+	);
+
 }
 
-void AActionCharacter::SectionJumpForCombo()
+void AActionCharacter::SectionJumpForCombo(int StaminaCost)
 {
 	if (SectionJumpNotify && bComboReady) {
 		UAnimMontage* current = AnimInstance->GetCurrentActiveMontage();
@@ -164,7 +218,7 @@ void AActionCharacter::SectionJumpForCombo()
 			SectionJumpNotify->GetNextSectionName(),
 			current
 		);
-		Resource->AddStamina(-AttackStaminaCost);
+		Resource->AddStamina(-StaminaCost);
 		bComboReady = false;
 	}
 

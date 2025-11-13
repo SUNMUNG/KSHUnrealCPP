@@ -123,6 +123,10 @@ struct Z_Construct_UClass_AActionCharacter_Statics
 		{ "Category", "Input" },
 		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_IA_MeleeAttack_MetaData[] = {
+		{ "Category", "Input" },
+		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SprintSpeed_MetaData[] = {
 		{ "Category", "Player|Movement" },
 #if !UE_BUILD_SHIPPING
@@ -156,11 +160,21 @@ struct Z_Construct_UClass_AActionCharacter_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AttackMontage_MetaData[] = {
 		{ "Category", "Animation|Montage" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "// \xea\xb5\xac\xeb\xa5\xb4\xea\xb8\xb0 \xeb\xaa\xbd\xed\x83\x80\xec\xa3\xbc\n" },
+		{ "Comment", "// \xea\xb3\xb5\xea\xb2\xa9 \xeb\xaa\xbd\xed\x83\x80\xec\xa3\xbc\n" },
 #endif
 		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "\xea\xb5\xac\xeb\xa5\xb4\xea\xb8\xb0 \xeb\xaa\xbd\xed\x83\x80\xec\xa3\xbc" },
+		{ "ToolTip", "\xea\xb3\xb5\xea\xb2\xa9 \xeb\xaa\xbd\xed\x83\x80\xec\xa3\xbc" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MeleeAttackMontage_MetaData[] = {
+		{ "Category", "Animation|Montage" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// \xea\xb3\xb5\xea\xb2\xa9""2 \xeb\xaa\xbd\xed\x83\x80\xec\xa3\xbc\n" },
+#endif
+		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "\xea\xb3\xb5\xea\xb2\xa9""2 \xeb\xaa\xbd\xed\x83\x80\xec\xa3\xbc" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SprintStaminaCost_MetaData[] = {
@@ -186,11 +200,21 @@ struct Z_Construct_UClass_AActionCharacter_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AttackStaminaCost_MetaData[] = {
 		{ "Category", "Player|Resource" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "// \xea\xb5\xac\xeb\xa5\xb4\xea\xb8\xb0\xeb\xa5\xbc \xed\x95\x98\xea\xb8\xb0 \xec\x9c\x84\xed\x95\xb4 \xed\x95\x84\xec\x9a\x94\xed\x95\x9c \xec\x8a\xa4\xed\x83\x9c\xeb\xaf\xb8\xeb\x84\x88 \xeb\xb9\x84\xec\x9a\xa9\n" },
+		{ "Comment", "// \xea\xb3\xb5\xea\xb2\xa9\xec\x9d\x84 \xed\x95\x98\xea\xb8\xb0 \xec\x9c\x84\xed\x95\xb4 \xed\x95\x84\xec\x9a\x94\xed\x95\x9c \xec\x8a\xa4\xed\x83\x9c\xeb\xaf\xb8\xeb\x84\x88 \xeb\xb9\x84\xec\x9a\xa9\n" },
 #endif
 		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "\xea\xb5\xac\xeb\xa5\xb4\xea\xb8\xb0\xeb\xa5\xbc \xed\x95\x98\xea\xb8\xb0 \xec\x9c\x84\xed\x95\xb4 \xed\x95\x84\xec\x9a\x94\xed\x95\x9c \xec\x8a\xa4\xed\x83\x9c\xeb\xaf\xb8\xeb\x84\x88 \xeb\xb9\x84\xec\x9a\xa9" },
+		{ "ToolTip", "\xea\xb3\xb5\xea\xb2\xa9\xec\x9d\x84 \xed\x95\x98\xea\xb8\xb0 \xec\x9c\x84\xed\x95\xb4 \xed\x95\x84\xec\x9a\x94\xed\x95\x9c \xec\x8a\xa4\xed\x83\x9c\xeb\xaf\xb8\xeb\x84\x88 \xeb\xb9\x84\xec\x9a\xa9" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MeleeAttackStaminaCost_MetaData[] = {
+		{ "Category", "Player|Resource" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// \xea\xb3\xb5\xea\xb2\xa9""2\xec\x9d\x84 \xed\x95\x98\xea\xb8\xb0 \xec\x9c\x84\xed\x95\xb4 \xed\x95\x84\xec\x9a\x94\xed\x95\x9c \xec\x8a\xa4\xed\x83\x9c\xeb\xaf\xb8\xeb\x84\x88 \xeb\xb9\x84\xec\x9a\xa9\n" },
+#endif
+		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "\xea\xb3\xb5\xea\xb2\xa9""2\xec\x9d\x84 \xed\x95\x98\xea\xb8\xb0 \xec\x9c\x84\xed\x95\xb4 \xed\x95\x84\xec\x9a\x94\xed\x95\x9c \xec\x8a\xa4\xed\x83\x9c\xeb\xaf\xb8\xeb\x84\x88 \xeb\xb9\x84\xec\x9a\xa9" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bIsSprint_MetaData[] = {
@@ -217,13 +241,16 @@ struct Z_Construct_UClass_AActionCharacter_Statics
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_IA_Sprint;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_IA_Roll;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_IA_Attack;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_IA_MeleeAttack;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_SprintSpeed;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_WalkSpeed;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_RollMontage;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_AttackMontage;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_MeleeAttackMontage;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_SprintStaminaCost;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_RollStaminaCost;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_AttackStaminaCost;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_MeleeAttackStaminaCost;
 	static void NewProp_bIsSprint_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsSprint;
 	static const UECodeGen_Private::FWeakObjectPropertyParams NewProp_AnimInstance;
@@ -246,13 +273,16 @@ const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AActionCharact
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_IA_Sprint = { "IA_Sprint", nullptr, (EPropertyFlags)0x0124080000000015, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, IA_Sprint), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_IA_Sprint_MetaData), NewProp_IA_Sprint_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_IA_Roll = { "IA_Roll", nullptr, (EPropertyFlags)0x0124080000000015, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, IA_Roll), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_IA_Roll_MetaData), NewProp_IA_Roll_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_IA_Attack = { "IA_Attack", nullptr, (EPropertyFlags)0x0124080000000015, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, IA_Attack), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_IA_Attack_MetaData), NewProp_IA_Attack_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_IA_MeleeAttack = { "IA_MeleeAttack", nullptr, (EPropertyFlags)0x0124080000000015, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, IA_MeleeAttack), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_IA_MeleeAttack_MetaData), NewProp_IA_MeleeAttack_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_SprintSpeed = { "SprintSpeed", nullptr, (EPropertyFlags)0x0020080000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, SprintSpeed), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SprintSpeed_MetaData), NewProp_SprintSpeed_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_WalkSpeed = { "WalkSpeed", nullptr, (EPropertyFlags)0x0020080000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, WalkSpeed), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_WalkSpeed_MetaData), NewProp_WalkSpeed_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_RollMontage = { "RollMontage", nullptr, (EPropertyFlags)0x0124080000000015, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, RollMontage), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RollMontage_MetaData), NewProp_RollMontage_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_AttackMontage = { "AttackMontage", nullptr, (EPropertyFlags)0x0124080000000015, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, AttackMontage), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AttackMontage_MetaData), NewProp_AttackMontage_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_MeleeAttackMontage = { "MeleeAttackMontage", nullptr, (EPropertyFlags)0x0124080000000015, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, MeleeAttackMontage), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MeleeAttackMontage_MetaData), NewProp_MeleeAttackMontage_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_SprintStaminaCost = { "SprintStaminaCost", nullptr, (EPropertyFlags)0x0020080000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, SprintStaminaCost), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SprintStaminaCost_MetaData), NewProp_SprintStaminaCost_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_RollStaminaCost = { "RollStaminaCost", nullptr, (EPropertyFlags)0x0020080000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, RollStaminaCost), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RollStaminaCost_MetaData), NewProp_RollStaminaCost_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_AttackStaminaCost = { "AttackStaminaCost", nullptr, (EPropertyFlags)0x0020080000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, AttackStaminaCost), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AttackStaminaCost_MetaData), NewProp_AttackStaminaCost_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_MeleeAttackStaminaCost = { "MeleeAttackStaminaCost", nullptr, (EPropertyFlags)0x0020080000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, MeleeAttackStaminaCost), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MeleeAttackStaminaCost_MetaData), NewProp_MeleeAttackStaminaCost_MetaData) };
 void Z_Construct_UClass_AActionCharacter_Statics::NewProp_bIsSprint_SetBit(void* Obj)
 {
 	((AActionCharacter*)Obj)->bIsSprint = 1;
@@ -268,13 +298,16 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AActionCh
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_IA_Sprint,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_IA_Roll,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_IA_Attack,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_IA_MeleeAttack,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_SprintSpeed,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_WalkSpeed,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_RollMontage,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_AttackMontage,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_MeleeAttackMontage,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_SprintStaminaCost,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_RollStaminaCost,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_AttackStaminaCost,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_MeleeAttackStaminaCost,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_bIsSprint,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_AnimInstance,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_SectionJumpNotify,
@@ -320,10 +353,10 @@ AActionCharacter::~AActionCharacter() {}
 struct Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AActionCharacter, AActionCharacter::StaticClass, TEXT("AActionCharacter"), &Z_Registration_Info_UClass_AActionCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AActionCharacter), 2705024564U) },
+		{ Z_Construct_UClass_AActionCharacter, AActionCharacter::StaticClass, TEXT("AActionCharacter"), &Z_Registration_Info_UClass_AActionCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AActionCharacter), 439380320U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_1219361169(TEXT("/Script/KSHUnrealCPP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_700259611(TEXT("/Script/KSHUnrealCPP"),
 	Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
