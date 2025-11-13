@@ -49,7 +49,6 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void TimerClear();
 
 	// 스태미너 추가/감소용 함수
 	UFUNCTION(BlueprintCallable)

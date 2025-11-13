@@ -22,6 +22,7 @@ void UResourceComponent::BeginPlay()
 
 	// 게임 진행 중에 자주 변경되는 값은 시작 시점에서 리셋을 해주는 것이 좋다.
 	SetCurrentStamina(MaxStamina);
+	SetCurrentStamina(MaxHealth);
 	
 
 }
@@ -38,7 +39,10 @@ void UResourceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 void UResourceComponent::AddStamina(float InValue)
 {
 	// 스태미너 변경 처리
-	StaminaAutoRegenCoolTimerSet();
+	if (InValue < 0) {
+		StaminaAutoRegenCoolTimerSet();
+	}
+	
 	SetCurrentStamina(FMath::Clamp(CurrentStamina+InValue, 0, MaxStamina));
 
 	if (CurrentStamina <= 0)
@@ -68,6 +72,7 @@ void UResourceComponent::StaminaAutoRegenCoolTimerSet()
 	FTimerManager& timerManager = world->GetTimerManager();
 
 	//GetWorldTimerManager().ClearTimer(StaminaCoolTimer);	// 해서 나쁠 것은 없음(SetTimer할 때 이미 내부적으로 처리하고 있다)
+	timerManager.ClearTimer(StaminaRegenTickTimer);
 	timerManager.SetTimer(
 		StaminaAutoRegenCoolTimer,
 		[this]() {
@@ -105,10 +110,4 @@ void UResourceComponent::StaminaRegenPerTick()
 	UE_LOG(LogTemp, Warning, TEXT("Stamina Regen : %.1f"), CurrentStamina);
 }
 
-void UResourceComponent::TimerClear()
-{
-	UWorld* world = GetWorld();
-	FTimerManager& timerManager = world->GetTimerManager();
 
-	timerManager.ClearTimer(StaminaRegenTickTimer);
-}

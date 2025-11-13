@@ -44,6 +44,12 @@
     <Filter Include="Source\KSHUnrealCPP\Private">
       <UniqueIdentifier>{EBE8FCA5-167C-3FA5-980A-2C0D2E44A175}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\KSHUnrealCPP\Private\AnimNotify">
+      <UniqueIdentifier>{E7BF8130-527A-3FDA-B690-B8BE6B936245}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\AnimNotify\AnimNotifyState_SectionJump.cpp">
+      <Filter>Source\KSHUnrealCPP\Private\AnimNotify</Filter>
+    </ClCompile>
     <Filter Include="Source\KSHUnrealCPP\Private\FrameWork">
       <UniqueIdentifier>{8266D5BA-483A-39C4-94EA-0F636C23C667}</UniqueIdentifier>
     </Filter>
@@ -95,6 +101,12 @@
     <Filter Include="Source\KSHUnrealCPP\Public">
       <UniqueIdentifier>{D8B4268F-54F4-3015-9571-AEC72300CA74}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\KSHUnrealCPP\Public\AnimNotify">
+      <UniqueIdentifier>{ABB25E96-4EE9-3942-A593-A0A2E4A9EC33}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\AnimNotify\AnimNotifyState_SectionJump.h">
+      <Filter>Source\KSHUnrealCPP\Public\AnimNotify</Filter>
+    </ClCompile>
     <Filter Include="Source\KSHUnrealCPP\Public\FrameWork">
       <UniqueIdentifier>{BBFE7FBB-5989-3468-B4D3-97700F06DD57}</UniqueIdentifier>
     </Filter>

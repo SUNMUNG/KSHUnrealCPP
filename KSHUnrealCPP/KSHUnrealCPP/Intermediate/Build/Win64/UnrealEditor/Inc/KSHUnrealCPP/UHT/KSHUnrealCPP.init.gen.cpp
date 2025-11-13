@@ -25,13 +25,13 @@ void EmptyLinkFunctionForGeneratedCodeKSHUnrealCPP_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x13B4E7D7,
-				0x0124BA0B,
+				0x8D3CEBF7,
+				0x01CDBDD1,
 				METADATA_PARAMS(0, nullptr)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_KSHUnrealCPP.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_KSHUnrealCPP.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_KSHUnrealCPP(Z_Construct_UPackage__Script_KSHUnrealCPP, TEXT("/Script/KSHUnrealCPP"), Z_Registration_Info_UPackage__Script_KSHUnrealCPP, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x13B4E7D7, 0x0124BA0B));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_KSHUnrealCPP(Z_Construct_UPackage__Script_KSHUnrealCPP, TEXT("/Script/KSHUnrealCPP"), Z_Registration_Info_UPackage__Script_KSHUnrealCPP, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x8D3CEBF7, 0x01CDBDD1));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

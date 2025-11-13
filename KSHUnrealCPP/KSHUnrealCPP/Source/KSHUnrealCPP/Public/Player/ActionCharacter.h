@@ -9,6 +9,7 @@
 
 class UInputAction;
 class UResourceComponent;
+class UAnimNotifyState_SectionJump;
 //class USpringArmComponent;
 
 UCLASS()
@@ -28,10 +29,17 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void SpendRunStamina(float DeltaTime);
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UResourceComponent* GetResourceComponent() { return Resource; }
+
+	inline void SetSectionJumpNotify(UAnimNotifyState_SectionJump* InSectionJumpNotify) {
+		bComboReady = InSectionJumpNotify!=nullptr;
+		SectionJumpNotify = InSectionJumpNotify;
+	}
 
 protected:
 	// 이동 방향 입력 받기
@@ -39,6 +47,8 @@ protected:
 
 	// 구르기 입력 받기
 	void OnRollInput(const FInputActionValue& InValue);
+
+	void OnAttackInput(const FInputActionValue& InValue);
 
 	// 달리기 모드 설정
 	void SetSprintMode();
@@ -48,7 +58,7 @@ protected:
 	void SetWalkMode();
 
 private:
-
+	void SectionJumpForCombo();
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player|Camera")
@@ -65,6 +75,8 @@ protected:
 	TObjectPtr<UInputAction> IA_Sprint = nullptr;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> IA_Roll = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<UInputAction> IA_Attack = nullptr;
 
 	// 달리기 속도
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player|Movement")
@@ -77,6 +89,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation|Montage")
 	TObjectPtr<UAnimMontage> RollMontage = nullptr;
 
+	// 구르기 몽타주
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation|Montage")
+	TObjectPtr<UAnimMontage> AttackMontage = nullptr;
+
 	// 달리기 상태일 때 초당 스태미너 비용
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player|Resource")
 	float SprintStaminaCost = 20.0f;
@@ -85,6 +101,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player|Resource")
 	float RollStaminaCost = 50.0f;
 
+	// 구르기를 하기 위해 필요한 스태미너 비용
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player|Resource")
+	float AttackStaminaCost = 15.0f;
+
 	// 플레이어가 뛰고 있는 중인지 표시 해놓은 변수
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Player|State")
 	bool bIsSprint = false;
@@ -92,5 +112,10 @@ protected:
 private:
 	UPROPERTY()
 	TWeakObjectPtr<UAnimInstance> AnimInstance = nullptr;
+
+	UPROPERTY()
+	TObjectPtr<UAnimNotifyState_SectionJump> SectionJumpNotify = nullptr;
+
+	bool bComboReady = false;
 
 };

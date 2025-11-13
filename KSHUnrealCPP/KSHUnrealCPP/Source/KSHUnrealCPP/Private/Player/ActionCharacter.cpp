@@ -7,6 +7,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Player/ResourceComponent.h"
+#include "AnimNotify/AnimNotifyState_SectionJump.h"
 
 // Sets default values
 AActionCharacter::AActionCharacter()
@@ -54,7 +55,13 @@ void AActionCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (bIsSprint && !GetVelocity().IsNearlyZero())	// 달리기 모드인 상태에서 움직이면 스태미너를 소비한다.
+	SpendRunStamina(DeltaTime);
+}
+
+void AActionCharacter::SpendRunStamina(float DeltaTime)
+{
+	if ((bIsSprint && !GetVelocity().IsNearlyZero())
+		&& (AnimInstance.IsValid() && !AnimInstance->IsAnyMontagePlaying()))	// 달리기 모드인 상태에서 움직이면 스태미너를 소비한다.
 	{
 		Resource->AddStamina(-SprintStaminaCost * DeltaTime);	// 스태미너 감소
 	}
@@ -78,6 +85,7 @@ void AActionCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 				SetWalkMode();
 			});
 		enhanced->BindAction(IA_Roll, ETriggerEvent::Triggered, this, &AActionCharacter::OnRollInput);
+		enhanced->BindAction(IA_Attack, ETriggerEvent::Triggered, this, &AActionCharacter::OnAttackInput);
 	}
 }
 
@@ -102,13 +110,33 @@ void AActionCharacter::OnRollInput(const FInputActionValue& InValue)
 		if (!AnimInstance->IsAnyMontagePlaying()
 			&& Resource->HasEnoughStamina(RollStaminaCost))	// 몽타주 재생중이 아니고 충분한 스태미너가 있을 때만 작동
 		{
-			//if (!GetLastMovementInputVector().IsNearlyZero())	// 입력을 하는 중에만 즉시 회전
-			//{
-			//	SetActorRotation(GetLastMovementInputVector().Rotation());	// 마지막 입력 방향으로 즉시 회전 시키기
-			//}
-			Resource->TimerClear();
+			if (!GetLastMovementInputVector().IsNearlyZero())	// 입력을 하는 중에만 즉시 회전
+			{
+				SetActorRotation(GetLastMovementInputVector().Rotation());	// 마지막 입력 방향으로 즉시 회전 시키기
+			}
 			Resource->AddStamina(-RollStaminaCost);	// 스태미너 감소
 			PlayAnimMontage(RollMontage);
+		}
+	}
+}
+
+void AActionCharacter::OnAttackInput(const FInputActionValue& InValue)
+{
+	if (AnimInstance.IsValid()&&Resource->HasEnoughStamina(AttackStaminaCost))
+	{
+		if (!AnimInstance->IsAnyMontagePlaying())	// 몽타주 재생중이 아니고 충분한 스태미너가 있을 때만 작동
+		{
+			if (!GetLastMovementInputVector().IsNearlyZero())	// 입력을 하는 중에만 즉시 회전
+			{
+				SetActorRotation(GetLastMovementInputVector().Rotation());	// 마지막 입력 방향으로 즉시 회전 시키기
+			}
+			Resource->AddStamina(-AttackStaminaCost);	// 스태미너 감소
+			PlayAnimMontage(AttackMontage);
+		}
+		else if (AnimInstance->GetCurrentActiveMontage()==AttackMontage) {
+				// 스태미너 감소
+			
+			SectionJumpForCombo();
 		}
 	}
 }
@@ -117,7 +145,6 @@ void AActionCharacter::SetSprintMode()
 {
 	//UE_LOG(LogTemp, Warning, TEXT("달리기 모드"));
 	GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
-	Resource->TimerClear();
 	bIsSprint = true;
 }
 
@@ -126,4 +153,19 @@ void AActionCharacter::SetWalkMode()
 	//UE_LOG(LogTemp, Warning, TEXT("걷기 모드"));
 	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 	bIsSprint = false;
+}
+
+void AActionCharacter::SectionJumpForCombo()
+{
+	if (SectionJumpNotify && bComboReady) {
+		UAnimMontage* current = AnimInstance->GetCurrentActiveMontage();
+		AnimInstance->Montage_SetNextSection(
+			AnimInstance->Montage_GetCurrentSection(current),
+			SectionJumpNotify->GetNextSectionName(),
+			current
+		);
+		Resource->AddStamina(-AttackStaminaCost);
+		bComboReady = false;
+	}
+
 }
