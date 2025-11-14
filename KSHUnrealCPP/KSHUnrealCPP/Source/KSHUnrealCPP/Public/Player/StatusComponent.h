@@ -17,18 +17,27 @@ public:
 	UStatusComponent();
 
 	float GetAttackPower();
+	float GetDefaultStamina();
+	float GetDefaultHealth();
+
 
 
 protected:
 	//힘
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status", meta = (ClampMin = "0", ClampMax = "20"))
-	int32 Strength = 10;
+	float Strength = 10;
 	//민첩
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status", meta = (ClampMin = "0", ClampMax = "20"))
-	int32 Agility = 10;
+	float Agility = 20;
 	//생명력
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status", meta = (ClampMin = "0", ClampMax = "20"))
-	int32 Vitality = 10;
+	float Vitality = 20;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status", meta = (ClampMin = "0", ClampMax = "20"))
+	float Stamina = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status", meta = (ClampMin = "0", ClampMax = "20"))
+	float Health = 0;
+
 
 	//공격력 모디파이어
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")

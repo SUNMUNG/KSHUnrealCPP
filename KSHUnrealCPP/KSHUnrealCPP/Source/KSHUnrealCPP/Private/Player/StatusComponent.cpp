@@ -20,6 +20,18 @@ float UStatusComponent::GetAttackPower()
 	return Strength * AttackModifier;
 }
 
+float UStatusComponent::GetDefaultStamina()
+{
+	Stamina = Agility * 10.0f;
+	return Stamina;
+}
+
+float UStatusComponent::GetDefaultHealth()
+{
+	Health = Vitality * 10.0f;
+	return Health;
+}
+
 
 
 

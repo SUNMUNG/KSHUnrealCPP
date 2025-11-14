@@ -27,6 +27,7 @@
 // DECLARE_DELEGATE_Retval
 // DECLARE_DELEGATE_Retval_OneParam
 
+
 // FOnStaminaEmpty이름의 델리게이트가 있다라고 타입을 선언한 것
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnStaminaEmpty);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDie);	// 사망 알림용
@@ -48,7 +49,6 @@ protected:
 public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
 
 	// 스태미너 추가/감소용 함수
 	UFUNCTION(BlueprintCallable)
@@ -88,29 +88,41 @@ public:
 	// 체력 변화를 알리는 델리게이트(일반 델리게이트는 블루프린트에서 사용 불능)
 	FOnHealthChanged OnHealthChanged;
 
-
+	inline void SetDefaultStamina(float InValue) {
+		MaxStamina = InValue;
+		CurrentStamina = MaxStamina;
+		OnHealthChanged.Broadcast(CurrentHealth, MaxHealth);
+	}
+	inline void SetDefaultHealth(float InValue) {
+		MaxHealth = InValue;
+		CurrentHealth = MaxHealth;
+		OnHealthChanged.Broadcast(CurrentHealth, MaxHealth);
+	}
+	
 private:
 	void StaminaAutoRegenCoolTimerSet();
 	void StaminaRegenPerTick();
 	
-
 	void SetCurrentHealth(float InValue) {
 		CurrentHealth = InValue;
-		OnHealthChanged.Broadcast(CurrentHealth,MaxHealth);
+		OnHealthChanged.Broadcast(CurrentHealth, MaxHealth);
 	}
 	void SetCurrentStamina(float InValue) {
 		CurrentStamina = InValue;
 		OnStaminaChanged.Broadcast(CurrentStamina, MaxStamina);
 	}
+	
 
 protected:
+
+	
 	// 현재 체력
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data|Health")
-	float CurrentHealth = 100.0f;
+	float CurrentHealth = 10.0f;
 
 	// 최대 체력
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data|Health")
-	float MaxHealth = 100.0f;
+	float MaxHealth = 10.0f;
 
 	// 현재 스태미너
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data|Stamina")
@@ -143,7 +155,7 @@ protected:
 private:
 	//float TimeSinceLastStaminaUse = 0.0f;
 	//bool bRegenStamina = false;
-
+	
 	FTimerHandle StaminaAutoRegenCoolTimer;	// 스태미너 자동 회복용 타이머 핸들
 	FTimerHandle StaminaRegenTickTimer;		// 스태미너 자동 회복시 틱별 타이머 핸들
 };
