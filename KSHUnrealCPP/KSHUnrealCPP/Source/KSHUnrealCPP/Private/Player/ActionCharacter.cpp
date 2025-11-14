@@ -8,13 +8,13 @@
 #include "Camera/CameraComponent.h"
 #include "Player/ResourceComponent.h"
 #include "AnimNotify/AnimNotifyState_SectionJump.h"
+#include "Weapon/WeaponActor.h"
 
 // Sets default values
 AActionCharacter::AActionCharacter()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->SetupAttachment(RootComponent);
 	SpringArm->TargetArmLength = 350.0f;
@@ -26,6 +26,7 @@ AActionCharacter::AActionCharacter()
 	PlayerCamera->SetRelativeRotation(FRotator(-20.0f, 0.0f, 0.0f));
 
 	Resource = CreateDefaultSubobject<UResourceComponent>(TEXT("PlayerResource"));
+	
 
 	bUseControllerRotationYaw = false;	// 컨트롤러의 Yaw 회전 사용 안함
 	GetCharacterMovement()->bOrientRotationToMovement = true;	// 이동 방향으로 캐릭터 회전
@@ -48,6 +49,8 @@ void AActionCharacter::BeginPlay()
 
 	// 게임 진행 중에 자주 변경되는 값은 시작 시점에서 리셋을 해주는 것이 좋다.
 	bIsSprint = false;
+
+	
 }
 
 // Called every frame
@@ -170,6 +173,12 @@ void AActionCharacter::SetSprintMode()
 	GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 	bIsSprint = true;
 }
+
+void AActionCharacter::OnEnableAttack(bool bEnable)
+{
+	CurrentWeapon->AttackEnable(bEnable);
+}
+
 
 void AActionCharacter::UpdatePlayerWalkSpeed()
 {

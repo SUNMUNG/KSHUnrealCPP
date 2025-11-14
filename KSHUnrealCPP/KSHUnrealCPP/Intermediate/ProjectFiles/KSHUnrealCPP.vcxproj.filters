@@ -50,6 +50,9 @@
     <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\AnimNotify\AnimNotifyState_SectionJump.cpp">
       <Filter>Source\KSHUnrealCPP\Private\AnimNotify</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\AnimNotify\AnimNotifyState_WeaponEnable.cpp">
+      <Filter>Source\KSHUnrealCPP\Private\AnimNotify</Filter>
+    </ClCompile>
     <Filter Include="Source\KSHUnrealCPP\Private\FrameWork">
       <UniqueIdentifier>{8266D5BA-483A-39C4-94EA-0F636C23C667}</UniqueIdentifier>
     </Filter>
@@ -72,6 +75,9 @@
       <Filter>Source\KSHUnrealCPP\Private\Player</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\Player\ResourceComponent.cpp">
+      <Filter>Source\KSHUnrealCPP\Private\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\Player\StatusComponent.cpp">
       <Filter>Source\KSHUnrealCPP\Private\Player</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\Player\UW_PlayerHud.cpp">
@@ -98,6 +104,12 @@
     <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\UI\ResourceBarWidget.cpp">
       <Filter>Source\KSHUnrealCPP\Private\UI</Filter>
     </ClCompile>
+    <Filter Include="Source\KSHUnrealCPP\Private\Weapon">
+      <UniqueIdentifier>{96B68BBC-14DA-3A5A-9A78-0F4177AC6FA0}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\Weapon\WeaponActor.cpp">
+      <Filter>Source\KSHUnrealCPP\Private\Weapon</Filter>
+    </ClCompile>
     <Filter Include="Source\KSHUnrealCPP\Public">
       <UniqueIdentifier>{D8B4268F-54F4-3015-9571-AEC72300CA74}</UniqueIdentifier>
     </Filter>
@@ -105,6 +117,9 @@
       <UniqueIdentifier>{ABB25E96-4EE9-3942-A593-A0A2E4A9EC33}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\AnimNotify\AnimNotifyState_SectionJump.h">
+      <Filter>Source\KSHUnrealCPP\Public\AnimNotify</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\AnimNotify\AnimNotifyState_WeaponEnable.h">
       <Filter>Source\KSHUnrealCPP\Public\AnimNotify</Filter>
     </ClCompile>
     <Filter Include="Source\KSHUnrealCPP\Public\FrameWork">
@@ -131,6 +146,9 @@
     <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\Player\ResourceComponent.h">
       <Filter>Source\KSHUnrealCPP\Public\Player</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\Player\StatusComponent.h">
+      <Filter>Source\KSHUnrealCPP\Public\Player</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\Player\UW_PlayerHud.h">
       <Filter>Source\KSHUnrealCPP\Public\Player</Filter>
     </ClCompile>
@@ -154,6 +172,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\UI\ResourceBarWidget.h">
       <Filter>Source\KSHUnrealCPP\Public\UI</Filter>
+    </ClCompile>
+    <Filter Include="Source\KSHUnrealCPP\Public\Weapon">
+      <UniqueIdentifier>{9815441F-1E33-3981-871C-0F17A573D463}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\Weapon\WeaponActor.h">
+      <Filter>Source\KSHUnrealCPP\Public\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

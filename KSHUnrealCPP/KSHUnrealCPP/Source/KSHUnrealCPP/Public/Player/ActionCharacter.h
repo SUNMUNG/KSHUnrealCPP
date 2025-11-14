@@ -10,7 +10,7 @@
 class UInputAction;
 class UResourceComponent;
 class UAnimNotifyState_SectionJump;
-//class USpringArmComponent;
+class USpringArmComponent;
 
 UCLASS()
 class KSHUNREALCPP_API AActionCharacter : public ACharacter
@@ -31,10 +31,13 @@ public:
 
 	void SpendRunStamina(float DeltaTime);
 
+	void OnEnableAttack(bool bEnable);
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UResourceComponent* GetResourceComponent() { return Resource; }
+
+	class AWeaponActor* GetWeapon() { return CurrentWeapon; }
 
 	inline void SetSectionJumpNotify(UAnimNotifyState_SectionJump* InSectionJumpNotify) {
 		bComboReady = InSectionJumpNotify!=nullptr;
@@ -54,6 +57,7 @@ protected:
 	// 달리기 모드 설정
 	void SetSprintMode();
 
+
 	// 걷기 속도 업데이트(보간)
 	void UpdatePlayerWalkSpeed();
 
@@ -65,6 +69,8 @@ private:
 	void SectionJumpForCombo(int StaminaCost);
 
 protected:
+
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player|Camera")
 	TObjectPtr<class USpringArmComponent> SpringArm = nullptr;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player|Camera")
@@ -123,6 +129,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Player|State")
 	bool bIsSprint = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player|Weapon")
+	TObjectPtr<class AWeaponActor> CurrentWeapon = nullptr;
 private:
 	UPROPERTY()
 	TWeakObjectPtr<UAnimInstance> AnimInstance = nullptr;
