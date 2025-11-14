@@ -5,13 +5,16 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "Weapon/WeaponActor.h"
 #include "ActionCharacter.generated.h"
+
 
 class UInputAction;
 class UResourceComponent;
 class UStatusComponent;
 class UAnimNotifyState_SectionJump;
 class USpringArmComponent;
+class AWeaponActor;
 
 UCLASS()
 class KSHUNREALCPP_API AActionCharacter : public ACharacter
@@ -29,6 +32,8 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	void EquipWeapon(TSubclassOf<AWeaponActor> InWeapon);
 
 	void SpendRunStamina(float DeltaTime);
 
@@ -134,7 +139,7 @@ protected:
 	bool bIsSprint = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player|Weapon")
-	TObjectPtr<class AWeaponActor> CurrentWeapon = nullptr;
+	TObjectPtr<AWeaponActor> CurrentWeapon = nullptr;
 private:
 	UPROPERTY()
 	TWeakObjectPtr<UAnimInstance> AnimInstance = nullptr;

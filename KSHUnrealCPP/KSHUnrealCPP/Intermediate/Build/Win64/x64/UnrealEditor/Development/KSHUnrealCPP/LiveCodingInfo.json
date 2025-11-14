@@ -15,6 +15,7 @@
 			"MainHudWidget.gen.cpp.obj",
 			"ResourceBarWidget.gen.cpp.obj",
 			"ResourceComponent.gen.cpp.obj",
+			"SpecialWeaponItem.gen.cpp.obj",
 			"StatusComponent.gen.cpp.obj",
 			"TestActor.gen.cpp.obj",
 			"UW_PlayerHud.gen.cpp.obj",
@@ -36,6 +37,7 @@
 			"TestActor.cpp.obj",
 			"MainHudWidget.cpp.obj",
 			"ResourceBarWidget.cpp.obj",
+			"SpecialWeaponItem.cpp.obj",
 			"WeaponActor.cpp.obj"
 		]
 	}

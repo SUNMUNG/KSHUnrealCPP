@@ -107,6 +107,9 @@
     <Filter Include="Source\KSHUnrealCPP\Private\Weapon">
       <UniqueIdentifier>{96B68BBC-14DA-3A5A-9A78-0F4177AC6FA0}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\Weapon\SpecialWeaponItem.cpp">
+      <Filter>Source\KSHUnrealCPP\Private\Weapon</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\Weapon\WeaponActor.cpp">
       <Filter>Source\KSHUnrealCPP\Private\Weapon</Filter>
     </ClCompile>
@@ -176,6 +179,9 @@
     <Filter Include="Source\KSHUnrealCPP\Public\Weapon">
       <UniqueIdentifier>{9815441F-1E33-3981-871C-0F17A573D463}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\Weapon\SpecialWeaponItem.h">
+      <Filter>Source\KSHUnrealCPP\Public\Weapon</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\Weapon\WeaponActor.h">
       <Filter>Source\KSHUnrealCPP\Public\Weapon</Filter>
     </ClCompile>

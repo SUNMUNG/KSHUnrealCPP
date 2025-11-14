@@ -47,7 +47,4 @@ protected:
 
 private:
 	TObjectPtr<class AActionCharacter> WeaponOwner = nullptr;
-
-
-
 };

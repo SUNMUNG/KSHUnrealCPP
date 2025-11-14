@@ -64,6 +64,17 @@ void AActionCharacter::Tick(float DeltaTime)
 	SpendRunStamina(DeltaTime);
 }
 
+void AActionCharacter::EquipWeapon(TSubclassOf<AWeaponActor> InWeapon)
+{
+	FActorSpawnParameters SpawnParams; 
+	SpawnParams.Owner = this;
+
+	CurrentWeapon = GetWorld()->SpawnActor<AWeaponActor>(InWeapon, GetActorLocation(), GetActorRotation(), SpawnParams);
+	if (CurrentWeapon) {
+		CurrentWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("hand_rSocket"));
+	}
+}
+
 void AActionCharacter::SpendRunStamina(float DeltaTime)
 {
 	if ((bIsSprint && !GetVelocity().IsNearlyZero())
