@@ -4097,3 +4097,764 @@ LogConfig: Set CVar [[r.VRS.ContrastAdaptiveShading:1]]
 [2025.11.14-07.41.34:346][132]LogContentValidation: 	/Script/DataValidation.WorldPartitionChangelistValidator
 [2025.11.14-07.41.34:346][132]LogContentValidation: 	/Script/InputBlueprintNodes.EnhancedInputUserWidgetValidator
 [2025.11.14-07.41.34:346][132]AssetCheck: /Game/MAP/Test05_Weapon 에셋 유효성 검사 중
+[2025.11.14-07.43.31:076][534]Candidate modules for hot reload:
+[2025.11.14-07.43.31:077][534]  KSHUnrealCPP
+[2025.11.14-07.43.31:083][534]Launching UnrealBuildTool... [C:/Program Files/Epic Games/UE_5.5/Engine/Build/BatchFiles/Build.bat  -ModuleWithSuffix=KSHUnrealCPP,9555 KSHUnrealCPPEditor Win64 Development -Project="C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject" "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject"  -IgnoreJunk]
+[2025.11.14-07.43.31:083][534]Warning: Starting HotReload took  0.0s.
+[2025.11.14-07.43.32:641][628]LogEOSSDK: LogEOS: Updating Product SDK Config, Time: 3195.840820
+[2025.11.14-07.43.32:889][649]LogEOSSDK: LogEOS: SDK Config Product Update Request Completed - No Change
+[2025.11.14-07.43.32:889][649]LogEOSSDK: LogEOS: ScheduleNextSDKConfigDataUpdate - Time: 3196.079346, Update Interval: 351.415741
+[2025.11.14-07.43.41:011][445]CompilerResultsLog: Using bundled DotNet SDK version: 8.0.300
+[2025.11.14-07.43.41:011][445]CompilerResultsLog: Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" -ModuleWithSuffix=KSHUnrealCPP,9555 KSHUnrealCPPEditor Win64 Development -Project="C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject" "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject"  -IgnoreJunk
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: Log file: C:\Users\KGA\AppData\Local\UnrealBuildTool\Log.txt
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: Parsing headers for KSHUnrealCPPEditor
+[2025.11.14-07.43.41:012][445]CompilerResultsLog:   Running Internal UnrealHeaderTool "C:\Users\KGA\Documents\Unreal Projects\KSHUnrealCPP07\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP.uproject" "C:\Users\KGA\Documents\Unreal Projects\KSHUnrealCPP07\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP\Intermediate\Build\Win64\KSHUnrealCPPEditor\Development\KSHUnrealCPPEditor.uhtmanifest" -WarningsAsErrors -installed
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: Total of 2 written
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: Reflection code generated for KSHUnrealCPPEditor in 1.9496719 seconds
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: Building KSHUnrealCPPEditor...
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: Using Visual Studio 2022 14.38.33145 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130) and Windows 10.0.22621.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: [Upgrade]
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: [Upgrade] Using backward-compatible include order. The latest version of UE has changed the order of includes, which may require code changes. The current setting is:
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: [Upgrade]     IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_3
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: [Upgrade] Suppress this message by setting 'IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_5;' in KSHUnrealCPPEditor.Target.cs.
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: [Upgrade] Alternatively you can set this to 'EngineIncludeOrderVersion.Latest' to always use the latest include order. This will potentially cause compile errors when integrating new versions of the engine.
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: [Upgrade]
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: [Adaptive Build] Excluded from KSHUnrealCPP unity file: KSHUnrealCPP.cpp, AnimNotifyState_SectionJump.cpp, AnimNotifyState_WeaponEnable.cpp, MainHUD.cpp, ActionAnimInstance.cpp, ActionCharacter.cpp, ActionCharacterAnimtion.cpp, ActionPlayerController.cpp, ResourceComponent.cpp, StatusComponent.cpp, UW_PlayerHud.cpp, FloatingActor2.cpp, FloatingActor_Curve.cpp, TestActor.cpp, MainHudWidget.cpp, ResourceBarWidget.cpp, WeaponActor.cpp
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: Determining max actions to execute in parallel (6 physical cores, 12 logical cores)
+[2025.11.14-07.43.41:012][445]CompilerResultsLog:   Executing up to 6 processes, one per physical core
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: Using Unreal Build Accelerator local executor to run 7 action(s)
+[2025.11.14-07.43.41:012][445]CompilerResultsLog:   Storage capacity 40Gb
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: ---- Starting trace: 251114_164334 ----
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: UbaSessionServer - Disable remote execution (remote sessions will finish current processes)
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: ------ Building 7 action(s) started ------
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: [1/7] Compile [x64] StatusComponent.cpp
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: [2/7] Compile [x64] WeaponActor.cpp
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: [3/7] Compile [x64] ActionCharacter.cpp
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: [4/7] Compile [x64] Module.KSHUnrealCPP.cpp
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: [5/7] Link [x64] UnrealEditor-KSHUnrealCPP-9555.lib
+[2025.11.14-07.43.41:012][445]CompilerResultsLog:    C:\Users\KGA\Documents\Unreal Projects\KSHUnrealCPP07\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP\Intermediate\Build\Win64\x64\UnrealEditor\Development\KSHUnrealCPP\UnrealEditor-KSHUnrealCPP-9555.lib 라이브러리 및 C:\Users\KGA\Documents\Unreal Projects\KSHUnrealCPP07\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP\Intermediate\Build\Win64\x64\UnrealEditor\Development\KSHUnrealCPP\UnrealEditor-KSHUnrealCPP-9555.exp 개체를 생성하고 있습니다.
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: [6/7] Link [x64] UnrealEditor-KSHUnrealCPP-9555.dll
+[2025.11.14-07.43.41:012][445]CompilerResultsLog:    개체 C:\Users\KGA\Documents\Unreal Projects\KSHUnrealCPP07\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP\Binaries\Win64\UnrealEditor-KSHUnrealCPP-9555.exp 만들기
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: [7/7] WriteMetadata KSHUnrealCPPEditor.target (UBA disabled)
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: Trace file written to C:/Users/KGA/AppData/Local/UnrealBuildTool/Log.uba with size 4.1kb
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: Total time in Unreal Build Accelerator local executor: 6.79 seconds
+[2025.11.14-07.43.41:012][445]CompilerResultsLog: Total execution time: 9.74 seconds
+[2025.11.14-07.43.41:012][445]LogMainFrame: MainFrame: Module compiling took 9.959 seconds
+[2025.11.14-07.43.41:033][445]LogUObjectHash: Compacting FUObjectHashTables data took   0.88ms
+[2025.11.14-07.43.41:044][445]LogClass: UPackage /Script/KSHUnrealCPP Reload.
+[2025.11.14-07.43.41:045][445]LogClass: UClass StatusComponent Reload.
+[2025.11.14-07.43.41:077][445]LogClass: Could not find existing class StatusComponent in package /Script/KSHUnrealCPP for reload, assuming new or modified class
+[2025.11.14-07.43.41:108][445]Re-instancing StatusComponent after reload.
+[2025.11.14-07.43.41:238][445]LogUObjectHash: Compacting FUObjectHashTables data took   1.51ms
+[2025.11.14-07.43.41:262][445]Display: HotReload took 10.2s.
+[2025.11.14-07.43.41:262][445]Display: Reload/Re-instancing Complete: 1 package changed, 1 class changed, 15 classes unchanged, 15 functions remapped
+[2025.11.14-07.43.43:644][666]LogDebuggerCommands: Repeating last play command: 선택된 뷰포트
+[2025.11.14-07.43.43:650][666]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2025.11.14-07.43.43:671][666]LogPlayLevel: Creating play world package: /Game/MAP/UEDPIE_0_Test05_Weapon
+[2025.11.14-07.43.43:673][666]LogPlayLevel: PIE: StaticDuplicateObject took: (0.001903s)
+[2025.11.14-07.43.43:673][666]LogPlayLevel: PIE: Created PIE world by copying editor world from /Game/MAP/Test05_Weapon.Test05_Weapon to /Game/MAP/UEDPIE_0_Test05_Weapon.Test05_Weapon (0.001945s)
+[2025.11.14-07.43.43:761][666]LogUObjectHash: Compacting FUObjectHashTables data took   1.50ms
+[2025.11.14-07.43.43:763][666]LogChaosDD: Creating Chaos Debug Draw Scene for world Test05_Weapon
+[2025.11.14-07.43.43:765][666]LogPlayLevel: PIE: World Init took: (0.001745s)
+[2025.11.14-07.43.43:765][666]LogAudio: Display: Creating Audio Device:                 Id: 13, Scope: Unique, Realtime: True
+[2025.11.14-07.43.43:765][666]LogAudioMixer: Display: Audio Mixer Platform Settings:
+[2025.11.14-07.43.43:765][666]LogAudioMixer: Display: 	Sample Rate:						  48000
+[2025.11.14-07.43.43:765][666]LogAudioMixer: Display: 	Callback Buffer Frame Size Requested: 1024
+[2025.11.14-07.43.43:765][666]LogAudioMixer: Display: 	Callback Buffer Frame Size To Use:	  1024
+[2025.11.14-07.43.43:765][666]LogAudioMixer: Display: 	Number of buffers to queue:			  1
+[2025.11.14-07.43.43:765][666]LogAudioMixer: Display: 	Max Channels (voices):				  32
+[2025.11.14-07.43.43:765][666]LogAudioMixer: Display: 	Number of Async Source Workers:		  4
+[2025.11.14-07.43.43:765][666]LogAudio: Display: AudioDevice MaxSources: 32
+[2025.11.14-07.43.43:765][666]LogAudio: Display: Audio Spatialization Plugin: None (built-in).
+[2025.11.14-07.43.43:766][666]LogAudio: Display: Audio Reverb Plugin: None (built-in).
+[2025.11.14-07.43.43:766][666]LogAudio: Display: Audio Occlusion Plugin: None (built-in).
+[2025.11.14-07.43.43:768][666]LogAudioMixer: Display: Initializing audio mixer using platform API: 'XAudio2'
+[2025.11.14-07.43.43:787][666]LogAudioMixer: Display: Using Audio Hardware Device B250F(NVIDIA High Definition Audio)
+[2025.11.14-07.43.43:787][666]LogAudioMixer: Display: Initializing Sound Submixes...
+[2025.11.14-07.43.43:787][666]LogAudioMixer: Display: Creating Master Submix 'MasterSubmixDefault'
+[2025.11.14-07.43.43:787][666]LogAudioMixer: Display: Creating Master Submix 'MasterReverbSubmixDefault'
+[2025.11.14-07.43.43:788][666]LogAudioMixer: FMixerPlatformXAudio2::StartAudioStream() called. InstanceID=13
+[2025.11.14-07.43.43:788][666]LogAudioMixer: Display: Output buffers initialized: Frames=1024, Channels=2, Samples=2048, InstanceID=13
+[2025.11.14-07.43.43:791][666]LogAudioMixer: Display: Starting AudioMixerPlatformInterface::RunInternal(), InstanceID=13
+[2025.11.14-07.43.43:791][666]LogAudioMixer: Display: FMixerPlatformXAudio2::SubmitBuffer() called for the first time. InstanceID=13
+[2025.11.14-07.43.43:791][666]LogInit: FAudioDevice initialized with ID 13.
+[2025.11.14-07.43.43:791][666]LogAudio: Display: Audio Device (ID: 13) registered with world 'Test05_Weapon'.
+[2025.11.14-07.43.43:791][666]LogAudioMixer: Initializing Audio Bus Subsystem for audio device with ID 13
+[2025.11.14-07.43.43:794][666]LogLoad: Game class is 'GM_TestWeapon_C'
+[2025.11.14-07.43.43:795][666]LogWorld: Bringing World /Game/MAP/UEDPIE_0_Test05_Weapon.Test05_Weapon up for play (max tick rate 0) at 2025.11.14-16.43.43
+[2025.11.14-07.43.43:795][666]LogWorld: Bringing up level for play took: 0.001366
+[2025.11.14-07.43.43:798][666]LogOnline: OSS: Created online subsystem instance for: :Context_20
+[2025.11.14-07.43.43:802][666]LogTemp: Warning: 200.0
+[2025.11.14-07.43.43:803][666]PIE: 서버가 로그인했습니다.
+[2025.11.14-07.43.43:804][666]PIE: 에디터에서 플레이 총 시작 시간 0.154초입니다.
+[2025.11.14-07.43.45:615][865]LogTemp: Warning: 1200.0
+[2025.11.14-07.43.45:639][867]LogTemp: Warning: 1190.4
+[2025.11.14-07.43.45:650][868]LogTemp: Warning: 1181.0
+[2025.11.14-07.43.45:668][870]LogTemp: Warning: 1171.7
+[2025.11.14-07.43.45:679][871]LogTemp: Warning: 1162.5
+[2025.11.14-07.43.45:693][872]LogTemp: Warning: 1153.5
+[2025.11.14-07.43.45:713][874]LogTemp: Warning: 1144.7
+[2025.11.14-07.43.45:730][876]LogTemp: Warning: 1135.9
+[2025.11.14-07.43.45:747][878]LogTemp: Warning: 1127.4
+[2025.11.14-07.43.45:772][878]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2025.11.14-07.43.45:772][878]LogWorld: BeginTearingDown for /Game/MAP/UEDPIE_0_Test05_Weapon
+[2025.11.14-07.43.45:772][878]LogWorld: UWorld::CleanupWorld for Test05_Weapon, bSessionEnded=true, bCleanupResources=true
+[2025.11.14-07.43.45:772][878]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.14-07.43.45:775][878]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2025.11.14-07.43.45:781][878]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.14-07.43.45:799][878]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2025.11.14-07.43.45:809][878]LogAudioMixer: Deinitializing Audio Bus Subsystem for audio device with ID 13
+[2025.11.14-07.43.45:810][878]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=13
+[2025.11.14-07.43.45:812][878]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=13
+[2025.11.14-07.43.45:817][878]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2025.11.14-07.43.45:833][878]LogUObjectHash: Compacting FUObjectHashTables data took   1.77ms
+[2025.11.14-07.43.45:924][879]LogPlayLevel: Display: Destroying online subsystem :Context_20
+[2025.11.14-07.43.46:100][897]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2025.11.14-07.43.46:185][897]LogUObjectHash: Compacting FUObjectHashTables data took   0.93ms
+[2025.11.14-07.43.46:200][897]LogSavePackage: Moving output files for package: /Game/MAP/Test05_Weapon
+[2025.11.14-07.43.46:200][897]LogSavePackage: Moving '../../../../../../Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Saved/Test05_Weapon71D094A9455D675141309AB773FCD07B.tmp' to '../../../../../../Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Content/MAP/Test05_Weapon.umap'
+[2025.11.14-07.43.46:209][897]LogFileHelpers: Saving map 'Test05_Weapon' took 0.061
+[2025.11.14-07.43.46:225][897]LogFileHelpers: InternalPromptForCheckoutAndSave took 125.459 ms (total: 1.57 sec)
+[2025.11.14-07.43.46:281][897]LogContentValidation: Display: Starting to validate 1 assets
+[2025.11.14-07.43.46:281][897]LogContentValidation: Enabled validators:
+[2025.11.14-07.43.46:281][897]LogContentValidation: 	/Script/DataValidation.EditorValidator_Material
+[2025.11.14-07.43.46:281][897]LogContentValidation: 	/Script/DataValidation.DirtyFilesChangelistValidator
+[2025.11.14-07.43.46:281][897]LogContentValidation: 	/Script/DataValidation.EditorValidator_Localization
+[2025.11.14-07.43.46:281][897]LogContentValidation: 	/Script/DataValidation.PackageFileValidator
+[2025.11.14-07.43.46:281][897]LogContentValidation: 	/Script/DataValidation.WorldPartitionChangelistValidator
+[2025.11.14-07.43.46:281][897]LogContentValidation: 	/Script/InputBlueprintNodes.EnhancedInputUserWidgetValidator
+[2025.11.14-07.43.46:281][897]AssetCheck: /Game/MAP/Test05_Weapon 에셋 유효성 검사 중
+[2025.11.14-07.43.55:976][ 56]Candidate modules for hot reload:
+[2025.11.14-07.43.55:976][ 56]  KSHUnrealCPP
+[2025.11.14-07.43.55:983][ 56]Launching UnrealBuildTool... [C:/Program Files/Epic Games/UE_5.5/Engine/Build/BatchFiles/Build.bat  -ModuleWithSuffix=KSHUnrealCPP,3004 KSHUnrealCPPEditor Win64 Development -Project="C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject" "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject"  -IgnoreJunk]
+[2025.11.14-07.43.55:983][ 56]Warning: Starting HotReload took  0.0s.
+[2025.11.14-07.44.06:193][916]CompilerResultsLog: Using bundled DotNet SDK version: 8.0.300
+[2025.11.14-07.44.06:193][916]CompilerResultsLog: Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" -ModuleWithSuffix=KSHUnrealCPP,3004 KSHUnrealCPPEditor Win64 Development -Project="C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject" "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject"  -IgnoreJunk
+[2025.11.14-07.44.06:193][916]CompilerResultsLog: Log file: C:\Users\KGA\AppData\Local\UnrealBuildTool\Log.txt
+[2025.11.14-07.44.06:193][916]CompilerResultsLog: Parsing headers for KSHUnrealCPPEditor
+[2025.11.14-07.44.06:193][916]CompilerResultsLog:   Running Internal UnrealHeaderTool "C:\Users\KGA\Documents\Unreal Projects\KSHUnrealCPP07\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP.uproject" "C:\Users\KGA\Documents\Unreal Projects\KSHUnrealCPP07\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP\Intermediate\Build\Win64\KSHUnrealCPPEditor\Development\KSHUnrealCPPEditor.uhtmanifest" -WarningsAsErrors -installed
+[2025.11.14-07.44.06:193][916]CompilerResultsLog: Total of 0 written
+[2025.11.14-07.44.06:193][916]CompilerResultsLog: Reflection code generated for KSHUnrealCPPEditor in 2.1730783 seconds
+[2025.11.14-07.44.06:193][916]CompilerResultsLog: Building KSHUnrealCPPEditor...
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: Using Visual Studio 2022 14.38.33145 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130) and Windows 10.0.22621.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: [Upgrade]
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: [Upgrade] Using backward-compatible include order. The latest version of UE has changed the order of includes, which may require code changes. The current setting is:
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: [Upgrade]     IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_3
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: [Upgrade] Suppress this message by setting 'IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_5;' in KSHUnrealCPPEditor.Target.cs.
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: [Upgrade] Alternatively you can set this to 'EngineIncludeOrderVersion.Latest' to always use the latest include order. This will potentially cause compile errors when integrating new versions of the engine.
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: [Upgrade]
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: [Adaptive Build] Excluded from KSHUnrealCPP unity file: KSHUnrealCPP.cpp, AnimNotifyState_SectionJump.cpp, AnimNotifyState_WeaponEnable.cpp, MainHUD.cpp, ActionAnimInstance.cpp, ActionCharacter.cpp, ActionCharacterAnimtion.cpp, ActionPlayerController.cpp, ResourceComponent.cpp, StatusComponent.cpp, UW_PlayerHud.cpp, FloatingActor2.cpp, FloatingActor_Curve.cpp, TestActor.cpp, MainHudWidget.cpp, ResourceBarWidget.cpp, WeaponActor.cpp
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: Determining max actions to execute in parallel (6 physical cores, 12 logical cores)
+[2025.11.14-07.44.06:194][916]CompilerResultsLog:   Executing up to 6 processes, one per physical core
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: Using Unreal Build Accelerator local executor to run 7 action(s)
+[2025.11.14-07.44.06:194][916]CompilerResultsLog:   Storage capacity 40Gb
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: ---- Starting trace: 251114_164359 ----
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: UbaSessionServer - Disable remote execution (remote sessions will finish current processes)
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: ------ Building 7 action(s) started ------
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: [1/7] Compile [x64] StatusComponent.cpp
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: [2/7] Compile [x64] WeaponActor.cpp
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: [3/7] Compile [x64] ActionCharacter.cpp
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: [4/7] Compile [x64] Module.KSHUnrealCPP.cpp
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: [5/7] Link [x64] UnrealEditor-KSHUnrealCPP-3004.lib
+[2025.11.14-07.44.06:194][916]CompilerResultsLog:    C:\Users\KGA\Documents\Unreal Projects\KSHUnrealCPP07\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP\Intermediate\Build\Win64\x64\UnrealEditor\Development\KSHUnrealCPP\UnrealEditor-KSHUnrealCPP-3004.lib 라이브러리 및 C:\Users\KGA\Documents\Unreal Projects\KSHUnrealCPP07\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP\Intermediate\Build\Win64\x64\UnrealEditor\Development\KSHUnrealCPP\UnrealEditor-KSHUnrealCPP-3004.exp 개체를 생성하고 있습니다.
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: [6/7] Link [x64] UnrealEditor-KSHUnrealCPP-3004.dll
+[2025.11.14-07.44.06:194][916]CompilerResultsLog:    개체 C:\Users\KGA\Documents\Unreal Projects\KSHUnrealCPP07\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP\Binaries\Win64\UnrealEditor-KSHUnrealCPP-3004.exp 만들기
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: [7/7] WriteMetadata KSHUnrealCPPEditor.target (UBA disabled)
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: Trace file written to C:/Users/KGA/AppData/Local/UnrealBuildTool/Log.uba with size 4.1kb
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: Total time in Unreal Build Accelerator local executor: 6.74 seconds
+[2025.11.14-07.44.06:194][916]CompilerResultsLog: Total execution time: 10.03 seconds
+[2025.11.14-07.44.06:194][916]LogMainFrame: MainFrame: Module compiling took 10.235 seconds
+[2025.11.14-07.44.06:213][916]LogUObjectHash: Compacting FUObjectHashTables data took   0.54ms
+[2025.11.14-07.44.06:373][916]LogUObjectHash: Compacting FUObjectHashTables data took   1.27ms
+[2025.11.14-07.44.06:397][916]Display: HotReload took 10.4s.
+[2025.11.14-07.44.06:397][916]Display: Reload/Re-instancing Complete: 1 package changed, 16 classes unchanged, 15 functions remapped
+[2025.11.14-07.44.07:320][949]LogDebuggerCommands: Repeating last play command: 선택된 뷰포트
+[2025.11.14-07.44.07:329][949]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2025.11.14-07.44.07:351][949]LogPlayLevel: Creating play world package: /Game/MAP/UEDPIE_0_Test05_Weapon
+[2025.11.14-07.44.07:354][949]LogPlayLevel: PIE: StaticDuplicateObject took: (0.002132s)
+[2025.11.14-07.44.07:354][949]LogPlayLevel: PIE: Created PIE world by copying editor world from /Game/MAP/Test05_Weapon.Test05_Weapon to /Game/MAP/UEDPIE_0_Test05_Weapon.Test05_Weapon (0.002182s)
+[2025.11.14-07.44.07:436][949]LogUObjectHash: Compacting FUObjectHashTables data took   1.43ms
+[2025.11.14-07.44.07:446][949]LogChaosDD: Creating Chaos Debug Draw Scene for world Test05_Weapon
+[2025.11.14-07.44.07:448][949]LogPlayLevel: PIE: World Init took: (0.001857s)
+[2025.11.14-07.44.07:449][949]LogAudio: Display: Creating Audio Device:                 Id: 14, Scope: Unique, Realtime: True
+[2025.11.14-07.44.07:449][949]LogAudioMixer: Display: Audio Mixer Platform Settings:
+[2025.11.14-07.44.07:449][949]LogAudioMixer: Display: 	Sample Rate:						  48000
+[2025.11.14-07.44.07:449][949]LogAudioMixer: Display: 	Callback Buffer Frame Size Requested: 1024
+[2025.11.14-07.44.07:449][949]LogAudioMixer: Display: 	Callback Buffer Frame Size To Use:	  1024
+[2025.11.14-07.44.07:449][949]LogAudioMixer: Display: 	Number of buffers to queue:			  1
+[2025.11.14-07.44.07:449][949]LogAudioMixer: Display: 	Max Channels (voices):				  32
+[2025.11.14-07.44.07:449][949]LogAudioMixer: Display: 	Number of Async Source Workers:		  4
+[2025.11.14-07.44.07:449][949]LogAudio: Display: AudioDevice MaxSources: 32
+[2025.11.14-07.44.07:449][949]LogAudio: Display: Audio Spatialization Plugin: None (built-in).
+[2025.11.14-07.44.07:449][949]LogAudio: Display: Audio Reverb Plugin: None (built-in).
+[2025.11.14-07.44.07:449][949]LogAudio: Display: Audio Occlusion Plugin: None (built-in).
+[2025.11.14-07.44.07:451][949]LogAudioMixer: Display: Initializing audio mixer using platform API: 'XAudio2'
+[2025.11.14-07.44.07:467][949]LogAudioMixer: Display: Using Audio Hardware Device B250F(NVIDIA High Definition Audio)
+[2025.11.14-07.44.07:467][949]LogAudioMixer: Display: Initializing Sound Submixes...
+[2025.11.14-07.44.07:467][949]LogAudioMixer: Display: Creating Master Submix 'MasterSubmixDefault'
+[2025.11.14-07.44.07:467][949]LogAudioMixer: Display: Creating Master Submix 'MasterReverbSubmixDefault'
+[2025.11.14-07.44.07:468][949]LogAudioMixer: FMixerPlatformXAudio2::StartAudioStream() called. InstanceID=14
+[2025.11.14-07.44.07:468][949]LogAudioMixer: Display: Output buffers initialized: Frames=1024, Channels=2, Samples=2048, InstanceID=14
+[2025.11.14-07.44.07:471][949]LogAudioMixer: Display: Starting AudioMixerPlatformInterface::RunInternal(), InstanceID=14
+[2025.11.14-07.44.07:471][949]LogAudioMixer: Display: FMixerPlatformXAudio2::SubmitBuffer() called for the first time. InstanceID=14
+[2025.11.14-07.44.07:471][949]LogInit: FAudioDevice initialized with ID 14.
+[2025.11.14-07.44.07:471][949]LogAudio: Display: Audio Device (ID: 14) registered with world 'Test05_Weapon'.
+[2025.11.14-07.44.07:471][949]LogAudioMixer: Initializing Audio Bus Subsystem for audio device with ID 14
+[2025.11.14-07.44.07:474][949]LogLoad: Game class is 'GM_TestWeapon_C'
+[2025.11.14-07.44.07:475][949]LogWorld: Bringing World /Game/MAP/UEDPIE_0_Test05_Weapon.Test05_Weapon up for play (max tick rate 0) at 2025.11.14-16.44.07
+[2025.11.14-07.44.07:476][949]LogWorld: Bringing up level for play took: 0.001867
+[2025.11.14-07.44.07:479][949]LogOnline: OSS: Created online subsystem instance for: :Context_21
+[2025.11.14-07.44.07:483][949]LogTemp: Warning: 200.0
+[2025.11.14-07.44.07:484][949]PIE: 서버가 로그인했습니다.
+[2025.11.14-07.44.07:485][949]PIE: 에디터에서 플레이 총 시작 시간 0.156초입니다.
+[2025.11.14-07.44.10:441][257]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2025.11.14-07.44.10:442][257]LogWorld: BeginTearingDown for /Game/MAP/UEDPIE_0_Test05_Weapon
+[2025.11.14-07.44.10:442][257]LogWorld: UWorld::CleanupWorld for Test05_Weapon, bSessionEnded=true, bCleanupResources=true
+[2025.11.14-07.44.10:442][257]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.14-07.44.10:445][257]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2025.11.14-07.44.10:451][257]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.14-07.44.10:469][257]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2025.11.14-07.44.10:474][257]LogAudioMixer: Deinitializing Audio Bus Subsystem for audio device with ID 14
+[2025.11.14-07.44.10:475][257]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=14
+[2025.11.14-07.44.10:477][257]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=14
+[2025.11.14-07.44.10:482][257]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2025.11.14-07.44.10:492][257]LogUObjectHash: Compacting FUObjectHashTables data took   1.67ms
+[2025.11.14-07.44.10:582][258]LogPlayLevel: Display: Destroying online subsystem :Context_21
+[2025.11.14-07.44.11:628][371]LogDebuggerCommands: Repeating last play command: 선택된 뷰포트
+[2025.11.14-07.44.11:647][371]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2025.11.14-07.44.11:681][371]LogPlayLevel: Creating play world package: /Game/MAP/UEDPIE_0_Test05_Weapon
+[2025.11.14-07.44.11:683][371]LogPlayLevel: PIE: StaticDuplicateObject took: (0.001923s)
+[2025.11.14-07.44.11:683][371]LogPlayLevel: PIE: Created PIE world by copying editor world from /Game/MAP/Test05_Weapon.Test05_Weapon to /Game/MAP/UEDPIE_0_Test05_Weapon.Test05_Weapon (0.001965s)
+[2025.11.14-07.44.11:700][371]LogUObjectHash: Compacting FUObjectHashTables data took   0.95ms
+[2025.11.14-07.44.11:704][371]LogChaosDD: Creating Chaos Debug Draw Scene for world Test05_Weapon
+[2025.11.14-07.44.11:706][371]LogPlayLevel: PIE: World Init took: (0.001649s)
+[2025.11.14-07.44.11:707][371]LogAudio: Display: Creating Audio Device:                 Id: 15, Scope: Unique, Realtime: True
+[2025.11.14-07.44.11:707][371]LogAudioMixer: Display: Audio Mixer Platform Settings:
+[2025.11.14-07.44.11:707][371]LogAudioMixer: Display: 	Sample Rate:						  48000
+[2025.11.14-07.44.11:707][371]LogAudioMixer: Display: 	Callback Buffer Frame Size Requested: 1024
+[2025.11.14-07.44.11:707][371]LogAudioMixer: Display: 	Callback Buffer Frame Size To Use:	  1024
+[2025.11.14-07.44.11:707][371]LogAudioMixer: Display: 	Number of buffers to queue:			  1
+[2025.11.14-07.44.11:707][371]LogAudioMixer: Display: 	Max Channels (voices):				  32
+[2025.11.14-07.44.11:707][371]LogAudioMixer: Display: 	Number of Async Source Workers:		  4
+[2025.11.14-07.44.11:707][371]LogAudio: Display: AudioDevice MaxSources: 32
+[2025.11.14-07.44.11:707][371]LogAudio: Display: Audio Spatialization Plugin: None (built-in).
+[2025.11.14-07.44.11:707][371]LogAudio: Display: Audio Reverb Plugin: None (built-in).
+[2025.11.14-07.44.11:707][371]LogAudio: Display: Audio Occlusion Plugin: None (built-in).
+[2025.11.14-07.44.11:709][371]LogAudioMixer: Display: Initializing audio mixer using platform API: 'XAudio2'
+[2025.11.14-07.44.11:725][371]LogAudioMixer: Display: Using Audio Hardware Device B250F(NVIDIA High Definition Audio)
+[2025.11.14-07.44.11:725][371]LogAudioMixer: Display: Initializing Sound Submixes...
+[2025.11.14-07.44.11:725][371]LogAudioMixer: Display: Creating Master Submix 'MasterSubmixDefault'
+[2025.11.14-07.44.11:725][371]LogAudioMixer: Display: Creating Master Submix 'MasterReverbSubmixDefault'
+[2025.11.14-07.44.11:725][371]LogAudioMixer: FMixerPlatformXAudio2::StartAudioStream() called. InstanceID=15
+[2025.11.14-07.44.11:725][371]LogAudioMixer: Display: Output buffers initialized: Frames=1024, Channels=2, Samples=2048, InstanceID=15
+[2025.11.14-07.44.11:728][371]LogAudioMixer: Display: Starting AudioMixerPlatformInterface::RunInternal(), InstanceID=15
+[2025.11.14-07.44.11:728][371]LogInit: FAudioDevice initialized with ID 15.
+[2025.11.14-07.44.11:728][371]LogAudioMixer: Display: FMixerPlatformXAudio2::SubmitBuffer() called for the first time. InstanceID=15
+[2025.11.14-07.44.11:728][371]LogAudio: Display: Audio Device (ID: 15) registered with world 'Test05_Weapon'.
+[2025.11.14-07.44.11:728][371]LogAudioMixer: Initializing Audio Bus Subsystem for audio device with ID 15
+[2025.11.14-07.44.11:731][371]LogLoad: Game class is 'GM_TestWeapon_C'
+[2025.11.14-07.44.11:732][371]LogWorld: Bringing World /Game/MAP/UEDPIE_0_Test05_Weapon.Test05_Weapon up for play (max tick rate 0) at 2025.11.14-16.44.11
+[2025.11.14-07.44.11:732][371]LogWorld: Bringing up level for play took: 0.001315
+[2025.11.14-07.44.11:735][371]LogOnline: OSS: Created online subsystem instance for: :Context_22
+[2025.11.14-07.44.11:739][371]LogTemp: Warning: 200.0
+[2025.11.14-07.44.11:740][371]PIE: 서버가 로그인했습니다.
+[2025.11.14-07.44.11:741][371]PIE: 에디터에서 플레이 총 시작 시간 0.094초입니다.
+[2025.11.14-07.44.13:091][504]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2025.11.14-07.44.13:092][504]LogWorld: BeginTearingDown for /Game/MAP/UEDPIE_0_Test05_Weapon
+[2025.11.14-07.44.13:092][504]LogWorld: UWorld::CleanupWorld for Test05_Weapon, bSessionEnded=true, bCleanupResources=true
+[2025.11.14-07.44.13:092][504]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.14-07.44.13:095][504]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2025.11.14-07.44.13:100][504]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.14-07.44.13:117][504]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2025.11.14-07.44.13:117][504]LogAudioMixer: Deinitializing Audio Bus Subsystem for audio device with ID 15
+[2025.11.14-07.44.13:117][504]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=15
+[2025.11.14-07.44.13:119][504]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=15
+[2025.11.14-07.44.13:127][504]LogUObjectHash: Compacting FUObjectHashTables data took   1.19ms
+[2025.11.14-07.44.13:206][505]LogPlayLevel: Display: Destroying online subsystem :Context_22
+[2025.11.14-07.44.13:376][523]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2025.11.14-07.44.13:466][523]LogUObjectHash: Compacting FUObjectHashTables data took   0.95ms
+[2025.11.14-07.44.13:475][523]LogSavePackage: Moving output files for package: /Game/MAP/Test05_Weapon
+[2025.11.14-07.44.13:475][523]LogSavePackage: Moving '../../../../../../Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Saved/Test05_Weapon5674290D4C0ACBB539FE47920B460AAA.tmp' to '../../../../../../Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Content/MAP/Test05_Weapon.umap'
+[2025.11.14-07.44.13:484][523]LogFileHelpers: Saving map 'Test05_Weapon' took 0.054
+[2025.11.14-07.44.13:502][523]LogFileHelpers: InternalPromptForCheckoutAndSave took 125.501 ms (total: 1.70 sec)
+[2025.11.14-07.44.13:563][523]LogContentValidation: Display: Starting to validate 1 assets
+[2025.11.14-07.44.13:563][523]LogContentValidation: Enabled validators:
+[2025.11.14-07.44.13:563][523]LogContentValidation: 	/Script/DataValidation.EditorValidator_Material
+[2025.11.14-07.44.13:563][523]LogContentValidation: 	/Script/DataValidation.DirtyFilesChangelistValidator
+[2025.11.14-07.44.13:563][523]LogContentValidation: 	/Script/DataValidation.EditorValidator_Localization
+[2025.11.14-07.44.13:564][523]LogContentValidation: 	/Script/DataValidation.PackageFileValidator
+[2025.11.14-07.44.13:564][523]LogContentValidation: 	/Script/DataValidation.WorldPartitionChangelistValidator
+[2025.11.14-07.44.13:564][523]LogContentValidation: 	/Script/InputBlueprintNodes.EnhancedInputUserWidgetValidator
+[2025.11.14-07.44.13:564][523]AssetCheck: /Game/MAP/Test05_Weapon 에셋 유효성 검사 중
+[2025.11.14-07.44.30:776][792]LogDebuggerCommands: Repeating last play command: 선택된 뷰포트
+[2025.11.14-07.44.30:783][792]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2025.11.14-07.44.30:783][792]LogPlayLevel: Creating play world package: /Game/MAP/UEDPIE_0_Test05_Weapon
+[2025.11.14-07.44.30:785][792]LogPlayLevel: PIE: StaticDuplicateObject took: (0.001760s)
+[2025.11.14-07.44.30:785][792]LogPlayLevel: PIE: Created PIE world by copying editor world from /Game/MAP/Test05_Weapon.Test05_Weapon to /Game/MAP/UEDPIE_0_Test05_Weapon.Test05_Weapon (0.001791s)
+[2025.11.14-07.44.30:801][792]LogUObjectHash: Compacting FUObjectHashTables data took   1.02ms
+[2025.11.14-07.44.30:803][792]LogChaosDD: Creating Chaos Debug Draw Scene for world Test05_Weapon
+[2025.11.14-07.44.30:805][792]LogPlayLevel: PIE: World Init took: (0.001999s)
+[2025.11.14-07.44.30:806][792]LogAudio: Display: Creating Audio Device:                 Id: 16, Scope: Unique, Realtime: True
+[2025.11.14-07.44.30:806][792]LogAudioMixer: Display: Audio Mixer Platform Settings:
+[2025.11.14-07.44.30:806][792]LogAudioMixer: Display: 	Sample Rate:						  48000
+[2025.11.14-07.44.30:806][792]LogAudioMixer: Display: 	Callback Buffer Frame Size Requested: 1024
+[2025.11.14-07.44.30:806][792]LogAudioMixer: Display: 	Callback Buffer Frame Size To Use:	  1024
+[2025.11.14-07.44.30:806][792]LogAudioMixer: Display: 	Number of buffers to queue:			  1
+[2025.11.14-07.44.30:806][792]LogAudioMixer: Display: 	Max Channels (voices):				  32
+[2025.11.14-07.44.30:806][792]LogAudioMixer: Display: 	Number of Async Source Workers:		  4
+[2025.11.14-07.44.30:806][792]LogAudio: Display: AudioDevice MaxSources: 32
+[2025.11.14-07.44.30:806][792]LogAudio: Display: Audio Spatialization Plugin: None (built-in).
+[2025.11.14-07.44.30:806][792]LogAudio: Display: Audio Reverb Plugin: None (built-in).
+[2025.11.14-07.44.30:806][792]LogAudio: Display: Audio Occlusion Plugin: None (built-in).
+[2025.11.14-07.44.30:809][792]LogAudioMixer: Display: Initializing audio mixer using platform API: 'XAudio2'
+[2025.11.14-07.44.30:825][792]LogAudioMixer: Display: Using Audio Hardware Device B250F(NVIDIA High Definition Audio)
+[2025.11.14-07.44.30:825][792]LogAudioMixer: Display: Initializing Sound Submixes...
+[2025.11.14-07.44.30:825][792]LogAudioMixer: Display: Creating Master Submix 'MasterSubmixDefault'
+[2025.11.14-07.44.30:825][792]LogAudioMixer: Display: Creating Master Submix 'MasterReverbSubmixDefault'
+[2025.11.14-07.44.30:825][792]LogAudioMixer: FMixerPlatformXAudio2::StartAudioStream() called. InstanceID=16
+[2025.11.14-07.44.30:825][792]LogAudioMixer: Display: Output buffers initialized: Frames=1024, Channels=2, Samples=2048, InstanceID=16
+[2025.11.14-07.44.30:828][792]LogAudioMixer: Display: Starting AudioMixerPlatformInterface::RunInternal(), InstanceID=16
+[2025.11.14-07.44.30:828][792]LogAudioMixer: Display: FMixerPlatformXAudio2::SubmitBuffer() called for the first time. InstanceID=16
+[2025.11.14-07.44.30:828][792]LogInit: FAudioDevice initialized with ID 16.
+[2025.11.14-07.44.30:828][792]LogAudio: Display: Audio Device (ID: 16) registered with world 'Test05_Weapon'.
+[2025.11.14-07.44.30:828][792]LogAudioMixer: Initializing Audio Bus Subsystem for audio device with ID 16
+[2025.11.14-07.44.30:831][792]LogLoad: Game class is 'GM_TestWeapon_C'
+[2025.11.14-07.44.30:832][792]LogWorld: Bringing World /Game/MAP/UEDPIE_0_Test05_Weapon.Test05_Weapon up for play (max tick rate 0) at 2025.11.14-16.44.30
+[2025.11.14-07.44.30:832][792]LogWorld: Bringing up level for play took: 0.001347
+[2025.11.14-07.44.30:835][792]LogOnline: OSS: Created online subsystem instance for: :Context_23
+[2025.11.14-07.44.30:839][792]LogTemp: Warning: 200.0
+[2025.11.14-07.44.30:840][792]PIE: 서버가 로그인했습니다.
+[2025.11.14-07.44.30:841][792]PIE: 에디터에서 플레이 총 시작 시간 0.058초입니다.
+[2025.11.14-07.44.32:281][950]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2025.11.14-07.44.32:281][950]LogWorld: BeginTearingDown for /Game/MAP/UEDPIE_0_Test05_Weapon
+[2025.11.14-07.44.32:281][950]LogWorld: UWorld::CleanupWorld for Test05_Weapon, bSessionEnded=true, bCleanupResources=true
+[2025.11.14-07.44.32:282][950]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.14-07.44.32:284][950]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2025.11.14-07.44.32:290][950]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.14-07.44.32:307][950]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2025.11.14-07.44.32:307][950]LogAudioMixer: Deinitializing Audio Bus Subsystem for audio device with ID 16
+[2025.11.14-07.44.32:307][950]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=16
+[2025.11.14-07.44.32:310][950]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=16
+[2025.11.14-07.44.32:316][950]LogUObjectHash: Compacting FUObjectHashTables data took   1.08ms
+[2025.11.14-07.44.32:400][951]LogPlayLevel: Display: Destroying online subsystem :Context_23
+[2025.11.14-07.44.32:786][995]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2025.11.14-07.44.32:883][995]LogUObjectHash: Compacting FUObjectHashTables data took   0.97ms
+[2025.11.14-07.44.32:892][995]LogSavePackage: Moving output files for package: /Game/MAP/Test05_Weapon
+[2025.11.14-07.44.32:893][995]LogSavePackage: Moving '../../../../../../Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Saved/Test05_Weapon97CFAC2048C48C5F97C8FF906CA77887.tmp' to '../../../../../../Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Content/MAP/Test05_Weapon.umap'
+[2025.11.14-07.44.32:901][995]LogFileHelpers: Saving map 'Test05_Weapon' took 0.055
+[2025.11.14-07.44.32:917][995]LogFileHelpers: InternalPromptForCheckoutAndSave took 130.655 ms (total: 1.83 sec)
+[2025.11.14-07.44.32:962][995]LogContentValidation: Display: Starting to validate 1 assets
+[2025.11.14-07.44.32:962][995]LogContentValidation: Enabled validators:
+[2025.11.14-07.44.32:962][995]LogContentValidation: 	/Script/DataValidation.EditorValidator_Material
+[2025.11.14-07.44.32:962][995]LogContentValidation: 	/Script/DataValidation.DirtyFilesChangelistValidator
+[2025.11.14-07.44.32:962][995]LogContentValidation: 	/Script/DataValidation.EditorValidator_Localization
+[2025.11.14-07.44.32:962][995]LogContentValidation: 	/Script/DataValidation.PackageFileValidator
+[2025.11.14-07.44.32:962][995]LogContentValidation: 	/Script/DataValidation.WorldPartitionChangelistValidator
+[2025.11.14-07.44.32:962][995]LogContentValidation: 	/Script/InputBlueprintNodes.EnhancedInputUserWidgetValidator
+[2025.11.14-07.44.32:962][995]AssetCheck: /Game/MAP/Test05_Weapon 에셋 유효성 검사 중
+[2025.11.14-07.44.59:309][305]Candidate modules for hot reload:
+[2025.11.14-07.44.59:309][305]  KSHUnrealCPP
+[2025.11.14-07.44.59:315][305]Launching UnrealBuildTool... [C:/Program Files/Epic Games/UE_5.5/Engine/Build/BatchFiles/Build.bat  -ModuleWithSuffix=KSHUnrealCPP,9813 KSHUnrealCPPEditor Win64 Development -Project="C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject" "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject"  -IgnoreJunk]
+[2025.11.14-07.44.59:316][305]Warning: Starting HotReload took  0.0s.
+[2025.11.14-07.45.03:309][416]LogSlate: Window 'BP_Weapon' being destroyed
+[2025.11.14-07.45.03:324][416]LogSlate: Window 'BP_Weapon' being destroyed
+[2025.11.14-07.45.03:329][416]LogWorld: UWorld::CleanupWorld for World_7, bSessionEnded=true, bCleanupResources=true
+[2025.11.14-07.45.03:329][416]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.14-07.45.03:403][416]LogUObjectHash: Compacting FUObjectHashTables data took   1.51ms
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: Using bundled DotNet SDK version: 8.0.300
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" -ModuleWithSuffix=KSHUnrealCPP,9813 KSHUnrealCPPEditor Win64 Development -Project="C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject" "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject"  -IgnoreJunk
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: Log file: C:\Users\KGA\AppData\Local\UnrealBuildTool\Log.txt
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: Creating makefile for KSHUnrealCPPEditor (command line arguments changed)
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: Building KSHUnrealCPPEditor...
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: Using Visual Studio 2022 14.38.33145 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130) and Windows 10.0.22621.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: [Upgrade]
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: [Upgrade] Using backward-compatible include order. The latest version of UE has changed the order of includes, which may require code changes. The current setting is:
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: [Upgrade]     IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_3
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: [Upgrade] Suppress this message by setting 'IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_5;' in KSHUnrealCPPEditor.Target.cs.
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: [Upgrade] Alternatively you can set this to 'EngineIncludeOrderVersion.Latest' to always use the latest include order. This will potentially cause compile errors when integrating new versions of the engine.
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: [Upgrade]
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: [Adaptive Build] Excluded from KSHUnrealCPP unity file: KSHUnrealCPP.cpp, AnimNotifyState_SectionJump.cpp, AnimNotifyState_WeaponEnable.cpp, MainHUD.cpp, ActionAnimInstance.cpp, ActionCharacter.cpp, ActionCharacterAnimtion.cpp, ActionPlayerController.cpp, ResourceComponent.cpp, StatusComponent.cpp, UW_PlayerHud.cpp, FloatingActor2.cpp, FloatingActor_Curve.cpp, TestActor.cpp, MainHudWidget.cpp, ResourceBarWidget.cpp, WeaponActor.cpp
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: Determining max actions to execute in parallel (6 physical cores, 12 logical cores)
+[2025.11.14-07.45.08:571][862]CompilerResultsLog:   Executing up to 6 processes, one per physical core
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: Using Unreal Build Accelerator local executor to run 7 action(s)
+[2025.11.14-07.45.08:571][862]CompilerResultsLog:   Storage capacity 40Gb
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: ---- Starting trace: 251114_164501 ----
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: UbaSessionServer - Disable remote execution (remote sessions will finish current processes)
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: ------ Building 7 action(s) started ------
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: [1/7] Compile [x64] StatusComponent.cpp
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: [2/7] Compile [x64] WeaponActor.cpp
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: [3/7] Compile [x64] ActionCharacter.cpp
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: [4/7] Compile [x64] Module.KSHUnrealCPP.cpp
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: [5/7] Link [x64] UnrealEditor-KSHUnrealCPP-9813.lib
+[2025.11.14-07.45.08:571][862]CompilerResultsLog:    C:\Users\KGA\Documents\Unreal Projects\KSHUnrealCPP07\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP\Intermediate\Build\Win64\x64\UnrealEditor\Development\KSHUnrealCPP\UnrealEditor-KSHUnrealCPP-9813.lib 라이브러리 및 C:\Users\KGA\Documents\Unreal Projects\KSHUnrealCPP07\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP\Intermediate\Build\Win64\x64\UnrealEditor\Development\KSHUnrealCPP\UnrealEditor-KSHUnrealCPP-9813.exp 개체를 생성하고 있습니다.
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: [6/7] Link [x64] UnrealEditor-KSHUnrealCPP-9813.dll
+[2025.11.14-07.45.08:571][862]CompilerResultsLog:    개체 C:\Users\KGA\Documents\Unreal Projects\KSHUnrealCPP07\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP\Binaries\Win64\UnrealEditor-KSHUnrealCPP-9813.exp 만들기
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: [7/7] WriteMetadata KSHUnrealCPPEditor.target (UBA disabled)
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: Trace file written to C:/Users/KGA/AppData/Local/UnrealBuildTool/Log.uba with size 4.1kb
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: Total time in Unreal Build Accelerator local executor: 6.54 seconds
+[2025.11.14-07.45.08:571][862]CompilerResultsLog: Total execution time: 9.07 seconds
+[2025.11.14-07.45.08:571][862]LogMainFrame: MainFrame: Module compiling took 9.269 seconds
+[2025.11.14-07.45.08:597][862]LogUObjectHash: Compacting FUObjectHashTables data took   1.15ms
+[2025.11.14-07.45.08:608][862]LogClass: UPackage /Script/KSHUnrealCPP Reload.
+[2025.11.14-07.45.08:608][862]LogClass: UClass StatusComponent Reload.
+[2025.11.14-07.45.08:643][862]LogClass: Could not find existing class StatusComponent in package /Script/KSHUnrealCPP for reload, assuming new or modified class
+[2025.11.14-07.45.08:674][862]Re-instancing StatusComponent after reload.
+[2025.11.14-07.45.08:808][862]LogUObjectHash: Compacting FUObjectHashTables data took   1.42ms
+[2025.11.14-07.45.08:831][862]Display: HotReload took  9.5s.
+[2025.11.14-07.45.08:831][862]Display: Reload/Re-instancing Complete: 1 package changed, 1 class changed, 15 classes unchanged, 15 functions remapped
+[2025.11.14-07.45.09:882][922]LogDebuggerCommands: Repeating last play command: 선택된 뷰포트
+[2025.11.14-07.45.09:889][922]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2025.11.14-07.45.09:889][922]LogPlayLevel: Creating play world package: /Game/MAP/UEDPIE_0_Test05_Weapon
+[2025.11.14-07.45.09:891][922]LogPlayLevel: PIE: StaticDuplicateObject took: (0.001920s)
+[2025.11.14-07.45.09:891][922]LogPlayLevel: PIE: Created PIE world by copying editor world from /Game/MAP/Test05_Weapon.Test05_Weapon to /Game/MAP/UEDPIE_0_Test05_Weapon.Test05_Weapon (0.001952s)
+[2025.11.14-07.45.09:977][922]LogUObjectHash: Compacting FUObjectHashTables data took   1.36ms
+[2025.11.14-07.45.09:979][922]LogChaosDD: Creating Chaos Debug Draw Scene for world Test05_Weapon
+[2025.11.14-07.45.09:981][922]LogPlayLevel: PIE: World Init took: (0.001653s)
+[2025.11.14-07.45.09:982][922]LogAudio: Display: Creating Audio Device:                 Id: 17, Scope: Unique, Realtime: True
+[2025.11.14-07.45.09:982][922]LogAudioMixer: Display: Audio Mixer Platform Settings:
+[2025.11.14-07.45.09:982][922]LogAudioMixer: Display: 	Sample Rate:						  48000
+[2025.11.14-07.45.09:982][922]LogAudioMixer: Display: 	Callback Buffer Frame Size Requested: 1024
+[2025.11.14-07.45.09:982][922]LogAudioMixer: Display: 	Callback Buffer Frame Size To Use:	  1024
+[2025.11.14-07.45.09:982][922]LogAudioMixer: Display: 	Number of buffers to queue:			  1
+[2025.11.14-07.45.09:982][922]LogAudioMixer: Display: 	Max Channels (voices):				  32
+[2025.11.14-07.45.09:982][922]LogAudioMixer: Display: 	Number of Async Source Workers:		  4
+[2025.11.14-07.45.09:982][922]LogAudio: Display: AudioDevice MaxSources: 32
+[2025.11.14-07.45.09:982][922]LogAudio: Display: Audio Spatialization Plugin: None (built-in).
+[2025.11.14-07.45.09:982][922]LogAudio: Display: Audio Reverb Plugin: None (built-in).
+[2025.11.14-07.45.09:982][922]LogAudio: Display: Audio Occlusion Plugin: None (built-in).
+[2025.11.14-07.45.09:984][922]LogAudioMixer: Display: Initializing audio mixer using platform API: 'XAudio2'
+[2025.11.14-07.45.09:999][922]LogAudioMixer: Display: Using Audio Hardware Device B250F(NVIDIA High Definition Audio)
+[2025.11.14-07.45.10:000][922]LogAudioMixer: Display: Initializing Sound Submixes...
+[2025.11.14-07.45.10:000][922]LogAudioMixer: Display: Creating Master Submix 'MasterSubmixDefault'
+[2025.11.14-07.45.10:000][922]LogAudioMixer: Display: Creating Master Submix 'MasterReverbSubmixDefault'
+[2025.11.14-07.45.10:000][922]LogAudioMixer: FMixerPlatformXAudio2::StartAudioStream() called. InstanceID=17
+[2025.11.14-07.45.10:000][922]LogAudioMixer: Display: Output buffers initialized: Frames=1024, Channels=2, Samples=2048, InstanceID=17
+[2025.11.14-07.45.10:003][922]LogAudioMixer: Display: Starting AudioMixerPlatformInterface::RunInternal(), InstanceID=17
+[2025.11.14-07.45.10:003][922]LogAudioMixer: Display: FMixerPlatformXAudio2::SubmitBuffer() called for the first time. InstanceID=17
+[2025.11.14-07.45.10:003][922]LogInit: FAudioDevice initialized with ID 17.
+[2025.11.14-07.45.10:003][922]LogAudio: Display: Audio Device (ID: 17) registered with world 'Test05_Weapon'.
+[2025.11.14-07.45.10:003][922]LogAudioMixer: Initializing Audio Bus Subsystem for audio device with ID 17
+[2025.11.14-07.45.10:006][922]LogLoad: Game class is 'GM_TestWeapon_C'
+[2025.11.14-07.45.10:007][922]LogWorld: Bringing World /Game/MAP/UEDPIE_0_Test05_Weapon.Test05_Weapon up for play (max tick rate 0) at 2025.11.14-16.45.10
+[2025.11.14-07.45.10:008][922]LogWorld: Bringing up level for play took: 0.001467
+[2025.11.14-07.45.10:010][922]LogOnline: OSS: Created online subsystem instance for: :Context_24
+[2025.11.14-07.45.10:014][922]LogTemp: Warning: 200.0
+[2025.11.14-07.45.10:014][922]PIE: 서버가 로그인했습니다.
+[2025.11.14-07.45.10:016][922]PIE: 에디터에서 플레이 총 시작 시간 0.127초입니다.
+[2025.11.14-07.45.12:011][141]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2025.11.14-07.45.12:011][141]LogWorld: BeginTearingDown for /Game/MAP/UEDPIE_0_Test05_Weapon
+[2025.11.14-07.45.12:011][141]LogWorld: UWorld::CleanupWorld for Test05_Weapon, bSessionEnded=true, bCleanupResources=true
+[2025.11.14-07.45.12:011][141]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.14-07.45.12:014][141]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2025.11.14-07.45.12:020][141]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.14-07.45.12:038][141]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2025.11.14-07.45.12:044][141]LogAudioMixer: Deinitializing Audio Bus Subsystem for audio device with ID 17
+[2025.11.14-07.45.12:044][141]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=17
+[2025.11.14-07.45.12:046][141]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=17
+[2025.11.14-07.45.12:051][141]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2025.11.14-07.45.12:071][141]LogUObjectHash: Compacting FUObjectHashTables data took   1.60ms
+[2025.11.14-07.45.12:162][142]LogPlayLevel: Display: Destroying online subsystem :Context_24
+[2025.11.14-07.45.12:834][206]LogDebuggerCommands: Repeating last play command: 선택된 뷰포트
+[2025.11.14-07.45.12:840][206]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2025.11.14-07.45.12:871][206]LogPlayLevel: Creating play world package: /Game/MAP/UEDPIE_0_Test05_Weapon
+[2025.11.14-07.45.12:872][206]LogPlayLevel: PIE: StaticDuplicateObject took: (0.001872s)
+[2025.11.14-07.45.12:872][206]LogPlayLevel: PIE: Created PIE world by copying editor world from /Game/MAP/Test05_Weapon.Test05_Weapon to /Game/MAP/UEDPIE_0_Test05_Weapon.Test05_Weapon (0.001918s)
+[2025.11.14-07.45.12:889][206]LogUObjectHash: Compacting FUObjectHashTables data took   1.01ms
+[2025.11.14-07.45.12:897][206]LogChaosDD: Creating Chaos Debug Draw Scene for world Test05_Weapon
+[2025.11.14-07.45.12:899][206]LogPlayLevel: PIE: World Init took: (0.001615s)
+[2025.11.14-07.45.12:900][206]LogAudio: Display: Creating Audio Device:                 Id: 18, Scope: Unique, Realtime: True
+[2025.11.14-07.45.12:900][206]LogAudioMixer: Display: Audio Mixer Platform Settings:
+[2025.11.14-07.45.12:900][206]LogAudioMixer: Display: 	Sample Rate:						  48000
+[2025.11.14-07.45.12:900][206]LogAudioMixer: Display: 	Callback Buffer Frame Size Requested: 1024
+[2025.11.14-07.45.12:900][206]LogAudioMixer: Display: 	Callback Buffer Frame Size To Use:	  1024
+[2025.11.14-07.45.12:900][206]LogAudioMixer: Display: 	Number of buffers to queue:			  1
+[2025.11.14-07.45.12:900][206]LogAudioMixer: Display: 	Max Channels (voices):				  32
+[2025.11.14-07.45.12:900][206]LogAudioMixer: Display: 	Number of Async Source Workers:		  4
+[2025.11.14-07.45.12:900][206]LogAudio: Display: AudioDevice MaxSources: 32
+[2025.11.14-07.45.12:900][206]LogAudio: Display: Audio Spatialization Plugin: None (built-in).
+[2025.11.14-07.45.12:900][206]LogAudio: Display: Audio Reverb Plugin: None (built-in).
+[2025.11.14-07.45.12:900][206]LogAudio: Display: Audio Occlusion Plugin: None (built-in).
+[2025.11.14-07.45.12:902][206]LogAudioMixer: Display: Initializing audio mixer using platform API: 'XAudio2'
+[2025.11.14-07.45.12:918][206]LogAudioMixer: Display: Using Audio Hardware Device B250F(NVIDIA High Definition Audio)
+[2025.11.14-07.45.12:919][206]LogAudioMixer: Display: Initializing Sound Submixes...
+[2025.11.14-07.45.12:919][206]LogAudioMixer: Display: Creating Master Submix 'MasterSubmixDefault'
+[2025.11.14-07.45.12:919][206]LogAudioMixer: Display: Creating Master Submix 'MasterReverbSubmixDefault'
+[2025.11.14-07.45.12:919][206]LogAudioMixer: FMixerPlatformXAudio2::StartAudioStream() called. InstanceID=18
+[2025.11.14-07.45.12:919][206]LogAudioMixer: Display: Output buffers initialized: Frames=1024, Channels=2, Samples=2048, InstanceID=18
+[2025.11.14-07.45.12:923][206]LogAudioMixer: Display: Starting AudioMixerPlatformInterface::RunInternal(), InstanceID=18
+[2025.11.14-07.45.12:923][206]LogInit: FAudioDevice initialized with ID 18.
+[2025.11.14-07.45.12:923][206]LogAudioMixer: Display: FMixerPlatformXAudio2::SubmitBuffer() called for the first time. InstanceID=18
+[2025.11.14-07.45.12:923][206]LogAudio: Display: Audio Device (ID: 18) registered with world 'Test05_Weapon'.
+[2025.11.14-07.45.12:923][206]LogAudioMixer: Initializing Audio Bus Subsystem for audio device with ID 18
+[2025.11.14-07.45.12:925][206]LogLoad: Game class is 'GM_TestWeapon_C'
+[2025.11.14-07.45.12:926][206]LogWorld: Bringing World /Game/MAP/UEDPIE_0_Test05_Weapon.Test05_Weapon up for play (max tick rate 0) at 2025.11.14-16.45.12
+[2025.11.14-07.45.12:927][206]LogWorld: Bringing up level for play took: 0.001353
+[2025.11.14-07.45.12:929][206]LogOnline: OSS: Created online subsystem instance for: :Context_25
+[2025.11.14-07.45.12:933][206]LogTemp: Warning: 200.0
+[2025.11.14-07.45.12:934][206]PIE: 서버가 로그인했습니다.
+[2025.11.14-07.45.12:935][206]PIE: 에디터에서 플레이 총 시작 시간 0.095초입니다.
+[2025.11.14-07.45.13:801][299]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2025.11.14-07.45.13:801][299]LogWorld: BeginTearingDown for /Game/MAP/UEDPIE_0_Test05_Weapon
+[2025.11.14-07.45.13:801][299]LogWorld: UWorld::CleanupWorld for Test05_Weapon, bSessionEnded=true, bCleanupResources=true
+[2025.11.14-07.45.13:802][299]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.14-07.45.13:805][299]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2025.11.14-07.45.13:810][299]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.14-07.45.13:826][299]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2025.11.14-07.45.13:826][299]LogAudioMixer: Deinitializing Audio Bus Subsystem for audio device with ID 18
+[2025.11.14-07.45.13:826][299]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=18
+[2025.11.14-07.45.13:829][299]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=18
+[2025.11.14-07.45.13:835][299]LogUObjectHash: Compacting FUObjectHashTables data took   1.06ms
+[2025.11.14-07.45.13:917][300]LogPlayLevel: Display: Destroying online subsystem :Context_25
+[2025.11.14-07.45.14:156][326]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2025.11.14-07.45.14:233][326]LogUObjectHash: Compacting FUObjectHashTables data took   0.95ms
+[2025.11.14-07.45.14:242][326]LogSavePackage: Moving output files for package: /Game/MAP/Test05_Weapon
+[2025.11.14-07.45.14:242][326]LogSavePackage: Moving '../../../../../../Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Saved/Test05_Weapon351A5A5D49AFC750AB3D9985E52FD44F.tmp' to '../../../../../../Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Content/MAP/Test05_Weapon.umap'
+[2025.11.14-07.45.14:251][326]LogFileHelpers: Saving map 'Test05_Weapon' took 0.055
+[2025.11.14-07.45.14:269][326]LogFileHelpers: InternalPromptForCheckoutAndSave took 112.589 ms (total: 1.94 sec)
+[2025.11.14-07.45.14:329][326]LogContentValidation: Display: Starting to validate 1 assets
+[2025.11.14-07.45.14:329][326]LogContentValidation: Enabled validators:
+[2025.11.14-07.45.14:329][326]LogContentValidation: 	/Script/DataValidation.EditorValidator_Material
+[2025.11.14-07.45.14:329][326]LogContentValidation: 	/Script/DataValidation.DirtyFilesChangelistValidator
+[2025.11.14-07.45.14:329][326]LogContentValidation: 	/Script/DataValidation.EditorValidator_Localization
+[2025.11.14-07.45.14:329][326]LogContentValidation: 	/Script/DataValidation.PackageFileValidator
+[2025.11.14-07.45.14:329][326]LogContentValidation: 	/Script/DataValidation.WorldPartitionChangelistValidator
+[2025.11.14-07.45.14:329][326]LogContentValidation: 	/Script/InputBlueprintNodes.EnhancedInputUserWidgetValidator
+[2025.11.14-07.45.14:329][326]AssetCheck: /Game/MAP/Test05_Weapon 에셋 유효성 검사 중
+[2025.11.14-07.45.39:211][478]Candidate modules for hot reload:
+[2025.11.14-07.45.39:211][478]  KSHUnrealCPP
+[2025.11.14-07.45.39:218][478]Launching UnrealBuildTool... [C:/Program Files/Epic Games/UE_5.5/Engine/Build/BatchFiles/Build.bat  -ModuleWithSuffix=KSHUnrealCPP,9506 KSHUnrealCPPEditor Win64 Development -Project="C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject" "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject"  -IgnoreJunk]
+[2025.11.14-07.45.39:218][478]Warning: Starting HotReload took  0.0s.
+[2025.11.14-07.45.39:561][484]CompilerResultsLog: Using bundled DotNet SDK version: 8.0.300
+[2025.11.14-07.45.39:561][484]CompilerResultsLog: Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" -ModuleWithSuffix=KSHUnrealCPP,9506 KSHUnrealCPPEditor Win64 Development -Project="C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject" "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject"  -IgnoreJunk
+[2025.11.14-07.45.39:561][484]CompilerResultsLog: A conflicting instance of UnrealBuildTool is already running.
+[2025.11.14-07.45.39:561][484]LogMainFrame: MainFrame: Module compiling took 0.360 seconds
+[2025.11.14-07.45.39:561][484]Warning: HotReload failed, recompile failed
+[2025.11.14-07.45.42:443][677]Candidate modules for hot reload:
+[2025.11.14-07.45.42:443][677]  KSHUnrealCPP
+[2025.11.14-07.45.42:453][677]Launching UnrealBuildTool... [C:/Program Files/Epic Games/UE_5.5/Engine/Build/BatchFiles/Build.bat  -ModuleWithSuffix=KSHUnrealCPP,6384 KSHUnrealCPPEditor Win64 Development -Project="C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject" "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject"  -IgnoreJunk]
+[2025.11.14-07.45.42:455][677]Warning: Starting HotReload took  0.2s.
+[2025.11.14-07.45.42:850][690]CompilerResultsLog: Using bundled DotNet SDK version: 8.0.300
+[2025.11.14-07.45.42:850][690]CompilerResultsLog: Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" -ModuleWithSuffix=KSHUnrealCPP,6384 KSHUnrealCPPEditor Win64 Development -Project="C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject" "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject"  -IgnoreJunk
+[2025.11.14-07.45.42:850][690]CompilerResultsLog: A conflicting instance of UnrealBuildTool is already running.
+[2025.11.14-07.45.42:850][690]LogMainFrame: MainFrame: Module compiling took 0.423 seconds
+[2025.11.14-07.45.42:850][690]Warning: HotReload failed, recompile failed
+[2025.11.14-07.45.43:872][789]LogSlate: Window '메시지 로그' being destroyed
+[2025.11.14-07.45.43:880][789]LogSlate: Window '메시지 로그' being destroyed
+[2025.11.14-07.45.47:176][131]Candidate modules for hot reload:
+[2025.11.14-07.45.47:176][131]  KSHUnrealCPP
+[2025.11.14-07.45.47:182][131]Launching UnrealBuildTool... [C:/Program Files/Epic Games/UE_5.5/Engine/Build/BatchFiles/Build.bat  -ModuleWithSuffix=KSHUnrealCPP,5106 KSHUnrealCPPEditor Win64 Development -Project="C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject" "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject"  -IgnoreJunk]
+[2025.11.14-07.45.47:183][131]Warning: Starting HotReload took  0.0s.
+[2025.11.14-07.45.49:073][267]LogSlate: Window '메시지 로그' being destroyed
+[2025.11.14-07.45.49:081][267]LogSlate: Window '메시지 로그' being destroyed
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: Using bundled DotNet SDK version: 8.0.300
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" -ModuleWithSuffix=KSHUnrealCPP,5106 KSHUnrealCPPEditor Win64 Development -Project="C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject" "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP.uproject"  -IgnoreJunk
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: Log file: C:\Users\KGA\AppData\Local\UnrealBuildTool\Log.txt
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: Creating makefile for KSHUnrealCPPEditor (command line arguments changed)
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: Building KSHUnrealCPPEditor...
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: Using Visual Studio 2022 14.38.33145 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130) and Windows 10.0.22621.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: [Upgrade]
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: [Upgrade] Using backward-compatible include order. The latest version of UE has changed the order of includes, which may require code changes. The current setting is:
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: [Upgrade]     IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_3
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: [Upgrade] Suppress this message by setting 'IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_5;' in KSHUnrealCPPEditor.Target.cs.
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: [Upgrade] Alternatively you can set this to 'EngineIncludeOrderVersion.Latest' to always use the latest include order. This will potentially cause compile errors when integrating new versions of the engine.
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: [Upgrade]
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: [Adaptive Build] Excluded from KSHUnrealCPP unity file: KSHUnrealCPP.cpp, AnimNotifyState_SectionJump.cpp, AnimNotifyState_WeaponEnable.cpp, MainHUD.cpp, ActionAnimInstance.cpp, ActionCharacter.cpp, ActionCharacterAnimtion.cpp, ActionPlayerController.cpp, ResourceComponent.cpp, StatusComponent.cpp, UW_PlayerHud.cpp, FloatingActor2.cpp, FloatingActor_Curve.cpp, TestActor.cpp, MainHudWidget.cpp, ResourceBarWidget.cpp, WeaponActor.cpp
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: Determining max actions to execute in parallel (6 physical cores, 12 logical cores)
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog:   Executing up to 6 processes, one per physical core
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: Using Unreal Build Accelerator local executor to run 8 action(s)
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog:   Storage capacity 40Gb
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: ---- Starting trace: 251114_164550 ----
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: UbaSessionServer - Disable remote execution (remote sessions will finish current processes)
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: ------ Building 8 action(s) started ------
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: [1/8] Compile [x64] ResourceComponent.cpp
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: [2/8] Compile [x64] UW_PlayerHud.cpp
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: [3/8] Compile [x64] MainHudWidget.cpp
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: [4/8] Compile [x64] ActionCharacter.cpp
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: [5/8] Compile [x64] Module.KSHUnrealCPP.cpp
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: [6/8] Link [x64] UnrealEditor-KSHUnrealCPP-5106.lib
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog:    C:\Users\KGA\Documents\Unreal Projects\KSHUnrealCPP07\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP\Intermediate\Build\Win64\x64\UnrealEditor\Development\KSHUnrealCPP\UnrealEditor-KSHUnrealCPP-5106.lib 라이브러리 및 C:\Users\KGA\Documents\Unreal Projects\KSHUnrealCPP07\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP\Intermediate\Build\Win64\x64\UnrealEditor\Development\KSHUnrealCPP\UnrealEditor-KSHUnrealCPP-5106.exp 개체를 생성하고 있습니다.
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: [7/8] Link [x64] UnrealEditor-KSHUnrealCPP-5106.dll
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog:    개체 C:\Users\KGA\Documents\Unreal Projects\KSHUnrealCPP07\KSHUnrealCPP\KSHUnrealCPP\KSHUnrealCPP\Binaries\Win64\UnrealEditor-KSHUnrealCPP-5106.exp 만들기
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: [8/8] WriteMetadata KSHUnrealCPPEditor.target (UBA disabled)
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: Trace file written to C:/Users/KGA/AppData/Local/UnrealBuildTool/Log.uba with size 4.3kb
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: Total time in Unreal Build Accelerator local executor: 6.98 seconds
+[2025.11.14-07.45.57:279][  3]CompilerResultsLog: Total execution time: 9.91 seconds
+[2025.11.14-07.45.57:279][  3]LogMainFrame: MainFrame: Module compiling took 10.118 seconds
+[2025.11.14-07.45.57:301][  3]LogUObjectHash: Compacting FUObjectHashTables data took   0.71ms
+[2025.11.14-07.45.57:468][  3]LogUObjectHash: Compacting FUObjectHashTables data took   1.22ms
+[2025.11.14-07.45.57:494][  3]Display: HotReload took 10.3s.
+[2025.11.14-07.45.57:494][  3]Display: Reload/Re-instancing Complete: 1 package changed, 16 classes unchanged, 15 functions remapped
+[2025.11.14-07.45.58:405][ 50]LogDebuggerCommands: Repeating last play command: 선택된 뷰포트
+[2025.11.14-07.45.58:412][ 50]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2025.11.14-07.45.58:460][ 50]LogPlayLevel: Creating play world package: /Game/MAP/UEDPIE_0_Test05_Weapon
+[2025.11.14-07.45.58:462][ 50]LogPlayLevel: PIE: StaticDuplicateObject took: (0.001979s)
+[2025.11.14-07.45.58:462][ 50]LogPlayLevel: PIE: Created PIE world by copying editor world from /Game/MAP/Test05_Weapon.Test05_Weapon to /Game/MAP/UEDPIE_0_Test05_Weapon.Test05_Weapon (0.002023s)
+[2025.11.14-07.45.58:544][ 50]LogUObjectHash: Compacting FUObjectHashTables data took   1.51ms
+[2025.11.14-07.45.58:552][ 50]LogChaosDD: Creating Chaos Debug Draw Scene for world Test05_Weapon
+[2025.11.14-07.45.58:553][ 50]LogPlayLevel: PIE: World Init took: (0.001760s)
+[2025.11.14-07.45.58:555][ 50]LogAudio: Display: Creating Audio Device:                 Id: 19, Scope: Unique, Realtime: True
+[2025.11.14-07.45.58:555][ 50]LogAudioMixer: Display: Audio Mixer Platform Settings:
+[2025.11.14-07.45.58:555][ 50]LogAudioMixer: Display: 	Sample Rate:						  48000
+[2025.11.14-07.45.58:555][ 50]LogAudioMixer: Display: 	Callback Buffer Frame Size Requested: 1024
+[2025.11.14-07.45.58:555][ 50]LogAudioMixer: Display: 	Callback Buffer Frame Size To Use:	  1024
+[2025.11.14-07.45.58:555][ 50]LogAudioMixer: Display: 	Number of buffers to queue:			  1
+[2025.11.14-07.45.58:555][ 50]LogAudioMixer: Display: 	Max Channels (voices):				  32
+[2025.11.14-07.45.58:555][ 50]LogAudioMixer: Display: 	Number of Async Source Workers:		  4
+[2025.11.14-07.45.58:555][ 50]LogAudio: Display: AudioDevice MaxSources: 32
+[2025.11.14-07.45.58:555][ 50]LogAudio: Display: Audio Spatialization Plugin: None (built-in).
+[2025.11.14-07.45.58:555][ 50]LogAudio: Display: Audio Reverb Plugin: None (built-in).
+[2025.11.14-07.45.58:555][ 50]LogAudio: Display: Audio Occlusion Plugin: None (built-in).
+[2025.11.14-07.45.58:557][ 50]LogAudioMixer: Display: Initializing audio mixer using platform API: 'XAudio2'
+[2025.11.14-07.45.58:572][ 50]LogAudioMixer: Display: Using Audio Hardware Device B250F(NVIDIA High Definition Audio)
+[2025.11.14-07.45.58:572][ 50]LogAudioMixer: Display: Initializing Sound Submixes...
+[2025.11.14-07.45.58:572][ 50]LogAudioMixer: Display: Creating Master Submix 'MasterSubmixDefault'
+[2025.11.14-07.45.58:572][ 50]LogAudioMixer: Display: Creating Master Submix 'MasterReverbSubmixDefault'
+[2025.11.14-07.45.58:573][ 50]LogAudioMixer: FMixerPlatformXAudio2::StartAudioStream() called. InstanceID=19
+[2025.11.14-07.45.58:573][ 50]LogAudioMixer: Display: Output buffers initialized: Frames=1024, Channels=2, Samples=2048, InstanceID=19
+[2025.11.14-07.45.58:575][ 50]LogAudioMixer: Display: Starting AudioMixerPlatformInterface::RunInternal(), InstanceID=19
+[2025.11.14-07.45.58:575][ 50]LogAudioMixer: Display: FMixerPlatformXAudio2::SubmitBuffer() called for the first time. InstanceID=19
+[2025.11.14-07.45.58:575][ 50]LogInit: FAudioDevice initialized with ID 19.
+[2025.11.14-07.45.58:575][ 50]LogAudio: Display: Audio Device (ID: 19) registered with world 'Test05_Weapon'.
+[2025.11.14-07.45.58:575][ 50]LogAudioMixer: Initializing Audio Bus Subsystem for audio device with ID 19
+[2025.11.14-07.45.58:578][ 50]LogLoad: Game class is 'GM_TestWeapon_C'
+[2025.11.14-07.45.58:579][ 50]LogWorld: Bringing World /Game/MAP/UEDPIE_0_Test05_Weapon.Test05_Weapon up for play (max tick rate 0) at 2025.11.14-16.45.58
+[2025.11.14-07.45.58:579][ 50]LogWorld: Bringing up level for play took: 0.001370
+[2025.11.14-07.45.58:582][ 50]LogOnline: OSS: Created online subsystem instance for: :Context_26
+[2025.11.14-07.45.58:586][ 50]LogTemp: Warning: 200.0
+[2025.11.14-07.45.58:586][ 50]PIE: 서버가 로그인했습니다.
+[2025.11.14-07.45.58:588][ 50]PIE: 에디터에서 플레이 총 시작 시간 0.176초입니다.
+[2025.11.14-07.46.03:219][579]LogTemp: Warning: 1200.0
+[2025.11.14-07.46.03:236][581]LogTemp: Warning: 1190.4
+[2025.11.14-07.46.03:253][583]LogTemp: Warning: 1181.0
+[2025.11.14-07.46.03:269][585]LogTemp: Warning: 1171.7
+[2025.11.14-07.46.03:286][587]LogTemp: Warning: 1162.5
+[2025.11.14-07.46.03:304][589]LogTemp: Warning: 1153.5
+[2025.11.14-07.46.03:321][591]LogTemp: Warning: 1144.7
+[2025.11.14-07.46.03:330][592]LogTemp: Warning: 1135.9
+[2025.11.14-07.46.03:347][594]LogTemp: Warning: 1127.4
+[2025.11.14-07.46.03:364][596]LogTemp: Warning: 1118.9
+[2025.11.14-07.46.03:380][598]LogTemp: Warning: 1110.6
+[2025.11.14-07.46.03:420][599]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2025.11.14-07.46.03:420][599]LogWorld: BeginTearingDown for /Game/MAP/UEDPIE_0_Test05_Weapon
+[2025.11.14-07.46.03:421][599]LogWorld: UWorld::CleanupWorld for Test05_Weapon, bSessionEnded=true, bCleanupResources=true
+[2025.11.14-07.46.03:421][599]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.14-07.46.03:424][599]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2025.11.14-07.46.03:430][599]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.14-07.46.03:448][599]LogAudio: Display: Audio Device unregistered from world 'None'.
+[2025.11.14-07.46.03:449][599]LogAudioMixer: Deinitializing Audio Bus Subsystem for audio device with ID 19
+[2025.11.14-07.46.03:449][599]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=19
+[2025.11.14-07.46.03:451][599]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=19
+[2025.11.14-07.46.03:456][599]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2025.11.14-07.46.03:482][599]LogUObjectHash: Compacting FUObjectHashTables data took   2.04ms
+[2025.11.14-07.46.03:575][600]LogPlayLevel: Display: Destroying online subsystem :Context_26
+[2025.11.14-07.46.03:883][633]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2025.11.14-07.46.03:968][633]LogUObjectHash: Compacting FUObjectHashTables data took   0.95ms
+[2025.11.14-07.46.03:983][633]LogSavePackage: Moving output files for package: /Game/MAP/Test05_Weapon
+[2025.11.14-07.46.03:983][633]LogSavePackage: Moving '../../../../../../Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Saved/Test05_WeaponF849615645FB0F30E7E0978F4292C459.tmp' to '../../../../../../Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Content/MAP/Test05_Weapon.umap'
+[2025.11.14-07.46.03:992][633]LogFileHelpers: Saving map 'Test05_Weapon' took 0.061
+[2025.11.14-07.46.04:001][633]LogFileHelpers: InternalPromptForCheckoutAndSave took 118.202 ms (total: 2.06 sec)
+[2025.11.14-07.46.04:063][633]LogContentValidation: Display: Starting to validate 1 assets
+[2025.11.14-07.46.04:063][633]LogContentValidation: Enabled validators:
+[2025.11.14-07.46.04:063][633]LogContentValidation: 	/Script/DataValidation.EditorValidator_Material
+[2025.11.14-07.46.04:063][633]LogContentValidation: 	/Script/DataValidation.DirtyFilesChangelistValidator
+[2025.11.14-07.46.04:063][633]LogContentValidation: 	/Script/DataValidation.EditorValidator_Localization
+[2025.11.14-07.46.04:063][633]LogContentValidation: 	/Script/DataValidation.PackageFileValidator
+[2025.11.14-07.46.04:063][633]LogContentValidation: 	/Script/DataValidation.WorldPartitionChangelistValidator
+[2025.11.14-07.46.04:063][633]LogContentValidation: 	/Script/InputBlueprintNodes.EnhancedInputUserWidgetValidator
+[2025.11.14-07.46.04:064][633]AssetCheck: /Game/MAP/Test05_Weapon 에셋 유효성 검사 중
+[2025.11.14-07.46.04:860][720]LogDebuggerCommands: Repeating last play command: 선택된 뷰포트
+[2025.11.14-07.46.04:866][720]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2025.11.14-07.46.04:900][720]LogPlayLevel: Creating play world package: /Game/MAP/UEDPIE_0_Test05_Weapon
+[2025.11.14-07.46.04:902][720]LogPlayLevel: PIE: StaticDuplicateObject took: (0.001913s)
+[2025.11.14-07.46.04:902][720]LogPlayLevel: PIE: Created PIE world by copying editor world from /Game/MAP/Test05_Weapon.Test05_Weapon to /Game/MAP/UEDPIE_0_Test05_Weapon.Test05_Weapon (0.001955s)
+[2025.11.14-07.46.04:919][720]LogUObjectHash: Compacting FUObjectHashTables data took   1.01ms
+[2025.11.14-07.46.04:921][720]LogChaosDD: Creating Chaos Debug Draw Scene for world Test05_Weapon
+[2025.11.14-07.46.04:922][720]LogPlayLevel: PIE: World Init took: (0.001599s)
+[2025.11.14-07.46.04:924][720]LogAudio: Display: Creating Audio Device:                 Id: 20, Scope: Unique, Realtime: True
+[2025.11.14-07.46.04:924][720]LogAudioMixer: Display: Audio Mixer Platform Settings:
+[2025.11.14-07.46.04:924][720]LogAudioMixer: Display: 	Sample Rate:						  48000
+[2025.11.14-07.46.04:924][720]LogAudioMixer: Display: 	Callback Buffer Frame Size Requested: 1024
+[2025.11.14-07.46.04:924][720]LogAudioMixer: Display: 	Callback Buffer Frame Size To Use:	  1024
+[2025.11.14-07.46.04:924][720]LogAudioMixer: Display: 	Number of buffers to queue:			  1
+[2025.11.14-07.46.04:924][720]LogAudioMixer: Display: 	Max Channels (voices):				  32
+[2025.11.14-07.46.04:924][720]LogAudioMixer: Display: 	Number of Async Source Workers:		  4
+[2025.11.14-07.46.04:924][720]LogAudio: Display: AudioDevice MaxSources: 32
+[2025.11.14-07.46.04:924][720]LogAudio: Display: Audio Spatialization Plugin: None (built-in).
+[2025.11.14-07.46.04:924][720]LogAudio: Display: Audio Reverb Plugin: None (built-in).
+[2025.11.14-07.46.04:924][720]LogAudio: Display: Audio Occlusion Plugin: None (built-in).
+[2025.11.14-07.46.04:926][720]LogAudioMixer: Display: Initializing audio mixer using platform API: 'XAudio2'
+[2025.11.14-07.46.04:942][720]LogAudioMixer: Display: Using Audio Hardware Device B250F(NVIDIA High Definition Audio)
+[2025.11.14-07.46.04:943][720]LogAudioMixer: Display: Initializing Sound Submixes...
+[2025.11.14-07.46.04:943][720]LogAudioMixer: Display: Creating Master Submix 'MasterSubmixDefault'
+[2025.11.14-07.46.04:943][720]LogAudioMixer: Display: Creating Master Submix 'MasterReverbSubmixDefault'
+[2025.11.14-07.46.04:943][720]LogAudioMixer: FMixerPlatformXAudio2::StartAudioStream() called. InstanceID=20
+[2025.11.14-07.46.04:943][720]LogAudioMixer: Display: Output buffers initialized: Frames=1024, Channels=2, Samples=2048, InstanceID=20
+[2025.11.14-07.46.04:946][720]LogAudioMixer: Display: Starting AudioMixerPlatformInterface::RunInternal(), InstanceID=20
+[2025.11.14-07.46.04:946][720]LogAudioMixer: Display: FMixerPlatformXAudio2::SubmitBuffer() called for the first time. InstanceID=20
+[2025.11.14-07.46.04:946][720]LogInit: FAudioDevice initialized with ID 20.
+[2025.11.14-07.46.04:946][720]LogAudio: Display: Audio Device (ID: 20) registered with world 'Test05_Weapon'.
+[2025.11.14-07.46.04:946][720]LogAudioMixer: Initializing Audio Bus Subsystem for audio device with ID 20
+[2025.11.14-07.46.04:949][720]LogLoad: Game class is 'GM_TestWeapon_C'
+[2025.11.14-07.46.04:950][720]LogWorld: Bringing World /Game/MAP/UEDPIE_0_Test05_Weapon.Test05_Weapon up for play (max tick rate 0) at 2025.11.14-16.46.04
+[2025.11.14-07.46.04:950][720]LogWorld: Bringing up level for play took: 0.001433
+[2025.11.14-07.46.04:953][720]LogOnline: OSS: Created online subsystem instance for: :Context_27
+[2025.11.14-07.46.04:957][720]LogTemp: Warning: 200.0
+[2025.11.14-07.46.04:958][720]PIE: 서버가 로그인했습니다.
+[2025.11.14-07.46.04:959][720]PIE: 에디터에서 플레이 총 시작 시간 0.093초입니다.
+[2025.11.14-07.46.05:841][812]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2025.11.14-07.46.05:841][812]LogWorld: BeginTearingDown for /Game/MAP/UEDPIE_0_Test05_Weapon
+[2025.11.14-07.46.05:841][812]LogWorld: UWorld::CleanupWorld for Test05_Weapon, bSessionEnded=true, bCleanupResources=true
+[2025.11.14-07.46.05:841][812]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.14-07.46.05:844][812]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2025.11.14-07.46.05:849][812]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2025.11.14-07.46.05:866][812]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2025.11.14-07.46.05:866][812]LogAudioMixer: Deinitializing Audio Bus Subsystem for audio device with ID 20
+[2025.11.14-07.46.05:866][812]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=20
+[2025.11.14-07.46.05:869][812]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=20
+[2025.11.14-07.46.05:877][812]LogUObjectHash: Compacting FUObjectHashTables data took   1.45ms
+[2025.11.14-07.46.05:968][813]LogPlayLevel: Display: Destroying online subsystem :Context_27
+[2025.11.14-07.46.06:420][864]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2025.11.14-07.46.06:519][864]LogUObjectHash: Compacting FUObjectHashTables data took   0.97ms
+[2025.11.14-07.46.06:528][864]LogSavePackage: Moving output files for package: /Game/MAP/Test05_Weapon
+[2025.11.14-07.46.06:528][864]LogSavePackage: Moving '../../../../../../Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Saved/Test05_WeaponAAA1236C4A4697D438857BB86173E581.tmp' to '../../../../../../Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Content/MAP/Test05_Weapon.umap'
+[2025.11.14-07.46.06:537][864]LogFileHelpers: Saving map 'Test05_Weapon' took 0.056
+[2025.11.14-07.46.06:553][864]LogFileHelpers: InternalPromptForCheckoutAndSave took 133.834 ms (total: 2.19 sec)
+[2025.11.14-07.46.06:612][864]LogContentValidation: Display: Starting to validate 1 assets
+[2025.11.14-07.46.06:612][864]LogContentValidation: Enabled validators:
+[2025.11.14-07.46.06:612][864]LogContentValidation: 	/Script/DataValidation.EditorValidator_Material
+[2025.11.14-07.46.06:612][864]LogContentValidation: 	/Script/DataValidation.DirtyFilesChangelistValidator
+[2025.11.14-07.46.06:612][864]LogContentValidation: 	/Script/DataValidation.EditorValidator_Localization
+[2025.11.14-07.46.06:613][864]LogContentValidation: 	/Script/DataValidation.PackageFileValidator
+[2025.11.14-07.46.06:613][864]LogContentValidation: 	/Script/DataValidation.WorldPartitionChangelistValidator
+[2025.11.14-07.46.06:613][864]LogContentValidation: 	/Script/InputBlueprintNodes.EnhancedInputUserWidgetValidator
+[2025.11.14-07.46.06:613][864]AssetCheck: /Game/MAP/Test05_Weapon 에셋 유효성 검사 중
+[2025.11.14-07.46.53:444][337]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2025.11.14-07.46.53:535][337]LogUObjectHash: Compacting FUObjectHashTables data took   0.63ms
+[2025.11.14-07.46.53:544][337]LogSavePackage: Moving output files for package: /Game/MAP/Test05_Weapon
+[2025.11.14-07.46.53:544][337]LogSavePackage: Moving '../../../../../../Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Saved/Test05_WeaponC7C20CFE46710264F1A8DDAF3B5BAC54.tmp' to '../../../../../../Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Content/MAP/Test05_Weapon.umap'
+[2025.11.14-07.46.53:553][337]LogFileHelpers: Saving map 'Test05_Weapon' took 0.059
+[2025.11.14-07.46.53:559][337]LogFileHelpers: InternalPromptForCheckoutAndSave took 114.849 ms (total: 2.31 sec)
+[2025.11.14-07.46.53:610][337]LogContentValidation: Display: Starting to validate 1 assets
+[2025.11.14-07.46.53:610][337]LogContentValidation: Enabled validators:
+[2025.11.14-07.46.53:610][337]LogContentValidation: 	/Script/DataValidation.EditorValidator_Material
+[2025.11.14-07.46.53:610][337]LogContentValidation: 	/Script/DataValidation.DirtyFilesChangelistValidator
+[2025.11.14-07.46.53:610][337]LogContentValidation: 	/Script/DataValidation.EditorValidator_Localization
+[2025.11.14-07.46.53:610][337]LogContentValidation: 	/Script/DataValidation.PackageFileValidator
+[2025.11.14-07.46.53:610][337]LogContentValidation: 	/Script/DataValidation.WorldPartitionChangelistValidator
+[2025.11.14-07.46.53:610][337]LogContentValidation: 	/Script/InputBlueprintNodes.EnhancedInputUserWidgetValidator
+[2025.11.14-07.46.53:610][337]AssetCheck: /Game/MAP/Test05_Weapon 에셋 유효성 검사 중
+[2025.11.14-07.47.18:190][827]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2025.11.14-07.47.18:287][827]LogUObjectHash: Compacting FUObjectHashTables data took   0.55ms
+[2025.11.14-07.47.18:296][827]LogSavePackage: Moving output files for package: /Game/MAP/Test05_Weapon
+[2025.11.14-07.47.18:296][827]LogSavePackage: Moving '../../../../../../Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Saved/Test05_Weapon754013DA43848832568BF0B8C783D065.tmp' to '../../../../../../Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Content/MAP/Test05_Weapon.umap'
+[2025.11.14-07.47.18:305][827]LogFileHelpers: Saving map 'Test05_Weapon' took 0.058
+[2025.11.14-07.47.18:315][827]LogFileHelpers: InternalPromptForCheckoutAndSave took 124.492 ms (total: 2.43 sec)
+[2025.11.14-07.47.18:379][827]LogContentValidation: Display: Starting to validate 1 assets
+[2025.11.14-07.47.18:379][827]LogContentValidation: Enabled validators:
+[2025.11.14-07.47.18:379][827]LogContentValidation: 	/Script/DataValidation.EditorValidator_Material
+[2025.11.14-07.47.18:379][827]LogContentValidation: 	/Script/DataValidation.DirtyFilesChangelistValidator
+[2025.11.14-07.47.18:379][827]LogContentValidation: 	/Script/DataValidation.EditorValidator_Localization
+[2025.11.14-07.47.18:379][827]LogContentValidation: 	/Script/DataValidation.PackageFileValidator
+[2025.11.14-07.47.18:380][827]LogContentValidation: 	/Script/DataValidation.WorldPartitionChangelistValidator
+[2025.11.14-07.47.18:380][827]LogContentValidation: 	/Script/InputBlueprintNodes.EnhancedInputUserWidgetValidator
+[2025.11.14-07.47.18:380][827]AssetCheck: /Game/MAP/Test05_Weapon 에셋 유효성 검사 중

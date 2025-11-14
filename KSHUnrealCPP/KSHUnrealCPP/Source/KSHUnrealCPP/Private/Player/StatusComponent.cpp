@@ -28,7 +28,7 @@ float UStatusComponent::GetDefaultStamina()
 
 float UStatusComponent::GetDefaultHealth()
 {
-	Health = Vitality * 10.0f;
+	Health =Vitality * 10.0f;
 	return Health;
 }
 

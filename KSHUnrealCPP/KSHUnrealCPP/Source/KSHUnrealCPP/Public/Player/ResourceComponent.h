@@ -91,7 +91,7 @@ public:
 	inline void SetDefaultStamina(float InValue) {
 		MaxStamina = InValue;
 		CurrentStamina = MaxStamina;
-		OnHealthChanged.Broadcast(CurrentHealth, MaxHealth);
+		OnStaminaChanged.Broadcast(CurrentStamina, MaxStamina);
 	}
 	inline void SetDefaultHealth(float InValue) {
 		MaxHealth = InValue;
