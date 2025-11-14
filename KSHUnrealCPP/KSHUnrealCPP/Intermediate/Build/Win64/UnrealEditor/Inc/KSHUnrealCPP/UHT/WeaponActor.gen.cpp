@@ -13,10 +13,10 @@ void EmptyLinkFunctionForGeneratedCodeWeaponActor() {}
 COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 ENGINE_API UClass* Z_Construct_UClass_AActor();
 ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
-ENGINE_API UClass* Z_Construct_UClass_ACharacter_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UCapsuleComponent_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UDamageType_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_USkeletalMeshComponent_NoRegister();
+KSHUNREALCPP_API UClass* Z_Construct_UClass_AActionCharacter_NoRegister();
 KSHUNREALCPP_API UClass* Z_Construct_UClass_AWeaponActor();
 KSHUNREALCPP_API UClass* Z_Construct_UClass_AWeaponActor_NoRegister();
 UPackage* Z_Construct_UPackage__Script_KSHUnrealCPP();
@@ -121,7 +121,7 @@ struct Z_Construct_UFunction_AWeaponActor_SetWeaponOwner_Statics
 {
 	struct WeaponActor_eventSetWeaponOwner_Parms
 	{
-		ACharacter* InOwner;
+		AActionCharacter* InOwner;
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
@@ -132,7 +132,7 @@ struct Z_Construct_UFunction_AWeaponActor_SetWeaponOwner_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AWeaponActor_SetWeaponOwner_Statics::NewProp_InOwner = { "InOwner", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(WeaponActor_eventSetWeaponOwner_Parms, InOwner), Z_Construct_UClass_ACharacter_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AWeaponActor_SetWeaponOwner_Statics::NewProp_InOwner = { "InOwner", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(WeaponActor_eventSetWeaponOwner_Parms, InOwner), Z_Construct_UClass_AActionCharacter_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AWeaponActor_SetWeaponOwner_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AWeaponActor_SetWeaponOwner_Statics::NewProp_InOwner,
 };
@@ -150,7 +150,7 @@ UFunction* Z_Construct_UFunction_AWeaponActor_SetWeaponOwner()
 }
 DEFINE_FUNCTION(AWeaponActor::execSetWeaponOwner)
 {
-	P_GET_OBJECT(ACharacter,Z_Param_InOwner);
+	P_GET_OBJECT(AActionCharacter,Z_Param_InOwner);
 	P_FINISH;
 	P_NATIVE_BEGIN;
 	P_THIS->SetWeaponOwner(Z_Param_InOwner);
@@ -209,7 +209,7 @@ struct Z_Construct_UClass_AWeaponActor_Statics
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_AWeaponActor_AttackEnable, "AttackEnable" }, // 1141799300
 		{ &Z_Construct_UFunction_AWeaponActor_OnWeaponBeginOverlap, "OnWeaponBeginOverlap" }, // 4269070589
-		{ &Z_Construct_UFunction_AWeaponActor_SetWeaponOwner, "SetWeaponOwner" }, // 146290696
+		{ &Z_Construct_UFunction_AWeaponActor_SetWeaponOwner, "SetWeaponOwner" }, // 1409579831
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -268,10 +268,10 @@ AWeaponActor::~AWeaponActor() {}
 struct Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Weapon_WeaponActor_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AWeaponActor, AWeaponActor::StaticClass, TEXT("AWeaponActor"), &Z_Registration_Info_UClass_AWeaponActor, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWeaponActor), 1827911287U) },
+		{ Z_Construct_UClass_AWeaponActor, AWeaponActor::StaticClass, TEXT("AWeaponActor"), &Z_Registration_Info_UClass_AWeaponActor, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWeaponActor), 2543103219U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Weapon_WeaponActor_h_4176355061(TEXT("/Script/KSHUnrealCPP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Weapon_WeaponActor_h_3484982822(TEXT("/Script/KSHUnrealCPP"),
 	Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Weapon_WeaponActor_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Weapon_WeaponActor_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

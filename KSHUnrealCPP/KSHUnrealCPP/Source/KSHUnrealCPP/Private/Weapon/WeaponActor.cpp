@@ -4,6 +4,8 @@
 #include "Weapon/WeaponActor.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Player/ActionCharacter.h"
+#include "Player/StatusComponent.h"
 #include "GameFramework/Character.h"
 
 
@@ -46,7 +48,11 @@ void AWeaponActor::OnWeaponBeginOverlap(AActor* OverlappedActor, AActor* otherAc
 			return;
 		}
 		UE_LOG(LogTemp, Warning, TEXT("Overlapped : %s"), *otherActor->GetName());
-		//finalDamage +=
+
+		if (WeaponOwner->GetStatusComponent() != nullptr) {
+			finalDamage += WeaponOwner->GetStatusComponent()->GetAttackPower();
+		}
+		
 		instigator = WeaponOwner->GetController();
 		UGameplayStatics::ApplyDamage(otherActor, finalDamage, instigator, this, DamageType);
 	}

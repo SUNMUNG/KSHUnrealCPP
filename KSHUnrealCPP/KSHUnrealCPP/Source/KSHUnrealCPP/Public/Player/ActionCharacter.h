@@ -9,6 +9,7 @@
 
 class UInputAction;
 class UResourceComponent;
+class UStatusComponent;
 class UAnimNotifyState_SectionJump;
 class USpringArmComponent;
 
@@ -36,6 +37,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UResourceComponent* GetResourceComponent() { return Resource; }
+	UStatusComponent* GetStatusComponent() { return Status; }
 
 	class AWeaponActor* GetWeapon() { return CurrentWeapon; }
 
@@ -77,6 +79,8 @@ protected:
 	TObjectPtr<class UCameraComponent> PlayerCamera = nullptr;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player|Resource")
 	TObjectPtr<UResourceComponent> Resource = nullptr;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player|Resource")
+	TObjectPtr<class UStatusComponent> Status = nullptr;
 
 	// 인풋 액션들
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")

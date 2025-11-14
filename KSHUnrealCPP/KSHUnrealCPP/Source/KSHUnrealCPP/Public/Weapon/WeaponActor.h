@@ -29,7 +29,7 @@ public:
 	virtual void PostInitializeComponents() override;
 
 	UFUNCTION(BlueprintCallable)
-	inline void SetWeaponOwner(ACharacter* InOwner) {
+	inline void SetWeaponOwner(AActionCharacter* InOwner) {
 		WeaponOwner = InOwner;
 	}
 protected:
@@ -46,7 +46,7 @@ protected:
 	TSubclassOf<UDamageType> DamageType = nullptr;
 
 private:
-	TObjectPtr<ACharacter> WeaponOwner = nullptr;
+	TObjectPtr<class AActionCharacter> WeaponOwner = nullptr;
 
 
 

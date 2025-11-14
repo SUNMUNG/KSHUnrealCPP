@@ -16,13 +16,22 @@ public:
 	// Sets default values for this component's properties
 	UStatusComponent();
 
+	float GetAttackPower();
+
+
 protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
+	//힘
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status", meta = (ClampMin = "0", ClampMax = "20"))
+	int32 Strength = 10;
+	//민첩
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status", meta = (ClampMin = "0", ClampMax = "20"))
+	int32 Agility = 10;
+	//생명력
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status", meta = (ClampMin = "0", ClampMax = "20"))
+	int32 Vitality = 10;
 
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	//공격력 모디파이어
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
+	float AttackModifier = 1.0f;
 
-		
 };
