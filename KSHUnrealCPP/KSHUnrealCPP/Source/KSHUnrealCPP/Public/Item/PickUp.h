@@ -36,6 +36,20 @@ private:
 		int32 OtherBodyIndex,
 		bool bFromSweep,
 		const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void OnScaleUpdate(float Value);
+
+	UFUNCTION()
+	void OnScaleFinish();
+
+
+	UFUNCTION()
+	void OnLocationUpdate(float Value);
+
+	UFUNCTION()
+
+	void OnLocationFinish();
 protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
@@ -50,9 +64,29 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<class UNiagaraComponent> PickupEffect=nullptr;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	TObjectPtr<class UTimelineComponent> PickupTimeline = nullptr;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pickup")
 	EItemCode PickupItem = EItemCode::BasicWeapon;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pickup")
 	float RotateSpeed = 180.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pickup")
+	float duration = 0.5f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pickup")
+	TObjectPtr<UCurveFloat> ScaleCurve = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pickup")
+	TObjectPtr<UCurveFloat> LocationCurve = nullptr;
+
+private:
+	TWeakObjectPtr<AActor> PickupOwner = nullptr;
+
+	FVector TargetLocation;
+
+	bool bPickuped = false;
+
 };

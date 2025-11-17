@@ -5,7 +5,7 @@
 #include "Player/InventoryOwner.h"
 #include "Components/SphereComponent.h"
 #include "NiagaraComponent.h"
-
+#include "Components/TimelineComponent.h"
 // Sets default values
 APickUp::APickUp()
 {
@@ -36,6 +36,8 @@ APickUp::APickUp()
 	PickupEffect = CreateDefaultSubobject<UNiagaraComponent>(TEXT("Effect"));
 	PickupEffect->SetupAttachment(BaseRoot);
 
+
+	PickupTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("PickupTimeline"));
 }
 
 // Called when the game starts or when spawned
@@ -47,7 +49,31 @@ void APickUp::BeginPlay()
 		PickupOverlap->OnComponentBeginOverlap.AddDynamic(this,&APickUp::OnPickupBeginOverlap);
 	}
 	
+	if (PickupTimeline)
+	{
+		if (ScaleCurve)
+		{
+			FOnTimelineFloat ScaleUpdateDelegate;
+			ScaleUpdateDelegate.BindUFunction(this, FName("OnScaleUpdate"));
+			PickupTimeline->AddInterpFloat(ScaleCurve, ScaleUpdateDelegate);
 
+			FOnTimelineEvent ScaleFinishDelegate;
+			ScaleFinishDelegate.BindUFunction(this, FName("OnScaleFinish"));
+			PickupTimeline->SetTimelineFinishedFunc(ScaleFinishDelegate);
+		}
+
+		if (LocationCurve) {
+			FOnTimelineFloat LocationUpdateDelegate;
+			LocationUpdateDelegate.BindUFunction(this, FName("OnLocationUpdate"));
+			PickupTimeline->AddInterpFloat(LocationCurve, LocationUpdateDelegate);
+			FOnTimelineEvent LocationFinishDelegate;
+			LocationFinishDelegate.BindUFunction(this, FName("OnLocationFinish"));
+			PickupTimeline->SetTimelineFinishedFunc(LocationFinishDelegate);
+		}
+
+		PickupTimeline->SetPlayRate(duration);
+	}
+	bPickuped = false;
 }
 
 // Called every frame
@@ -59,17 +85,50 @@ void APickUp::Tick(float DeltaTime)
 
 void APickUp::OnPickUp_Implementation(AActor* Target)
 {
-	UE_LOG(LogTemp, Log, TEXT("OnPickup_Implementation 실행"));
-
-	if (Target && Target->Implements<UInventoryOwner>())
-	{
-		IInventoryOwner::Execute_AddItem(Target, PickupItem);
+	if (!bPickuped) {
+		PickupOwner = Target;
+		bPickuped = true;
+		UE_LOG(LogTemp, Log, TEXT("OnPickup_Implementation 실행"));
+		BaseRoot->SetSimulatePhysics(false);
+		BaseRoot->SetCollisionProfileName(TEXT("NoCollision"));
+		PickupTimeline->PlayFromStart();
 	}
+
 }
 
 void APickUp::OnPickupBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	UE_LOG(LogTemp, Log, TEXT("Pickup Overlap"));
+}
+
+void APickUp::OnScaleUpdate(float Value)
+{
+	FVector NewScale = FVector::One() * Value;
+	SetActorScale3D(NewScale);
+}
+
+void APickUp::OnScaleFinish()
+{
+	// 자신을 먹은 대상에게 자기가 가지고 있는 무기를 알려줘야 함
+	if (PickupOwner.IsValid() && PickupOwner->Implements<UInventoryOwner>())
+	{
+		IInventoryOwner::Execute_AddItem(PickupOwner.Get(), PickupItem);
+	}
+}
+
+void APickUp::OnLocationUpdate(float Value)
+{
+	TargetLocation = PickupOwner->GetActorLocation();
+	FVector NewLocation = FMath::Lerp(GetActorLocation(), TargetLocation, Value);
+	SetActorLocation(NewLocation);
+}
+
+void APickUp::OnLocationFinish()
+{
+	if (PickupOwner.IsValid() && PickupOwner->Implements<UInventoryOwner>())
+	{
+		IInventoryOwner::Execute_AddItem(PickupOwner.Get(), PickupItem);
+	}
 }
 
 
