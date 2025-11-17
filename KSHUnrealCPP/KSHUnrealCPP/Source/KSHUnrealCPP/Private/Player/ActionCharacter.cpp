@@ -46,14 +46,18 @@ void AActionCharacter::BeginPlay()
 	if (Resource)
 	{
 		Resource->OnStaminaEmpty.AddDynamic(this, &AActionCharacter::SetWalkMode);
+
+		if (Status) {
+			Resource->SetDefaultHealth(Status->GetDefaultHealth());
+			Resource->SetDefaultStamina(Status->GetDefaultStamina());
+		}
 	}
+	
 
 	// 게임 진행 중에 자주 변경되는 값은 시작 시점에서 리셋을 해주는 것이 좋다.
 	bIsSprint = false;
 
-	Resource->SetDefaultHealth(Status->GetDefaultHealth());
-	UE_LOG(LogTemp, Warning, TEXT("%.1f"), Status->GetDefaultHealth());
-	Resource->SetDefaultStamina(Status->GetDefaultStamina());
+	
 }
 
 // Called every frame
@@ -72,6 +76,7 @@ void AActionCharacter::EquipWeapon(TSubclassOf<AWeaponActor> InWeapon)
 	CurrentWeapon = GetWorld()->SpawnActor<AWeaponActor>(InWeapon, GetActorLocation(), GetActorRotation(), SpawnParams);
 	if (CurrentWeapon) {
 		CurrentWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("hand_rSocket"));
+		CurrentWeapon->SetWeaponOwner(this);
 	}
 }
 

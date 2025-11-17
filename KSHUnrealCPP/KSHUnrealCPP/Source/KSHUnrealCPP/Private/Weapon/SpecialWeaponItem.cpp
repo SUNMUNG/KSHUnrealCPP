@@ -37,7 +37,6 @@ void ASpecialWeaponItem::BeginPlay()
 void ASpecialWeaponItem::OnItemBeginOverlap(AActor* OverlappedActor, AActor* otherActor)
 {
 	Cast<AActionCharacter>(otherActor)->EquipWeapon(ThisWeaponItem);
-
 	Destroy();
 }
 

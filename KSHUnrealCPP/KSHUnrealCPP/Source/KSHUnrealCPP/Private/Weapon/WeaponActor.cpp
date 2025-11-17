@@ -28,6 +28,7 @@ AWeaponActor::AWeaponActor()
 	WeaponCollision->SetupAttachment(WeaponMesh);
 	WeaponCollision->SetCollisionProfileName(TEXT("OverlapOnlyPawn"));
 
+	UE_LOG(LogTemp, Warning, TEXT("생성자"));
 }
 
 // Called when the game starts or when spawned
@@ -35,6 +36,7 @@ void AWeaponActor::BeginPlay()
 {
 	Super::BeginPlay();
 	OnActorBeginOverlap.AddDynamic(this, &AWeaponActor::OnWeaponBeginOverlap);
+	UE_LOG(LogTemp, Warning, TEXT("연결"));
 }
 
 void AWeaponActor::OnWeaponBeginOverlap(AActor* OverlappedActor, AActor* otherActor)
@@ -68,6 +70,8 @@ void AWeaponActor::AttackEnable(bool bEnable)
 		WeaponCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 }
+
+
 
 void AWeaponActor::PostInitializeComponents()
 {
