@@ -10,6 +10,8 @@
 #include "Player/StatusComponent.h"
 #include "AnimNotify/AnimNotifyState_SectionJump.h"
 #include "Weapon/WeaponActor.h"
+#include "Item/PickUpable.h"
+#include "Item/PickUp.h"
 
 // Sets default values
 AActionCharacter::AActionCharacter()
@@ -53,7 +55,7 @@ void AActionCharacter::BeginPlay()
 		}
 	}
 	
-
+	OnActorBeginOverlap.AddDynamic(this, &AActionCharacter::OnBeginOverlap);
 	// 게임 진행 중에 자주 변경되는 값은 시작 시점에서 리셋을 해주는 것이 좋다.
 	bIsSprint = false;
 
@@ -110,6 +112,11 @@ void AActionCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 		enhanced->BindAction(IA_Attack, ETriggerEvent::Triggered, this, &AActionCharacter::OnAttackInput);
 		enhanced->BindAction(IA_MeleeAttack, ETriggerEvent::Triggered, this, &AActionCharacter::OnMeleeAttackInput);
 	}
+}
+
+void AActionCharacter::AddItem_Implementation(EItemCode Code)
+{
+	UE_LOG(LogTemp, Warning, TEXT("%d"),Code);
 }
 
 void AActionCharacter::OnMoveInput(const FInputActionValue& InValue)
@@ -235,6 +242,17 @@ void AActionCharacter::SetWalkMode()
 		true
 	);
 
+}
+
+void AActionCharacter::OnBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
+{
+	UE_LOG(LogTemp, Warning, TEXT("CharOverlap"));
+
+	
+	if (OtherActor->Implements<UPickUpable>())	// OtherActor가 IPickable인터페이스를 구현했는지 확인
+	{
+		IPickUpable::Execute_OnPickUp(OtherActor,this);
+	}
 }
 
 void AActionCharacter::SectionJumpForCombo(int StaminaCost)

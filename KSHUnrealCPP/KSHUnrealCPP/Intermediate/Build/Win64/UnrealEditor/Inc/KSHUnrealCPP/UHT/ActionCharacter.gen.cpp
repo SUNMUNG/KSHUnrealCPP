@@ -10,6 +10,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeActionCharacter() {}
 
 // Begin Cross Module References
+ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 ENGINE_API UClass* Z_Construct_UClass_UAnimInstance_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UAnimMontage_NoRegister();
@@ -20,10 +21,58 @@ KSHUNREALCPP_API UClass* Z_Construct_UClass_AActionCharacter();
 KSHUNREALCPP_API UClass* Z_Construct_UClass_AActionCharacter_NoRegister();
 KSHUNREALCPP_API UClass* Z_Construct_UClass_AWeaponActor_NoRegister();
 KSHUNREALCPP_API UClass* Z_Construct_UClass_UAnimNotifyState_SectionJump_NoRegister();
+KSHUNREALCPP_API UClass* Z_Construct_UClass_UInventoryOwner_NoRegister();
 KSHUNREALCPP_API UClass* Z_Construct_UClass_UResourceComponent_NoRegister();
 KSHUNREALCPP_API UClass* Z_Construct_UClass_UStatusComponent_NoRegister();
 UPackage* Z_Construct_UPackage__Script_KSHUnrealCPP();
 // End Cross Module References
+
+// Begin Class AActionCharacter Function OnBeginOverlap
+struct Z_Construct_UFunction_AActionCharacter_OnBeginOverlap_Statics
+{
+	struct ActionCharacter_eventOnBeginOverlap_Parms
+	{
+		AActor* OverlappedActor;
+		AActor* OtherActor;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_OverlappedActor;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_OtherActor;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AActionCharacter_OnBeginOverlap_Statics::NewProp_OverlappedActor = { "OverlappedActor", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ActionCharacter_eventOnBeginOverlap_Parms, OverlappedActor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AActionCharacter_OnBeginOverlap_Statics::NewProp_OtherActor = { "OtherActor", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ActionCharacter_eventOnBeginOverlap_Parms, OtherActor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AActionCharacter_OnBeginOverlap_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AActionCharacter_OnBeginOverlap_Statics::NewProp_OverlappedActor,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AActionCharacter_OnBeginOverlap_Statics::NewProp_OtherActor,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AActionCharacter_OnBeginOverlap_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AActionCharacter_OnBeginOverlap_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AActionCharacter, nullptr, "OnBeginOverlap", nullptr, nullptr, Z_Construct_UFunction_AActionCharacter_OnBeginOverlap_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AActionCharacter_OnBeginOverlap_Statics::PropPointers), sizeof(Z_Construct_UFunction_AActionCharacter_OnBeginOverlap_Statics::ActionCharacter_eventOnBeginOverlap_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00080401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AActionCharacter_OnBeginOverlap_Statics::Function_MetaDataParams), Z_Construct_UFunction_AActionCharacter_OnBeginOverlap_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_AActionCharacter_OnBeginOverlap_Statics::ActionCharacter_eventOnBeginOverlap_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AActionCharacter_OnBeginOverlap()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AActionCharacter_OnBeginOverlap_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AActionCharacter::execOnBeginOverlap)
+{
+	P_GET_OBJECT(AActor,Z_Param_OverlappedActor);
+	P_GET_OBJECT(AActor,Z_Param_OtherActor);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->OnBeginOverlap(Z_Param_OverlappedActor,Z_Param_OtherActor);
+	P_NATIVE_END;
+}
+// End Class AActionCharacter Function OnBeginOverlap
 
 // Begin Class AActionCharacter Function SetWalkMode
 struct Z_Construct_UFunction_AActionCharacter_SetWalkMode_Statics
@@ -65,6 +114,7 @@ void AActionCharacter::StaticRegisterNativesAActionCharacter()
 {
 	UClass* Class = AActionCharacter::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
+		{ "OnBeginOverlap", &AActionCharacter::execOnBeginOverlap },
 		{ "SetWalkMode", &AActionCharacter::execSetWalkMode },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -265,9 +315,11 @@ struct Z_Construct_UClass_AActionCharacter_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
+		{ &Z_Construct_UFunction_AActionCharacter_OnBeginOverlap, "OnBeginOverlap" }, // 3847017286
 		{ &Z_Construct_UFunction_AActionCharacter_SetWalkMode, "SetWalkMode" }, // 1205112217
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
+	static const UECodeGen_Private::FImplementedInterfaceParams InterfaceParams[];
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AActionCharacter>::IsAbstract,
 	};
@@ -329,6 +381,9 @@ UObject* (*const Z_Construct_UClass_AActionCharacter_Statics::DependentSingleton
 	(UObject* (*)())Z_Construct_UPackage__Script_KSHUnrealCPP,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AActionCharacter_Statics::DependentSingletons) < 16);
+const UECodeGen_Private::FImplementedInterfaceParams Z_Construct_UClass_AActionCharacter_Statics::InterfaceParams[] = {
+	{ Z_Construct_UClass_UInventoryOwner_NoRegister, (int32)VTABLE_OFFSET(AActionCharacter, IInventoryOwner), false },  // 401072001
+};
 const UECodeGen_Private::FClassParams Z_Construct_UClass_AActionCharacter_Statics::ClassParams = {
 	&AActionCharacter::StaticClass,
 	"Game",
@@ -336,11 +391,11 @@ const UECodeGen_Private::FClassParams Z_Construct_UClass_AActionCharacter_Static
 	DependentSingletons,
 	FuncInfo,
 	Z_Construct_UClass_AActionCharacter_Statics::PropPointers,
-	nullptr,
+	InterfaceParams,
 	UE_ARRAY_COUNT(DependentSingletons),
 	UE_ARRAY_COUNT(FuncInfo),
 	UE_ARRAY_COUNT(Z_Construct_UClass_AActionCharacter_Statics::PropPointers),
-	0,
+	UE_ARRAY_COUNT(InterfaceParams),
 	0x009000A4u,
 	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AActionCharacter_Statics::Class_MetaDataParams), Z_Construct_UClass_AActionCharacter_Statics::Class_MetaDataParams)
 };
@@ -364,10 +419,10 @@ AActionCharacter::~AActionCharacter() {}
 struct Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AActionCharacter, AActionCharacter::StaticClass, TEXT("AActionCharacter"), &Z_Registration_Info_UClass_AActionCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AActionCharacter), 1166443980U) },
+		{ Z_Construct_UClass_AActionCharacter, AActionCharacter::StaticClass, TEXT("AActionCharacter"), &Z_Registration_Info_UClass_AActionCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AActionCharacter), 1551990180U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_3585350478(TEXT("/Script/KSHUnrealCPP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_3328684802(TEXT("/Script/KSHUnrealCPP"),
 	Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

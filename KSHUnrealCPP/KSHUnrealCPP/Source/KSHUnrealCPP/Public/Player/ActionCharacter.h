@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
 #include "Weapon/WeaponActor.h"
+#include "InventoryOwner.h"
 #include "ActionCharacter.generated.h"
 
 
@@ -17,7 +18,7 @@ class USpringArmComponent;
 class AWeaponActor;
 
 UCLASS()
-class KSHUNREALCPP_API AActionCharacter : public ACharacter
+class KSHUNREALCPP_API AActionCharacter : public ACharacter , public IInventoryOwner
 {
 	GENERATED_BODY()
 
@@ -41,6 +42,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	virtual void AddItem_Implementation(EItemCode Code);
 	UResourceComponent* GetResourceComponent() { return Resource; }
 	UStatusComponent* GetStatusComponent() { return Status; }
 
@@ -71,6 +73,9 @@ protected:
 	// 걷기 모드 설정(다이나믹 델리게이트에 바인드하기 위해 UFUNCTION 추가)
 	UFUNCTION()
 	void SetWalkMode();
+
+	UFUNCTION()
+	void OnBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);
 
 private:
 	void SectionJumpForCombo(int StaminaCost);
