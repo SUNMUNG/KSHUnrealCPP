@@ -128,6 +128,7 @@ void APickUp::OnLocationFinish()
 	if (PickupOwner.IsValid() && PickupOwner->Implements<UInventoryOwner>())
 	{
 		IInventoryOwner::Execute_AddItem(PickupOwner.Get(), PickupItem);
+		Destroy();
 	}
 }
 
