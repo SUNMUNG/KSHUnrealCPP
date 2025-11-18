@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KSHUnrealCPPModuleRules")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Development")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b19c61e421dd425f78d6e19d10250c426a10fe91")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3095bf9c9b56535ced19539b1b9d002fa2ce4fa4")]
 [assembly: System.Reflection.AssemblyProductAttribute("KSHUnrealCPPModuleRules")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KSHUnrealCPPModuleRules")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

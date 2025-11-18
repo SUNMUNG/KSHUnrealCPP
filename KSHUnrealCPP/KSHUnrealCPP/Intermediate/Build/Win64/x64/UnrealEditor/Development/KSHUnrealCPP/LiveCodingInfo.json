@@ -23,6 +23,7 @@
 			"SpecialWeaponItem.gen.cpp.obj",
 			"StatusComponent.gen.cpp.obj",
 			"TestActor.gen.cpp.obj",
+			"UsedWeapon.gen.cpp.obj",
 			"UW_PlayerHud.gen.cpp.obj",
 			"WeaponActor.gen.cpp.obj",
 			"WeaponManagerComponent.gen.cpp.obj",
@@ -50,6 +51,7 @@
 			"ResourceBarWidget.cpp.obj",
 			"ComsumeableWeapon.cpp.obj",
 			"SpecialWeaponItem.cpp.obj",
+			"UsedWeapon.cpp.obj",
 			"WeaponActor.cpp.obj"
 		]
 	}

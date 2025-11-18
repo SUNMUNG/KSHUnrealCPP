@@ -42,8 +42,6 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
-
 	virtual void AddItem_Implementation(EItemCode Code);
 	UResourceComponent* GetResourceComponent() { return Resource; }
 	UStatusComponent* GetStatusComponent() { return Status; }
@@ -80,8 +78,11 @@ protected:
 	void OnBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);
 
 private:
-	void SectionJumpForCombo(int StaminaCost);
+	void SectionJumpForCombo();
 
+	UFUNCTION()
+
+	void OnAttackMontageEnded(UAnimMontage* Montage, bool binterrupt);
 protected:
 
 
@@ -147,6 +148,11 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player|Weapon")
 	TObjectPtr<AWeaponActor> CurrentWeapon = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player|Weapon")
+	TMap<EItemCode, TSubclassOf<AActor>> UsedWeapon;
+
+	
 private:
 	UPROPERTY()
 	TWeakObjectPtr<UAnimInstance> AnimInstance = nullptr;
@@ -158,4 +164,6 @@ private:
 
 	bool bComboReady = false;
 
+	/*UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animation|Weapon", meta = (AllowPrivateAccess="true"))
+	bool bWeaponUseEnded = false;*/
 };

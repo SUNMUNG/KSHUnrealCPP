@@ -10,6 +10,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeActionCharacter() {}
 
 // Begin Cross Module References
+COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 ENGINE_API UClass* Z_Construct_UClass_UAnimInstance_NoRegister();
@@ -24,8 +25,61 @@ KSHUNREALCPP_API UClass* Z_Construct_UClass_UAnimNotifyState_SectionJump_NoRegis
 KSHUNREALCPP_API UClass* Z_Construct_UClass_UInventoryOwner_NoRegister();
 KSHUNREALCPP_API UClass* Z_Construct_UClass_UResourceComponent_NoRegister();
 KSHUNREALCPP_API UClass* Z_Construct_UClass_UStatusComponent_NoRegister();
+KSHUNREALCPP_API UEnum* Z_Construct_UEnum_KSHUnrealCPP_EItemCode();
 UPackage* Z_Construct_UPackage__Script_KSHUnrealCPP();
 // End Cross Module References
+
+// Begin Class AActionCharacter Function OnAttackMontageEnded
+struct Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded_Statics
+{
+	struct ActionCharacter_eventOnAttackMontageEnded_Parms
+	{
+		UAnimMontage* Montage;
+		bool binterrupt;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_Montage;
+	static void NewProp_binterrupt_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_binterrupt;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded_Statics::NewProp_Montage = { "Montage", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ActionCharacter_eventOnAttackMontageEnded_Parms, Montage), Z_Construct_UClass_UAnimMontage_NoRegister, METADATA_PARAMS(0, nullptr) };
+void Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded_Statics::NewProp_binterrupt_SetBit(void* Obj)
+{
+	((ActionCharacter_eventOnAttackMontageEnded_Parms*)Obj)->binterrupt = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded_Statics::NewProp_binterrupt = { "binterrupt", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ActionCharacter_eventOnAttackMontageEnded_Parms), &Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded_Statics::NewProp_binterrupt_SetBit, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded_Statics::NewProp_Montage,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded_Statics::NewProp_binterrupt,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AActionCharacter, nullptr, "OnAttackMontageEnded", nullptr, nullptr, Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded_Statics::PropPointers), sizeof(Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded_Statics::ActionCharacter_eventOnAttackMontageEnded_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00040401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded_Statics::Function_MetaDataParams), Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded_Statics::ActionCharacter_eventOnAttackMontageEnded_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AActionCharacter::execOnAttackMontageEnded)
+{
+	P_GET_OBJECT(UAnimMontage,Z_Param_Montage);
+	P_GET_UBOOL(Z_Param_binterrupt);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->OnAttackMontageEnded(Z_Param_Montage,Z_Param_binterrupt);
+	P_NATIVE_END;
+}
+// End Class AActionCharacter Function OnAttackMontageEnded
 
 // Begin Class AActionCharacter Function OnBeginOverlap
 struct Z_Construct_UFunction_AActionCharacter_OnBeginOverlap_Statics
@@ -114,6 +168,7 @@ void AActionCharacter::StaticRegisterNativesAActionCharacter()
 {
 	UClass* Class = AActionCharacter::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
+		{ "OnAttackMontageEnded", &AActionCharacter::execOnAttackMontageEnded },
 		{ "OnBeginOverlap", &AActionCharacter::execOnBeginOverlap },
 		{ "SetWalkMode", &AActionCharacter::execSetWalkMode },
 	};
@@ -282,6 +337,10 @@ struct Z_Construct_UClass_AActionCharacter_Statics
 		{ "Category", "Player|Weapon" },
 		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_UsedWeapon_MetaData[] = {
+		{ "Category", "Player|Weapon" },
+		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AnimInstance_MetaData[] = {
 		{ "ModuleRelativePath", "Public/Player/ActionCharacter.h" },
 	};
@@ -310,11 +369,16 @@ struct Z_Construct_UClass_AActionCharacter_Statics
 	static void NewProp_bIsSprint_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsSprint;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_CurrentWeapon;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_UsedWeapon_ValueProp;
+	static const UECodeGen_Private::FBytePropertyParams NewProp_UsedWeapon_Key_KeyProp_Underlying;
+	static const UECodeGen_Private::FEnumPropertyParams NewProp_UsedWeapon_Key_KeyProp;
+	static const UECodeGen_Private::FMapPropertyParams NewProp_UsedWeapon;
 	static const UECodeGen_Private::FWeakObjectPropertyParams NewProp_AnimInstance;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_SectionJumpNotify;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
+		{ &Z_Construct_UFunction_AActionCharacter_OnAttackMontageEnded, "OnAttackMontageEnded" }, // 3336626854
 		{ &Z_Construct_UFunction_AActionCharacter_OnBeginOverlap, "OnBeginOverlap" }, // 3847017286
 		{ &Z_Construct_UFunction_AActionCharacter_SetWalkMode, "SetWalkMode" }, // 1205112217
 	};
@@ -349,6 +413,10 @@ void Z_Construct_UClass_AActionCharacter_Statics::NewProp_bIsSprint_SetBit(void*
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_bIsSprint = { "bIsSprint", nullptr, (EPropertyFlags)0x0020080000020005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AActionCharacter), &Z_Construct_UClass_AActionCharacter_Statics::NewProp_bIsSprint_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bIsSprint_MetaData), NewProp_bIsSprint_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_CurrentWeapon = { "CurrentWeapon", nullptr, (EPropertyFlags)0x0124080000000005, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, CurrentWeapon), Z_Construct_UClass_AWeaponActor_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentWeapon_MetaData), NewProp_CurrentWeapon_MetaData) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_UsedWeapon_ValueProp = { "UsedWeapon", nullptr, (EPropertyFlags)0x0004000000000001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, Z_Construct_UClass_UClass, Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_UsedWeapon_Key_KeyProp_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_UsedWeapon_Key_KeyProp = { "UsedWeapon_Key", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UEnum_KSHUnrealCPP_EItemCode, METADATA_PARAMS(0, nullptr) }; // 3628415129
+const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_UsedWeapon = { "UsedWeapon", nullptr, (EPropertyFlags)0x0024080000000005, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, UsedWeapon), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_UsedWeapon_MetaData), NewProp_UsedWeapon_MetaData) }; // 3628415129
 const UECodeGen_Private::FWeakObjectPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_AnimInstance = { "AnimInstance", nullptr, (EPropertyFlags)0x0044000000000000, UECodeGen_Private::EPropertyGenFlags::WeakObject, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, AnimInstance), Z_Construct_UClass_UAnimInstance_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AnimInstance_MetaData), NewProp_AnimInstance_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AActionCharacter_Statics::NewProp_SectionJumpNotify = { "SectionJumpNotify", nullptr, (EPropertyFlags)0x0144000000000000, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AActionCharacter, SectionJumpNotify), Z_Construct_UClass_UAnimNotifyState_SectionJump_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SectionJumpNotify_MetaData), NewProp_SectionJumpNotify_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AActionCharacter_Statics::PropPointers[] = {
@@ -372,6 +440,10 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AActionCh
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_MeleeAttackStaminaCost,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_bIsSprint,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_CurrentWeapon,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_UsedWeapon_ValueProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_UsedWeapon_Key_KeyProp_Underlying,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_UsedWeapon_Key_KeyProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_UsedWeapon,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_AnimInstance,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AActionCharacter_Statics::NewProp_SectionJumpNotify,
 };
@@ -419,10 +491,10 @@ AActionCharacter::~AActionCharacter() {}
 struct Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AActionCharacter, AActionCharacter::StaticClass, TEXT("AActionCharacter"), &Z_Registration_Info_UClass_AActionCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AActionCharacter), 1551990180U) },
+		{ Z_Construct_UClass_AActionCharacter, AActionCharacter::StaticClass, TEXT("AActionCharacter"), &Z_Registration_Info_UClass_AActionCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AActionCharacter), 651027581U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_3328684802(TEXT("/Script/KSHUnrealCPP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_2907236667(TEXT("/Script/KSHUnrealCPP"),
 	Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

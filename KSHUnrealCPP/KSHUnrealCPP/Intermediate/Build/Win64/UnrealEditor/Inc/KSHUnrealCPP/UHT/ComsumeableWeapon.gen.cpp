@@ -87,7 +87,7 @@ struct Z_Construct_UClass_AComsumeableWeapon_Statics
 };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_AComsumeableWeapon_Statics::NewProp_MaxUseCount = { "MaxUseCount", nullptr, (EPropertyFlags)0x0020080000000015, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AComsumeableWeapon, MaxUseCount), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MaxUseCount_MetaData), NewProp_MaxUseCount_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_AComsumeableWeapon_Statics::NewProp_RemainingUseCount = { "RemainingUseCount", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AComsumeableWeapon, RemainingUseCount), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RemainingUseCount_MetaData), NewProp_RemainingUseCount_MetaData) };
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_AComsumeableWeapon_Statics::NewProp_OnWeaponUseEnded = { "OnWeaponUseEnded", nullptr, (EPropertyFlags)0x0020080010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AComsumeableWeapon, OnWeaponUseEnded), Z_Construct_UDelegateFunction_KSHUnrealCPP_OnWeaponUseEnded__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnWeaponUseEnded_MetaData), NewProp_OnWeaponUseEnded_MetaData) }; // 3709803051
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_AComsumeableWeapon_Statics::NewProp_OnWeaponUseEnded = { "OnWeaponUseEnded", nullptr, (EPropertyFlags)0x0020080010080004, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AComsumeableWeapon, OnWeaponUseEnded), Z_Construct_UDelegateFunction_KSHUnrealCPP_OnWeaponUseEnded__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnWeaponUseEnded_MetaData), NewProp_OnWeaponUseEnded_MetaData) }; // 3709803051
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AComsumeableWeapon_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AComsumeableWeapon_Statics::NewProp_MaxUseCount,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AComsumeableWeapon_Statics::NewProp_RemainingUseCount,
@@ -135,10 +135,10 @@ AComsumeableWeapon::~AComsumeableWeapon() {}
 struct Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Weapon_ComsumeableWeapon_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AComsumeableWeapon, AComsumeableWeapon::StaticClass, TEXT("AComsumeableWeapon"), &Z_Registration_Info_UClass_AComsumeableWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AComsumeableWeapon), 3104446614U) },
+		{ Z_Construct_UClass_AComsumeableWeapon, AComsumeableWeapon::StaticClass, TEXT("AComsumeableWeapon"), &Z_Registration_Info_UClass_AComsumeableWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AComsumeableWeapon), 1277045562U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Weapon_ComsumeableWeapon_h_2320819665(TEXT("/Script/KSHUnrealCPP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Weapon_ComsumeableWeapon_h_3267179904(TEXT("/Script/KSHUnrealCPP"),
 	Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Weapon_ComsumeableWeapon_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Weapon_ComsumeableWeapon_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

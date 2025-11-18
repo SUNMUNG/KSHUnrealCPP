@@ -20,6 +20,7 @@
 #include "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Intermediate/Build/Win64/UnrealEditor/Inc/KSHUnrealCPP/UHT/SpecialWeaponItem.gen.cpp"
 #include "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Intermediate/Build/Win64/UnrealEditor/Inc/KSHUnrealCPP/UHT/StatusComponent.gen.cpp"
 #include "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Intermediate/Build/Win64/UnrealEditor/Inc/KSHUnrealCPP/UHT/TestActor.gen.cpp"
+#include "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Intermediate/Build/Win64/UnrealEditor/Inc/KSHUnrealCPP/UHT/UsedWeapon.gen.cpp"
 #include "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Intermediate/Build/Win64/UnrealEditor/Inc/KSHUnrealCPP/UHT/UW_PlayerHud.gen.cpp"
 #include "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Intermediate/Build/Win64/UnrealEditor/Inc/KSHUnrealCPP/UHT/WeaponActor.gen.cpp"
 #include "C:/Users/KGA/Documents/Unreal Projects/KSHUnrealCPP07/KSHUnrealCPP/KSHUnrealCPP/KSHUnrealCPP/Intermediate/Build/Win64/UnrealEditor/Inc/KSHUnrealCPP/UHT/WeaponManagerComponent.gen.cpp"

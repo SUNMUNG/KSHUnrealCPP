@@ -44,6 +44,11 @@ void AActionCharacter::BeginPlay()
 	if (GetMesh())
 	{
 		AnimInstance = GetMesh()->GetAnimInstance();	// ABP 객체 가져오기
+		if (AnimInstance.IsValid() && AttackMontage) {
+			FOnMontageEnded onMontageEnded;
+			onMontageEnded.BindUObject(this, &AActionCharacter::OnAttackMontageEnded);
+			AnimInstance->Montage_SetEndDelegate(onMontageEnded);
+		}
 	}
 	if (Resource)
 	{
@@ -152,45 +157,37 @@ void AActionCharacter::OnRollInput(const FInputActionValue& InValue)
 
 void AActionCharacter::OnAttackInput(const FInputActionValue& InValue)
 {
-	if (AnimInstance.IsValid()&&Resource->HasEnoughStamina(AttackStaminaCost))
+	// 애님 인스턴스가 있고, 스태미너도 충분하고, 현재 무기가 공격을 할 수 있어야 한다.
+	if (AnimInstance.IsValid() && Resource->HasEnoughStamina(AttackStaminaCost)
+		&& (CurrentWeapon && CurrentWeapon->CanAttack()))
 	{
-		if (!AnimInstance->IsAnyMontagePlaying())	// 몽타주 재생중이 아니고 충분한 스태미너가 있을 때만 작동
+		if (!AnimInstance->IsAnyMontagePlaying())	// 몽타주가 재생 중이 아닐 때
 		{
-			if (!GetLastMovementInputVector().IsNearlyZero())	// 입력을 하는 중에만 즉시 회전
-			{
-				SetActorRotation(GetLastMovementInputVector().Rotation());	// 마지막 입력 방향으로 즉시 회전 시키기
-			}
+			// 첫번째 공격			
+			PlayAnimMontage(AttackMontage);	// 몽타주 재생
+
+			FOnMontageEnded onMontageEnded;
+			onMontageEnded.BindUObject(this, &AActionCharacter::OnAttackMontageEnded);
+			AnimInstance->Montage_SetEndDelegate(onMontageEnded);	// 몽타주가 끝났을 때 델리게이트 발송(몽타주 플레이 이후에 등록해야 함)
+
 			Resource->AddStamina(-AttackStaminaCost);	// 스태미너 감소
-			PlayAnimMontage(AttackMontage);
+			if (CurrentWeapon)
+			{
+				CurrentWeapon->OnAttack();	// 무기 공격시 처리(회수 차감)
+			}
 		}
-		else if (AnimInstance->GetCurrentActiveMontage()==AttackMontage) {
-				// 스태미너 감소
-			
-			SectionJumpForCombo(AttackStaminaCost);
+		else if (AnimInstance->GetCurrentActiveMontage() == AttackMontage)	// 몽타주가 재생 중인데, AttackMontage가 재생중이면
+		{
+			// 콤보 공격
+			SectionJumpForCombo();
 		}
 	}
 }
 
 void AActionCharacter::OnMeleeAttackInput(const FInputActionValue& InValue)
 {
-	if (AnimInstance.IsValid() && Resource->HasEnoughStamina(MeleeAttackStaminaCost))
-	{
-		if (!AnimInstance->IsAnyMontagePlaying())	// 몽타주 재생중이 아니고 충분한 스태미너가 있을 때만 작동
-		{
-			if (!GetLastMovementInputVector().IsNearlyZero())	// 입력을 하는 중에만 즉시 회전
-			{
-				SetActorRotation(GetLastMovementInputVector().Rotation());	// 마지막 입력 방향으로 즉시 회전 시키기
-			}
-			Resource->AddStamina(-MeleeAttackStaminaCost);	// 스태미너 감소
-			PlayAnimMontage(MeleeAttackMontage);
-		}
-		else if (AnimInstance->GetCurrentActiveMontage() == MeleeAttackMontage) {
-			// 스태미너 감소
-
-			SectionJumpForCombo(MeleeAttackStaminaCost);
-		}
-	}
 }
+
 
 void AActionCharacter::SetSprintMode()
 {
@@ -257,17 +254,42 @@ void AActionCharacter::OnBeginOverlap(AActor* OverlappedActor, AActor* OtherActo
 	}
 }
 
-void AActionCharacter::SectionJumpForCombo(int StaminaCost)
+void AActionCharacter::SectionJumpForCombo()
 {
-	if (SectionJumpNotify && bComboReady) {
+	if (SectionJumpNotify && bComboReady)	// SectionJumpNotify가 있고 콤보가 가능한 상태이면
+	{
 		UAnimMontage* current = AnimInstance->GetCurrentActiveMontage();
-		AnimInstance->Montage_SetNextSection(
-			AnimInstance->Montage_GetCurrentSection(current),
-			SectionJumpNotify->GetNextSectionName(),
-			current
-		);
-		Resource->AddStamina(-StaminaCost);
-		bComboReady = false;
+		AnimInstance->Montage_SetNextSection(					// 다음 섹션으로 점프하기
+			AnimInstance->Montage_GetCurrentSection(current),		// 현재 섹션
+			SectionJumpNotify->GetNextSectionName(),				// 다음 섹션의 이름
+			current);												// 실행될 몽타주
+
+		bComboReady = false;	// 중복실행 방지
+		Resource->AddStamina(-AttackStaminaCost);	// 스태미너 감소
+		if (CurrentWeapon)
+		{
+			CurrentWeapon->OnAttack();
+		}
 	}
 
+}
+
+void AActionCharacter::OnAttackMontageEnded(UAnimMontage* Montage, bool binterrupt)
+{
+	UE_LOG(LogTemp, Warning, TEXT("OnWeaponUseEnded"));
+	
+	if (CurrentWeapon && !CurrentWeapon->CanAttack()) {
+		UE_LOG(LogTemp, Warning, TEXT("버리기"));
+
+		UE_LOG(LogTemp, Log, TEXT("다쓴 무기 버리기"));
+		TSubclassOf<AActor>* usedClass = UsedWeapon.Find(CurrentWeapon->GetWeaponID());
+		AActor* used = GetWorld()->SpawnActor<AActor>(
+			*usedClass,
+			GetActorLocation() + GetActorForwardVector() * 100.0f,
+			GetActorRotation());
+	
+		UPrimitiveComponent* primitive = used->FindComponentByClass<UPrimitiveComponent>();
+		primitive->AddImpulse((GetActorForwardVector() + GetActorUpVector()) * 250.0f, NAME_None, true);
+
+	}
 }

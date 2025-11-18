@@ -134,6 +134,9 @@
     <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\Weapon\SpecialWeaponItem.cpp">
       <Filter>Source\KSHUnrealCPP\Private\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\Weapon\UsedWeapon.cpp">
+      <Filter>Source\KSHUnrealCPP\Private\Weapon</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\KSHUnrealCPP\Private\Weapon\WeaponActor.cpp">
       <Filter>Source\KSHUnrealCPP\Private\Weapon</Filter>
     </ClCompile>
@@ -228,6 +231,9 @@
       <Filter>Source\KSHUnrealCPP\Public\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\Weapon\SpecialWeaponItem.h">
+      <Filter>Source\KSHUnrealCPP\Public\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\Weapon\UsedWeapon.h">
       <Filter>Source\KSHUnrealCPP\Public\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\KSHUnrealCPP\Public\Weapon\WeaponActor.h">

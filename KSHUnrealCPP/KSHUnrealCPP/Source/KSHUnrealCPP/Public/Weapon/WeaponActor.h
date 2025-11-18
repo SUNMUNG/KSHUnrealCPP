@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Common/CommonEnums.h"
 #include "WeaponActor.generated.h"
 
 UCLASS()
@@ -29,10 +30,17 @@ public:
 	UFUNCTION(BlueprintCallable)
 	virtual void OnAttack() {}
 
+	UFUNCTION(BlueprintCallable,BlueprintPure)
+	virtual bool CanAttack() { return true;}
 	UFUNCTION(BlueprintCallable)
 	virtual void OnWeaponPickuped(AActionCharacter* InOwner);
 
 	virtual void PostInitializeComponents() override;
+
+	UFUNCTION(BlueprintCallable)
+	inline EItemCode GetWeaponID()const {
+		return WeaponID;
+	}
 
 	UFUNCTION(BlueprintCallable)
 	inline void SetWeaponOwner(AActionCharacter* InOwner) {
@@ -44,6 +52,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Componenets")
 	TObjectPtr<class UCapsuleComponent> WeaponCollision = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
+	EItemCode WeaponID = EItemCode::BasicWeapon;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
 	float Damage = 10.0f;

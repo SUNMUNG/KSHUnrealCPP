@@ -18,13 +18,17 @@ class KSHUNREALCPP_API AComsumeableWeapon : public AWeaponActor
 public:
 	virtual void OnAttack() override;
 
+	virtual bool CanAttack() override {
+		return RemainingUseCount > 0;
+	}
+
 	virtual void OnWeaponPickuped(AActionCharacter* InOwner) override;
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
-	int32 MaxUseCount = 10;
+	int32 MaxUseCount = 3;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	int32 RemainingUseCount = 10;
+	int32 RemainingUseCount = 3;
 
-	UPROPERTY(BlueprintAssignable,Category="Weapon")
+	UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Category = "Weapon")
 	FOnWeaponUseEnded OnWeaponUseEnded;
 };

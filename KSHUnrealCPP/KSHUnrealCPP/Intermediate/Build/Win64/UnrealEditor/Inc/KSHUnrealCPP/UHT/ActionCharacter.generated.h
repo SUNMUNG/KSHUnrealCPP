@@ -10,12 +10,14 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class AActor;
+class UAnimMontage;
 #ifdef KSHUNREALCPP_ActionCharacter_generated_h
 #error "ActionCharacter.generated.h already included, missing '#pragma once' in ActionCharacter.h"
 #endif
 #define KSHUNREALCPP_ActionCharacter_generated_h
 
 #define FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Player_ActionCharacter_h_23_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execOnAttackMontageEnded); \
 	DECLARE_FUNCTION(execOnBeginOverlap); \
 	DECLARE_FUNCTION(execSetWalkMode);
 
