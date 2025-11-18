@@ -16,6 +16,7 @@ class UStatusComponent;
 class UAnimNotifyState_SectionJump;
 class USpringArmComponent;
 class AWeaponActor;
+class UCameraComponent;
 
 UCLASS()
 class KSHUNREALCPP_API AActionCharacter : public ACharacter , public IInventoryOwner
@@ -52,6 +53,11 @@ public:
 		bComboReady = InSectionJumpNotify!=nullptr;
 		SectionJumpNotify = InSectionJumpNotify;
 	}
+	UFUNCTION(BlueprintCallable)
+	void TestDropUsedWeapon();
+
+	UFUNCTION(BlueprintCallable)
+	void TestDropCurrentWeapon();
 
 protected:
 	// 이동 방향 입력 받기
@@ -83,17 +89,25 @@ private:
 	UFUNCTION()
 
 	void OnAttackMontageEnded(UAnimMontage* Montage, bool binterrupt);
+
+	void DropUsedWeapon();
+
+	void DropCurrentWeapon();
+
 protected:
 
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player|Camera")
-	TObjectPtr<class USpringArmComponent> SpringArm = nullptr;
+	TObjectPtr<USpringArmComponent> SpringArm = nullptr;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player|Camera")
-	TObjectPtr<class UCameraComponent> PlayerCamera = nullptr;
+	TObjectPtr<UCameraComponent> PlayerCamera = nullptr;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player|Resource")
 	TObjectPtr<UResourceComponent> Resource = nullptr;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player|Resource")
-	TObjectPtr<class UStatusComponent> Status = nullptr;
+	TObjectPtr<UStatusComponent> Status = nullptr;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player|Resource")
+	TObjectPtr<USceneComponent> DropLocation = nullptr;
+
 
 	// 인풋 액션들
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
@@ -150,8 +164,10 @@ protected:
 	TObjectPtr<AWeaponActor> CurrentWeapon = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player|Weapon")
-	TMap<EItemCode, TSubclassOf<AActor>> UsedWeapon;
+	TMap<EItemCode, TSubclassOf<class AUsedWeapon>> UsedWeapons;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player|Weapon")
+	TMap<EItemCode, TSubclassOf<class APickUp>> PickUpWeapons;
 	
 private:
 	UPROPERTY()

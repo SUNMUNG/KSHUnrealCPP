@@ -27,6 +27,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void OnPickUp_Implementation(AActor* Target) override;
+
+	void AddImpulse(FVector& Velocity);
 private:
 
 	UFUNCTION()
@@ -56,6 +58,9 @@ protected:
 	EItemCode PickupItem = EItemCode::BasicWeapon;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pickup")
+	float PickupableTime = 3.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pickup")
 	float RotateSpeed = 180.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pickup")
@@ -71,6 +76,8 @@ private:
 	TWeakObjectPtr<AActor> PickupOwner = nullptr;
 
 	FVector TargetLocation;
+
+	FTimerHandle PickupableTimer;
 
 	bool bPickuped = false;
 

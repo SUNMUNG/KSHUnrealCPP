@@ -145,6 +145,10 @@ struct Z_Construct_UClass_APickUp_Statics
 		{ "Category", "Pickup" },
 		{ "ModuleRelativePath", "Public/Item/PickUp.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PickupableTime_MetaData[] = {
+		{ "Category", "Pickup" },
+		{ "ModuleRelativePath", "Public/Item/PickUp.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RotateSpeed_MetaData[] = {
 		{ "Category", "Pickup" },
 		{ "ModuleRelativePath", "Public/Item/PickUp.h" },
@@ -169,6 +173,7 @@ struct Z_Construct_UClass_APickUp_Statics
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_PickupTimeline;
 	static const UECodeGen_Private::FBytePropertyParams NewProp_PickupItem_Underlying;
 	static const UECodeGen_Private::FEnumPropertyParams NewProp_PickupItem;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_PickupableTime;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_RotateSpeed;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_duration;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_ScaleCurve;
@@ -193,6 +198,7 @@ const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APickUp_Static
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APickUp_Statics::NewProp_PickupTimeline = { "PickupTimeline", nullptr, (EPropertyFlags)0x01240800000a001d, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APickUp, PickupTimeline), Z_Construct_UClass_UTimelineComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PickupTimeline_MetaData), NewProp_PickupTimeline_MetaData) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_APickUp_Statics::NewProp_PickupItem_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_APickUp_Statics::NewProp_PickupItem = { "PickupItem", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APickUp, PickupItem), Z_Construct_UEnum_KSHUnrealCPP_EItemCode, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PickupItem_MetaData), NewProp_PickupItem_MetaData) }; // 3628415129
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_APickUp_Statics::NewProp_PickupableTime = { "PickupableTime", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APickUp, PickupableTime), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PickupableTime_MetaData), NewProp_PickupableTime_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_APickUp_Statics::NewProp_RotateSpeed = { "RotateSpeed", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APickUp, RotateSpeed), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RotateSpeed_MetaData), NewProp_RotateSpeed_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_APickUp_Statics::NewProp_duration = { "duration", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APickUp, duration), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_duration_MetaData), NewProp_duration_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APickUp_Statics::NewProp_ScaleCurve = { "ScaleCurve", nullptr, (EPropertyFlags)0x0124080000000015, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APickUp, ScaleCurve), Z_Construct_UClass_UCurveFloat_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ScaleCurve_MetaData), NewProp_ScaleCurve_MetaData) };
@@ -205,6 +211,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_APickUp_S
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APickUp_Statics::NewProp_PickupTimeline,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APickUp_Statics::NewProp_PickupItem_Underlying,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APickUp_Statics::NewProp_PickupItem,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APickUp_Statics::NewProp_PickupableTime,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APickUp_Statics::NewProp_RotateSpeed,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APickUp_Statics::NewProp_duration,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APickUp_Statics::NewProp_ScaleCurve,
@@ -254,10 +261,10 @@ APickUp::~APickUp() {}
 struct Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Item_PickUp_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_APickUp, APickUp::StaticClass, TEXT("APickUp"), &Z_Registration_Info_UClass_APickUp, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APickUp), 193593078U) },
+		{ Z_Construct_UClass_APickUp, APickUp::StaticClass, TEXT("APickUp"), &Z_Registration_Info_UClass_APickUp, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APickUp), 3538172058U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Item_PickUp_h_1229616343(TEXT("/Script/KSHUnrealCPP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Item_PickUp_h_963649391(TEXT("/Script/KSHUnrealCPP"),
 	Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Item_PickUp_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Item_PickUp_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

@@ -10,6 +10,7 @@
 #include "Player/StatusComponent.h"
 #include "AnimNotify/AnimNotifyState_SectionJump.h"
 #include "Weapon/WeaponActor.h"
+#include "Weapon/UsedWeapon.h"
 #include "Item/PickUpable.h"
 #include "Item/PickUp.h"
 
@@ -34,6 +35,9 @@ AActionCharacter::AActionCharacter()
 	bUseControllerRotationYaw = false;	// 컨트롤러의 Yaw 회전 사용 안함
 	GetCharacterMovement()->bOrientRotationToMovement = true;	// 이동 방향으로 캐릭터 회전
 	GetCharacterMovement()->RotationRate = FRotator(0, 360, 0);
+
+	DropLocation = CreateDefaultSubobject<USceneComponent>(TEXT("DropLocation"));
+	DropLocation->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
@@ -124,6 +128,16 @@ void AActionCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 void AActionCharacter::AddItem_Implementation(EItemCode Code)
 {
 	UE_LOG(LogTemp, Warning, TEXT("%d"),Code);
+}
+
+void AActionCharacter::TestDropUsedWeapon()
+{
+	DropUsedWeapon();
+}
+
+void AActionCharacter::TestDropCurrentWeapon()
+{
+	DropCurrentWeapon();
 }
 
 void AActionCharacter::OnMoveInput(const FInputActionValue& InValue)
@@ -250,6 +264,7 @@ void AActionCharacter::OnBeginOverlap(AActor* OverlappedActor, AActor* OtherActo
 	
 	if (OtherActor->Implements<UPickUpable>())	// OtherActor가 IPickable인터페이스를 구현했는지 확인
 	{
+		UE_LOG(LogTemp, Warning, TEXT("UPickUpable"));
 		IPickUpable::Execute_OnPickUp(OtherActor,this);
 	}
 }
@@ -276,20 +291,47 @@ void AActionCharacter::SectionJumpForCombo()
 
 void AActionCharacter::OnAttackMontageEnded(UAnimMontage* Montage, bool binterrupt)
 {
-	UE_LOG(LogTemp, Warning, TEXT("OnWeaponUseEnded"));
-	
 	if (CurrentWeapon && !CurrentWeapon->CanAttack()) {
-		UE_LOG(LogTemp, Warning, TEXT("버리기"));
+		DropUsedWeapon();
+	}
+}
 
-		UE_LOG(LogTemp, Log, TEXT("다쓴 무기 버리기"));
-		TSubclassOf<AActor>* usedClass = UsedWeapon.Find(CurrentWeapon->GetWeaponID());
-		AActor* used = GetWorld()->SpawnActor<AActor>(
-			*usedClass,
-			GetActorLocation() + GetActorForwardVector() * 100.0f,
-			GetActorRotation());
+void AActionCharacter::DropUsedWeapon()
+{
+	UE_LOG(LogTemp, Warning, TEXT("OnWeaponUseEnded"));
+
 	
-		UPrimitiveComponent* primitive = used->FindComponentByClass<UPrimitiveComponent>();
-		primitive->AddImpulse((GetActorForwardVector() + GetActorUpVector()) * 250.0f, NAME_None, true);
+	UE_LOG(LogTemp, Warning, TEXT("버리기"));
 
+	UE_LOG(LogTemp, Log, TEXT("다쓴 무기 버리기"));
+	TSubclassOf<AUsedWeapon>* usedClass = UsedWeapons.Find(CurrentWeapon->GetWeaponID());
+
+	if (CurrentWeapon) {
+		if (usedClass) {
+			AUsedWeapon* used = GetWorld()->SpawnActor<AUsedWeapon>(
+				*usedClass,
+				DropLocation->GetComponentLocation(),
+				GetActorRotation());
+		}
+	}
+	
+	
+
+	
+
+	
+
+}
+
+void AActionCharacter::DropCurrentWeapon()
+{
+	if (CurrentWeapon && CurrentWeapon->GetWeaponID()!=EItemCode::BasicWeapon) {
+		if (TSubclassOf<APickUp>* pickupClass = PickUpWeapons.Find(CurrentWeapon->GetWeaponID())) {
+			APickUp* pickup = GetWorld()->SpawnActor<APickUp>(*pickupClass,
+				DropLocation->GetComponentLocation(), 
+				GetActorRotation());
+			FVector velocity = (GetActorForwardVector() + GetActorUpVector())*300.0f;
+			pickup->AddImpulse(velocity);
+		}
 	}
 }
