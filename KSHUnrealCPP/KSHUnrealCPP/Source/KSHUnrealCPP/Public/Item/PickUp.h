@@ -28,28 +28,13 @@ public:
 
 	virtual void OnPickUp_Implementation(AActor* Target) override;
 private:
-	UFUNCTION()
-	void OnPickupBeginOverlap(
-		UPrimitiveComponent* OverlappedComponent,
-		AActor* OtherActor,
-		UPrimitiveComponent* OtherComp,
-		int32 OtherBodyIndex,
-		bool bFromSweep,
-		const FHitResult& SweepResult);
 
 	UFUNCTION()
-	void OnScaleUpdate(float Value);
+	void OnTimeLineUpdate(float Value);
 
 	UFUNCTION()
-	void OnScaleFinish();
+	void OnTimeLineFinished();
 
-
-	UFUNCTION()
-	void OnLocationUpdate(float Value);
-
-	UFUNCTION()
-
-	void OnLocationFinish();
 protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")

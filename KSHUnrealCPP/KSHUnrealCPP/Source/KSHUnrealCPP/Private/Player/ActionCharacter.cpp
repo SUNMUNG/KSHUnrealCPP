@@ -114,6 +114,8 @@ void AActionCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	}
 }
 
+
+
 void AActionCharacter::AddItem_Implementation(EItemCode Code)
 {
 	UE_LOG(LogTemp, Warning, TEXT("%d"),Code);

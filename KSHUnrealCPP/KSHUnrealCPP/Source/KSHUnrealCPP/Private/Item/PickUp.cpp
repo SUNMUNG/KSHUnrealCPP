@@ -44,32 +44,20 @@ APickUp::APickUp()
 void APickUp::BeginPlay()
 {
 	Super::BeginPlay();	
-
-	if (PickupOverlap) {
-		PickupOverlap->OnComponentBeginOverlap.AddDynamic(this,&APickUp::OnPickupBeginOverlap);
-	}
 	
 	if (PickupTimeline)
 	{
-		if (ScaleCurve)
+		if (ScaleCurve && LocationCurve)
 		{
 			FOnTimelineFloat ScaleUpdateDelegate;
-			ScaleUpdateDelegate.BindUFunction(this, FName("OnScaleUpdate"));
+			ScaleUpdateDelegate.BindUFunction(this, FName("OnTimeLineUpdate"));
 			PickupTimeline->AddInterpFloat(ScaleCurve, ScaleUpdateDelegate);
 
 			FOnTimelineEvent ScaleFinishDelegate;
-			ScaleFinishDelegate.BindUFunction(this, FName("OnScaleFinish"));
+			ScaleFinishDelegate.BindUFunction(this, FName("OnTimeLineFinished"));
 			PickupTimeline->SetTimelineFinishedFunc(ScaleFinishDelegate);
 		}
 
-		if (LocationCurve) {
-			FOnTimelineFloat LocationUpdateDelegate;
-			LocationUpdateDelegate.BindUFunction(this, FName("OnLocationUpdate"));
-			PickupTimeline->AddInterpFloat(LocationCurve, LocationUpdateDelegate);
-			FOnTimelineEvent LocationFinishDelegate;
-			LocationFinishDelegate.BindUFunction(this, FName("OnLocationFinish"));
-			PickupTimeline->SetTimelineFinishedFunc(LocationFinishDelegate);
-		}
 
 		PickupTimeline->SetPlayRate(duration);
 	}
@@ -96,40 +84,34 @@ void APickUp::OnPickUp_Implementation(AActor* Target)
 
 }
 
-void APickUp::OnPickupBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void APickUp::OnTimeLineUpdate(float Value)
+{
+	float currentTime = PickupTimeline->GetPlaybackPosition();
+	
+
+	float distanceValue = Value;
+	float LocationValue = LocationCurve ? LocationCurve->GetFloatValue(currentTime) : 0.0f;
+	float scaleValue = ScaleCurve ? ScaleCurve->GetFloatValue(currentTime) : 1.0f;
+
+	TargetLocation = PickupOwner->GetActorLocation();
+	FVector NewLocation = FMath::Lerp(GetActorLocation(), TargetLocation, LocationValue);
+	SetActorLocation(NewLocation);
+
+	FVector NewScale = FVector::One() * Value;
+	Mesh->SetRelativeScale3D(NewScale);
+}
+
+void APickUp::OnTimeLineFinished()
 {
 	UE_LOG(LogTemp, Log, TEXT("Pickup Overlap"));
-}
-
-void APickUp::OnScaleUpdate(float Value)
-{
-	FVector NewScale = FVector::One() * Value;
-	SetActorScale3D(NewScale);
-}
-
-void APickUp::OnScaleFinish()
-{
 	// 자신을 먹은 대상에게 자기가 가지고 있는 무기를 알려줘야 함
-	if (PickupOwner.IsValid() && PickupOwner->Implements<UInventoryOwner>())
-	{
-		IInventoryOwner::Execute_AddItem(PickupOwner.Get(), PickupItem);
-	}
-}
-
-void APickUp::OnLocationUpdate(float Value)
-{
-	TargetLocation = PickupOwner->GetActorLocation();
-	FVector NewLocation = FMath::Lerp(GetActorLocation(), TargetLocation, Value);
-	SetActorLocation(NewLocation);
-}
-
-void APickUp::OnLocationFinish()
-{
 	if (PickupOwner.IsValid() && PickupOwner->Implements<UInventoryOwner>())
 	{
 		IInventoryOwner::Execute_AddItem(PickupOwner.Get(), PickupItem);
 		Destroy();
 	}
 }
+
+
 
 

@@ -18,6 +18,8 @@ class AActor;
 
 #define FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Weapon_WeaponActor_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execSetWeaponOwner); \
+	DECLARE_FUNCTION(execOnWeaponPickuped); \
+	DECLARE_FUNCTION(execOnAttack); \
 	DECLARE_FUNCTION(execAttackEnable); \
 	DECLARE_FUNCTION(execOnWeaponBeginOverlap);
 

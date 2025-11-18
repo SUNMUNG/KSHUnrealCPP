@@ -6,6 +6,7 @@
 #include "Weapon/WeaponActor.h"
 #include "ComsumeableWeapon.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWeaponUseEnded);
 /**
  * 
  */
@@ -14,4 +15,16 @@ class KSHUNREALCPP_API AComsumeableWeapon : public AWeaponActor
 {
 	GENERATED_BODY()
 	
+public:
+	virtual void OnAttack() override;
+
+	virtual void OnWeaponPickuped(AActionCharacter* InOwner) override;
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
+	int32 MaxUseCount = 10;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 RemainingUseCount = 10;
+
+	UPROPERTY(BlueprintAssignable,Category="Weapon")
+	FOnWeaponUseEnded OnWeaponUseEnded;
 };

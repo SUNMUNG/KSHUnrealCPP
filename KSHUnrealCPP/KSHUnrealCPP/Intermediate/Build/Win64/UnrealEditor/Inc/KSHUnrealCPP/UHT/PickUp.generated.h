@@ -9,20 +9,14 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
-class AActor;
-class UPrimitiveComponent;
-struct FHitResult;
 #ifdef KSHUNREALCPP_PickUp_generated_h
 #error "PickUp.generated.h already included, missing '#pragma once' in PickUp.h"
 #endif
 #define KSHUNREALCPP_PickUp_generated_h
 
 #define FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Item_PickUp_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
-	DECLARE_FUNCTION(execOnLocationFinish); \
-	DECLARE_FUNCTION(execOnLocationUpdate); \
-	DECLARE_FUNCTION(execOnScaleFinish); \
-	DECLARE_FUNCTION(execOnScaleUpdate); \
-	DECLARE_FUNCTION(execOnPickupBeginOverlap);
+	DECLARE_FUNCTION(execOnTimeLineFinished); \
+	DECLARE_FUNCTION(execOnTimeLineUpdate);
 
 
 #define FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Item_PickUp_h_15_INCLASS_NO_PURE_DECLS \

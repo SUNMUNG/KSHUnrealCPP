@@ -25,6 +25,12 @@ protected:
 public:
 	UFUNCTION(BlueprintCallable)
 	void AttackEnable(bool bEnable);
+	// 공격을 했을 때 실행되어야 할 함수
+	UFUNCTION(BlueprintCallable)
+	virtual void OnAttack() {}
+
+	UFUNCTION(BlueprintCallable)
+	virtual void OnWeaponPickuped(AActionCharacter* InOwner);
 
 	virtual void PostInitializeComponents() override;
 

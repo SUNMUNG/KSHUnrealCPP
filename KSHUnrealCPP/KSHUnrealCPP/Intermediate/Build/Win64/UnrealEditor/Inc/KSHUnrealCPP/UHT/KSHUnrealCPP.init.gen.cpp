@@ -10,6 +10,7 @@ void EmptyLinkFunctionForGeneratedCodeKSHUnrealCPP_init() {}
 	KSHUNREALCPP_API UFunction* Z_Construct_UDelegateFunction_KSHUnrealCPP_OnDie__DelegateSignature();
 	KSHUNREALCPP_API UFunction* Z_Construct_UDelegateFunction_KSHUnrealCPP_OnStaminaChanged__DelegateSignature();
 	KSHUNREALCPP_API UFunction* Z_Construct_UDelegateFunction_KSHUnrealCPP_OnStaminaEmpty__DelegateSignature();
+	KSHUNREALCPP_API UFunction* Z_Construct_UDelegateFunction_KSHUnrealCPP_OnWeaponUseEnded__DelegateSignature();
 	static FPackageRegistrationInfo Z_Registration_Info_UPackage__Script_KSHUnrealCPP;
 	FORCENOINLINE UPackage* Z_Construct_UPackage__Script_KSHUnrealCPP()
 	{
@@ -19,19 +20,20 @@ void EmptyLinkFunctionForGeneratedCodeKSHUnrealCPP_init() {}
 				(UObject* (*)())Z_Construct_UDelegateFunction_KSHUnrealCPP_OnDie__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_KSHUnrealCPP_OnStaminaChanged__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_KSHUnrealCPP_OnStaminaEmpty__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_KSHUnrealCPP_OnWeaponUseEnded__DelegateSignature,
 			};
 			static const UECodeGen_Private::FPackageParams PackageParams = {
 				"/Script/KSHUnrealCPP",
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x519ECE06,
-				0xEA0E1F16,
+				0xF41E4291,
+				0xE75CC847,
 				METADATA_PARAMS(0, nullptr)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_KSHUnrealCPP.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_KSHUnrealCPP.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_KSHUnrealCPP(Z_Construct_UPackage__Script_KSHUnrealCPP, TEXT("/Script/KSHUnrealCPP"), Z_Registration_Info_UPackage__Script_KSHUnrealCPP, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x519ECE06, 0xEA0E1F16));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_KSHUnrealCPP(Z_Construct_UPackage__Script_KSHUnrealCPP, TEXT("/Script/KSHUnrealCPP"), Z_Registration_Info_UPackage__Script_KSHUnrealCPP, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xF41E4291, 0xE75CC847));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

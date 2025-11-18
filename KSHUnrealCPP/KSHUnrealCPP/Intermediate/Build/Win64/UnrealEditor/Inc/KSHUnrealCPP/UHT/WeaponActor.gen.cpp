@@ -69,6 +69,41 @@ DEFINE_FUNCTION(AWeaponActor::execAttackEnable)
 }
 // End Class AWeaponActor Function AttackEnable
 
+// Begin Class AWeaponActor Function OnAttack
+struct Z_Construct_UFunction_AWeaponActor_OnAttack_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// \xea\xb3\xb5\xea\xb2\xa9\xec\x9d\x84 \xed\x96\x88\xec\x9d\x84 \xeb\x95\x8c \xec\x8b\xa4\xed\x96\x89\xeb\x90\x98\xec\x96\xb4\xec\x95\xbc \xed\x95\xa0 \xed\x95\xa8\xec\x88\x98\n" },
+#endif
+		{ "ModuleRelativePath", "Public/Weapon/WeaponActor.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "\xea\xb3\xb5\xea\xb2\xa9\xec\x9d\x84 \xed\x96\x88\xec\x9d\x84 \xeb\x95\x8c \xec\x8b\xa4\xed\x96\x89\xeb\x90\x98\xec\x96\xb4\xec\x95\xbc \xed\x95\xa0 \xed\x95\xa8\xec\x88\x98" },
+#endif
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AWeaponActor_OnAttack_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AWeaponActor, nullptr, "OnAttack", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020400, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AWeaponActor_OnAttack_Statics::Function_MetaDataParams), Z_Construct_UFunction_AWeaponActor_OnAttack_Statics::Function_MetaDataParams) };
+UFunction* Z_Construct_UFunction_AWeaponActor_OnAttack()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AWeaponActor_OnAttack_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AWeaponActor::execOnAttack)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->OnAttack();
+	P_NATIVE_END;
+}
+// End Class AWeaponActor Function OnAttack
+
 // Begin Class AWeaponActor Function OnWeaponBeginOverlap
 struct Z_Construct_UFunction_AWeaponActor_OnWeaponBeginOverlap_Statics
 {
@@ -115,6 +150,48 @@ DEFINE_FUNCTION(AWeaponActor::execOnWeaponBeginOverlap)
 	P_NATIVE_END;
 }
 // End Class AWeaponActor Function OnWeaponBeginOverlap
+
+// Begin Class AWeaponActor Function OnWeaponPickuped
+struct Z_Construct_UFunction_AWeaponActor_OnWeaponPickuped_Statics
+{
+	struct WeaponActor_eventOnWeaponPickuped_Parms
+	{
+		AActionCharacter* InOwner;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/Weapon/WeaponActor.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_InOwner;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AWeaponActor_OnWeaponPickuped_Statics::NewProp_InOwner = { "InOwner", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(WeaponActor_eventOnWeaponPickuped_Parms, InOwner), Z_Construct_UClass_AActionCharacter_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AWeaponActor_OnWeaponPickuped_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AWeaponActor_OnWeaponPickuped_Statics::NewProp_InOwner,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AWeaponActor_OnWeaponPickuped_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AWeaponActor_OnWeaponPickuped_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AWeaponActor, nullptr, "OnWeaponPickuped", nullptr, nullptr, Z_Construct_UFunction_AWeaponActor_OnWeaponPickuped_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AWeaponActor_OnWeaponPickuped_Statics::PropPointers), sizeof(Z_Construct_UFunction_AWeaponActor_OnWeaponPickuped_Statics::WeaponActor_eventOnWeaponPickuped_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020400, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AWeaponActor_OnWeaponPickuped_Statics::Function_MetaDataParams), Z_Construct_UFunction_AWeaponActor_OnWeaponPickuped_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_AWeaponActor_OnWeaponPickuped_Statics::WeaponActor_eventOnWeaponPickuped_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AWeaponActor_OnWeaponPickuped()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AWeaponActor_OnWeaponPickuped_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AWeaponActor::execOnWeaponPickuped)
+{
+	P_GET_OBJECT(AActionCharacter,Z_Param_InOwner);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->OnWeaponPickuped(Z_Param_InOwner);
+	P_NATIVE_END;
+}
+// End Class AWeaponActor Function OnWeaponPickuped
 
 // Begin Class AWeaponActor Function SetWeaponOwner
 struct Z_Construct_UFunction_AWeaponActor_SetWeaponOwner_Statics
@@ -164,7 +241,9 @@ void AWeaponActor::StaticRegisterNativesAWeaponActor()
 	UClass* Class = AWeaponActor::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
 		{ "AttackEnable", &AWeaponActor::execAttackEnable },
+		{ "OnAttack", &AWeaponActor::execOnAttack },
 		{ "OnWeaponBeginOverlap", &AWeaponActor::execOnWeaponBeginOverlap },
+		{ "OnWeaponPickuped", &AWeaponActor::execOnWeaponPickuped },
 		{ "SetWeaponOwner", &AWeaponActor::execSetWeaponOwner },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -208,7 +287,9 @@ struct Z_Construct_UClass_AWeaponActor_Statics
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_AWeaponActor_AttackEnable, "AttackEnable" }, // 1141799300
+		{ &Z_Construct_UFunction_AWeaponActor_OnAttack, "OnAttack" }, // 2073633509
 		{ &Z_Construct_UFunction_AWeaponActor_OnWeaponBeginOverlap, "OnWeaponBeginOverlap" }, // 4269070589
+		{ &Z_Construct_UFunction_AWeaponActor_OnWeaponPickuped, "OnWeaponPickuped" }, // 2496345771
 		{ &Z_Construct_UFunction_AWeaponActor_SetWeaponOwner, "SetWeaponOwner" }, // 1409579831
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
@@ -268,10 +349,10 @@ AWeaponActor::~AWeaponActor() {}
 struct Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Weapon_WeaponActor_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AWeaponActor, AWeaponActor::StaticClass, TEXT("AWeaponActor"), &Z_Registration_Info_UClass_AWeaponActor, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWeaponActor), 2543103219U) },
+		{ Z_Construct_UClass_AWeaponActor, AWeaponActor::StaticClass, TEXT("AWeaponActor"), &Z_Registration_Info_UClass_AWeaponActor, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWeaponActor), 3732899763U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Weapon_WeaponActor_h_3484982822(TEXT("/Script/KSHUnrealCPP"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Weapon_WeaponActor_h_3498243534(TEXT("/Script/KSHUnrealCPP"),
 	Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Weapon_WeaponActor_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_KGA_Documents_Unreal_Projects_KSHUnrealCPP07_KSHUnrealCPP_KSHUnrealCPP_KSHUnrealCPP_Source_KSHUnrealCPP_Public_Weapon_WeaponActor_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
