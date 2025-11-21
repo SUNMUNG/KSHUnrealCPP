@@ -31,6 +31,10 @@ public:
 	// 무기 자체를 활성화/비활성화 하는 함수(비지빌리티, 충돌 등등)
 	UFUNCTION(BlueprintCallable)
 	void WeaponActivate(bool bActivate);
+	UFUNCTION(BlueprintCallable)
+	void WeaponSlashEffectActivate();
+	UFUNCTION(BlueprintCallable)
+	void WeaponSlashEffectDeActivate();
 
 	// 공격을 활성화/비활성화 하는 함수(컬리전 켜고 끄기)
 	UFUNCTION(BlueprintCallable)
@@ -60,6 +64,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<class UCapsuleComponent> WeaponCollision = nullptr;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	TObjectPtr<class UNiagaraComponent> WeaponSlashEffect = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	EItemCode WeaponID = EItemCode::BasicWeapon;

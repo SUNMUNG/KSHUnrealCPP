@@ -2,6 +2,7 @@
 
 
 #include "Player/ActionAnimInstance.h"
+#include "Player/ActionCharacter.h"
 #include "GameFramework/PawnMovementComponent.h"
 
 void UActionAnimInstance::NativeInitializeAnimation()
@@ -12,12 +13,17 @@ void UActionAnimInstance::NativeInitializeAnimation()
 	if (ownerPawn)
 	{
 		OwnerMovementComponent = ownerPawn->GetMovementComponent();
+		OwnerWeapon = Cast<AActionCharacter>(ownerPawn)->GetCurrentWeapon();
 	}
 }
 
 void UActionAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 {
 	Super::NativeUpdateAnimation(DeltaSeconds);
+	
+	if (TryGetPawnOwner()) {
+		OwnerWeapon = Cast<AActionCharacter>(TryGetPawnOwner())->GetCurrentWeapon();
+	}
 	//TryGetPawnOwner()->GetVelocity().Size(); // Tick이나 Update같이 빠르게 반복되는 곳에서는 불필요한 중복 실행은 방지해야한다.
 
 	if (OwnerMovementComponent.IsValid())
