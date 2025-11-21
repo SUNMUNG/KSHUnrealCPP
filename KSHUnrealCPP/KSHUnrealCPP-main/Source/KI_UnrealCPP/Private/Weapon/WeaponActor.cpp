@@ -85,6 +85,8 @@ void AWeaponActor::WeaponActivate(bool bActivate)
 		//SetActorEnableCollision(false);
 		//SetActorTickEnabled(false);
 
+		TrailEnable(false);
+		AttackEnable(false);
 		OnWeaponDeactivate();
 	}
 
@@ -106,16 +108,6 @@ void AWeaponActor::WeaponActivate(bool bActivate)
 	//}
 }
 
-void AWeaponActor::WeaponSlashEffectActivate()
-{
-	UE_LOG(LogTemp, Log, TEXT("aasaa"));
-	WeaponSlashEffect->Activate(true);
-}
-
-void AWeaponActor::WeaponSlashEffectDeActivate()
-{
-	WeaponSlashEffect->Deactivate();
-}
 
 void AWeaponActor::AttackEnable(bool bEnable)
 {
@@ -126,6 +118,16 @@ void AWeaponActor::AttackEnable(bool bEnable)
 	else
 	{
 		WeaponCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
+}
+
+void AWeaponActor::TrailEnable(bool bEnable)
+{
+	if (bEnable) {
+		WeaponSlashEffect->Activate(true);
+	}
+	else {
+		WeaponSlashEffect->Deactivate();
 	}
 }
 

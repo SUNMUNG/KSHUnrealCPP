@@ -22,9 +22,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Movement")
 	float Speed = 0.0f;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Weapon")
-	TWeakObjectPtr<class AWeaponActor> OwnerWeapon = nullptr;
-
 private:
 	TWeakObjectPtr<const UPawnMovementComponent> OwnerMovementComponent = nullptr;
 

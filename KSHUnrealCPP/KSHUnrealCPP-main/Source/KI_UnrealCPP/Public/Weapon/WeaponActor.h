@@ -31,14 +31,14 @@ public:
 	// 무기 자체를 활성화/비활성화 하는 함수(비지빌리티, 충돌 등등)
 	UFUNCTION(BlueprintCallable)
 	void WeaponActivate(bool bActivate);
-	UFUNCTION(BlueprintCallable)
-	void WeaponSlashEffectActivate();
-	UFUNCTION(BlueprintCallable)
-	void WeaponSlashEffectDeActivate();
 
 	// 공격을 활성화/비활성화 하는 함수(컬리전 켜고 끄기)
 	UFUNCTION(BlueprintCallable)
 	void AttackEnable(bool bEnable);
+
+	UFUNCTION(BlueprintCallable)
+	void TrailEnable(bool bEnable);
+
 
 	// 공격을 했을 때 실행되어야 할 함수
 	UFUNCTION(BlueprintCallable)
