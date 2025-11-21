@@ -6,6 +6,8 @@
 #include "Player/ActionCharacter.h"
 #include "Player/StatusComponent.h"
 #include "NiagaraComponent.h"
+#include "NiagaraSystem.h"
+#include "NiagaraFunctionLibrary.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -40,11 +42,16 @@ void AWeaponActor::BeginPlay()
 
 void AWeaponActor::OnWeaponBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {	
+	DamageToTarget(OtherActor);
+}
+
+void AWeaponActor::DamageToTarget(AActor* InTarget)
+{
 	float finalDamage = Damage;
 	AController* instigator = nullptr;
 	if (WeaponOwner.IsValid())
 	{
-		if (WeaponOwner == OtherActor)	// 내가 오버랩될 때는 무시
+		if (WeaponOwner == InTarget)	// 내가 오버랩될 때는 무시
 			return;
 
 		if (WeaponOwner->GetStatusComponent() != nullptr)	// 스테이터스 컴포넌트가 있으면 공격력 가져와서 추가하기
@@ -54,7 +61,50 @@ void AWeaponActor::OnWeaponBeginOverlap(AActor* OverlappedActor, AActor* OtherAc
 		instigator = WeaponOwner->GetController();
 	}
 	//UE_LOG(LogTemp, Log, TEXT("Overlapped : %s"), *OtherActor->GetName());
-	UGameplayStatics::ApplyDamage(OtherActor, finalDamage, instigator, this, DamageType);
+	UGameplayStatics::ApplyDamage(InTarget, finalDamage, instigator, this, DamageType);
+}
+
+void AWeaponActor::DamageToArea()
+{
+	float finalDamage = Damage;
+	AController* instigator = nullptr;
+	if (WeaponOwner.IsValid())
+	{
+		if (WeaponOwner->GetStatusComponent() != nullptr)	// 스테이터스 컴포넌트가 있으면 공격력 가져와서 추가하기
+		{
+			finalDamage += WeaponOwner->GetStatusComponent()->GetAttackPower();
+		}
+		instigator = WeaponOwner->GetController();
+	}
+	finalDamage *= 2.0f;
+
+	FVector center = FMath::Lerp(WeaponMesh->GetSocketLocation(TEXT("BladeBase")), WeaponMesh->GetSocketLocation(TEXT("BladeTip")), 0.5f);
+
+	if (AreaAttackEffect) {
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+			GetWorld(),
+			AreaAttackEffect,
+			center,
+			WeaponOwner->GetActorRotation());
+	}
+
+	TArray<AActor*> IgnoreActors = { WeaponOwner.Get(),this};
+	UGameplayStatics::ApplyRadialDamageWithFalloff(
+		GetWorld(),
+		finalDamage,
+		Damage,
+		center,
+		AreaInnerRadius,
+		AreaOutterRadius,
+		Falloff,
+		DamageType,
+		IgnoreActors,
+		this, WeaponOwner->GetController(),
+		ECollisionChannel::ECC_Pawn
+		);
+
+	DrawDebugSphere(GetWorld(), center, AreaInnerRadius, 12, FColor::Red, false, 3.0f, 0, 1.0f);
+	DrawDebugSphere(GetWorld(), center, AreaOutterRadius, 12, FColor::Green, false, 3.0f, 0, 1.0f);
 }
 
 void AWeaponActor::WeaponActivate(bool bActivate)
@@ -129,6 +179,11 @@ void AWeaponActor::TrailEnable(bool bEnable)
 	else {
 		WeaponSlashEffect->Deactivate();
 	}
+}
+
+FVector AWeaponActor::GetCollisionLocation()
+{
+	return WeaponCollision->GetSocketLocation(NAME_None);
 }
 
 void AWeaponActor::OnWeaponPickuped(int InCount)

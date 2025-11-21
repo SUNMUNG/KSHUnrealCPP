@@ -6,6 +6,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Player/ResourceComponent.h"
 #include "Player/StatusComponent.h"
 #include "Player/WeaponManagerComponent.h"
@@ -69,6 +70,13 @@ void AActionCharacter::BeginPlay()
 
 	// 캐릭터에 다른 액터가 오버랩되었을 때 실행하기 위한 바인딩
 	OnActorBeginOverlap.AddDynamic(this, &AActionCharacter::OnBeginOverlap);
+}
+
+float AActionCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+
+	UE_LOG(LogTemp, Log, TEXT("%.1f"), DamageAmount);
+	return DamageAmount;
 }
 
 // Called every frame
@@ -144,6 +152,14 @@ void AActionCharacter::OnWeaponTrailEnable(bool bEnable)
 	if (CurrentWeapon.IsValid())
 	{
 		CurrentWeapon->TrailEnable(bEnable);
+	}
+}
+
+void AActionCharacter::OnAreaAttack()
+{
+	UE_LOG(LogTemp, Log, TEXT("OnAreaAttack"));
+	if (CurrentWeapon.IsValid()) {
+		CurrentWeapon->DamageToArea();
 	}
 }
 

@@ -29,6 +29,7 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -46,6 +47,10 @@ public:
 	void OnAttackEnable(bool bEnable);
 
 	void OnWeaponTrailEnable(bool bEnable);
+
+	void OnAreaAttack();
+
+
 	TWeakObjectPtr<class AWeaponActor> GetCurrentWeapon() const{ return CurrentWeapon; }
 	UResourceComponent* GetResourceComponent() { return Resource; }
 	UStatusComponent* GetStatusComponent() { return Status; }
@@ -64,6 +69,7 @@ public:
 	void TestDropCurrentWeapon();
 
 protected:
+
 	// 이동 방향 입력 받기
 	void OnMoveInput(const FInputActionValue& InValue);
 

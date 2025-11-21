@@ -28,6 +28,12 @@ protected:
 	virtual void OnWeaponDeactivate() {};
 
 public:	
+	UFUNCTION(BlueprintCallable)
+	void DamageToTarget(AActor* InTarget);
+
+	UFUNCTION(BlueprintCallable)
+	void DamageToArea();
+
 	// 무기 자체를 활성화/비활성화 하는 함수(비지빌리티, 충돌 등등)
 	UFUNCTION(BlueprintCallable)
 	void WeaponActivate(bool bActivate);
@@ -39,6 +45,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void TrailEnable(bool bEnable);
 
+	//실습 연습용
+	FVector GetCollisionLocation();
 
 	// 공격을 했을 때 실행되어야 할 함수
 	UFUNCTION(BlueprintCallable)
@@ -74,8 +82,20 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
 	float Damage = 10.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data|Area")
+	float AreaInnerRadius = 100.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data|Area")
+	float AreaOutterRadius = 300.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data|Area")
+	float Falloff = 1.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data|Area")
 	TSubclassOf<UDamageType> DamageType = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data|Area")
+	TObjectPtr<class UNiagaraSystem> AreaAttackEffect = nullptr;
 
 private:
 	TWeakObjectPtr<AActionCharacter> WeaponOwner = nullptr;
