@@ -50,7 +50,7 @@ public:
 
 	void OnAreaAttack();
 
-
+	void OnCameraShake();
 	TWeakObjectPtr<class AWeaponActor> GetCurrentWeapon() const{ return CurrentWeapon; }
 	UResourceComponent* GetResourceComponent() { return Resource; }
 	UStatusComponent* GetStatusComponent() { return Status; }
@@ -118,7 +118,8 @@ protected:
 	TObjectPtr<USceneComponent> DropLocation = nullptr;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player|Weapon")
 	TObjectPtr<class UWeaponManagerComponent> WeaponManager = nullptr;
-
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player|Camera")
+	TSubclassOf<class UCameraShakeBase> CameraShake1 = nullptr;
 
 	// 인풋 액션들
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")

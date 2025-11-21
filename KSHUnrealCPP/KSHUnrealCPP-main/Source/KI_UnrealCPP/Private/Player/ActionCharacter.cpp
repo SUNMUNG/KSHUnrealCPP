@@ -6,6 +6,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
+#include"Camera/CameraShakeBase.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/ResourceComponent.h"
 #include "Player/StatusComponent.h"
@@ -83,7 +84,7 @@ float AActionCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Damag
 void AActionCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 	SpendRunStamina(DeltaTime);
 }
 
@@ -160,7 +161,22 @@ void AActionCharacter::OnAreaAttack()
 	UE_LOG(LogTemp, Log, TEXT("OnAreaAttack"));
 	if (CurrentWeapon.IsValid()) {
 		CurrentWeapon->DamageToArea();
+		OnCameraShake();
 	}
+}
+
+void AActionCharacter::OnCameraShake()
+{
+	
+	if (CameraShake1) {
+		UE_LOG(LogTemp, Warning, TEXT("CameraShake1있음"));
+		APlayerController* playercontroller = Cast<APlayerController>(GetController());
+		playercontroller->PlayerCameraManager->StartCameraShake(CameraShake1, 1.0f, ECameraShakePlaySpace::CameraLocal, FRotator());
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("CameraShake1없음"));
+	}
+	
 }
 
 void AActionCharacter::TestDropUsedWeapon()
