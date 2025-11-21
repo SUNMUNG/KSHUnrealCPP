@@ -31,11 +31,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Mesh")
 	TObjectPtr<USkeletalMeshComponent> Mesh = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Mesh")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Collision")
 	TObjectPtr<class UCapsuleComponent> Collision = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Mesh")
-	TObjectPtr<class UWidgetComponent> DamageWidget = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "DamageText")
+	TSubclassOf<AActor> DamageText = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Helath")
 	float Health =  200.0f;

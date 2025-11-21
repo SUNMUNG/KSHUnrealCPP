@@ -13,6 +13,8 @@ UCLASS()
 class KI_UNREALCPP_API UPracticeDamageWidget : public UUserWidget
 {
 	GENERATED_BODY()
+public:
+	void SetDamageText(float DamageAmount);
 protected:
 	virtual void NativeConstruct() override;
 
@@ -25,4 +27,6 @@ protected:
 
 	UPROPERTY(Transient, EditAnywhere, BlueprintReadOnly, Category = "FloatingDamageText", meta = (BindWidgetAnim))
 	TWeakObjectPtr<class UWidgetAnimation> FloatingDamageText;
+
+	FText Damage;
 };

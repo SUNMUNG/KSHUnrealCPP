@@ -4,6 +4,7 @@
 #include "Enemy/TestDummyEnemy.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/WidgetComponent.h"
+#include "UI/PracticeDamageWidget.h"
 
 // Sets default values
 ATestDummyEnemy::ATestDummyEnemy()
@@ -19,9 +20,6 @@ ATestDummyEnemy::ATestDummyEnemy()
 	Mesh->SetupAttachment(Collision); 
 	Mesh->SetCollisionProfileName(TEXT("NoCollision"));
 
-	DamageWidget= CreateDefaultSubobject<UWidgetComponent>(TEXT("DamageWidget"));
-	DamageWidget->SetupAttachment(Collision);
-
 	
 }
 
@@ -32,11 +30,16 @@ float ATestDummyEnemy::TakeDamage(float DamageAmount, FDamageEvent const& Damage
 	UE_LOG(LogTemp, Warning, TEXT("%.1f 데미지를 받음"), DamageAmount);
 	if (Health > 0) {
 		Health -= DamageAmount;
-		DamageWidget->SetHiddenInGame(false);
-		SetDamageText(DamageAmount, GetActorLocation());
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+		AActor* SpawnedActor = GetWorld()->SpawnActor<AActor>(DamageText, GetActorLocation()+FVector(0,0,150.0f), FRotator(), SpawnParams);
+		//SetDamageText(DamageAmount, GetActorLocation());
+
+		Cast<UPracticeDamageWidget>(SpawnedActor)->SetDamageText(DamageAmount);
 	}
 	else {
 		Health = 0;
+		Destroy();
 	}
 	UE_LOG(LogTemp, Warning, TEXT("%.1f 남은 적 체력"), Health);
 	return 0.0f;
@@ -46,7 +49,6 @@ float ATestDummyEnemy::TakeDamage(float DamageAmount, FDamageEvent const& Damage
 void ATestDummyEnemy::BeginPlay()
 {
 	Super::BeginPlay();
-	DamageWidget->SetHiddenInGame(true);
 	
 }
 
