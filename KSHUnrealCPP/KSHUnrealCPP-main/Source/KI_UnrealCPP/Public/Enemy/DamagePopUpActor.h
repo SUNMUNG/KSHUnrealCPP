@@ -27,7 +27,7 @@ protected:
 	virtual void OnConstruction(const FTransform& Transform) override;
 public:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Setting", meta = (ClampMin = "1.0"))
-	float Lifetime=1.5f;
+	float Lifetime=1.1f;
 protected:
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "DamageWidget")

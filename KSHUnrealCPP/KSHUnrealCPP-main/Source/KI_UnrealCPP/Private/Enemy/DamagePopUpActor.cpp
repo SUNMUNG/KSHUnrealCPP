@@ -66,7 +66,10 @@ void ADamagePopUpActor::BeginPlay()
 void ADamagePopUpActor::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
-
+	if (DamageWidgetComponent) {
+		UE_LOG(LogTemp, Warning, TEXT("DamageWidget valid"));
+		DamageWidget = Cast<UDamageWidget>(DamageWidgetComponent->GetUserWidgetObject());
+	}
 }
 
 

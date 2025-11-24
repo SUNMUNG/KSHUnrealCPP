@@ -6,7 +6,7 @@
 #include "GameFramework/Pawn.h"
 #include "EnemyPawn.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class KI_UNREALCPP_API AEnemyPawn : public APawn
 {
 	GENERATED_BODY()

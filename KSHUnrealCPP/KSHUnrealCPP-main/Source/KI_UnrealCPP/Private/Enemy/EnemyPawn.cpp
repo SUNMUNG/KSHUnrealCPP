@@ -3,6 +3,7 @@
 
 #include "Enemy/EnemyPawn.h"
 #include "Framework/DamagePopupSubsystem.h"
+#include "Framework/PracticeEnemyCountSubSystem.h"
 #include "Enemy/DamagePopUpActor.h"
 // Sets default values
 AEnemyPawn::AEnemyPawn()
@@ -23,13 +24,18 @@ void AEnemyPawn::BeginPlay()
 {
 	Super::BeginPlay();
 	OnTakeAnyDamage.AddDynamic(this,&AEnemyPawn::OnTakeDamage);
+
+	UPracticeEnemyCountSubSystem* EnemycountSystem = GetWorld()->GetSubsystem<UPracticeEnemyCountSubSystem>();
+	EnemycountSystem->ShowEnemyCount();
 }
 
 void AEnemyPawn::OnTakeDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
 	UDamagePopupSubsystem* popupSystem = GetWorld()->GetSubsystem<UDamagePopupSubsystem>();
-
+	UPracticeEnemyCountSubSystem* EnemycountSystem = GetWorld()->GetSubsystem<UPracticeEnemyCountSubSystem>();
 	popupSystem->ShowDamagePopup(Damage, PopupLocation->GetComponentLocation());
+	
+	EnemycountSystem->ShowEnemyCount();
 	//UE_LOG(LogTemp, Warning, TEXT("OnTakeDamage함수"));
 	//ADamagePopUpActor* actor = GetWorld()->SpawnActor<ADamagePopUpActor>(
 	//	DamagePopupclass,
