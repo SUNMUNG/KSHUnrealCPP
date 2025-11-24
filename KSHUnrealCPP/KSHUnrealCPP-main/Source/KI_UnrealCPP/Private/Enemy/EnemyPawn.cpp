@@ -2,12 +2,13 @@
 
 
 #include "Enemy/EnemyPawn.h"
+#include "Framework/DamagePopupSubsystem.h"
 #include "Enemy/DamagePopUpActor.h"
 // Sets default values
 AEnemyPawn::AEnemyPawn()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
@@ -26,27 +27,22 @@ void AEnemyPawn::BeginPlay()
 
 void AEnemyPawn::OnTakeDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-	UE_LOG(LogTemp, Warning, TEXT("OnTakeDamage함수"));
-	ADamagePopUpActor* actor = GetWorld()->SpawnActor<ADamagePopUpActor>(
-		DamagePopupclass,
-		PopupLocation->GetComponentToWorld()
-	);
+	UDamagePopupSubsystem* popupSystem = GetWorld()->GetSubsystem<UDamagePopupSubsystem>();
 
-	if (actor) {
-		actor->PopupActivate(Damage);
-		UE_LOG(LogTemp, Warning, TEXT("actor 스폰"));
-	}
-	else {
-		UE_LOG(LogTemp, Warning, TEXT("actor 스폰 실패"));
-	}
-}
+	popupSystem->ShowDamagePopup(Damage, PopupLocation->GetComponentLocation());
+	//UE_LOG(LogTemp, Warning, TEXT("OnTakeDamage함수"));
+	//ADamagePopUpActor* actor = GetWorld()->SpawnActor<ADamagePopUpActor>(
+	//	DamagePopupclass,
+	//	PopupLocation->GetComponentToWorld()
+	//);
 
-
-// Called every frame
-void AEnemyPawn::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
+	//if (actor) {
+	//	actor->PopupActivate(Damage);
+	//	//UE_LOG(LogTemp, Warning, TEXT("actor 스폰"));
+	//}
+	//else {
+	//	//UE_LOG(LogTemp, Warning, TEXT("actor 스폰 실패"));
+	//}
 }
 
 // Called to bind functionality to input

@@ -3,6 +3,7 @@
 
 #include "Enemy/DamagePopUpActor.h"
 #include "Widget/DamageWidget.h"
+#include "Framework/DamagePopupSubsystem.h"
 #include "Components/WidgetComponent.h"
 
 // Sets default values
@@ -38,7 +39,17 @@ void ADamagePopUpActor::PopupActivate(float Damage)
 
 void ADamagePopUpActor::PopupDeActivate()
 {
-	Destroy();
+	if (UWorld* world = GetWorld()) {
+		if (UDamagePopupSubsystem* PoolSystem = world->GetSubsystem<UDamagePopupSubsystem>()) {
+			PoolSystem->ReturnToPool(this);
+		}
+		else {
+			Destroy();
+		}
+	}
+	else {
+		Destroy();
+	}
 }
 
 
