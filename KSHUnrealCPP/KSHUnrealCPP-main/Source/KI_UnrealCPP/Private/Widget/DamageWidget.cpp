@@ -11,18 +11,50 @@ void UDamageWidget::SetDamageTextBlock(float Damage)
 	}	
 }
 
+//void UDamageWidget::PlayPopupAnimation()
+//{
+//	if (PopupAnimation) {
+//
+//		// 2. 처음부터 다시 재생
+//		PlayAnimation(PopupAnimation, 0.0f, 1, EUMGSequencePlayMode::Forward, 1.0f);
+//		
+//		UE_LOG(LogTemp, Warning, TEXT("PlayPopupAnimation"));
+//	}
+//	else {
+//		UE_LOG(LogTemp, Warning, TEXT("PopupAnimation null"));
+//	}
+//
+//}
 void UDamageWidget::PlayPopupAnimation()
 {
-	if (PopupAnimation) {
+	if (PopupAnimation)
+	{
 		StopAnimation(PopupAnimation);
 
-		// 2. 처음부터 다시 재생
-		PlayAnimation(PopupAnimation, 0.0f, 1, EUMGSequencePlayMode::Forward, 1.0f);
-		
-		UE_LOG(LogTemp, Warning, TEXT("PlayPopupAnimation"));
+		// ★ [핵심] 준비 운동하는 동안에는 눈에 안 보이게 숨깁니다.
+		// 이렇게 하면 "멈춰있는 0.01초"가 화면에 안 그려져서 뚝 끊기는 느낌이 사라집니다.
+		SetRenderOpacity(0.0f);
+
+		if (UWorld* World = GetWorld())
+		{
+			FTimerDelegate TimerDelegate;
+			TimerDelegate.BindWeakLambda(this, [this]()
+				{
+					if (IsValid(this) && PopupAnimation)
+					{
+						// ★ [핵심] 이제 보여주면서 동시에 재생합니다.
+						SetRenderOpacity(1.0f);
+						PlayAnimation(PopupAnimation, 0.0f, 1, EUMGSequencePlayMode::Forward, 1.0f);
+					}
+				});
+
+			FTimerHandle TempHandle;
+			// 시간을 0.01초로 더 줄임 (반응 속도 UP)
+			World->GetTimerManager().SetTimer(TempHandle, TimerDelegate, 0.01f, false);
+		}
 	}
-	else {
+	else
+	{
 		UE_LOG(LogTemp, Warning, TEXT("PopupAnimation null"));
 	}
-
 }
