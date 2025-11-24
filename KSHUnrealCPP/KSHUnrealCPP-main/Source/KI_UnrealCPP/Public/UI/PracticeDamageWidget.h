@@ -14,6 +14,7 @@ class KI_UNREALCPP_API UPracticeDamageWidget : public UUserWidget
 {
 	GENERATED_BODY()
 public:
+	UFUNCTION(BlueprintCallable)
 	void SetDamageText(float DamageAmount);
 protected:
 	virtual void NativeConstruct() override;

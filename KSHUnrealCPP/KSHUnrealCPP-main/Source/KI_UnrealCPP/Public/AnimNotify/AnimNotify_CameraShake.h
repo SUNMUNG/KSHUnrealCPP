@@ -18,7 +18,18 @@ public:
 	virtual void Notify(USkeletalMeshComponent* MeshComp,
 		UAnimSequenceBase* Animation) override;
 
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "CameraShake")
+	TSubclassOf<class UCameraShakeBase> CameraShake = nullptr;
+	
+
 private:
 	FVector WeaponCenterLocation;
+
+
 	TWeakObjectPtr<class AActionCharacter> OwnerCharacter = nullptr;
+
+	TWeakObjectPtr<APlayerCameraManager> CameraManager = nullptr;
+
+
 };

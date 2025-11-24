@@ -26,16 +26,27 @@ ATestDummyEnemy::ATestDummyEnemy()
 float ATestDummyEnemy::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
 	Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
-
+	Damage = DamageAmount;
 	UE_LOG(LogTemp, Warning, TEXT("%.1f 데미지를 받음"), DamageAmount);
 	if (Health > 0) {
 		Health -= DamageAmount;
 		FActorSpawnParameters SpawnParams;
 		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-		AActor* SpawnedActor = GetWorld()->SpawnActor<AActor>(DamageText, GetActorLocation()+FVector(0,0,150.0f), FRotator(), SpawnParams);
-		//SetDamageText(DamageAmount, GetActorLocation());
 
-		Cast<UPracticeDamageWidget>(SpawnedActor)->SetDamageText(DamageAmount);
+		if (DamageText) {
+			AActor* SpawnedActor = GetWorld()->SpawnActor<AActor>(DamageText, GetActorLocation() + FVector(0, 0, 150.0f), FRotator(), SpawnParams);
+
+			UWidgetComponent* widget = SpawnedActor->FindComponentByClass<UWidgetComponent>();
+
+			if (widget) {
+				
+				Cast<UPracticeDamageWidget>(widget->GetUserWidgetObject())->SetDamageText(DamageAmount);
+			}
+			//Cast<UPracticeDamageWidget>(SpawnedActor)->SetDamageText(DamageAmount);
+		}
+		
+		
+		
 	}
 	else {
 		Health = 0;

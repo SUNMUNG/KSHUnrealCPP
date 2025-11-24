@@ -34,6 +34,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Collision")
 	TObjectPtr<class UCapsuleComponent> Collision = nullptr;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "CameraShake")
+	float Damage = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "DamageText")
 	TSubclassOf<AActor> DamageText = nullptr;
