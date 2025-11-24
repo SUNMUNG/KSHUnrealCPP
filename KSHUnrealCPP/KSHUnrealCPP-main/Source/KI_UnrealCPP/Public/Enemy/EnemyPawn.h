@@ -19,11 +19,24 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+private:
+	UFUNCTION()
+	void OnTakeDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType,
+		class AController* InstigatedBy, AActor* DamageCauser);
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+protected:UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "component")
+	TObjectPtr<UStaticMeshComponent> Mesh = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "component")
+	TObjectPtr<USceneComponent> PopupLocation = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Popup")
+	TSubclassOf<class ADamagePopUpActor> DamagePopupclass = nullptr;
+private:
 
 };
