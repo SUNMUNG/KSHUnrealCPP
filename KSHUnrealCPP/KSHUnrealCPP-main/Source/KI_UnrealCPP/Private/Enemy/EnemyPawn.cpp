@@ -4,6 +4,7 @@
 #include "Enemy/EnemyPawn.h"
 #include "Framework/DamagePopupSubsystem.h"
 #include "Framework/PracticeEnemyCountSubSystem.h"
+#include "Framework/PickupFactorySubsystem.h"
 #include "Framework/EnemyTrackingSubsystem.h"
 #include "Data/DropItemDataTableRow.h"
 #include "Player/ResourceComponent.h"
@@ -61,20 +62,10 @@ void AEnemyPawn::OnTakeDamage(AActor* DamagedActor, float Damage, const UDamageT
 
 		popupSystem->ShowDamagePopup(Damage, PopupLocation->GetComponentLocation());
 
-		//EnemycountSystem->ShowEnemyCount();
 		Resource->AddHealth(-Damage);
 		UE_LOG(LogTemp, Warning, TEXT("%.1f"), Damage);
 		bInvincible = true;
 		LastDamage = Damage;
-
-		/*FTimerDelegate resetInvincibleDelegate = FTimerDelegate::CreateWeakLambda(
-			this,
-			[this]()
-			{
-				bInvincible = false;
-			}
-		);*/
-
 
 		GetWorldTimerManager().ClearTimer(InvincibleTimer);
 		GetWorldTimerManager().SetTimer(
@@ -86,21 +77,6 @@ void AEnemyPawn::OnTakeDamage(AActor* DamagedActor, float Damage, const UDamageT
 			false
 		);
 	}
-
-	
-	//UE_LOG(LogTemp, Warning, TEXT("OnTakeDamage함수"));
-	//ADamagePopUpActor* actor = GetWorld()->SpawnActor<ADamagePopUpActor>(
-	//	DamagePopupclass,
-	//	PopupLocation->GetComponentToWorld()
-	//);
-
-	//if (actor) {
-	//	actor->PopupActivate(Damage);
-	//	//UE_LOG(LogTemp, Warning, TEXT("actor 스폰"));
-	//}
-	//else {
-	//	//UE_LOG(LogTemp, Warning, TEXT("actor 스폰 실패"));
-	//}
 }
 
 void AEnemyPawn::OnDie()
@@ -111,39 +87,55 @@ void AEnemyPawn::OnDie()
 
 void AEnemyPawn::DropItems()
 {
-	if (DropItemTable) {
-		APickup* pickup = nullptr;
-		TMap<FName, uint8*>RowMap = DropItemTable->GetRowMap();
 
-		UE_LOG(LogTemp, Warning, TEXT("DropItemTable존재"));
+	UPickupFactorySubsystem* pickupFactory = GetWorld()->GetSubsystem<UPickupFactorySubsystem>();
 
-		float totalweight = 0.0f;
+	if (pickupFactory) {
+		if (DropItemTable) {
+			APickup* pickup = nullptr;
+			TMap<FName, uint8*>RowMap = DropItemTable->GetRowMap();
+
+			UE_LOG(LogTemp, Warning, TEXT("DropItemTable존재"));
+
+			FDropItemDataTableRow* row = nullptr;
+			float totalweight = 0.0f;
 
 
-		for (const auto& element : RowMap) {
-			FDropItemDataTableRow* row = (FDropItemDataTableRow*)element.Value;
-			totalweight += row->DropRate;
-		}
-		float RandomSelect = FMath::FRandRange(0, totalweight);
-		float CurrentWeight = 0.0f;
+			for (const auto& element : RowMap) {
+				row = (FDropItemDataTableRow*)element.Value;
+				totalweight += row->DropRate;
+			}
+			float RandomSelect = FMath::FRandRange(0, totalweight);
+			float CurrentWeight = 0.0f;
 
-		for (const auto& element : RowMap) {
-			FDropItemDataTableRow* row = (FDropItemDataTableRow*)element.Value;
-			CurrentWeight += row->DropRate;
-			if (RandomSelect < CurrentWeight) {
-				pickup = GetWorld()->SpawnActor<APickup>(row->DropItemClass, GetActorLocation() + FVector::UpVector * 200.0f,
-					GetActorRotation());
-				break;
+			for (const auto& element : RowMap)
+			{
+				row = (FDropItemDataTableRow*)element.Value;
+
+				if (!row) continue;
+
+				CurrentWeight += row->DropRate;
+
+				// 누적 확률이 랜덤 값에 도달하면 -> 이 row가 당첨!
+				if (RandomSelect <= CurrentWeight)
+				{
+					// 당첨된 행(Row) 안에 있는 아이템(DropItemInfo)을 드랍 요청
+					for (const auto& pair : row->DropItemInfo)
+					{
+						// pair.Key는 EItemCode
+						pickupFactory->DropPickupItem(pair.Key, DropItemTable, GetActorLocation());
+					}
+
+					// 찾았으니 종료
+					break;
+				}
 			}
 		}
-
-		if (pickup) {
-			UE_LOG(LogTemp, Warning, TEXT("pickup존재"));
-		}
-		else {
-			UE_LOG(LogTemp, Warning, TEXT("pickup존재X"));
-		}
 	}
+
+
+
+	
 }
 
 

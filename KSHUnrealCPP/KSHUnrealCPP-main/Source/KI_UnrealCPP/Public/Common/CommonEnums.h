@@ -10,6 +10,7 @@
 UENUM(BlueprintType)
 enum class EItemCode : uint8
 {
+	None			UMETA(DisplayName = "없음"),
 	BasicWeapon		UMETA(DisplayName = "기본무기(도끼)"),
 	Sword			UMETA(DisplayName = "대검"),
 	Hammer			UMETA(DisplayName = "망치"),

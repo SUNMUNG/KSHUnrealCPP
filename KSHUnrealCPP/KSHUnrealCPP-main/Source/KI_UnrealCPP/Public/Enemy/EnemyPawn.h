@@ -6,7 +6,7 @@
 #include "GameFramework/Pawn.h"
 #include "Common/CommonStructures.h"
 #include "EnemyPawn.generated.h"
-
+class UDataTable;
 UCLASS(Blueprintable)
 class KI_UNREALCPP_API AEnemyPawn : public APawn
 {
@@ -31,6 +31,10 @@ private:
 
 	
 public:	
+	inline class UDataTable* GetDropTable() {
+		return DropItemTable.Get();
+	}
+	
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -57,5 +61,5 @@ protected:
 	TArray<FItemDropInfo> DropItemInfo;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "DropItems")
-	TObjectPtr<class UDataTable> DropItemTable=nullptr;
+	TObjectPtr<UDataTable> DropItemTable=nullptr;
 };
