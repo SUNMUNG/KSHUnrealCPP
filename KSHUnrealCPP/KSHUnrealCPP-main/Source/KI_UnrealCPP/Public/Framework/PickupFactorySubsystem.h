@@ -20,8 +20,10 @@ class KI_UNREALCPP_API UPickupFactorySubsystem : public UWorldSubsystem
 	GENERATED_BODY()
 	
 public:
+	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
+	
+
 	void DropPickupItem(EItemCode ItemCode, UDataTable* DropTable,FVector SpawnLocation);
 private:
-
-
+	TObjectPtr<class UDataTable> DropItemTable = nullptr;
 };

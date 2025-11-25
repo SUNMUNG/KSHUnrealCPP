@@ -100,7 +100,7 @@ void AEnemyPawn::DropItems()
 			FDropItemDataTableRow* row = nullptr;
 			float totalweight = 0.0f;
 
-
+			
 			for (const auto& element : RowMap) {
 				row = (FDropItemDataTableRow*)element.Value;
 				totalweight += row->DropRate;
@@ -116,17 +116,13 @@ void AEnemyPawn::DropItems()
 
 				CurrentWeight += row->DropRate;
 
-				// 누적 확률이 랜덤 값에 도달하면 -> 이 row가 당첨!
+				
 				if (RandomSelect <= CurrentWeight)
 				{
-					// 당첨된 행(Row) 안에 있는 아이템(DropItemInfo)을 드랍 요청
 					for (const auto& pair : row->DropItemInfo)
 					{
-						// pair.Key는 EItemCode
 						pickupFactory->DropPickupItem(pair.Key, DropItemTable, GetActorLocation());
 					}
-
-					// 찾았으니 종료
 					break;
 				}
 			}
