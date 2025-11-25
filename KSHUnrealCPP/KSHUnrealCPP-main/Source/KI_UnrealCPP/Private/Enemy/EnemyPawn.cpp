@@ -5,7 +5,9 @@
 #include "Framework/DamagePopupSubsystem.h"
 #include "Framework/PracticeEnemyCountSubSystem.h"
 #include "Framework/EnemyTrackingSubsystem.h"
+#include "Data/DropItemDataTableRow.h"
 #include "Player/ResourceComponent.h"
+#include "Item/Pickup.h"
 #include "Enemy/DamagePopUpActor.h"
 // Sets default values
 AEnemyPawn::AEnemyPawn()
@@ -103,13 +105,58 @@ void AEnemyPawn::OnTakeDamage(AActor* DamagedActor, float Damage, const UDamageT
 
 void AEnemyPawn::OnDie()
 {
+	DropItems();
 	Destroy();
 }
+
+void AEnemyPawn::DropItems()
+{
+	if (DropItemTable) {
+		APickup* pickup = nullptr;
+		TMap<FName, uint8*>RowMap = DropItemTable->GetRowMap();
+
+		UE_LOG(LogTemp, Warning, TEXT("DropItemTable존재"));
+
+		float totalweight = 0.0f;
+
+
+		for (const auto& element : RowMap) {
+			FDropItemDataTableRow* row = (FDropItemDataTableRow*)element.Value;
+			totalweight += row->DropRate;
+		}
+		float RandomSelect = FMath::FRandRange(0, totalweight);
+		float CurrentWeight = 0.0f;
+
+		for (const auto& element : RowMap) {
+			FDropItemDataTableRow* row = (FDropItemDataTableRow*)element.Value;
+			CurrentWeight += row->DropRate;
+			if (RandomSelect < CurrentWeight) {
+				pickup = GetWorld()->SpawnActor<APickup>(row->DropItemClass, GetActorLocation() + FVector::UpVector * 200.0f,
+					GetActorRotation());
+				break;
+			}
+		}
+
+		if (pickup) {
+			UE_LOG(LogTemp, Warning, TEXT("pickup존재"));
+		}
+		else {
+			UE_LOG(LogTemp, Warning, TEXT("pickup존재X"));
+		}
+	}
+}
+
+
 
 // Called to bind functionality to input
 void AEnemyPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AEnemyPawn::TestDropItem()
+{
+	DropItems();
 }
 

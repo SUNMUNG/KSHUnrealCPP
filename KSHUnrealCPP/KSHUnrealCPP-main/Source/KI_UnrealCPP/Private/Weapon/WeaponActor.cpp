@@ -79,6 +79,7 @@ void AWeaponActor::DamageToArea()
 	finalDamage *= 2.0f;
 
 	FVector center = FMath::Lerp(WeaponMesh->GetSocketLocation(TEXT("BladeBase")), WeaponMesh->GetSocketLocation(TEXT("BladeTip")), 0.5f);
+	center.Z += 20.0f;
 
 	if (AreaAttackEffect) {
 		UNiagaraFunctionLibrary::SpawnSystemAtLocation(
@@ -89,7 +90,7 @@ void AWeaponActor::DamageToArea()
 	}
 
 	TArray<AActor*> IgnoreActors = { WeaponOwner.Get(),this};
-	UGameplayStatics::ApplyRadialDamageWithFalloff(
+	bool isHit = UGameplayStatics::ApplyRadialDamageWithFalloff(
 		GetWorld(),
 		finalDamage,
 		Damage,
@@ -100,8 +101,9 @@ void AWeaponActor::DamageToArea()
 		DamageType,
 		IgnoreActors,
 		this, WeaponOwner->GetController(),
-		ECollisionChannel::ECC_Pawn
+		ECollisionChannel::ECC_Visibility
 		);
+	UE_LOG(LogTemp, Warning, TEXT("isHit: %d"), isHit);
 
 	DrawDebugSphere(GetWorld(), center, AreaInnerRadius, 12, FColor::Red, false, 3.0f, 0, 1.0f);
 	DrawDebugSphere(GetWorld(), center, AreaOutterRadius, 12, FColor::Green, false, 3.0f, 0, 1.0f);
