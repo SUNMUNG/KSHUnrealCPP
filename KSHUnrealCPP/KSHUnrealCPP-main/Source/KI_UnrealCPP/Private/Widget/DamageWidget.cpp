@@ -14,14 +14,7 @@ void UDamageWidget::SetDamageTextBlock(float Damage)
 void UDamageWidget::PlayPopupAnimation()
 {
 	if (PopupAnimation) {
-
-		// 2. 처음부터 다시 재생
 		PlayAnimation(PopupAnimation, 0.0f, 1, EUMGSequencePlayMode::Forward, 1.0f);
-		
-		UE_LOG(LogTemp, Warning, TEXT("PlayPopupAnimation"));
-	}
-	else {
-		UE_LOG(LogTemp, Warning, TEXT("PopupAnimation null"));
 	}
 
 }

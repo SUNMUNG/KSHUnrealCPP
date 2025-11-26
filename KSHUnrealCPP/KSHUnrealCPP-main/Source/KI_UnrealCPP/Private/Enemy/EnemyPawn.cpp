@@ -88,6 +88,43 @@ void AEnemyPawn::OnDie()
 void AEnemyPawn::DropItems()
 {
 
+	//if (DropItemTable)
+	//{
+	//	//TArray<FDropItemData_TableRow*> AllRows;
+	//	//DropItemTable->GetAllRows<FDropItemData_TableRow>(TEXT("Rows"), AllRows);
+
+	//	APickup* pickup = nullptr;
+	//	TMap<FName, uint8*> RowMap = DropItemTable->GetRowMap();
+
+	//	// 중복으로 당첨 가능(아무것도 안나올 수도 있음)
+	//	for (const auto& element : RowMap)
+	//	{
+	//		pickup = nullptr;
+	//		FDropItemDataTableRow* row = (FDropItemDataTableRow*)element.Value;
+	//		if (FMath::FRand() <= row->DropRate)
+	//		{
+	//			//pickup = GetWorld()->SpawnActor<APickup>(
+	//			//	row->DropItemClass,
+	//			//	GetActorLocation() + FVector::UpVector * 200.0f,
+	//			//	GetActorRotation());
+
+	//		
+	//			pickup = GetWorld()->GetSubsystem<UPickupFactorySubsystem>()->SpawnPickup(
+	//				,
+	//				GetActorLocation() + FVector::UpVector * 200.0f,
+	//				GetActorRotation()
+	//			);
+	//		}
+	//		if (pickup)
+	//		{
+	//			UE_LOG(LogTemp, Log, TEXT("Drop Success : %s"), *pickup->GetName());
+	//		}
+	//		else
+	//		{
+	//			UE_LOG(LogTemp, Log, TEXT("Drop empty"));
+	//		}
+	//	}
+	//}
 	UPickupFactorySubsystem* pickupFactory = GetWorld()->GetSubsystem<UPickupFactorySubsystem>();
 
 	if (pickupFactory) {
@@ -124,16 +161,13 @@ void AEnemyPawn::DropItems()
 					for (const auto& pair : row->DropItemInfo)
 					{
 						//pickupFactory->DropPickupItem(pair.Key, DropItemTable, GetActorLocation());
-						pickupFactory->SpawnPickup(pair.Key, GetActorLocation(), GetActorRotation());
+						pickupFactory->SpawnPickup(pair.Key, GetActorLocation()+FVector(0,0,200.0f), GetActorRotation());
 					}
 					break;
 				}
 			}
 		}
 	}
-
-
-
 	
 }
 

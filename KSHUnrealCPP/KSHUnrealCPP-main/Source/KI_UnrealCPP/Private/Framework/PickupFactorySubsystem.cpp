@@ -52,6 +52,9 @@ APickup* UPickupFactorySubsystem::SpawnPickup(EItemCode InCode, FVector InLocati
 	if (PickupClasses.Contains(InCode)) {
 		if (UWorld* world = GetWorld()) {
 			spawnedPickup = world->SpawnActor<APickup>(PickupClasses[InCode], InLocation, InRotator);
+
+			FVector velocity = FMath::VRand() * 300.0f;
+			spawnedPickup->AddImpulse(velocity);
 		}
 	}
 	else {

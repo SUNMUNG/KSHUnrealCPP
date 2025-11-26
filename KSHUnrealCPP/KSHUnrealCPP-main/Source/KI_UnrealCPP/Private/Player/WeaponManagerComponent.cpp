@@ -24,6 +24,15 @@ UWeaponManagerComponent::UWeaponManagerComponent()
 	ItemCodeToWeaponCode.Add(EItemCode::BasicWeapon,EWeaponCode::BasicWeapon);
 	ItemCodeToWeaponCode.Add(EItemCode::Sword, EWeaponCode::Sword);
 	ItemCodeToWeaponCode.Add(EItemCode::Hammer, EWeaponCode::Hammer);
+
+	/*const UEnum* EnumPtr = StaticEnum<EWeaponCode>();
+	if (EnumPtr) {
+		int weaponTypeCount = EnumPtr->NumEnums() - 1;
+		if ((WeaponCodeToItemCode.Num() != weaponTypeCount)
+			|| (ItemCodeToWeaponCode.Num() != weaponTypeCount)) {
+			UE_LOG(LogTemp, Error, TEXT("WeaponCode : %d와 ItemCode : %d의 매칭이 잘못된 것 같습니다. weaponTypeCount : %d"), WeaponCodeToItemCode.Num(), ItemCodeToWeaponCode.Num(), weaponTypeCount);
+		}
+	}*/
 }
 
 AWeaponActor* UWeaponManagerComponent::GetEquippedWeapon(EWeaponCode InType) const
