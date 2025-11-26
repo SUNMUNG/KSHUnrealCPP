@@ -15,7 +15,7 @@ enum class EItemCode : uint8
 	Sword			UMETA(DisplayName = "대검"),
 	Hammer			UMETA(DisplayName = "망치"),
 };
-
+UENUM(BlueprintType)
 enum class EWeaponCode : uint8
 {
 	None			UMETA(DisplayName = "없음"),
