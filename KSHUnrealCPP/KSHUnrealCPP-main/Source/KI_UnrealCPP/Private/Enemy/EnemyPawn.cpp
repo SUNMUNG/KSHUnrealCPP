@@ -6,7 +6,7 @@
 #include "Framework/PracticeEnemyCountSubSystem.h"
 #include "Framework/PickupFactorySubsystem.h"
 #include "Framework/EnemyTrackingSubsystem.h"
-#include "Data/DropItemDataTableRow.h"
+#include "Data/DataTableRow.h"
 #include "Player/ResourceComponent.h"
 #include "Item/Pickup.h"
 #include "Enemy/DamagePopUpActor.h"
@@ -119,9 +119,12 @@ void AEnemyPawn::DropItems()
 				
 				if (RandomSelect <= CurrentWeight)
 				{
+
+					//pickupFactory->SpawnPickup(row->PickupCode, GetActorLocation(), GetActorRotation());
 					for (const auto& pair : row->DropItemInfo)
 					{
-						pickupFactory->DropPickupItem(pair.Key, DropItemTable, GetActorLocation());
+						//pickupFactory->DropPickupItem(pair.Key, DropItemTable, GetActorLocation());
+						pickupFactory->SpawnPickup(pair.Key, GetActorLocation(), GetActorRotation());
 					}
 					break;
 				}

@@ -16,6 +16,11 @@ class KI_UNREALCPP_API UPickupFactorySettings : public UDeveloperSettings
 	GENERATED_BODY()
 	
 public:
+	//실습 연습
 	UPROPERTY(Config, EditAnywhere, Category = "PickUpFactory")
 	TSoftObjectPtr<UDataTable> DropItemTable = nullptr;
+
+	//실습 풀이
+	UPROPERTY(Config, EditAnywhere, Category = "Pickup Data")
+	TSoftObjectPtr<UDataTable> PickupDataTable = nullptr;
 };

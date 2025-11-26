@@ -105,8 +105,8 @@ void AWeaponActor::DamageToArea()
 		);
 	UE_LOG(LogTemp, Warning, TEXT("isHit: %d"), isHit);
 
-	DrawDebugSphere(GetWorld(), center, AreaInnerRadius, 12, FColor::Red, false, 3.0f, 0, 1.0f);
-	DrawDebugSphere(GetWorld(), center, AreaOutterRadius, 12, FColor::Green, false, 3.0f, 0, 1.0f);
+	//DrawDebugSphere(GetWorld(), center, AreaInnerRadius, 12, FColor::Red, false, 3.0f, 0, 1.0f);
+	//DrawDebugSphere(GetWorld(), center, AreaOutterRadius, 12, FColor::Green, false, 3.0f, 0, 1.0f);
 }
 
 void AWeaponActor::WeaponActivate(bool bActivate)

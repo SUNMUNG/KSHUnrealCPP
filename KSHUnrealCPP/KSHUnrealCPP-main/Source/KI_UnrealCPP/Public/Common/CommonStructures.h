@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Common/CommonEnums.h"
 #include "CommonStructures.generated.h"
 
 USTRUCT(BlueprintType)
