@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Item/Pickup.h"
 #include "Item/ConsumableItem.h"
+#include "Data/ConsumableDataAsset.h"
 #include "PickupConsume.generated.h"
 
 /**
@@ -18,7 +19,10 @@ class KI_UNREALCPP_API APickupConsume : public APickup
 public:
 	virtual void OnPickupComplete_Implementation() override;
 
-	virtual void OnConsume() {};
+	virtual void OnConsume();
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
+	TObjectPtr<UConsumableDataAsset> DataAsset = nullptr;
 	//virtual void OnConsume_Implementation(AActor* Target) override;
 
 };
