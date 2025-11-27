@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Item/Pickup.h"
+#include "Item/ConsumableItem.h"
 #include "PickupConsume.generated.h"
 
 /**
@@ -14,4 +15,10 @@ class KI_UNREALCPP_API APickupConsume : public APickup
 {
 	GENERATED_BODY()
 	
+public:
+	virtual void OnPickupComplete_Implementation() override;
+
+	virtual void OnConsume() {};
+	//virtual void OnConsume_Implementation(AActor* Target) override;
+
 };

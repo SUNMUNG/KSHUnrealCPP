@@ -14,4 +14,9 @@ class KI_UNREALCPP_API APickupItem : public APickup
 {
 	GENERATED_BODY()
 	
+	virtual void OnPickupComplete_Implementation() override;
+
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "DataAsset")
+	TObjectPtr<class UItemDataAsset> ItemDataAsset = nullptr;
 };

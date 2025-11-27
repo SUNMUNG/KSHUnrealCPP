@@ -59,6 +59,7 @@ void APickup::BeginPlay()
 			PickupTimeline->SetTimelineFinishedFunc(FinishedDelegate);
 		}
 
+		
 		PickupTimeline->SetPlayRate(1/Duration);
 	}
 
@@ -99,7 +100,6 @@ void APickup::OnPickup_Implementation(AActor* Target)
 
 void APickup::OnPickupComplete_Implementation()
 {
-	UE_LOG(LogTemp, Warning, TEXT("APickup : OnPickupComplete_Implementation 실행 "));
 	Destroy();
 }
 

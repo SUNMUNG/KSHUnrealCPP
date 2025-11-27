@@ -127,6 +127,30 @@ void AActionCharacter::AddWeapon_Implementation(EWeaponCode Code, int32 UseCount
 	CurrentWeapon->OnWeaponPickuped(UseCount);
 }
 
+void AActionCharacter::AddMoney_Implementation(int32 Income)
+{
+	UE_LOG(LogTemp, Warning, TEXT("%d 만큼의 돈이 추가"), Income);
+}
+
+void AActionCharacter::RemoveMoney_Implementation(int32 Expense)
+{
+	UE_LOG(LogTemp, Warning, TEXT("%d 만큼의 돈이 삭제"), Expense);
+}
+
+void AActionCharacter::HealHealth_Implementation(float InHeal)
+{
+	if (Resource) {
+		Resource->AddHealth(InHeal);
+	}
+}
+
+void AActionCharacter::DamageHealth_Implementation(float InDamage)
+{
+	if (Resource) {
+		Resource->AddHealth(-InDamage);
+	}
+}
+
 void AActionCharacter::EquipWeapon(EWeaponCode WeaponCode)
 {
 	if (CurrentWeapon.IsValid())
