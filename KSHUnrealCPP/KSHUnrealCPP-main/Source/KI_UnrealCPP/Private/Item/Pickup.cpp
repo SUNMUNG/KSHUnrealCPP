@@ -35,7 +35,7 @@ APickup::APickup()
 	PickupOverlap->SetCollisionProfileName(TEXT("NoCollision"));
 
 	Effect = CreateDefaultSubobject<UNiagaraComponent>(TEXT("Effect"));
-	Effect->SetupAttachment(BaseRoot);
+	Effect->SetupAttachment(Mesh);
 
 	PickupTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("PickupTimeline"));
 
@@ -97,6 +97,12 @@ void APickup::OnPickup_Implementation(AActor* Target)
 	}
 }
 
+void APickup::OnPickupComplete_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("APickup : OnPickupComplete_Implementation 실행 "));
+	Destroy();
+}
+
 void APickup::AddImpulse(FVector& Velocity)
 {
 	BaseRoot->AddImpulse(Velocity, NAME_None, true);
@@ -124,11 +130,6 @@ void APickup::OnTimelineUpdate(float Value)
 
 void APickup::OnTimelineFinished()
 {
-	// 자신을 먹은 대상에게 자기가 가지고 있는 무기를 알려줘야 함
-	if (PickupOwner.IsValid() && PickupOwner->Implements<UInventoryOwner>())
-	{
-		IInventoryOwner::Execute_AddItem(PickupOwner.Get(), PickupItem, PickupCount);
-	}
-	Destroy();	// 자기 자신 삭제
+	Execute_OnPickupComplete(this);
 }
 

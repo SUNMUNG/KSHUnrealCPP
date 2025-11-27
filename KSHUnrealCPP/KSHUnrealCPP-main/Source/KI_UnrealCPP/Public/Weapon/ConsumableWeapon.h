@@ -36,8 +36,4 @@ protected:
 	// 남은 사용회수
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	int32 RemainingUseCount = 10;
-
-	// 무기를 다 사용했을 때 실행되는 델리게이트(현재 사용 안함)
-	UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Category = "Weapon")
-	FOnConsume OnWeaponUseEnded;
 };
