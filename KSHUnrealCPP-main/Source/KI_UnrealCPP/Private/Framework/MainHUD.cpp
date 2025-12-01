@@ -3,6 +3,8 @@
 
 #include "Framework/MainHUD.h"
 #include "Blueprint/UserWidget.h"
+#include "Player/ActionPlayerController.h"
+
 
 void AMainHUD::BeginPlay()
 {
@@ -10,10 +12,18 @@ void AMainHUD::BeginPlay()
 
 	if (MainWidgetClass)
 	{
-		UUserWidget* widget = CreateWidget<UUserWidget>(GetWorld(), MainWidgetClass);
-		if (widget)
+		MainWidgetInstance = CreateWidget<UMainHudWidget>(GetWorld(), MainWidgetClass);
+		if (MainWidgetInstance)
 		{
-			widget->AddToViewport();
+			MainWidgetInstance->AddToViewport();
+			AActionPlayerController* pc = Cast<AActionPlayerController>(GetOwningPlayerController());
+
+			if (pc) {
+				pc->setMainHudWidget(MainWidgetInstance);
+				FScriptDelegate delegate;
+				delegate.BindUFunction(pc, "CloseInventoryWidget");
+				MainWidgetInstance->AddToInventoryCloseDelegate(delegate);
+			}
 		}
 	}
 }

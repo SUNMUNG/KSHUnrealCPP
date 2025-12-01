@@ -104,8 +104,6 @@ void AActionCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 			});
 		enhanced->BindAction(IA_Roll, ETriggerEvent::Triggered, this, &AActionCharacter::OnRollInput);
 		enhanced->BindAction(IA_Attack, ETriggerEvent::Triggered, this, &AActionCharacter::OnAttackInput);
-
-		//enhanced->BindAction(IA_InventoryOnOff, ETriggerEvent::Triggered, this, &AActionCharacter::OnInventory);
 	}
 }
 
@@ -247,6 +245,8 @@ void AActionCharacter::OnMoveInput(const FInputActionValue& InValue)
 
 void AActionCharacter::OnRollInput(const FInputActionValue& InValue)
 {
+	if (GetController()->IsMoveInputIgnored()) return;
+
 	if (AnimInstance.IsValid())
 	{
 		if (!AnimInstance->IsAnyMontagePlaying() 
@@ -264,6 +264,7 @@ void AActionCharacter::OnRollInput(const FInputActionValue& InValue)
 
 void AActionCharacter::OnAttackInput(const FInputActionValue& InValue)
 {
+	if (GetController()->IsMoveInputIgnored()) return;
 	// 애님 인스턴스가 있고, 스태미너도 충분하고, 현재 무기가 공격을 할 수 있어야 한다.
 	if (AnimInstance.IsValid() && Resource->HasEnoughStamina(AttackStaminaCost)
 		&& (CurrentWeapon.IsValid() && CurrentWeapon->CanAttack())) 

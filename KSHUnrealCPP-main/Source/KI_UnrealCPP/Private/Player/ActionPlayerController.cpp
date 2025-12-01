@@ -5,6 +5,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubSystems.h"
 #include "InputMappingContext.h"
+#include "Framework/MainHUD.h"
 
 void AActionPlayerController::BeginPlay()
 {
@@ -19,6 +20,7 @@ void AActionPlayerController::BeginPlay()
 
 	PlayerCameraManager->ViewPitchMax = VewPitchMax;
 	PlayerCameraManager->ViewPitchMin = VewPitchMin;
+	
 }
 
 void AActionPlayerController::SetupInputComponent()
@@ -30,6 +32,8 @@ void AActionPlayerController::SetupInputComponent()
 	{
 		//UE_LOG(LogTemp, Log, TEXT("바인드 성공"));
 		enhanced->BindAction(IA_Look, ETriggerEvent::Triggered, this, &AActionPlayerController::OnLookInput);
+
+		enhanced->BindAction(IA_InventoryOnOff, ETriggerEvent::Started, this, &AActionPlayerController::OnInventoryOnOff);
 	}
 }
 
@@ -39,4 +43,57 @@ void AActionPlayerController::OnLookInput(const FInputActionValue& InValue)
 	//UE_LOG(LogTemp, Log, TEXT("OnLookInput : %s"), *lookAxis.ToString());
 	AddYawInput(lookAxis.X);
 	AddPitchInput(lookAxis.Y);
+}
+
+void AActionPlayerController::OnInventoryOnOff()
+{
+	if (MainHudWidget.IsValid()) {
+		if (MainHudWidget->GetOpenState() == EOpenState::Open) {
+			CloseInventoryWidget();
+		}
+		else if(MainHudWidget->GetOpenState() == EOpenState::Close){
+			OpenInventoryWidget();
+		}
+		else {
+			UE_LOG(LogTemp, Error, TEXT("OnInventoryOnOff : EOpenState 이상함 "));
+		}
+	}
+	
+}
+
+void AActionPlayerController::OpenInventoryWidget()
+{
+	if (MainHudWidget.IsValid()) {
+		MainHudWidget->OpenInventory();
+		
+		FInputModeGameAndUI inputmode;
+		inputmode.SetWidgetToFocus(MainHudWidget->TakeWidget());
+		inputmode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+		inputmode.SetHideCursorDuringCapture(false);
+		inputmode.ShouldFlushInputOnViewportFocus();
+		SetInputMode(inputmode);
+
+		bShowMouseCursor = true;
+		SetIgnoreMoveInput(true);
+		SetIgnoreLookInput(true);
+		
+		//SetPause(true);
+	}
+}
+
+void AActionPlayerController::CloseInventoryWidget()
+{
+	if (MainHudWidget.IsValid()) {
+		MainHudWidget->CloseInventory();
+
+		FInputModeGameOnly inputmode;
+		inputmode.SetConsumeCaptureMouseDown(true);
+		SetInputMode(inputmode);
+
+		bShowMouseCursor = false;
+		SetIgnoreMoveInput(false);
+		SetIgnoreLookInput(false);
+
+		//SetPause(false);
+	}
 }

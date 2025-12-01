@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "UI/Inventory/InventoryWidget.h"
 #include "MainHudWidget.generated.h"
 
 
@@ -27,7 +28,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "UI|Inventory")
 	void CloseInventory();
 
+	void AddToInventoryCloseDelegate(const FScriptDelegate& Delegate) {
+		if (Inventory) {
+			Inventory->OnInventoryCloseRequested.Add(Delegate);
+		}
+	}
+
 	inline EOpenState GetOpenState() const { return OpenState; }
+
 protected:
 	virtual void NativeConstruct() override;
 
@@ -42,7 +50,7 @@ protected:
 	TObjectPtr<class UResourceBarWidget> StaminaBar = nullptr;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory", meta = (BindWidget))
-	TObjectPtr<class UInventoryWidget> Inventory = nullptr;
+	TObjectPtr<UInventoryWidget> Inventory = nullptr;
 
 private:
 	EOpenState OpenState = EOpenState::Close;

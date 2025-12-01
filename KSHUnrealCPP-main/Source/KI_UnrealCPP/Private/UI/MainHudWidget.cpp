@@ -4,7 +4,6 @@
 #include "UI/MainHudWidget.h"
 #include "Player/ActionCharacter.h"
 #include "Player/ResourceComponent.h"
-#include "UI/Inventory/InventoryWidget.h"
 #include "UI/ResourceBarWidget.h"
 
 
@@ -22,8 +21,10 @@ void UMainHudWidget::NativeConstruct()
 			StaminaBar->RefreshWidget(resource->GetCurrentStamina(), resource->GetMaxStamina());
 		}
 
+		CloseInventory();
+
 		if (UInventoryComponent* inventoryComponent = player->GetInventoryComponent()) {
-			Inventory->OnInventoryCloseRequested.AddDynamic(this, &UMainHudWidget::CloseInventory);
+			//Inventory->OnInventoryCloseRequested.AddDynamic(this, &UMainHudWidget::CloseInventory);
 		}
 	
 	}
@@ -37,6 +38,7 @@ void UMainHudWidget::OpenInventory()
 {
 	if (Inventory) {
 		Inventory->SetVisibility(ESlateVisibility::Visible);
+		OpenState = EOpenState::Open;
 	}
 	
 }
@@ -45,5 +47,6 @@ void UMainHudWidget::CloseInventory()
 {
 	if (Inventory) {
 		Inventory->SetVisibility(ESlateVisibility::Hidden);
+		OpenState = EOpenState::Close;
 	}
 }

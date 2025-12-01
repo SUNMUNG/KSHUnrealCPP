@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/HUD.h"
+#include "UI/MainHudWidget.h"
 #include "MainHUD.generated.h"
 
 /**
@@ -14,12 +15,20 @@ class KI_UNREALCPP_API AMainHUD : public AHUD
 {
 	GENERATED_BODY()
 
+
+public:
+	inline UMainHudWidget* GetMainWidget() {
+		return MainWidgetInstance;
+	}
 protected:
 	virtual void BeginPlay() override;
 
 protected:
-	// MainWidgetClass는 UUserWidget의 파생 클래스 타입만 가능(객체가 아니라 타입을 저장한다)
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TSubclassOf<UUserWidget> MainWidgetClass = nullptr;
+	TSubclassOf<UMainHudWidget> MainWidgetClass = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TObjectPtr<UMainHudWidget> MainWidgetInstance = nullptr;
 	
 };
