@@ -104,6 +104,8 @@ void AActionCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 			});
 		enhanced->BindAction(IA_Roll, ETriggerEvent::Triggered, this, &AActionCharacter::OnRollInput);
 		enhanced->BindAction(IA_Attack, ETriggerEvent::Triggered, this, &AActionCharacter::OnAttackInput);
+
+		//enhanced->BindAction(IA_InventoryOnOff, ETriggerEvent::Triggered, this, &AActionCharacter::OnInventory);
 	}
 }
 
