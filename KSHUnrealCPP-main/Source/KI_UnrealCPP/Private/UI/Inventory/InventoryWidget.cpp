@@ -15,6 +15,7 @@ void UInventoryWidget::NativeConstruct()
 		CloseButton->OnClicked.AddDynamic(this, &UInventoryWidget::OnCloseClicked);
 	}
 
+	
 }
 
 void UInventoryWidget::InitializeInventoryWidget(UInventoryComponent* InventoryComponent)
@@ -23,12 +24,14 @@ void UInventoryWidget::InitializeInventoryWidget(UInventoryComponent* InventoryC
 		TargetInventory = InventoryComponent;
 		if (TargetInventory.IsValid()) {
 
+			//TargetInventory->OnItemChanged.AddDynamic(this, &UInventoryWidget::RefreshInventoryWidget);
+
 			if (SlotGridPanel->GetChildrenCount()!= TargetInventory->GetInventorySize()) {
 				UE_LOG(LogTemp, Warning, TEXT("인벤토리 컴포넌트 슬롯과 위젯 슬롯 크기가다릅니다."));
 				return;
 			}
 			int32 size = FMath::Min(SlotGridPanel->GetChildrenCount(), TargetInventory->GetInventorySize());
-
+			SlotWidgets.Empty(size);
 			for (int i = 0; i < TargetInventory->GetInventorySize(); i++) {
 				UE_LOG(LogTemp, Warning, TEXT("%d"), i);
 				FInvenSlot* slotData = TargetInventory->GetSlotData(i);

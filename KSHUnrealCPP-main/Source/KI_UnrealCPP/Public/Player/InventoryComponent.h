@@ -7,6 +7,7 @@
 #include "Data/ItemDataAsset.h"
 #include "InventoryComponent.generated.h"
 
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnItemChanged);
 
 USTRUCT(BlueprintType)
 struct FInvenSlot
@@ -88,6 +89,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	inline int32 GetInventorySize() const { return InventorySize; }
+
+	//UPROPERTY(BlueprintAssignable)
+	//FOnItemChanged OnItemChanged;
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")

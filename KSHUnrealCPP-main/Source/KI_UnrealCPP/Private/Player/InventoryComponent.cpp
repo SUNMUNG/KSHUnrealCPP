@@ -51,10 +51,12 @@ int32 UInventoryComponent::AddItem(UItemDataAsset* InItemData, int32 InCount)
 			SetItemAtIndex(emptyIndex, InItemData, amountToAdd);							// 결정된 추가량만큼 추가
 			remainingCount -= amountToAdd;	// remainingCount을 슬롯에 추가한만큼 감소
 		}
-
+		
 		// 같은 종류의 아이템이 들어있는 슬롯과 빈슬롯을 모두 채우고도 남은 아이템이 있다. => 남아있는 remainingCount 리턴
 	}
+	//OnItemChanged.Broadcast();
 	return remainingCount;
+	
 }
 
 void UInventoryComponent::SetItemAtIndex(int32 InSlotIndex, UItemDataAsset* InItemData, int32 InCount)
@@ -65,6 +67,7 @@ void UInventoryComponent::SetItemAtIndex(int32 InSlotIndex, UItemDataAsset* InIt
 				
 		TargetSlot.ItemData = InItemData;
 		TargetSlot.SetCount(InCount);	// InCount가 0이하면 자동 Clear
+
 	}	
 }
 
@@ -77,6 +80,7 @@ void UInventoryComponent::UpdateSlotCount(int32 InSlotIndex, int32 InDeltaCount)
 
 		int32 NewCount = TargetSlot.GetCount() + InDeltaCount;
 		SetItemAtIndex(InSlotIndex, TargetSlot.ItemData, NewCount);
+
 	}
 }
 
@@ -86,6 +90,8 @@ void UInventoryComponent::ClearSlotAtIndex(int32 InSlotIndex)
 	{
 		FInvenSlot& TargetSlot = Slots[InSlotIndex];
 		TargetSlot.Clear();
+
+		//OnItemChanged.Broadcast();
 	}
 }
 

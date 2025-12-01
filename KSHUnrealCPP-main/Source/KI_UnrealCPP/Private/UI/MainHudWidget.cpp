@@ -20,18 +20,8 @@ void UMainHudWidget::NativeConstruct()
 			HealthBar->RefreshWidget(resource->GetCurrentHealth(), resource->GetMaxHealth());
 			StaminaBar->RefreshWidget(resource->GetCurrentStamina(), resource->GetMaxStamina());
 		}
-
 		CloseInventory();
-
-		if (UInventoryComponent* inventoryComponent = player->GetInventoryComponent()) {
-			//Inventory->OnInventoryCloseRequested.AddDynamic(this, &UMainHudWidget::CloseInventory);
-		}
-	
-	}
-	
-	
-	
-	
+	}	
 }
 
 void UMainHudWidget::OpenInventory()
