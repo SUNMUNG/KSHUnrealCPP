@@ -2,6 +2,8 @@
 
 
 #include "Player/ActionPlayerController.h"
+#include "Player/InventoryComponent.h"
+#include "Player/ActionCharacter.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubSystems.h"
 #include "InputMappingContext.h"
@@ -23,6 +25,31 @@ void AActionPlayerController::BeginPlay()
 	
 }
 
+void AActionPlayerController::OnPossess(APawn* pawn)
+{
+	Super::OnPossess(pawn);
+
+	AActionCharacter* player = Cast<AActionCharacter>(pawn);
+	if (player) {
+		InventoryComponent = player->GetInventoryComponent();
+		if (InventoryComponent.IsValid()) {
+			if (InventoryWidget.IsValid()) {
+				InventoryWidget->InitializeInventoryWidget(InventoryComponent.Get());
+			}			
+		}
+		
+	}
+}
+
+void AActionPlayerController::OnUnPossess()
+{
+	if (InventoryComponent.IsValid()) {
+		InventoryWidget->ClearInventoryWidget();
+	}
+	InventoryComponent = nullptr;
+	Super::OnUnPossess();
+}
+
 void AActionPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
@@ -35,6 +62,23 @@ void AActionPlayerController::SetupInputComponent()
 
 		enhanced->BindAction(IA_InventoryOnOff, ETriggerEvent::Started, this, &AActionPlayerController::OnInventoryOnOff);
 	}
+}
+
+void AActionPlayerController::InitializeMainWidget(UMainHudWidget* widget)
+{
+	if (widget) {
+		MainHudWidget = widget;
+
+		FScriptDelegate delegate;
+		delegate.BindUFunction(this, "CloseInventoryWidget");
+		MainHudWidget->AddToInventoryCloseDelegate(delegate);
+
+		InventoryWidget = MainHudWidget->GetInventoryWidget();
+		if (InventoryWidget.IsValid()) {
+			InventoryWidget->InitializeInventoryWidget(InventoryComponent.Get());
+		}
+	}
+
 }
 
 void AActionPlayerController::OnLookInput(const FInputActionValue& InValue)

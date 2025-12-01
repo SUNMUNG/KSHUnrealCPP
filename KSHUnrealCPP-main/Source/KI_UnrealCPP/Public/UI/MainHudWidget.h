@@ -33,7 +33,7 @@ public:
 			Inventory->OnInventoryCloseRequested.Add(Delegate);
 		}
 	}
-
+	inline UInventoryWidget* GetInventoryWidget() { return Inventory; }
 	inline EOpenState GetOpenState() const { return OpenState; }
 
 protected:
