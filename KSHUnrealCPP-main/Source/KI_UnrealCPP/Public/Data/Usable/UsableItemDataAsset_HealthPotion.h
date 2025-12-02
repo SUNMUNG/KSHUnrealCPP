@@ -21,4 +21,6 @@ public:
 
 public:
 	virtual void UseItem_Implementation(AActor* InTarget) override;
+
+	//virtual bool UseItemPractice_Implementation(AActor* InTarget) override;
 };

@@ -14,5 +14,15 @@ class KI_UNREALCPP_API UUsableItemDataAsset_Pouch : public UUsableItemDataAsset
 {
 	GENERATED_BODY()
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ItemData|Pouch")
+	int32 MoneyAmount = 0;
+
+private:
+
+	int32 MinMoney=100;
+
+	int32 MaxMoney=300;
+
+public:
 	virtual void UseItem_Implementation(AActor* InTarget) override;
 };

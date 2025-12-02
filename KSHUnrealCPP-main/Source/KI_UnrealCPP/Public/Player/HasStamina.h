@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
-#include "UsableItem.generated.h"
+#include "HasStamina.generated.h"
 
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI)
-class UUsableItem : public UInterface
+class UHasStamina : public UInterface
 {
 	GENERATED_BODY()
 };
@@ -16,14 +16,16 @@ class UUsableItem : public UInterface
 /**
  * 
  */
-class KI_UNREALCPP_API IUsableItem
+class KI_UNREALCPP_API IHasStamina
 {
 	GENERATED_BODY()
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
+
 public:
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ItemData|Usable")
-	void UseItem(AActor* InTarget);
-	//UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ItemData|Usable")
-	//bool UseItemPractice(AActor* InTarget);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Health")
+	void IncreaseStamina(float InStamina);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Health")
+	void DecreaseStamina(float InStamina);
 };

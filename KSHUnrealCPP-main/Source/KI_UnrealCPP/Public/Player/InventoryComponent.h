@@ -50,6 +50,7 @@ protected:
 };
 
 DECLARE_DYNAMIC_DELEGATE_OneParam(FOnInventorySlotChanged, int32, InIndex);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOnInventoryMoneyChanged, int32, CurrentMoney);
 
 // 여러개의 아이템 슬롯을 가진다.
 // 하나의 슬롯에는 한종류의 아이템만 들어간다.
@@ -68,11 +69,18 @@ public:
 
 	// 인벤토리에서 특정 슬롯에 변화가 있었을 때 호출되는 델리게이트
 	FOnInventorySlotChanged OnInventorySlotChanged;
+	FOnInventoryMoneyChanged OnInventoryMoneyChanged;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Inventory|Money")
+	int32 Money = 200;
 
 public:	
 	// 아이템을 추가하는 함수(리턴:못먹은 아이템의 수, InItemData: 추가되는 아이템의 종류, InCount: 추가되는 아이템의 갯수)
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	int32 AddItem(UItemDataAsset* InItemData, int32 InCount);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void AddInventoryMoney(int32 InCount);
 
 	// 슬롯의 아이템을 사용하는 함수
 	UFUNCTION(BlueprintCallable, Category = "Inventory")

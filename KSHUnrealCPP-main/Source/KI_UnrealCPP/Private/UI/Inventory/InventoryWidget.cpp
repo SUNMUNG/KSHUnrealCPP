@@ -5,6 +5,7 @@
 #include "UI/Inventory/InventorySlotWidget.h"
 #include "Components/Button.h"
 #include "Components/UniformGridPanel.h"
+#include "UI/Inventory/GoldPanelWidget.h"
 #include "Player/InventoryComponent.h"
 
 void UInventoryWidget::NativeConstruct()
@@ -33,7 +34,9 @@ void UInventoryWidget::InitializeInventoryWidget(UInventoryComponent* InventoryC
 			}
 
 			TargetInventory->OnInventorySlotChanged.BindUFunction(this, "RefreshSlotWidget");
+			TargetInventory->OnInventoryMoneyChanged.BindUFunction(this, "RefreshMoneyPanel");
 
+			RefreshMoneyPanel(0);
 			int32 size = FMath::Min(SlotGridPanel->GetChildrenCount(), TargetInventory->GetInventorySize());
 			SlotWidgets.Empty(size);
 			for (int i = 0; i < size; i++)
@@ -63,6 +66,11 @@ void UInventoryWidget::RefreshSlotWidget(int32 InSlotIndex)
 	{
 		SlotWidgets[InSlotIndex]->RefreshSlot();
 	}
+}
+
+void UInventoryWidget::RefreshMoneyPanel(int32 CurrentMoney)
+{
+	GoldPanelWidget->SetGold(CurrentMoney);
 }
 
 void UInventoryWidget::ClearInventoryWidget()

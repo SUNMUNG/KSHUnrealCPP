@@ -57,6 +57,14 @@ int32 UInventoryComponent::AddItem(UItemDataAsset* InItemData, int32 InCount)
 	return remainingCount;
 }
 
+void UInventoryComponent::AddInventoryMoney(int32 InCount)
+{
+	Money += InCount;
+	OnInventoryMoneyChanged.ExecuteIfBound(Money);
+	UE_LOG(LogTemp, Warning, TEXT("플레이어 돈 : %d"),Money);
+	
+}
+
 void UInventoryComponent::UseItem(int32 InUseIndex)
 {
 	FInvenSlot* slot = GetSlotData(InUseIndex);
@@ -64,7 +72,10 @@ void UInventoryComponent::UseItem(int32 InUseIndex)
 	{
 		UE_LOG(LogTemp, Log, TEXT("Inven %d Slot : 사용됨"), InUseIndex);
 		IUsableItem::Execute_UseItem(slot->ItemData, GetOwner());	// 이 컴포넌트를 가지고 있는 액터에게 아이템을 사용해라
-
+		/*bool IsActive = IUsableItem::Execute_UseItemPractice(slot->ItemData, GetOwner());
+		if (IsActive) {
+			UpdateSlotCount(InUseIndex, -1);
+		}*/
 		UpdateSlotCount(InUseIndex, -1);
 	}
 	else
