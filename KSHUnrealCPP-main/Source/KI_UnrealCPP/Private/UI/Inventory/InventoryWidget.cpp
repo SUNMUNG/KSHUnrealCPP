@@ -5,6 +5,7 @@
 #include "UI/Inventory/InventorySlotWidget.h"
 #include "Components/Button.h"
 #include "Components/UniformGridPanel.h"
+#include "UI/Inventory/InventoryDragDropOperation.h"
 #include "UI/Inventory/GoldPanelWidget.h"
 #include "Player/InventoryComponent.h"
 
@@ -35,8 +36,8 @@ void UInventoryWidget::InitializeInventoryWidget(UInventoryComponent* InventoryC
 
 			TargetInventory->OnInventorySlotChanged.BindUFunction(this, "RefreshSlotWidget");
 			TargetInventory->OnInventoryMoneyChanged.BindUFunction(this, "RefreshMoneyPanel");
-
-			RefreshMoneyPanel(0);
+			
+			RefreshMoneyPanel(TargetInventory->Money);
 			int32 size = FMath::Min(SlotGridPanel->GetChildrenCount(), TargetInventory->GetInventorySize());
 			SlotWidgets.Empty(size);
 			for (int i = 0; i < size; i++)
@@ -46,6 +47,9 @@ void UInventoryWidget::InitializeInventoryWidget(UInventoryComponent* InventoryC
 				slotWidget->InitializeSlot(i, slotData);// 인벤토리 컴포넌트에 저장되어있는 슬롯과 슬롯 위젯을 엮어주는 작업
 				slotWidget->OnSlotRightClick.Clear();
 				slotWidget->OnSlotRightClick.BindUFunction(TargetInventory.Get(), "UseItem");
+				slotWidget->OnSlotDragCancelled.BindUFunction(TargetInventory.Get(), "UpdateSlotCount");
+				slotWidget->OnSlotDropCompleted.BindUFunction(TargetInventory.Get(), "SetItemAtIndex");
+
 				SlotWidgets.Add(slotWidget);
 			}
 		}
@@ -82,3 +86,16 @@ void UInventoryWidget::OnCloseClicked()
 {
 	OnInventoryCloseRequested.Broadcast();	// 닫힘 버튼이 눌려졌음을 알리기만 함
 }
+
+bool UInventoryWidget::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
+{
+
+	UInventoryDragDropOperation* invenOp=Cast<UInventoryDragDropOperation>(InOperation);
+
+	if (invenOp) {
+		UE_LOG(LogTemp, Log, TEXT("인벤토리에 드랍"));
+		return true;
+	}
+	return false;
+}
+

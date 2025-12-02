@@ -144,7 +144,7 @@ void AActionCharacter::AddWeapon_Implementation(EWeaponCode Code, int32 UseCount
 
 void AActionCharacter::AddMoney_Implementation(int32 Income)
 {
-	GetInventoryComponent()->AddInventoryMoney(Income);
+	Inventory->AddInventoryMoney(Income);
 	UE_LOG(LogTemp, Log, TEXT("돈 (%d) 골드를 획득했습니다."), Income);
 }
 

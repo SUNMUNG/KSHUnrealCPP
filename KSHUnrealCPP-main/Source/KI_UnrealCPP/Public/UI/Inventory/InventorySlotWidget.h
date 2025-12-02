@@ -4,10 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Data/ItemDataAsset.h"
 #include "InventorySlotWidget.generated.h"
 
 struct FInvenSlot;
 DECLARE_DYNAMIC_DELEGATE_OneParam(FOnSlotClicked, int32, InSlotIndex);
+DECLARE_DYNAMIC_DELEGATE_TwoParams(FOnSlotDragCancelled, int32, InSlotIndex,int32,DropAmount);
+DECLARE_DYNAMIC_DELEGATE_ThreeParams(FOnSlotDropCompleted, int32, DropSlotIndex, UItemDataAsset*,Slotdata,int32,inCount);
 /**
  * 
  */
@@ -28,9 +31,18 @@ protected:
 
 	virtual FReply NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
 
+	virtual void NativeOnDragDetected(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent, UDragDropOperation*& OutOperation) override;
+
+	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
+
+	virtual void NativeOnDragCancelled(const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
+
 public:
 	FOnSlotClicked OnSlotRightClick;
 
+	FOnSlotDragCancelled OnSlotDragCancelled;
+
+	FOnSlotDropCompleted OnSlotDropCompleted;
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI|IventorySlot", meta = (BindWidget))
 	TObjectPtr<class UImage> ItemIconImage = nullptr;
@@ -45,7 +57,13 @@ protected:
 	TObjectPtr<class UTextBlock> MaxCountText = nullptr;
 
 private:
+
+
 	int32 Index = -1;
 
 	FInvenSlot* SlotData = nullptr;
+
+	FInvenSlot* TempSlotData = nullptr;
+
+
 };

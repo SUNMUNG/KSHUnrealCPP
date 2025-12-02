@@ -41,6 +41,8 @@ private:
 		return InSlotIndex < SlotWidgets.Num() && InSlotIndex >= 0;
 	};
 
+	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
+
 protected:
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<class UButton> CloseButton = nullptr;

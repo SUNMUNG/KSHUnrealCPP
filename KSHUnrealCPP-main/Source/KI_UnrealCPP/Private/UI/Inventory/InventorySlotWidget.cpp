@@ -4,6 +4,7 @@
 #include "UI/Inventory/InventorySlotWidget.h"
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
+#include "UI/Inventory/InventoryDragDropOperation.h"
 #include "player/InventoryComponent.h"
 
 void UInventorySlotWidget::InitializeSlot(int32 InIndex, FInvenSlot* InSlotData)
@@ -60,6 +61,56 @@ FReply UInventorySlotWidget::NativeOnMouseButtonDown(const FGeometry& InGeometry
 		}
 		return FReply::Handled();	// 이 마우스 클릭은 완료되었다라고 전달
 	}
+	else if (InMouseEvent.IsMouseButtonDown(EKeys::LeftMouseButton)) {
+		if (SlotData->ItemData)
+		{
+			return FReply::Handled().DetectDrag(TakeWidget(), EKeys::LeftMouseButton);
+		}
+	}
 
 	return Super::NativeOnMouseButtonDown(InGeometry, InMouseEvent);	// 나는 처리안했다. 부모 or 다른 위젯이 처리할거다.
+}
+
+void UInventorySlotWidget::NativeOnDragDetected(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent, UDragDropOperation*& OutOperation)
+{
+	Super::NativeOnDragDetected(InGeometry, InMouseEvent, OutOperation);
+	UE_LOG(LogTemp, Log, TEXT("NativeOnDragDetected"));
+
+	UInventoryDragDropOperation* DragOp = NewObject<UInventoryDragDropOperation>();
+	DragOp->Index = this->Index;
+	DragOp->ItemData = SlotData->ItemData;
+
+	//TempSlotData->ItemData = DragOp->ItemData.Get();
+
+	OutOperation = DragOp;
+
+}
+
+
+bool UInventorySlotWidget::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
+{
+	UInventoryDragDropOperation* invenOp = Cast<UInventoryDragDropOperation>(InOperation);
+
+	if (invenOp) {
+		UE_LOG(LogTemp, Log, TEXT("Drop : %s %d"),*invenOp->ItemData->ItemName.ToString(), Index);
+		//OnSlotDropCompleted.ExecuteIfBound(Index, , 1);
+		return true;
+	}
+
+	return false;
+	
+	//return Super::NativeOnDrop(InGeometry, InDragDropEvent, InOperation);
+}
+
+void UInventorySlotWidget::NativeOnDragCancelled(const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
+{
+	Super::NativeOnDragCancelled(InDragDropEvent, InOperation);
+	UInventoryDragDropOperation* invenOp = Cast<UInventoryDragDropOperation>(InOperation);
+
+	if (invenOp) {
+		UE_LOG(LogTemp, Log, TEXT("NativeOnDragCancelled"));
+		OnSlotDragCancelled.ExecuteIfBound(invenOp->Index,-1);
+		//픽업 아이템 버리기 해야함
+	}
+
 }
