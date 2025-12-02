@@ -6,42 +6,49 @@
 #include "Blueprint/UserWidget.h"
 #include "InventoryWidget.generated.h"
 
-
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryCloseRequested);
 
 /**
  * 
  */
-
 UCLASS()
 class KI_UNREALCPP_API UInventoryWidget : public UUserWidget
 {
 	GENERATED_BODY()
-	
+
 public:
 	virtual void NativeConstruct() override;
 
 	void InitializeInventoryWidget(class UInventoryComponent* InventoryComponent);
 	void RefreshInventoryWidget();
+
+	UFUNCTION()
+	void RefreshSlotWidget(int32 InSlotIndex);
+
 	void ClearInventoryWidget();
+
+	UPROPERTY(BlueprintAssignable, Category = "UI|Inventory")
+	FOnInventoryCloseRequested OnInventoryCloseRequested;
+	
 private:
 	UFUNCTION()
 	void OnCloseClicked();
-public:
-	UPROPERTY(BlueprintAssignable)
-	FOnInventoryCloseRequested OnInventoryCloseRequested;
+
+	UFUNCTION(BlueprintCallable, Category = "UI|Inventory")
+	inline bool IsValidIndex(int32 InSlotIndex) const {
+		return InSlotIndex < SlotWidgets.Num() && InSlotIndex >= 0;
+	};
+
 protected:
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<class UButton> CloseButton = nullptr;
 
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<class UUniformGridPanel> SlotGridPanel = nullptr;
+
 private:
 	UPROPERTY()
 	TWeakObjectPtr<UInventoryComponent> TargetInventory = nullptr;
-	
-	UPROPERTY()
-	TArray<TObjectPtr<class UInventorySlotWidget >> SlotWidgets;
 
-
+	TArray<TObjectPtr<class UInventorySlotWidget>> SlotWidgets;
 };

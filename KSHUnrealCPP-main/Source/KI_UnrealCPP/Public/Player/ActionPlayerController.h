@@ -23,20 +23,24 @@ class KI_UNREALCPP_API AActionPlayerController : public APlayerController
 
 protected:
 	virtual void BeginPlay() override;
-	virtual void OnPossess(APawn* pawn) override;
+	virtual void OnPossess(APawn* aPawn) override;
 	virtual void OnUnPossess() override;
+
 public:
 	virtual void SetupInputComponent() override;
-
-	void InitializeMainWidget(UMainHudWidget* widget);
 
 	void OpenInventoryWidget();
 	UFUNCTION()
 	void CloseInventoryWidget();
+
+	void InitializeMainHudWidget(UMainHudWidget* InWidget);
+
+	UFUNCTION(BlueprintCallable, Category = "UI|Inventory")
+	void TestChangeInventoryTarget(UInventoryComponent* NewTarget);
+
 private:
 	void OnLookInput(const FInputActionValue& InValue);
-
-	void OnInventoryOnOff();
+	void OnInventoryOnOff();	
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
@@ -56,10 +60,7 @@ protected:
 
 private:
 	int32 GameInputPriority = 1;
-
 	TWeakObjectPtr<UMainHudWidget> MainHudWidget = nullptr;
-
 	TWeakObjectPtr<UInventoryWidget> InventoryWidget = nullptr;
-
 	TWeakObjectPtr<class UInventoryComponent> InventoryComponent = nullptr;
 };

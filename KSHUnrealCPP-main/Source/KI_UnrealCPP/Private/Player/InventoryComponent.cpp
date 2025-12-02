@@ -2,6 +2,7 @@
 
 
 #include "Player/InventoryComponent.h"
+#include "Data/Usable/UsableItem.h"
 
 // Sets default values for this component's properties
 UInventoryComponent::UInventoryComponent()
@@ -10,9 +11,8 @@ UInventoryComponent::UInventoryComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
 
-	Slots.SetNum(InventorySize);
+	Slots.SetNum(InventorySize);	// 인벤토리 크기만큼 빈 슬롯 만들기	
 }
-
 
 int32 UInventoryComponent::AddItem(UItemDataAsset* InItemData, int32 InCount)
 {	
@@ -51,12 +51,26 @@ int32 UInventoryComponent::AddItem(UItemDataAsset* InItemData, int32 InCount)
 			SetItemAtIndex(emptyIndex, InItemData, amountToAdd);							// 결정된 추가량만큼 추가
 			remainingCount -= amountToAdd;	// remainingCount을 슬롯에 추가한만큼 감소
 		}
-		
+
 		// 같은 종류의 아이템이 들어있는 슬롯과 빈슬롯을 모두 채우고도 남은 아이템이 있다. => 남아있는 remainingCount 리턴
 	}
-	//OnItemChanged.Broadcast();
 	return remainingCount;
-	
+}
+
+void UInventoryComponent::UseItem(int32 InUseIndex)
+{
+	FInvenSlot* slot = GetSlotData(InUseIndex);
+	if (slot->ItemData && slot->ItemData->Implements<UUsableItem>())
+	{
+		UE_LOG(LogTemp, Log, TEXT("Inven %d Slot : 사용됨"), InUseIndex);
+		IUsableItem::Execute_UseItem(slot->ItemData, GetOwner());	// 이 컴포넌트를 가지고 있는 액터에게 아이템을 사용해라
+
+		UpdateSlotCount(InUseIndex, -1);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Log, TEXT("Inven %d Slot : 비어있거나 사용할 수 없는 아이템"), InUseIndex);
+	}
 }
 
 void UInventoryComponent::SetItemAtIndex(int32 InSlotIndex, UItemDataAsset* InItemData, int32 InCount)
@@ -68,6 +82,7 @@ void UInventoryComponent::SetItemAtIndex(int32 InSlotIndex, UItemDataAsset* InIt
 		TargetSlot.ItemData = InItemData;
 		TargetSlot.SetCount(InCount);	// InCount가 0이하면 자동 Clear
 
+		OnInventorySlotChanged.ExecuteIfBound(InSlotIndex);
 	}	
 }
 
@@ -80,19 +95,18 @@ void UInventoryComponent::UpdateSlotCount(int32 InSlotIndex, int32 InDeltaCount)
 
 		int32 NewCount = TargetSlot.GetCount() + InDeltaCount;
 		SetItemAtIndex(InSlotIndex, TargetSlot.ItemData, NewCount);
-
 	}
 }
 
 void UInventoryComponent::ClearSlotAtIndex(int32 InSlotIndex)
 {
-	if (IsValidIndex(InSlotIndex))
-	{
-		FInvenSlot& TargetSlot = Slots[InSlotIndex];
-		TargetSlot.Clear();
-
-		//OnItemChanged.Broadcast();
-	}
+	//if (IsValidIndex(InSlotIndex))
+	//{
+	//	FInvenSlot& TargetSlot = Slots[InSlotIndex];
+	//	TargetSlot.Clear();
+	//	OnInventorySlotChanged.ExecuteIfBound(InSlotIndex);		
+	//}
+	SetItemAtIndex(InSlotIndex, nullptr, 0);
 }
 
 FInvenSlot* UInventoryComponent::GetSlotData(int32 InSlotIndex)
@@ -103,11 +117,7 @@ FInvenSlot* UInventoryComponent::GetSlotData(int32 InSlotIndex)
 	* verify : 거짓이면 프로그램 종료. shipping 빌드에 포함됨(검사는 안함)
 	* ensure : 거짓이면 로그 출력하고 계속. shipping 빌드에 포함됨
 	*/	
-	if (Slots.IsValidIndex(InSlotIndex))
-	{
-		return &Slots[InSlotIndex];
-	}
-	return nullptr;
+	return &Slots[InSlotIndex];
 }
 
 int32 UInventoryComponent::FindSlotWithItem(UItemDataAsset* InItemData, int32 InStartIndex)
@@ -116,7 +126,7 @@ int32 UInventoryComponent::FindSlotWithItem(UItemDataAsset* InItemData, int32 In
 	int32 size = Slots.Num();
 	for (int32 i = InStartIndex; i < size; i++)
 	{
-		if (Slots[i].ItemData == InItemData && !Slots[i].IsFull())
+		if (Slots[i].ItemData == InItemData && !Slots[i].IsFull())	// 같은 데이터에셋을 가지고 있으면서 빈칸이 있는 경우
 		{
 			result = i;
 			break;

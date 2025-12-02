@@ -2,12 +2,11 @@
 
 
 #include "Player/ActionPlayerController.h"
-#include "Player/InventoryComponent.h"
-#include "Player/ActionCharacter.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubSystems.h"
 #include "InputMappingContext.h"
-#include "Framework/MainHUD.h"
+#include "Player/InventoryComponent.h"
+#include "Player/ActionCharacter.h"
 
 void AActionPlayerController::BeginPlay()
 {
@@ -22,28 +21,27 @@ void AActionPlayerController::BeginPlay()
 
 	PlayerCameraManager->ViewPitchMax = VewPitchMax;
 	PlayerCameraManager->ViewPitchMin = VewPitchMin;
-	
 }
 
-void AActionPlayerController::OnPossess(APawn* pawn)
+void AActionPlayerController::OnPossess(APawn* aPawn)
 {
-	Super::OnPossess(pawn);
+	Super::OnPossess(aPawn);
 
-	AActionCharacter* player = Cast<AActionCharacter>(pawn);
-	if (player) {
+	AActionCharacter* player = Cast<AActionCharacter>(aPawn);
+	if (player)
+	{
 		InventoryComponent = player->GetInventoryComponent();
-		if (InventoryComponent.IsValid()) {
-			if (InventoryWidget.IsValid()) {
-				InventoryWidget->InitializeInventoryWidget(InventoryComponent.Get());
-			}			
+		if (InventoryWidget.IsValid())
+		{
+			InventoryWidget->InitializeInventoryWidget(InventoryComponent.Get());
 		}
-		
 	}
 }
 
 void AActionPlayerController::OnUnPossess()
 {
-	if (InventoryComponent.IsValid()) {
+	if (InventoryWidget.IsValid())
+	{
 		InventoryWidget->ClearInventoryWidget();
 	}
 	InventoryComponent = nullptr;
@@ -59,26 +57,8 @@ void AActionPlayerController::SetupInputComponent()
 	{
 		//UE_LOG(LogTemp, Log, TEXT("바인드 성공"));
 		enhanced->BindAction(IA_Look, ETriggerEvent::Triggered, this, &AActionPlayerController::OnLookInput);
-
 		enhanced->BindAction(IA_InventoryOnOff, ETriggerEvent::Started, this, &AActionPlayerController::OnInventoryOnOff);
 	}
-}
-
-void AActionPlayerController::InitializeMainWidget(UMainHudWidget* widget)
-{
-	if (widget) {
-		MainHudWidget = widget;
-
-		FScriptDelegate delegate;
-		delegate.BindUFunction(this, "CloseInventoryWidget");
-		MainHudWidget->AddToInventoryCloseDelegate(delegate);
-
-		InventoryWidget = MainHudWidget->GetInventoryWidget();
-		if (InventoryWidget.IsValid()) {
-			InventoryWidget->InitializeInventoryWidget(InventoryComponent.Get());
-		}
-	}
-
 }
 
 void AActionPlayerController::OnLookInput(const FInputActionValue& InValue)
@@ -91,53 +71,88 @@ void AActionPlayerController::OnLookInput(const FInputActionValue& InValue)
 
 void AActionPlayerController::OnInventoryOnOff()
 {
-	if (MainHudWidget.IsValid()) {
-		if (MainHudWidget->GetOpenState() == EOpenState::Open) {
+	if (MainHudWidget.IsValid())
+	{
+		if (MainHudWidget->GetOpenState() == EOpenState::Open)
+		{
 			CloseInventoryWidget();
 		}
-		else if(MainHudWidget->GetOpenState() == EOpenState::Close){
+		else
+		{
 			OpenInventoryWidget();
 		}
-		else {
-			UE_LOG(LogTemp, Error, TEXT("OnInventoryOnOff : EOpenState 이상함 "));
-		}
 	}
-	
 }
 
 void AActionPlayerController::OpenInventoryWidget()
 {
-	if (MainHudWidget.IsValid()) {
+	if (MainHudWidget.IsValid())
+	{
+		UE_LOG(LogTemp, Log, TEXT("OpenInventoryWidget"));
 		MainHudWidget->OpenInventory();
-		
-		FInputModeGameAndUI inputmode;
-		inputmode.SetWidgetToFocus(MainHudWidget->TakeWidget());
-		inputmode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-		inputmode.SetHideCursorDuringCapture(false);
-		inputmode.ShouldFlushInputOnViewportFocus();
-		SetInputMode(inputmode);
+
+		//FInputModeGameOnly	: 게임 전용(입력이 플레이어 컨트롤러로 우선 전달됨, 마우스 커서가 안보임)
+		//FInputModeUIOnly		: UI가 떠 있을 때 사용(입력이 UI로 먼저 전달됨, 마우스 커서가 보임)
+		//FInputModeGameAndUI	: 마우스를 클릭했을 때 UI가 아래에 있으면 UI로 처리, 없으면 Game으로 처리
+
+		FInputModeGameAndUI inputMode;
+		inputMode.SetWidgetToFocus(MainHudWidget->TakeWidget());	// 위젯에 포커스 주기
+		inputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);	// 마우스 커서가 뷰포트를 벗어날 수 있게 설정
+		inputMode.SetHideCursorDuringCapture(false);	// 마우스가 눌려졌을 때도 커서가 보이도록 설정
+		SetInputMode(inputMode);	// InputMode를 플레이어 컨트롤러에 적용
 
 		bShowMouseCursor = true;
-		SetIgnoreMoveInput(true);
-		SetIgnoreLookInput(true);
-		
-		//SetPause(true);
+
+		SetIgnoreMoveInput(true);	// 이동입력 무시
+		SetIgnoreLookInput(true);	// 카메라 회전 입력 무시
+
+		//SetPause(true);	// 게임일시정지
 	}
 }
 
 void AActionPlayerController::CloseInventoryWidget()
 {
-	if (MainHudWidget.IsValid()) {
-		MainHudWidget->CloseInventory();
+	if (MainHudWidget.IsValid())
+	{
+		UE_LOG(LogTemp, Log, TEXT("CloseInventoryWidget"));
 
-		FInputModeGameOnly inputmode;
-		inputmode.SetConsumeCaptureMouseDown(true);
-		SetInputMode(inputmode);
+		//SetPause(false);	// 게임일시정지 해제
+
+		SetIgnoreMoveInput(false);	// 이동입력 다시 받기
+		SetIgnoreLookInput(false);	// 카메라 회전 입력 다시 받기
+
+		FInputModeGameOnly inputMode;
+		SetInputMode(inputMode);
 
 		bShowMouseCursor = false;
-		SetIgnoreMoveInput(false);
-		SetIgnoreLookInput(false);
 
-		//SetPause(false);
+		MainHudWidget->CloseInventory();
+	}
+}
+
+void AActionPlayerController::InitializeMainHudWidget(UMainHudWidget* InWidget)
+{
+	if (InWidget)
+	{
+		MainHudWidget = InWidget;
+
+		// MainHudWidget의 Inventory의 닫힘 델리게이트에 함수 연결
+		FScriptDelegate delegate;
+		delegate.BindUFunction(this, "CloseInventoryWidget");
+		MainHudWidget->AddToInventoryCloseDelegate(delegate);
+
+		InventoryWidget = MainHudWidget->GetInventoryWidget();
+		if (InventoryWidget.IsValid())	// Possess보다 타이밍이 늦다.
+		{
+			InventoryWidget->InitializeInventoryWidget(InventoryComponent.Get());
+		}
+	}
+}
+
+void AActionPlayerController::TestChangeInventoryTarget(UInventoryComponent* NewTarget)
+{
+	if (NewTarget)
+	{
+		InventoryWidget->InitializeInventoryWidget(NewTarget);
 	}
 }

@@ -7,12 +7,11 @@
 #include "UI/Inventory/InventoryWidget.h"
 #include "MainHudWidget.generated.h"
 
-
 UENUM(BlueprintType)
 enum class EOpenState : uint8
 {
-	Open UMETA(DisplayName = "Open"),
-	Close UMETA(DisplayName = "Close")
+	Open	UMETA(DisplayName = "Open"),
+	Close	UMETA(DisplayName = "Close")
 };
 /**
  * 
@@ -21,6 +20,9 @@ UCLASS()
 class KI_UNREALCPP_API UMainHudWidget : public UUserWidget
 {
 	GENERATED_BODY()
+protected:
+	virtual void NativeConstruct() override;
+
 public:
 	UFUNCTION(BlueprintCallable, Category = "UI|Inventory")
 	void OpenInventory();
@@ -28,16 +30,16 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "UI|Inventory")
 	void CloseInventory();
 
-	void AddToInventoryCloseDelegate(const FScriptDelegate& Delegate) {
-		if (Inventory) {
+	void AddToInventoryCloseDelegate(const FScriptDelegate& Delegate)
+	{
+		if (Inventory)
+		{
 			Inventory->OnInventoryCloseRequested.Add(Delegate);
 		}
 	}
-	inline UInventoryWidget* GetInventoryWidget() { return Inventory; }
-	inline EOpenState GetOpenState() const { return OpenState; }
 
-protected:
-	virtual void NativeConstruct() override;
+	inline EOpenState GetOpenState() const { return OpenState; }	
+	inline UInventoryWidget* GetInventoryWidget() const { return Inventory; }
 
 protected:
 	// meta = (BindWidget)
@@ -54,4 +56,5 @@ protected:
 
 private:
 	EOpenState OpenState = EOpenState::Close;
+	
 };
