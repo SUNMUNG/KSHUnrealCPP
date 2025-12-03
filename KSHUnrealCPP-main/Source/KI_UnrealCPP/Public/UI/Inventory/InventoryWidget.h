@@ -58,4 +58,6 @@ private:
 	TWeakObjectPtr<UInventoryComponent> TargetInventory = nullptr;
 
 	TArray<TObjectPtr<class UInventorySlotWidget>> SlotWidgets;
+
+
 };

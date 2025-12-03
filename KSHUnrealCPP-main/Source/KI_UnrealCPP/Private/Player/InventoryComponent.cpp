@@ -88,6 +88,7 @@ void UInventoryComponent::SetItemAtIndex(int32 InSlotIndex, UItemDataAsset* InIt
 {
 	if (IsValidIndex(InSlotIndex))
 	{
+		UE_LOG(LogTemp, Log, TEXT("SetItemAtIndex : %d"), InSlotIndex);
 		FInvenSlot& TargetSlot = Slots[InSlotIndex];
 				
 		TargetSlot.ItemData = InItemData;
@@ -129,6 +130,14 @@ FInvenSlot* UInventoryComponent::GetSlotData(int32 InSlotIndex)
 	* ensure : 거짓이면 로그 출력하고 계속. shipping 빌드에 포함됨
 	*/	
 	return &Slots[InSlotIndex];
+}
+
+void UInventoryComponent::SetTempSlot(FInvenSlot Slotdata,int32 inIndex)
+{
+	TempSlot = Slotdata;
+	UE_LOG(LogTemp, Warning, TEXT("임시 슬롯에 %s 가 %d 개 있습니다."),*TempSlot.ItemData->ItemName.ToString(),TempSlot.GetCount());
+	ClearSlotAtIndex(inIndex);
+	
 }
 
 int32 UInventoryComponent::FindSlotWithItem(UItemDataAsset* InItemData, int32 InStartIndex)

@@ -106,16 +106,25 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	inline int32 GetInventorySize() const { return InventorySize; }
 
+	UFUNCTION()
+	void SetTempSlot(FInvenSlot Slotdata, int32 inIndex);
+
+	UFUNCTION()
+	inline FInvenSlot GetTempSlot() { return TempSlot; }
+
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
 	int32 InventorySize = 10;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory")
 	TArray<FInvenSlot> Slots;
+
+	FInvenSlot TempSlot;
 		
 private:
 	// 아이템을 특정칸에 추가하는 함수(초기화, 로딩 등에 사용)
 	// InSlotIndex: 아이템이 추가될 슬롯, InItemData: 추가되는 아이템의 종류, InCount: 추가되는 아이템의 갯수	
+	UFUNCTION()
 	void SetItemAtIndex(int32 InSlotIndex, UItemDataAsset* InItemData, int32 InCount);
 
 	// 같은 종류의 아이템이 있는 슬롯을 찾는 함수

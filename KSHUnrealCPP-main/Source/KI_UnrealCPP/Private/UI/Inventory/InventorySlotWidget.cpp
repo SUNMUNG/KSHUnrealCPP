@@ -74,15 +74,16 @@ FReply UInventorySlotWidget::NativeOnMouseButtonDown(const FGeometry& InGeometry
 void UInventorySlotWidget::NativeOnDragDetected(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent, UDragDropOperation*& OutOperation)
 {
 	Super::NativeOnDragDetected(InGeometry, InMouseEvent, OutOperation);
-	UE_LOG(LogTemp, Log, TEXT("NativeOnDragDetected"));
 
 	UInventoryDragDropOperation* DragOp = NewObject<UInventoryDragDropOperation>();
 	DragOp->Index = this->Index;
-	DragOp->ItemData = SlotData->ItemData;
+	DragOp->ItemData = this->SlotData->ItemData;
 
-	//TempSlotData->ItemData = DragOp->ItemData.Get();
+	UE_LOG(LogTemp, Log, TEXT("DragDetected : %s %d"), *DragOp->ItemData->ItemName.ToString(), DragOp->Index);
 
-	OutOperation = DragOp;
+	OnSlotDragDetected.ExecuteIfBound(*this->SlotData, this->Index);
+
+	OutOperation = DragOp;                                                                                                                                                                                                                              
 
 }
 
@@ -92,8 +93,8 @@ bool UInventorySlotWidget::NativeOnDrop(const FGeometry& InGeometry, const FDrag
 	UInventoryDragDropOperation* invenOp = Cast<UInventoryDragDropOperation>(InOperation);
 
 	if (invenOp) {
-		UE_LOG(LogTemp, Log, TEXT("Drop : %s %d"),*invenOp->ItemData->ItemName.ToString(), Index);
-		//OnSlotDropCompleted.ExecuteIfBound(Index, , 1);
+		UE_LOG(LogTemp, Log, TEXT("Drop : %s %d"),*invenOp->ItemData.Get()->GetName(), Index);
+		OnSlotDropCompleted.ExecuteIfBound(this->Index, invenOp->ItemData.Get(), 1);
 		return true;
 	}
 

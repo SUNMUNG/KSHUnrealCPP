@@ -4,11 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Player/InventoryComponent.h"
 #include "Data/ItemDataAsset.h"
 #include "InventorySlotWidget.generated.h"
 
-struct FInvenSlot;
 DECLARE_DYNAMIC_DELEGATE_OneParam(FOnSlotClicked, int32, InSlotIndex);
+DECLARE_DYNAMIC_DELEGATE_TwoParams(FOnSlotDragDetected,FInvenSlot,InSlotData,int32,inIndex);
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FOnSlotDragCancelled, int32, InSlotIndex,int32,DropAmount);
 DECLARE_DYNAMIC_DELEGATE_ThreeParams(FOnSlotDropCompleted, int32, DropSlotIndex, UItemDataAsset*,Slotdata,int32,inCount);
 /**
@@ -42,6 +43,8 @@ public:
 
 	FOnSlotDragCancelled OnSlotDragCancelled;
 
+	FOnSlotDragDetected OnSlotDragDetected;
+
 	FOnSlotDropCompleted OnSlotDropCompleted;
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI|IventorySlot", meta = (BindWidget))
@@ -62,8 +65,6 @@ private:
 	int32 Index = -1;
 
 	FInvenSlot* SlotData = nullptr;
-
-	FInvenSlot* TempSlotData = nullptr;
 
 
 };
