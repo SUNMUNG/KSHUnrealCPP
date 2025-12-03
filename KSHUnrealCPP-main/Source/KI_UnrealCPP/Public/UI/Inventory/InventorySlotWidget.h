@@ -39,6 +39,10 @@ protected:
 	// 마우스 버튼 클릭
 	virtual FReply NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
 
+	virtual void NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
+
+	virtual void NativeOnMouseLeave(const FPointerEvent& InMouseEvent) override;
+
 public:
 	FOnSlotClicked OnSlotRightClick;
 
@@ -62,4 +66,7 @@ private:
 
 	UPROPERTY()
 	TWeakObjectPtr<UInventoryComponent> TargetInventory = nullptr;
+
+	UPROPERTY()
+	TObjectPtr<class UDetailInfoWidget> DetailInfoWidget = nullptr;
 };

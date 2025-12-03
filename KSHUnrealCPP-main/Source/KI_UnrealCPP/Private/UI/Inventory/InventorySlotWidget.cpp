@@ -5,7 +5,10 @@
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
 #include "player/InventoryComponent.h"
+#include "Blueprint/WidgetLayoutLibrary.h"
 #include "UI/Inventory/TempSlotWidget.h"
+#include "UI/Inventory/DetailInfoWidget.h"
+#include "Framework/PickupFactorySubsystem.h"
 #include "UI/Inventory/InventoryDragDropOperation.h"
 
 void UInventorySlotWidget::InitializeSlot(UInventoryComponent* InInventoryComponent ,int32 InIndex)
@@ -58,7 +61,7 @@ void UInventorySlotWidget::NativeOnDragDetected(const FGeometry& InGeometry, con
 	UE_LOG(LogTemp, Log, TEXT("DragDetected : %d Slot"), this->Index);
 
 	UInventoryDragDropOperation* DragOp = NewObject<UInventoryDragDropOperation>();
-	DragOp->Index = this->Index;
+	DragOp->StartIndex = this->Index;
 	DragOp->ItemData = this->SlotData->ItemData;
 	DragOp->Count = this->SlotData->GetCount();
 	
@@ -80,13 +83,29 @@ void UInventorySlotWidget::NativeOnDragDetected(const FGeometry& InGeometry, con
 bool UInventorySlotWidget::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
 {
 	UInventoryDragDropOperation* invenOp = Cast<UInventoryDragDropOperation>(InOperation);
-	if (invenOp)
+	if (invenOp && invenOp->ItemData.IsValid())
 	{
-		UE_LOG(LogTemp, Log, TEXT("Drop : %d Slot에 %s를 옮기기"), 
-			Index,
-			*(invenOp->ItemData->ItemName.ToString()));
+		if (SlotData->IsEmpty()) {
+			TargetInventory->SetItemAtIndex(Index, invenOp->ItemData.Get(), invenOp->Count);
+		}
+		else {
+			if (invenOp->ItemData == SlotData->ItemData) {
+				int32 Count = FMath::Min(SlotData->GetRemainingCount(),invenOp->Count);
+				TargetInventory->UpdateSlotCount(Index, Count);
 
-		TargetInventory->SetItemAtIndex(this->Index, invenOp->ItemData.Get(),invenOp->Count);
+				int32 returnCount = invenOp->Count -Count;
+
+				if (returnCount > 0) {
+					TargetInventory->SetItemAtIndex(invenOp->StartIndex, invenOp->ItemData.Get(), returnCount);	
+				}
+
+
+			}
+			else {
+				TargetInventory->SetItemAtIndex(invenOp->StartIndex, SlotData->ItemData.Get(), SlotData->GetCount());
+				TargetInventory->SetItemAtIndex(Index, invenOp->ItemData.Get(), invenOp->Count);
+			}
+		}
 
 		return true;
 	}	
@@ -97,11 +116,34 @@ void UInventorySlotWidget::NativeOnDragCancelled(const FDragDropEvent& InDragDro
 {
 	Super::NativeOnDragCancelled(InDragDropEvent, InOperation);
 	UInventoryDragDropOperation* invenOp = Cast<UInventoryDragDropOperation>(InOperation);
-	if (invenOp)
+	if (invenOp && invenOp->ItemData.IsValid())
 	{
 		UE_LOG(LogTemp, Log, 
 			TEXT("DragCancelled : 바닥에다가 (%s)아이템을 버려야 한다."), 
 			*(invenOp->ItemData->ItemName.ToString()));
+
+
+
+		UWorld* world = GetWorld();
+		if (world) {
+			FHitResult hitResult;
+			UPickupFactorySubsystem* pickupFactory = world->GetSubsystem<UPickupFactorySubsystem>();
+			FVector2D MousePos = UWidgetLayoutLibrary::GetMousePositionOnViewport(GetWorld());
+			float ViewportScale = UWidgetLayoutLibrary::GetViewportScale(GetWorld());
+			MousePos *= ViewportScale;
+
+			if (GetOwningPlayer()->GetHitResultAtScreenPosition(MousePos, ECollisionChannel::ECC_Visibility, true, hitResult))
+			{
+				for (int32 i = 0; i < invenOp->Count; i++) {
+					FVector location = hitResult.Location;
+					FVector2D randCircle = FMath::RandPointInCircle(100.0f);
+					location.X += randCircle.X;
+					location.Y += randCircle.Y;
+
+					pickupFactory->SpawnPickup(invenOp->ItemData->ItemCode, location+FVector::UpVector*10.0f);
+				}
+			}
+		}
 	}
 }
 
@@ -129,4 +171,34 @@ FReply UInventorySlotWidget::NativeOnMouseButtonDown(const FGeometry& InGeometry
 	}
 
 	return Super::NativeOnMouseButtonDown(InGeometry, InMouseEvent);	// 나는 처리안했다. 부모 or 다른 위젯이 처리할거다.
+}
+
+void UInventorySlotWidget::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
+{
+	Super::NativeOnMouseEnter(InGeometry, InMouseEvent);
+
+	FVector2D MousePos = UWidgetLayoutLibrary::GetMousePositionOnViewport(GetWorld());
+	float ViewportScale = UWidgetLayoutLibrary::GetViewportScale(GetWorld());
+	MousePos *= ViewportScale;
+	MousePos += FVector2D(0.0f, -100.0f);
+
+
+	DetailInfoWidget = CreateWidget<UDetailInfoWidget>(this, TargetInventory->GetDetailInfoWidget());
+
+
+	if (DetailInfoWidget && this->SlotData->ItemData) {
+		DetailInfoWidget->SetItemIcon(this->SlotData->ItemData->ItemIcon);
+		DetailInfoWidget->SetItemNameText(this->SlotData->ItemData->ItemName);
+		DetailInfoWidget->SetItemDescriptionText(this->SlotData->ItemData->ItemDescription);
+		DetailInfoWidget->SetItemPriceText(this->SlotData->ItemData->ItemPrice);
+
+		DetailInfoWidget->AddToViewport();
+		DetailInfoWidget->SetPositionInViewport(MousePos);
+	}	
+}
+
+void UInventorySlotWidget::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
+{
+	Super::NativeOnMouseLeave(InMouseEvent);
+	DetailInfoWidget->RemoveFromParent();
 }

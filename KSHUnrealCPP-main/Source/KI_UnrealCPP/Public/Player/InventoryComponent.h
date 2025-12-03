@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "Data/ItemDataAsset.h"
 #include "UI/Inventory/TempSlotWidget.h"
+#include "UI/Inventory/DetailInfoWidget.h"
 #include "InventoryComponent.generated.h"
 
 
@@ -32,6 +33,9 @@ public:
 	}
 
 	// getter/setter
+	inline int32 GetRemainingCount()const { 
+		return ItemData ? ItemData->ItemMaxStackCount - Count : 0;
+	}
 	int32 GetCount() const { return Count; }
 	void SetCount(int32 NewCount) {
 		if (ItemData && NewCount > 0)
@@ -115,6 +119,11 @@ public:
 	};
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	inline TSubclassOf<UDetailInfoWidget> GetDetailInfoWidget() {
+		return DetailInfoWidgetClass;
+	};
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	inline int32 GetInventorySize() const { return InventorySize; }
 
 protected:
@@ -123,6 +132,13 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
 	TSubclassOf<UTempSlotWidget> TempSlotWidgetClass = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
+	TSubclassOf<UDetailInfoWidget> DetailInfoWidgetClass = nullptr;
+
+
+	/*UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
+	TSharedRef<UDetailInfoWidget> DetailInfoWidgetClassTest;*/
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Inventory|Money")
 	int32 Money = 0;
