@@ -14,6 +14,12 @@ UInventoryComponent::UInventoryComponent()
 	Slots.SetNum(InventorySize);	// 인벤토리 크기만큼 빈 슬롯 만들기	
 }
 
+void UInventoryComponent::AddMoney(int32 InIncome)
+{
+	Money += InIncome;
+	OnInventoryMoneyChanged.ExecuteIfBound(Money);
+}
+
 int32 UInventoryComponent::AddItem(UItemDataAsset* InItemData, int32 InCount)
 {	
 	int32 remainingCount = InCount;
@@ -57,14 +63,6 @@ int32 UInventoryComponent::AddItem(UItemDataAsset* InItemData, int32 InCount)
 	return remainingCount;
 }
 
-void UInventoryComponent::AddInventoryMoney(int32 InCount)
-{
-	Money += InCount;
-	OnInventoryMoneyChanged.ExecuteIfBound(Money);
-	UE_LOG(LogTemp, Warning, TEXT("플레이어 돈 : %d"),Money);
-	
-}
-
 void UInventoryComponent::UseItem(int32 InUseIndex)
 {
 	FInvenSlot* slot = GetSlotData(InUseIndex);
@@ -72,10 +70,7 @@ void UInventoryComponent::UseItem(int32 InUseIndex)
 	{
 		UE_LOG(LogTemp, Log, TEXT("Inven %d Slot : 사용됨"), InUseIndex);
 		IUsableItem::Execute_UseItem(slot->ItemData, GetOwner());	// 이 컴포넌트를 가지고 있는 액터에게 아이템을 사용해라
-		/*bool IsActive = IUsableItem::Execute_UseItemPractice(slot->ItemData, GetOwner());
-		if (IsActive) {
-			UpdateSlotCount(InUseIndex, -1);
-		}*/
+
 		UpdateSlotCount(InUseIndex, -1);
 	}
 	else
@@ -88,7 +83,6 @@ void UInventoryComponent::SetItemAtIndex(int32 InSlotIndex, UItemDataAsset* InIt
 {
 	if (IsValidIndex(InSlotIndex))
 	{
-		UE_LOG(LogTemp, Log, TEXT("SetItemAtIndex : %d"), InSlotIndex);
 		FInvenSlot& TargetSlot = Slots[InSlotIndex];
 				
 		TargetSlot.ItemData = InItemData;
@@ -130,14 +124,6 @@ FInvenSlot* UInventoryComponent::GetSlotData(int32 InSlotIndex)
 	* ensure : 거짓이면 로그 출력하고 계속. shipping 빌드에 포함됨
 	*/	
 	return &Slots[InSlotIndex];
-}
-
-void UInventoryComponent::SetTempSlot(FInvenSlot Slotdata,int32 inIndex)
-{
-	TempSlot = Slotdata;
-	UE_LOG(LogTemp, Warning, TEXT("임시 슬롯에 %s 가 %d 개 있습니다."),*TempSlot.ItemData->ItemName.ToString(),TempSlot.GetCount());
-	ClearSlotAtIndex(inIndex);
-	
 }
 
 int32 UInventoryComponent::FindSlotWithItem(UItemDataAsset* InItemData, int32 InStartIndex)

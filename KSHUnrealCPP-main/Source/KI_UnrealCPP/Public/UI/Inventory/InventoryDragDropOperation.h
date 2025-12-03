@@ -14,7 +14,7 @@ UCLASS()
 class KI_UNREALCPP_API UInventoryDragDropOperation : public UDragDropOperation
 {
 	GENERATED_BODY()
-
+	
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory|Slot")
 	int32 Index = -1;
@@ -22,5 +22,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory|Slot")
 	TWeakObjectPtr<UItemDataAsset> ItemData = nullptr;
 
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory|Slot")
+	int32 Count = -1;
 };

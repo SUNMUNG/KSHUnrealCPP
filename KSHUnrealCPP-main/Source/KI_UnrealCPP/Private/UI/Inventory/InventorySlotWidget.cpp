@@ -4,13 +4,19 @@
 #include "UI/Inventory/InventorySlotWidget.h"
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
-#include "UI/Inventory/InventoryDragDropOperation.h"
 #include "player/InventoryComponent.h"
+#include "UI/Inventory/TempSlotWidget.h"
+#include "UI/Inventory/InventoryDragDropOperation.h"
 
-void UInventorySlotWidget::InitializeSlot(int32 InIndex, FInvenSlot* InSlotData)
+void UInventorySlotWidget::InitializeSlot(UInventoryComponent* InInventoryComponent ,int32 InIndex)
 {
-	Index = InIndex;
-	SlotData = InSlotData;
+	if (InInventoryComponent) {
+		TargetInventory = InInventoryComponent;
+		Index = InIndex;
+		SlotData = TargetInventory->GetSlotData(InIndex);
+		OnSlotRightClick.BindUFunction(TargetInventory.Get(), "UseItem");
+	}
+	
 
 	RefreshSlot();
 }
@@ -46,9 +52,62 @@ void UInventorySlotWidget::ClearSlotWidget() const
 	MaxCountText->SetVisibility(ESlateVisibility::Hidden);
 }
 
+void UInventorySlotWidget::NativeOnDragDetected(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent, UDragDropOperation*& OutOperation)
+{
+	Super::NativeOnDragDetected(InGeometry, InMouseEvent, OutOperation);
+	UE_LOG(LogTemp, Log, TEXT("DragDetected : %d Slot"), this->Index);
+
+	UInventoryDragDropOperation* DragOp = NewObject<UInventoryDragDropOperation>();
+	DragOp->Index = this->Index;
+	DragOp->ItemData = this->SlotData->ItemData;
+	DragOp->Count = this->SlotData->GetCount();
+	
+	UTempSlotWidget* DragTempWidget = CreateWidget<UTempSlotWidget>(this,TargetInventory->GetTempSlotWidget());
+
+	if (DragTempWidget) {
+		UE_LOG(LogTemp, Log, TEXT("DragTempWidget : 존재"));
+		DragTempWidget->SetItemIconImage(SlotData->ItemData->ItemIcon);
+		DragTempWidget->SetCountText(SlotData->GetCount());
+		DragOp->DefaultDragVisual = DragTempWidget;
+	}
+
+
+	OutOperation = DragOp;
+
+	TargetInventory->ClearSlotAtIndex(this->Index);
+}
+
+bool UInventorySlotWidget::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
+{
+	UInventoryDragDropOperation* invenOp = Cast<UInventoryDragDropOperation>(InOperation);
+	if (invenOp)
+	{
+		UE_LOG(LogTemp, Log, TEXT("Drop : %d Slot에 %s를 옮기기"), 
+			Index,
+			*(invenOp->ItemData->ItemName.ToString()));
+
+		TargetInventory->SetItemAtIndex(this->Index, invenOp->ItemData.Get(),invenOp->Count);
+
+		return true;
+	}	
+	return false;
+}
+
+void UInventorySlotWidget::NativeOnDragCancelled(const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
+{
+	Super::NativeOnDragCancelled(InDragDropEvent, InOperation);
+	UInventoryDragDropOperation* invenOp = Cast<UInventoryDragDropOperation>(InOperation);
+	if (invenOp)
+	{
+		UE_LOG(LogTemp, Log, 
+			TEXT("DragCancelled : 바닥에다가 (%s)아이템을 버려야 한다."), 
+			*(invenOp->ItemData->ItemName.ToString()));
+	}
+}
+
 FReply UInventorySlotWidget::NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
-	if (InMouseEvent.IsMouseButtonDown(EKeys::RightMouseButton))	// 마우스 우클릭했는지 확인
+	if (InMouseEvent.IsMouseButtonDown(EKeys::RightMouseButton))	// 마우스 오른쪽 버튼 눌렸는지 확인
 	{
 		if (SlotData->ItemData)
 		{
@@ -61,7 +120,8 @@ FReply UInventorySlotWidget::NativeOnMouseButtonDown(const FGeometry& InGeometry
 		}
 		return FReply::Handled();	// 이 마우스 클릭은 완료되었다라고 전달
 	}
-	else if (InMouseEvent.IsMouseButtonDown(EKeys::LeftMouseButton)) {
+	else if(InMouseEvent.IsMouseButtonDown(EKeys::LeftMouseButton))	// 마우스 왼쪽 버튼 눌렸는지 확인
+	{
 		if (SlotData->ItemData)
 		{
 			return FReply::Handled().DetectDrag(TakeWidget(), EKeys::LeftMouseButton);
@@ -69,49 +129,4 @@ FReply UInventorySlotWidget::NativeOnMouseButtonDown(const FGeometry& InGeometry
 	}
 
 	return Super::NativeOnMouseButtonDown(InGeometry, InMouseEvent);	// 나는 처리안했다. 부모 or 다른 위젯이 처리할거다.
-}
-
-void UInventorySlotWidget::NativeOnDragDetected(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent, UDragDropOperation*& OutOperation)
-{
-	Super::NativeOnDragDetected(InGeometry, InMouseEvent, OutOperation);
-
-	UInventoryDragDropOperation* DragOp = NewObject<UInventoryDragDropOperation>();
-	DragOp->Index = this->Index;
-	DragOp->ItemData = this->SlotData->ItemData;
-
-	UE_LOG(LogTemp, Log, TEXT("DragDetected : %s %d"), *DragOp->ItemData->ItemName.ToString(), DragOp->Index);
-
-	OnSlotDragDetected.ExecuteIfBound(*this->SlotData, this->Index);
-
-	OutOperation = DragOp;                                                                                                                                                                                                                              
-
-}
-
-
-bool UInventorySlotWidget::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
-{
-	UInventoryDragDropOperation* invenOp = Cast<UInventoryDragDropOperation>(InOperation);
-
-	if (invenOp) {
-		UE_LOG(LogTemp, Log, TEXT("Drop : %s %d"),*invenOp->ItemData.Get()->GetName(), Index);
-		OnSlotDropCompleted.ExecuteIfBound(this->Index, invenOp->ItemData.Get(), 1);
-		return true;
-	}
-
-	return false;
-	
-	//return Super::NativeOnDrop(InGeometry, InDragDropEvent, InOperation);
-}
-
-void UInventorySlotWidget::NativeOnDragCancelled(const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
-{
-	Super::NativeOnDragCancelled(InDragDropEvent, InOperation);
-	UInventoryDragDropOperation* invenOp = Cast<UInventoryDragDropOperation>(InOperation);
-
-	if (invenOp) {
-		UE_LOG(LogTemp, Log, TEXT("NativeOnDragCancelled"));
-		OnSlotDragCancelled.ExecuteIfBound(invenOp->Index,-1);
-		//픽업 아이템 버리기 해야함
-	}
-
 }

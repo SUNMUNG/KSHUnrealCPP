@@ -24,6 +24,4 @@ class KI_UNREALCPP_API IUsableItem
 public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ItemData|Usable")
 	void UseItem(AActor* InTarget);
-	//UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ItemData|Usable")
-	//bool UseItemPractice(AActor* InTarget);
 };

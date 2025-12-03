@@ -13,15 +13,13 @@ UCLASS()
 class KI_UNREALCPP_API UUsableItemDataAsset_Pouch : public UUsableItemDataAsset
 {
 	GENERATED_BODY()
+
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ItemData|Pouch")
-	int32 MoneyAmount = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemData|GoldPouch", meta = (ClampMin = "0"))
+	int32 MinGold = 10;
 
-private:
-
-	int32 MinMoney=100;
-
-	int32 MaxMoney=300;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemData|GoldPouch", meta = (ClampMin = "0"))
+	int32 MaxGold = 1000;
 
 public:
 	virtual void UseItem_Implementation(AActor* InTarget) override;

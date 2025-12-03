@@ -4,14 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "Player/InventoryComponent.h"
-#include "Data/ItemDataAsset.h"
 #include "InventorySlotWidget.generated.h"
 
+struct FInvenSlot;
+class UInventoryComponent;
 DECLARE_DYNAMIC_DELEGATE_OneParam(FOnSlotClicked, int32, InSlotIndex);
-DECLARE_DYNAMIC_DELEGATE_TwoParams(FOnSlotDragDetected,FInvenSlot,InSlotData,int32,inIndex);
-DECLARE_DYNAMIC_DELEGATE_TwoParams(FOnSlotDragCancelled, int32, InSlotIndex,int32,DropAmount);
-DECLARE_DYNAMIC_DELEGATE_ThreeParams(FOnSlotDropCompleted, int32, DropSlotIndex, UItemDataAsset*,Slotdata,int32,inCount);
 /**
  * 
  */
@@ -22,7 +19,7 @@ class KI_UNREALCPP_API UInventorySlotWidget : public UUserWidget
 	
 public:
 	// 이 위젯이 보여줄 데이터를 세팅
-	void InitializeSlot(int32 InIndex, FInvenSlot* InSlotData);
+	void InitializeSlot(UInventoryComponent* InInventoryComponent ,int32 InIndex);
 
 	// 설정된 데이터를 기반으로 위젯에서 표시하는 내용을 갱신
 	void RefreshSlot() const;
@@ -30,22 +27,21 @@ public:
 protected:
 	void ClearSlotWidget() const;
 
-	virtual FReply NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
-
+	// 드래그 감지
 	virtual void NativeOnDragDetected(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent, UDragDropOperation*& OutOperation) override;
-
+	
+	// 드래그 완료
 	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
 
+	// 드래그 취소
 	virtual void NativeOnDragCancelled(const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
+
+	// 마우스 버튼 클릭
+	virtual FReply NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
 
 public:
 	FOnSlotClicked OnSlotRightClick;
 
-	FOnSlotDragCancelled OnSlotDragCancelled;
-
-	FOnSlotDragDetected OnSlotDragDetected;
-
-	FOnSlotDropCompleted OnSlotDropCompleted;
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI|IventorySlot", meta = (BindWidget))
 	TObjectPtr<class UImage> ItemIconImage = nullptr;
@@ -60,11 +56,10 @@ protected:
 	TObjectPtr<class UTextBlock> MaxCountText = nullptr;
 
 private:
-
-
 	int32 Index = -1;
 
 	FInvenSlot* SlotData = nullptr;
 
-
+	UPROPERTY()
+	TWeakObjectPtr<UInventoryComponent> TargetInventory = nullptr;
 };

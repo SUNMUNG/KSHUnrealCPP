@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Data/ItemDataAsset.h"
+#include "UI/Inventory/TempSlotWidget.h"
 #include "InventoryComponent.generated.h"
 
 
@@ -69,18 +70,22 @@ public:
 
 	// 인벤토리에서 특정 슬롯에 변화가 있었을 때 호출되는 델리게이트
 	FOnInventorySlotChanged OnInventorySlotChanged;
+
+	// 인벤토리 내의 금액 변화가 있을 때 호출되는 델리게이트
 	FOnInventoryMoneyChanged OnInventoryMoneyChanged;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Inventory|Money")
-	int32 Money = 200;
-
 public:	
+	// 아이템을 특정칸에 추가하는 함수(초기화, 로딩 등에 사용)
+	// InSlotIndex: 아이템이 추가될 슬롯, InItemData: 추가되는 아이템의 종류, InCount: 추가되는 아이템의 갯수	
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void SetItemAtIndex(int32 InSlotIndex, UItemDataAsset* InItemData, int32 InCount);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void AddMoney(int32 InIncome);
+
 	// 아이템을 추가하는 함수(리턴:못먹은 아이템의 수, InItemData: 추가되는 아이템의 종류, InCount: 추가되는 아이템의 갯수)
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	int32 AddItem(UItemDataAsset* InItemData, int32 InCount);
-
-	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	void AddInventoryMoney(int32 InCount);
 
 	// 슬롯의 아이템을 사용하는 함수
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
@@ -103,29 +108,31 @@ public:
 		return InSlotIndex < InventorySize && InSlotIndex >= 0;
 	};
 
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	inline TSubclassOf<UTempSlotWidget> GetTempSlotWidget() {
+		return TempSlotWidgetClass;
+	};
+
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	inline int32 GetInventorySize() const { return InventorySize; }
-
-	UFUNCTION()
-	void SetTempSlot(FInvenSlot Slotdata, int32 inIndex);
-
-	UFUNCTION()
-	inline FInvenSlot GetTempSlot() { return TempSlot; }
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
 	int32 InventorySize = 10;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
+	TSubclassOf<UTempSlotWidget> TempSlotWidgetClass = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Inventory|Money")
+	int32 Money = 0;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory|Slot")
 	TArray<FInvenSlot> Slots;
 
-	FInvenSlot TempSlot;
 		
 private:
-	// 아이템을 특정칸에 추가하는 함수(초기화, 로딩 등에 사용)
-	// InSlotIndex: 아이템이 추가될 슬롯, InItemData: 추가되는 아이템의 종류, InCount: 추가되는 아이템의 갯수	
-	UFUNCTION()
-	void SetItemAtIndex(int32 InSlotIndex, UItemDataAsset* InItemData, int32 InCount);
+	
 
 	// 같은 종류의 아이템이 있는 슬롯을 찾는 함수
 	// InItemData: 비교할 아이템의 종류, InStartIndex: 찾기 시작할 인덱스

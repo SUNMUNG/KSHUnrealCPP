@@ -19,7 +19,7 @@ class UInventoryComponent;
 //class UAnimNotifyState_SectionJump;
 
 UCLASS()
-class KI_UNREALCPP_API AActionCharacter : public ACharacter, public IInventoryOwner, public IHasHealth,public IHasStamina
+class KI_UNREALCPP_API AActionCharacter : public ACharacter, public IInventoryOwner, public IHasHealth, public IHasStamina
 {
 	GENERATED_BODY()
 
@@ -49,8 +49,7 @@ public:
 	virtual void DamageHealth_Implementation(float InDamage) override;
 
 	// IHasStamina 인터페이스 함수 구현
-	virtual void IncreaseStamina_Implementation(float InStamina) override;
-	virtual void DecreaseStamina_Implementation(float InStamina) override;
+	virtual void RecoveryStamina_Implementation(float InRecovery) override;
 
 	// 무기를 장비하는 함수
 	UFUNCTION(BlueprintCallable, Category = "Weapon")

@@ -13,10 +13,11 @@ UCLASS()
 class KI_UNREALCPP_API UGoldPanelWidget : public UUserWidget
 {
 	GENERATED_BODY()
+
 public:
 	void SetGold(int32 InGold);
+	
 protected:
-
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<class UTextBlock> GoldText = nullptr;
 };

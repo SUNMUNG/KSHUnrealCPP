@@ -21,11 +21,7 @@ class KI_UNREALCPP_API IHasStamina
 	GENERATED_BODY()
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
-
 public:
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Health")
-	void IncreaseStamina(float InStamina);
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Health")
-	void DecreaseStamina(float InStamina);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Stamina")
+	void RecoveryStamina(float InRecovery);
 };

@@ -3,11 +3,12 @@
 
 #include "UI/Inventory/InventoryWidget.h"
 #include "UI/Inventory/InventorySlotWidget.h"
+#include "UI/Inventory/GoldPanelWidget.h"
+#include "UI/Inventory/InventoryDragDropOperation.h"
 #include "Components/Button.h"
 #include "Components/UniformGridPanel.h"
-#include "UI/Inventory/InventoryDragDropOperation.h"
-#include "UI/Inventory/GoldPanelWidget.h"
 #include "Player/InventoryComponent.h"
+
 
 void UInventoryWidget::NativeConstruct()
 {
@@ -34,23 +35,19 @@ void UInventoryWidget::InitializeInventoryWidget(UInventoryComponent* InventoryC
 				return;
 			}
 
-			TargetInventory->OnInventorySlotChanged.BindUFunction(this, "RefreshSlotWidget");
 			TargetInventory->OnInventoryMoneyChanged.BindUFunction(this, "RefreshMoneyPanel");
-			
-			RefreshMoneyPanel(TargetInventory->Money);
+			TargetInventory->OnInventorySlotChanged.BindUFunction(this, "RefreshSlotWidget");
+
+			RefreshMoneyPanel(0);
+
 			int32 size = FMath::Min(SlotGridPanel->GetChildrenCount(), TargetInventory->GetInventorySize());
 			SlotWidgets.Empty(size);
 			for (int i = 0; i < size; i++)
 			{
 				FInvenSlot* slotData = TargetInventory->GetSlotData(i);
 				UInventorySlotWidget* slotWidget = Cast<UInventorySlotWidget>(SlotGridPanel->GetChildAt(i));
-				slotWidget->InitializeSlot(i, slotData);// 인벤토리 컴포넌트에 저장되어있는 슬롯과 슬롯 위젯을 엮어주는 작업
-				//slotWidget->OnSlotRightClick.Clear();
-				slotWidget->OnSlotRightClick.BindUFunction(TargetInventory.Get(), "UseItem");
-				slotWidget->OnSlotDragDetected.BindUFunction(TargetInventory.Get(),"SetTempSlot");
-				slotWidget->OnSlotDragCancelled.BindUFunction(TargetInventory.Get(), "UpdateSlotCount");
-				slotWidget->OnSlotDropCompleted.BindUFunction(TargetInventory.Get(), "SetItemAtIndex");
-
+				slotWidget->InitializeSlot(TargetInventory.Get(), i);// 인벤토리 컴포넌트에 저장되어있는 슬롯과 슬롯 위젯을 엮어주는 작업
+				
 				SlotWidgets.Add(slotWidget);
 			}
 		}
@@ -65,6 +62,11 @@ void UInventoryWidget::RefreshInventoryWidget()
 	}
 }
 
+void UInventoryWidget::RefreshMoneyPanel(int32 CurrentMoney)
+{
+	GoldPanel->SetGold(CurrentMoney);
+}
+
 void UInventoryWidget::RefreshSlotWidget(int32 InSlotIndex)
 {
 	if (IsValidIndex(InSlotIndex))
@@ -73,30 +75,23 @@ void UInventoryWidget::RefreshSlotWidget(int32 InSlotIndex)
 	}
 }
 
-void UInventoryWidget::RefreshMoneyPanel(int32 CurrentMoney)
-{
-	GoldPanelWidget->SetGold(CurrentMoney);
-}
-
 void UInventoryWidget::ClearInventoryWidget()
 {
 	TargetInventory = nullptr;
+}
+
+bool UInventoryWidget::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
+{
+	UInventoryDragDropOperation* invenOp = Cast<UInventoryDragDropOperation>(InOperation);
+	if (invenOp)
+	{
+		UE_LOG(LogTemp, Log, TEXT("인벤토리에 드랍 : 원래 슬롯(%d)으로 아이템이 돌아가야 한다."), invenOp->Index);
+		return true;
+	}
+	return false;	
 }
 
 void UInventoryWidget::OnCloseClicked()
 {
 	OnInventoryCloseRequested.Broadcast();	// 닫힘 버튼이 눌려졌음을 알리기만 함
 }
-
-bool UInventoryWidget::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
-{
-
-	UInventoryDragDropOperation* invenOp=Cast<UInventoryDragDropOperation>(InOperation);
-
-	if (invenOp) {
-		UE_LOG(LogTemp, Log, TEXT("인벤토리에 드랍"));                                                                                                                                 
-		return true;
-	}
-	return false;
-}
-

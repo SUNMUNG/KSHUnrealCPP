@@ -22,15 +22,21 @@ public:
 	void InitializeInventoryWidget(class UInventoryComponent* InventoryComponent);
 	void RefreshInventoryWidget();
 
-	UFUNCTION()
-	void RefreshSlotWidget(int32 InSlotIndex);
+
 	UFUNCTION()
 	void RefreshMoneyPanel(int32 CurrentMoney);
+
+	UFUNCTION()
+	void RefreshSlotWidget(int32 InSlotIndex);
 
 	void ClearInventoryWidget();
 
 	UPROPERTY(BlueprintAssignable, Category = "UI|Inventory")
 	FOnInventoryCloseRequested OnInventoryCloseRequested;
+
+protected:
+	// 드래그 완료
+	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
 	
 private:
 	UFUNCTION()
@@ -41,8 +47,6 @@ private:
 		return InSlotIndex < SlotWidgets.Num() && InSlotIndex >= 0;
 	};
 
-	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
-
 protected:
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<class UButton> CloseButton = nullptr;
@@ -51,13 +55,11 @@ protected:
 	TObjectPtr<class UUniformGridPanel> SlotGridPanel = nullptr;
 
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<class UGoldPanelWidget> GoldPanelWidget = nullptr;
+	TObjectPtr<class UGoldPanelWidget> GoldPanel = nullptr;
 
 private:
 	UPROPERTY()
 	TWeakObjectPtr<UInventoryComponent> TargetInventory = nullptr;
 
 	TArray<TObjectPtr<class UInventorySlotWidget>> SlotWidgets;
-
-
 };
