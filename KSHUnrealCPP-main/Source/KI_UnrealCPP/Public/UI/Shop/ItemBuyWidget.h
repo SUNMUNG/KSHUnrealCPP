@@ -6,6 +6,11 @@
 #include "Blueprint/UserWidget.h"
 #include "ItemBuyWidget.generated.h"
 
+class UImage;
+class UTextBlock;
+class UEditableTextBox;
+class UButton;
+class UOverlay;
 /**
  * 
  */
@@ -13,6 +18,41 @@ UCLASS()
 class KI_UNREALCPP_API UItemBuyWidget : public UUserWidget
 {
 	GENERATED_BODY()
+protected:
+	virtual void NativeConstruct() override;
 	
+private:
+	UFUNCTION()
+	void OnItemCountTextChanged(const FText& Text);
 
+	UFUNCTION()
+	void OnItemCountTextCommitted(const FText& Text, ETextCommit::Type CommitMethod);
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "Shop|ItemBuy", meta = (BindWidget))
+	TObjectPtr<UImage> ItemIcon = nullptr;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Shop|ItemBuy", meta = (BindWidget))
+	TObjectPtr<UTextBlock> ItemName = nullptr;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Shop|ItemBuy", meta = (BindWidget))
+	TObjectPtr<UTextBlock> ItemPrice = nullptr;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Shop|ItemBuy", meta = (BindWidget))
+	TObjectPtr<UTextBlock> ItemDescription = nullptr;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Shop|ItemBuy", meta = (BindWidget))
+	TObjectPtr<UTextBlock> ItemStackCount = nullptr;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Shop|ItemBuy", meta = (BindWidget))
+	TObjectPtr<UOverlay> Soldout = nullptr;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Shop|ItemBuy", meta = (BindWidget))
+	TObjectPtr<UEditableTextBox> ItemCount = nullptr;
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Shop|ItemBuy", meta = (BindWidget))
+	TObjectPtr<UButton> ItemBuy = nullptr;
+private:
+	static const int32 MinimumItemCount = 1;
+
+	int32 MaxStackCount = -1;
 };
