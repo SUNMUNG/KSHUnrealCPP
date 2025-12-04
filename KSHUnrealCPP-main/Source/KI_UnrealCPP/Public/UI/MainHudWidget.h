@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "UI/Inventory/InventoryWidget.h"
+#include "UI/Shop/ShopWidget.h"
 #include "MainHudWidget.generated.h"
 
 UENUM(BlueprintType)
@@ -30,6 +31,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "UI|Inventory")
 	void CloseInventory();
 
+	UFUNCTION(BlueprintCallable, Category = "UI|Shop")
+	void OpenShopUI();
+
+	UFUNCTION(BlueprintCallable, Category = "UI|Shop")
+	void CloseShopUI();
+
 	void AddToInventoryCloseDelegate(const FScriptDelegate& Delegate)
 	{
 		if (Inventory)
@@ -37,9 +44,19 @@ public:
 			Inventory->OnInventoryCloseRequested.Add(Delegate);
 		}
 	}
+	void AddToShopCloseDelegate(const FScriptDelegate& Delegate)
+	{
+		if (Shop)
+		{
+			Shop->OnShopCloseRequested.Add(Delegate);
+		}
+	}
 
-	inline EOpenState GetOpenState() const { return OpenState; }	
+	inline EOpenState GetInventoryOpenState() const { return InventoryOpenState; }	
+	inline EOpenState GetShopOpenState() const { return ShopOpenState; }	
 	inline UInventoryWidget* GetInventoryWidget() const { return Inventory; }
+
+	inline UShopWidget* GetShopWidget() const { return Shop; }
 
 protected:
 	// meta = (BindWidget)
@@ -54,7 +71,12 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory", meta = (BindWidget))
 	TObjectPtr<UInventoryWidget> Inventory = nullptr;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Shop", meta = (BindWidget))
+	TObjectPtr<UShopWidget> Shop = nullptr;
+
 private:
-	EOpenState OpenState = EOpenState::Close;
+	EOpenState InventoryOpenState = EOpenState::Close;
+
+	EOpenState ShopOpenState = EOpenState::Close;
 	
 };

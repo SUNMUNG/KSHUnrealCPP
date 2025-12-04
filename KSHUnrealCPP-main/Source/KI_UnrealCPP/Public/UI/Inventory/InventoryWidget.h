@@ -8,6 +8,7 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryCloseRequested);
 
+
 /**
  * 
  */
@@ -33,6 +34,7 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Category = "UI|Inventory")
 	FOnInventoryCloseRequested OnInventoryCloseRequested;
+
 
 protected:
 	// 드래그 완료

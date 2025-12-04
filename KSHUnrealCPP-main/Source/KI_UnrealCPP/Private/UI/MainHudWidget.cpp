@@ -9,7 +9,8 @@
 void UMainHudWidget::NativeConstruct()
 {
 	CloseInventory();
-
+	CloseShopUI();
+	
 	AActionCharacter* player = Cast<AActionCharacter>(GetOwningPlayerPawn());
 	if (player)
 	{
@@ -28,11 +29,23 @@ void UMainHudWidget::OpenInventory()
 {
 	Inventory->RefreshInventoryWidget();	// 열릴때마다 UI 내용 갱신
 	Inventory->SetVisibility(ESlateVisibility::Visible);
-	OpenState = EOpenState::Open;
+	InventoryOpenState = EOpenState::Open;
 }
 
 void UMainHudWidget::CloseInventory()
 {
-	OpenState = EOpenState::Close;
+	InventoryOpenState = EOpenState::Close;
 	Inventory->SetVisibility(ESlateVisibility::Hidden);
+}
+
+void UMainHudWidget::OpenShopUI()
+{
+	ShopOpenState = EOpenState::Open;
+	Shop->SetVisibility(ESlateVisibility::Visible);
+}
+
+void UMainHudWidget::CloseShopUI()
+{
+	ShopOpenState = EOpenState::Close;
+	Shop->SetVisibility(ESlateVisibility::Hidden);
 }

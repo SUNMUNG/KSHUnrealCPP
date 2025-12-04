@@ -24,6 +24,7 @@ public:
 	// 설정된 데이터를 기반으로 위젯에서 표시하는 내용을 갱신
 	void RefreshSlot() const;
 
+
 protected:
 	void ClearSlotWidget() const;
 
