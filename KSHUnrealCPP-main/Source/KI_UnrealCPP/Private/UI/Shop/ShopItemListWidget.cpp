@@ -16,7 +16,6 @@ void UShopItemListWidget::NativeConstruct()
 			UItemBuyWidget* widget = Cast<UItemBuyWidget>(ItemBoxContainer->GetChildAt(i));
 			ShopItems.Add(widget);
 		}
-		
 	}
 }
 

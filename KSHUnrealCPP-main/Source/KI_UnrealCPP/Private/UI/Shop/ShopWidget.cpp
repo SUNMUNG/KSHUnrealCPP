@@ -40,9 +40,7 @@ bool UShopWidget::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent
 			UE_LOG(LogTemp, Log, TEXT("TargetInventory X"), invenOp->StartIndex);
 		}
 	}
-	else {
-		UE_LOG(LogTemp, Log, TEXT("ItemData X"), invenOp->StartIndex);
-	}
+	
 	return false;
 }
 

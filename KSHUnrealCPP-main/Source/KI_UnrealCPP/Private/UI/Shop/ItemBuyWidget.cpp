@@ -11,6 +11,30 @@
 #include "Player/InventoryOwner.h"
 
 
+void UItemBuyWidget::BuyItem()
+{
+	int32 itemcount = FCString::Atoi(*ItemCount->GetText().ToString());
+	if (itemcount == 0) {
+		UE_LOG(LogTemp, Log, TEXT("구매할 수량이 0 입니다."));
+		return;
+	}
+
+	if (MaxStackCount - itemcount >= 0) {
+		MaxStackCount -= itemcount;
+		ItemStackCount->SetText(FText::AsNumber(MaxStackCount));
+		UE_LOG(LogTemp, Log, TEXT("구매처리 : %d"), itemPrice*itemcount);
+		if (MaxStackCount == 0) {
+			Soldout->SetVisibility(ESlateVisibility::Visible);
+			UE_LOG(LogTemp, Log, TEXT("SOLD OUT"));
+		}
+	}
+	else {
+		UE_LOG(LogTemp, Log, TEXT("재고가 없습니다."));
+	}
+	
+	
+}
+
 void UItemBuyWidget::SetItemData(const UItemDataAsset* itemData, int32 stockCount)
 {
 	ItemIcon->SetBrushFromTexture(itemData->ItemIcon);
@@ -18,6 +42,8 @@ void UItemBuyWidget::SetItemData(const UItemDataAsset* itemData, int32 stockCoun
 	ItemPrice->SetText(FText::AsNumber(itemData->ItemPrice));
 	ItemDescription->SetText(itemData->ItemDescription);
 	ItemStackCount->SetText(FText::AsNumber(stockCount));
+	MaxStackCount = stockCount;
+	itemPrice = itemData->ItemPrice;
 }
 
 void UItemBuyWidget::NativeConstruct()
@@ -30,8 +56,10 @@ void UItemBuyWidget::NativeConstruct()
 
 		ItemCount->SetHintText(FText::AsNumber(MinimumItemCount));
 	}
-	if (ItemStackCount) {
-		MaxStackCount = FCString::Atoi(*ItemStackCount->GetText().ToString());
+
+	if (ItemBuy) {
+		
+		ItemBuy->OnClicked.AddDynamic(this, &UItemBuyWidget::BuyItem);
 	}
 }
 
@@ -54,7 +82,7 @@ void UItemBuyWidget::OnItemCountTextCommitted(const FText& Text, ETextCommit::Ty
 	if (number.IsNumeric()) {
 		int32 count = FCString::Atoi(*number);
 
-		UE_LOG(LogTemp, Log, TEXT("%d %d"), count, MaxStackCount);
+		//UE_LOG(LogTemp, Log, TEXT("%d %d"), count, MaxStackCount);
 		if (MaxStackCount > count) {
 			ItemCount->SetText(FText::AsNumber(count));
 		}

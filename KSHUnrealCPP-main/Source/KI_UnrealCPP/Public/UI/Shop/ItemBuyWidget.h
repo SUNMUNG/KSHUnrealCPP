@@ -20,6 +20,8 @@ class KI_UNREALCPP_API UItemBuyWidget : public UUserWidget
 	GENERATED_BODY()
 
 public:
+	UFUNCTION()
+	void BuyItem();
 
 	void SetItemData(const class UItemDataAsset* itemData, int32 stockCount);
 protected:
@@ -60,4 +62,6 @@ private:
 	static const int32 MinimumItemCount = 1;
 
 	int32 MaxStackCount = -1;
+
+	int32 itemPrice = -1;
 };
