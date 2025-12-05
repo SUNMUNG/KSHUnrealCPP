@@ -22,6 +22,9 @@ public:
 	void InitializeShopWidget(UInventoryComponent* InInventoryComponent);
 
 protected:
+
+	void ResetShopItemListWidget();
+
 	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
 
 	virtual void NativeConstruct() override;
@@ -33,6 +36,11 @@ protected:
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<class UButton> ExitButton = nullptr;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Shop|Buy", meta = (BindWidget))
+	TObjectPtr<class UShopItemListWidget> ItemListWidget = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Shop|Buy")
+	TWeakObjectPtr<UDataTable> ShopItemList = nullptr;
 private:
 
 	UPROPERTY()

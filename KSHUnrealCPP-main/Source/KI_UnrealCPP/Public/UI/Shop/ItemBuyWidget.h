@@ -18,8 +18,13 @@ UCLASS()
 class KI_UNREALCPP_API UItemBuyWidget : public UUserWidget
 {
 	GENERATED_BODY()
+
+public:
+
+	void SetItemData(const class UItemDataAsset* itemData, int32 stockCount);
 protected:
 	virtual void NativeConstruct() override;
+	
 	
 private:
 	UFUNCTION()

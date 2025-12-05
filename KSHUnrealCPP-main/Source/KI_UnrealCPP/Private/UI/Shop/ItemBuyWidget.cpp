@@ -11,6 +11,15 @@
 #include "Player/InventoryOwner.h"
 
 
+void UItemBuyWidget::SetItemData(const UItemDataAsset* itemData, int32 stockCount)
+{
+	ItemIcon->SetBrushFromTexture(itemData->ItemIcon);
+	ItemName->SetText(itemData->ItemName);
+	ItemPrice->SetText(FText::AsNumber(itemData->ItemPrice));
+	ItemDescription->SetText(itemData->ItemDescription);
+	ItemStackCount->SetText(FText::AsNumber(stockCount));
+}
+
 void UItemBuyWidget::NativeConstruct()
 {
 	Super::NativeConstruct();

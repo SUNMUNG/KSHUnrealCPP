@@ -4,6 +4,7 @@
 #include "UI/Shop/ShopWidget.h"
 #include "UI/Inventory/InventoryDragDropOperation.h"
 #include "Player/InventoryComponent.h"
+#include "UI/Shop/ShopItemListWidget.h"
 #include "Components/Button.h"
 
 void UShopWidget::OnExitClicked()
@@ -14,6 +15,15 @@ void UShopWidget::OnExitClicked()
 void UShopWidget::InitializeShopWidget(UInventoryComponent* InInventoryComponent)
 {
 	TargetInventory = InInventoryComponent;
+}
+
+
+
+void UShopWidget::ResetShopItemListWidget()
+{
+	if (ShopItemList.IsValid()) {
+		ItemListWidget->ResetItemList(ShopItemList.Get());
+	}
 }
 
 bool UShopWidget::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
@@ -38,6 +48,9 @@ bool UShopWidget::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent
 
 void UShopWidget::NativeConstruct()
 {
+	Super::NativeConstruct();
 	ExitButton->OnClicked.AddDynamic(this, &UShopWidget::OnExitClicked);
+
+	ResetShopItemListWidget();
 }
 
