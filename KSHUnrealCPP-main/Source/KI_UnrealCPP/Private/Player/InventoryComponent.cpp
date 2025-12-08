@@ -17,7 +17,7 @@ UInventoryComponent::UInventoryComponent()
 void UInventoryComponent::AddMoney(int32 InIncome)
 {
 	Money += InIncome;
-	OnInventoryMoneyChanged.ExecuteIfBound(Money);
+	OnInventoryMoneyChanged.Broadcast(Money);
 }
 
 int32 UInventoryComponent::AddItem(UItemDataAsset* InItemData, int32 InCount)
@@ -79,7 +79,7 @@ void UInventoryComponent::UseItem(int32 InUseIndex)
 	}
 }
 
-void UInventoryComponent::SetItemAtIndex(int32 InSlotIndex, UItemDataAsset* InItemData, int32 InCount)
+void UInventoryComponent::SetItemAtIndex(int32 InSlotIndex,UItemDataAsset* InItemData, int32 InCount)
 {
 	if (IsValidIndex(InSlotIndex))
 	{

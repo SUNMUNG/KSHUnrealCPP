@@ -4,12 +4,13 @@
 #include "UI/MainHudWidget.h"
 #include "Player/ActionCharacter.h"
 #include "Player/ResourceComponent.h"
+#include "Player/InventoryComponent.h"
 #include "UI/ResourceBarWidget.h"
 
 void UMainHudWidget::NativeConstruct()
 {
 	CloseInventory();
-	CloseShopUI();
+	CloseShop();
 	
 	AActionCharacter* player = Cast<AActionCharacter>(GetOwningPlayerPawn());
 	if (player)
@@ -21,6 +22,11 @@ void UMainHudWidget::NativeConstruct()
 
 			HealthBar->RefreshWidget(resource->GetCurrentHealth(), resource->GetMaxHealth());
 			StaminaBar->RefreshWidget(resource->GetCurrentStamina(), resource->GetMaxStamina());
+		}
+		if (UInventoryComponent* inventory = player->GetInventoryComponent()) {
+			if (Shop) {
+				inventory->OnInventoryMoneyChanged.AddDynamic(Shop, &UShopWidget::UpdateAllBuyButtonState);
+			}
 		}
 	}
 }
@@ -47,5 +53,16 @@ void UMainHudWidget::OpenShopUI()
 void UMainHudWidget::CloseShopUI()
 {
 	ShopOpenState = EOpenState::Close;
+	Shop->SetVisibility(ESlateVisibility::Hidden);
+}
+
+void UMainHudWidget::OpenShop(UDataTable* ItemList)
+{
+	Shop->InitializeShop(ItemList);
+	Shop->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+}
+
+void UMainHudWidget::CloseShop()
+{
 	Shop->SetVisibility(ESlateVisibility::Hidden);
 }

@@ -7,8 +7,9 @@
 #include "Components/TextBlock.h"
 #include "Components/EditableTextBox.h"
 #include "Components/Overlay.h"
-#include "Data/ItemDataAsset.h"
 #include "Player/InventoryOwner.h"
+#include "Data/ItemDataAsset.h"
+
 
 
 void UItemBuyWidget::BuyItem()
@@ -20,11 +21,27 @@ void UItemBuyWidget::BuyItem()
 	}
 
 	if (MaxStackCount - itemcount >= 0) {
-		MaxStackCount -= itemcount;
-		ItemStackCount->SetText(FText::AsNumber(MaxStackCount));
-		UE_LOG(LogTemp, Log, TEXT("구매처리 : %d"), itemPrice*itemcount);
+
+		APawn* player = GetOwningPlayerPawn();
+		int32 BuyPrice = itemPrice * itemcount;
+		if (player && player->Implements<UInventoryOwner>()) {
+			if (IInventoryOwner::Execute_HasEnoughMoney(player, BuyPrice)) {
+				UE_LOG(LogTemp, Log, TEXT("구매처리 : %d"), BuyPrice);
+				MaxStackCount -= itemcount;
+				ItemStackCount->SetText(FText::AsNumber(MaxStackCount));
+				IInventoryOwner::Execute_RemoveMoney(player,BuyPrice);
+				IInventoryOwner::Execute_AddItem(player, ItemData.Get(), itemcount);
+			}
+			else {
+				UE_LOG(LogTemp, Log, TEXT("구매불가능"));
+			}
+			
+		}
+		
 		if (MaxStackCount == 0) {
-			Soldout->SetVisibility(ESlateVisibility::Visible);
+			Soldout->SetVisibility(ESlateVisibility::HitTestInvisible);
+			ItemBuy->SetIsEnabled(false);
+			ItemCount->SetIsEnabled(false);
 			UE_LOG(LogTemp, Log, TEXT("SOLD OUT"));
 		}
 	}
@@ -35,8 +52,11 @@ void UItemBuyWidget::BuyItem()
 	
 }
 
-void UItemBuyWidget::SetItemData(const UItemDataAsset* itemData, int32 stockCount)
+void UItemBuyWidget::SetItemData(UItemDataAsset* itemData, int32 stockCount)
 {
+	ItemCount->SetIsEnabled(true);
+	Soldout->SetVisibility(ESlateVisibility::Hidden);
+
 	ItemIcon->SetBrushFromTexture(itemData->ItemIcon);
 	ItemName->SetText(itemData->ItemName);
 	ItemPrice->SetText(FText::AsNumber(itemData->ItemPrice));
@@ -44,6 +64,25 @@ void UItemBuyWidget::SetItemData(const UItemDataAsset* itemData, int32 stockCoun
 	ItemStackCount->SetText(FText::AsNumber(stockCount));
 	MaxStackCount = stockCount;
 	itemPrice = itemData->ItemPrice;
+	ItemData = itemData;
+	
+
+	UpdateBuyButton();
+}
+
+void UItemBuyWidget::UpdateBuyButton()
+{
+	APawn* player = GetOwningPlayerPawn();
+
+	if (player && player->Implements<UInventoryOwner>()) {
+		if (bool hasEnoughMoney = IInventoryOwner::Execute_HasEnoughMoney(player, itemPrice)) {
+			ItemBuy->SetIsEnabled(hasEnoughMoney);
+		}
+		else {
+			ItemBuy->SetIsEnabled(hasEnoughMoney);
+		}
+	}
+
 }
 
 void UItemBuyWidget::NativeConstruct()
@@ -60,6 +99,10 @@ void UItemBuyWidget::NativeConstruct()
 	if (ItemBuy) {
 		
 		ItemBuy->OnClicked.AddDynamic(this, &UItemBuyWidget::BuyItem);
+	}
+
+	if (Soldout) {
+		Soldout->SetVisibility(ESlateVisibility::Hidden);
 	}
 }
 

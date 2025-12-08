@@ -16,11 +16,14 @@ class KI_UNREALCPP_API UShopWidget : public UUserWidget
 {
 	GENERATED_BODY()
 public:
+	void InitializeShop(UDataTable* ItemList);
+
 	UFUNCTION()
 	void OnExitClicked();
 
 	void InitializeShopWidget(UInventoryComponent* InInventoryComponent);
-
+	UFUNCTION()
+	void UpdateAllBuyButtonState(int32 _);
 protected:
 
 	void ResetShopItemListWidget();

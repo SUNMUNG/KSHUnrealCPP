@@ -37,6 +37,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "UI|Shop")
 	void CloseShopUI();
 
+	void OpenShop(UDataTable* ItemList);
+	void CloseShop();
+
 	void AddToInventoryCloseDelegate(const FScriptDelegate& Delegate)
 	{
 		if (Inventory)

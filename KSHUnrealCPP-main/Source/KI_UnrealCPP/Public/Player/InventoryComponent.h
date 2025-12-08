@@ -55,7 +55,7 @@ protected:
 };
 
 DECLARE_DYNAMIC_DELEGATE_OneParam(FOnInventorySlotChanged, int32, InIndex);
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOnInventoryMoneyChanged, int32, CurrentMoney);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryMoneyChanged, int32, CurrentMoney);
 
 // 여러개의 아이템 슬롯을 가진다.
 // 하나의 슬롯에는 한종류의 아이템만 들어간다.
@@ -82,7 +82,7 @@ public:
 	// 아이템을 특정칸에 추가하는 함수(초기화, 로딩 등에 사용)
 	// InSlotIndex: 아이템이 추가될 슬롯, InItemData: 추가되는 아이템의 종류, InCount: 추가되는 아이템의 갯수	
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	void SetItemAtIndex(int32 InSlotIndex, UItemDataAsset* InItemData, int32 InCount);
+	void SetItemAtIndex(int32 InSlotIndex,UItemDataAsset* InItemData, int32 InCount);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void AddMoney(int32 InIncome);
@@ -95,6 +95,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void UseItem(int32 InUseIndex);
 		
+	UFUNCTION()
+	inline int32 GetMoney() { return Money; }
+
 	// 특정 칸에 있는 아이템의 갯수를 조절하는 함수(증가/감소)
 	// InSlotIndex: 변경할 슬롯, InDeltaCount: 변화량
 	UFUNCTION(BlueprintCallable, Category = "Inventory")

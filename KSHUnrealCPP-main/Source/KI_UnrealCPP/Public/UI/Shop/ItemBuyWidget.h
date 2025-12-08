@@ -23,7 +23,10 @@ public:
 	UFUNCTION()
 	void BuyItem();
 
-	void SetItemData(const class UItemDataAsset* itemData, int32 stockCount);
+	void SetItemData(class UItemDataAsset* itemData, int32 stockCount);
+
+	void UpdateBuyButton();
+
 protected:
 	virtual void NativeConstruct() override;
 	
@@ -64,4 +67,8 @@ private:
 	int32 MaxStackCount = -1;
 
 	int32 itemPrice = -1;
+
+	TWeakObjectPtr<UItemDataAsset> ItemData = nullptr;
+
+	
 };

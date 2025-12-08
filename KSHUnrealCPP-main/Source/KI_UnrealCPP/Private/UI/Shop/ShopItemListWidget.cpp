@@ -19,6 +19,13 @@ void UShopItemListWidget::NativeConstruct()
 	}
 }
 
+void UShopItemListWidget::UpdateAllBuyButton()
+{
+	for (UItemBuyWidget* item : ShopItems) {
+		item->UpdateBuyButton();
+	}
+}
+
 void UShopItemListWidget::ResetItemList(UDataTable* ItemList)
 {
 	int32 index = 0;
@@ -48,5 +55,6 @@ void UShopItemListWidget::ResetItemList(UDataTable* ItemList)
 		ShopItems[index]->SetItemData(selectedRows[i]->ItemData, selectedRows[i]->StockCount);
 		index++;
 	}
+	
 }
 

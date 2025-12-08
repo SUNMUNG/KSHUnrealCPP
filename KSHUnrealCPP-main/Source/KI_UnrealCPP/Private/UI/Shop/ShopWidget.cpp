@@ -7,6 +7,12 @@
 #include "UI/Shop/ShopItemListWidget.h"
 #include "Components/Button.h"
 
+void UShopWidget::InitializeShop(UDataTable* ItemList)
+{
+	ShopItemList = ItemList;
+	ResetShopItemListWidget();
+}
+
 void UShopWidget::OnExitClicked()
 {
 	OnShopCloseRequested.Broadcast();
@@ -18,6 +24,13 @@ void UShopWidget::InitializeShopWidget(UInventoryComponent* InInventoryComponent
 }
 
 
+
+void UShopWidget::UpdateAllBuyButtonState(int32 _)
+{
+	if (GetVisibility() == ESlateVisibility::Visible) {
+		ItemListWidget->UpdateAllBuyButton();
+	}
+}
 
 void UShopWidget::ResetShopItemListWidget()
 {

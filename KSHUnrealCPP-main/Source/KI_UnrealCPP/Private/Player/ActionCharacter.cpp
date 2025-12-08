@@ -11,6 +11,7 @@
 #include "Player/StatusComponent.h"
 #include "Player/WeaponManagerComponent.h"
 #include "Player/InventoryComponent.h"
+#include "NPC/Interactable.h"
 #include "Weapon/WeaponActor.h"
 #include "Weapon/UsedWeapon.h"
 #include "Weapon/ConsumableWeapon.h"
@@ -75,6 +76,8 @@ void AActionCharacter::BeginPlay()
 
 	// 캐릭터에 다른 액터가 오버랩되었을 때 실행하기 위한 바인딩
 	OnActorBeginOverlap.AddDynamic(this, &AActionCharacter::OnBeginOverlap);
+
+	InteractionTargets.Empty();
 }
 
 // Called every frame
@@ -104,6 +107,7 @@ void AActionCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 			});
 		enhanced->BindAction(IA_Roll, ETriggerEvent::Triggered, this, &AActionCharacter::OnRollInput);
 		enhanced->BindAction(IA_Attack, ETriggerEvent::Triggered, this, &AActionCharacter::OnAttackInput);
+		enhanced->BindAction(IA_InterAction, ETriggerEvent::Triggered, this, &AActionCharacter::OnInterActionInput);
 	}
 }
 
@@ -151,6 +155,15 @@ void AActionCharacter::AddMoney_Implementation(int32 Income)
 void AActionCharacter::RemoveMoney_Implementation(int32 Expense)
 {
 	UE_LOG(LogTemp, Log, TEXT("돈 (%d) 골드를 사용했습니다."), Expense);
+	Inventory->AddMoney(-Expense);
+}
+
+bool AActionCharacter::HasEnoughMoney_Implementation(int32 InPrice)
+{
+	if (Inventory->GetMoney() - InPrice < 0) {
+		return false;
+	}
+	return true;
 }
 
 void AActionCharacter::HealHealth_Implementation(float InHeal)
@@ -167,6 +180,47 @@ void AActionCharacter::DamageHealth_Implementation(float InDamage)
 	{
 		Resource->AddHealth(-InDamage);
 	}
+}
+
+void AActionCharacter::SetInteractionTarget_Implementation(AActor* Intarget)
+{
+	/*if (Intarget->Implements<UInteractable>()) {
+		InteractionTargets.Add(Intarget);
+		FVector currentLocation = GetActorLocation();
+		InteractionTargets.Sort([currentLocation](const AActor& A, const AActor& B)
+			{
+				if (!IsValid(&A) || !IsValid(&B)) return false;
+
+				float DistSqA = FVector::DistSquared(A.GetActorLocation(), currentLocation);
+				float DistSqB = FVector::DistSquared(B.GetActorLocation(), currentLocation);
+
+				return DistSqA < DistSqB;
+			});
+		
+	}*/
+
+
+	//if (InteractionTargets.IsValid()) {
+	//	float distanceOld = FVector::DistSquared(GetActorLocation(), InteractionTarget->GetActorLocation());
+	//	float distanceNew = FVector::DistSquared(GetActorLocation(), Intarget->GetActorLocation());
+	//	if (distanceNew < distanceOld) {
+	//		InteractionTarget = Intarget;
+	//	}
+	//}
+	//else {
+	//	InteractionTargets = Intarget;
+	//}
+	
+}
+
+void AActionCharacter::ClearInteractionTarget_Implementation(AActor* Intarget)
+{
+	
+}
+
+void AActionCharacter::TryInteraction_Implementation()
+{
+	
 }
 
 void AActionCharacter::RecoveryStamina_Implementation(float InRecovery)
@@ -299,6 +353,10 @@ void AActionCharacter::OnAttackInput(const FInputActionValue& InValue)
 			SectionJumpForCombo();			
 		}		
 	}
+}
+
+void AActionCharacter::OnInterActionInput(const FInputActionValue& InValue)
+{
 }
 
 void AActionCharacter::SetSprintMode()
