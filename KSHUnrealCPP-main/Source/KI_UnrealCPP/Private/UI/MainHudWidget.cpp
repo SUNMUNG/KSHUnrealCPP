@@ -49,12 +49,12 @@ void UMainHudWidget::OpenInventory()
 {
 	Inventory->RefreshInventoryWidget();	// 열릴때마다 UI 내용 갱신
 	Inventory->SetVisibility(ESlateVisibility::Visible);
-	OpenState = EOpenState::Open;
+	InventoryState = EOpenState::Open;
 }
 
 void UMainHudWidget::CloseInventory()
 {
-	OpenState = EOpenState::Close;
+	InventoryState = EOpenState::Close;
 	Inventory->SetVisibility(ESlateVisibility::Hidden);
 }
 
@@ -62,6 +62,7 @@ void UMainHudWidget::OpenShop(UDataTable* ItemList)
 {
 	if (ItemList)
 	{
+		ShopState = EOpenState::Open;
 		Shop->InitializeShop(ItemList);
 		Shop->SetVisibility(ESlateVisibility::Visible);
 	}
@@ -69,5 +70,6 @@ void UMainHudWidget::OpenShop(UDataTable* ItemList)
 
 void UMainHudWidget::CloseShop()
 {
+	ShopState = EOpenState::Close;
 	Shop->SetVisibility(ESlateVisibility::Hidden);
 }
