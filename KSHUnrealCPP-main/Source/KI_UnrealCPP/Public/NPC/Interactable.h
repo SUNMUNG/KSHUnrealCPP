@@ -22,7 +22,8 @@ class KI_UNREALCPP_API IInteractable
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-
+	// 상호작용 되는 대상이 실제로 할 행동 수행
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interactable")
 	void OnInteraction();
+
 };

@@ -6,7 +6,6 @@
 #include "Blueprint/UserWidget.h"
 #include "ShopWidget.generated.h"
 
-class UInventoryComponent;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnShopCloseRequested);
 /**
  * 
@@ -15,37 +14,38 @@ UCLASS()
 class KI_UNREALCPP_API UShopWidget : public UUserWidget
 {
 	GENERATED_BODY()
+
+protected:
+	virtual void NativeConstruct() override;
+
 public:
 	void InitializeShop(UDataTable* ItemList);
 
-	UFUNCTION()
-	void OnExitClicked();
-
-	void InitializeShopWidget(UInventoryComponent* InInventoryComponent);
+	void AddToItemSellDelegate(const FScriptDelegate& Delegate);	
+		
 	UFUNCTION()
 	void UpdateAllBuyButtonState(int32 _);
-protected:
 
+protected:
 	void ResetShopItemListWidget();
 
-	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
+private:
+	UFUNCTION()
+	void OnExitButtonClicked();
 
-	virtual void NativeConstruct() override;
 public:
-	UPROPERTY(BlueprintAssignable, Category = "UI|Shop")
 	FOnShopCloseRequested OnShopCloseRequested;
-
+	
 protected:
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<class UButton> ExitButton = nullptr;
+	UPROPERTY(BlueprintReadOnly, Category = "Shop|Sell", meta = (BindWidget))
+	TObjectPtr<class UShopItemSellWidget> ItemSellWidget;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Shop|Buy", meta = (BindWidget))
-	TObjectPtr<class UShopItemListWidget> ItemListWidget = nullptr;
+	UPROPERTY(BlueprintReadOnly, Category = "Shop|Buy", meta = (BindWidget))
+	TObjectPtr<class UShopItemListWidget> ItemListWidget;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Shop", meta = (BindWidget))
+	TObjectPtr<class UButton> Exit;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Shop|Buy")
 	TWeakObjectPtr<UDataTable> ShopItemList = nullptr;
-private:
-
-	UPROPERTY()
-	TWeakObjectPtr<UInventoryComponent> TargetInventory = nullptr;
 };

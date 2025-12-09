@@ -32,12 +32,9 @@ public:
 	void CloseInventory();
 
 	UFUNCTION(BlueprintCallable, Category = "UI|Shop")
-	void OpenShopUI();
+	void OpenShop(UDataTable* ItemList);
 
 	UFUNCTION(BlueprintCallable, Category = "UI|Shop")
-	void CloseShopUI();
-
-	void OpenShop(UDataTable* ItemList);
 	void CloseShop();
 
 	void AddToInventoryCloseDelegate(const FScriptDelegate& Delegate)
@@ -47,6 +44,7 @@ public:
 			Inventory->OnInventoryCloseRequested.Add(Delegate);
 		}
 	}
+
 	void AddToShopCloseDelegate(const FScriptDelegate& Delegate)
 	{
 		if (Shop)
@@ -55,31 +53,26 @@ public:
 		}
 	}
 
-	inline EOpenState GetInventoryOpenState() const { return InventoryOpenState; }	
-	inline EOpenState GetShopOpenState() const { return ShopOpenState; }	
+	inline EOpenState GetOpenState() const { return OpenState; }	
 	inline UInventoryWidget* GetInventoryWidget() const { return Inventory; }
-
-	inline UShopWidget* GetShopWidget() const { return Shop; }
 
 protected:
 	// meta = (BindWidget)
 	// 위젯 블루프린트의 변수와 이 클래스의 변수를 바인드하겠다라는 의미(=둘이 같은 거라고 설정)
 	// 위젯 블루프린트의 변수명과 이 클래스의 변수명이 반드시 같아야 한다.(대소문자도 같아야 한다)
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Resource", meta = (BindWidget))
+	UPROPERTY(BlueprintReadOnly, Category = "Resource", meta = (BindWidget))
 	TObjectPtr<class UResourceBarWidget> HealthBar = nullptr;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Resource", meta = (BindWidget))
+	UPROPERTY(BlueprintReadOnly, Category = "Resource", meta = (BindWidget))
 	TObjectPtr<class UResourceBarWidget> StaminaBar = nullptr;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory", meta = (BindWidget))
+	UPROPERTY(BlueprintReadOnly, Category = "Inventory", meta = (BindWidget))
 	TObjectPtr<UInventoryWidget> Inventory = nullptr;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Shop", meta = (BindWidget))
-	TObjectPtr<UShopWidget> Shop = nullptr;
+	UPROPERTY(BlueprintReadOnly, Category = "Shop", meta = (BindWidget))
+	TObjectPtr<class UShopWidget> Shop = nullptr;
 
 private:
-	EOpenState InventoryOpenState = EOpenState::Close;
-
-	EOpenState ShopOpenState = EOpenState::Close;
+	EOpenState OpenState = EOpenState::Close;
 	
 };

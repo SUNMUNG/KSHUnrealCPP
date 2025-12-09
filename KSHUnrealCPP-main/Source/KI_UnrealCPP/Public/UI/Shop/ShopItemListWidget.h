@@ -13,19 +13,19 @@ UCLASS()
 class KI_UNREALCPP_API UShopItemListWidget : public UUserWidget
 {
 	GENERATED_BODY()
-public:
-	void ResetItemList(UDataTable* ItemList);
 
-	void UpdateAllBuyButton();
 protected:
-
 	virtual void NativeConstruct() override;
 
+public:
+	void ResetItemList(UDataTable* ItemList);
+	void UpdateAllBuyButton();
 
 protected:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	TObjectPtr<class UVerticalBox> ItemBoxContainer = nullptr;
+	TObjectPtr<class UVerticalBox> ItemBuyContainer;
 
 	UPROPERTY(BlueprintReadOnly)
-	TArray<class UItemBuyWidget*> ShopItems;
+	TArray<class UShopItemBuyWidget*> ShopItems;
+	
 };

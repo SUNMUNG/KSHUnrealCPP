@@ -8,7 +8,6 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryCloseRequested);
 
-
 /**
  * 
  */
@@ -35,14 +34,19 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "UI|Inventory")
 	FOnInventoryCloseRequested OnInventoryCloseRequested;
 
-
 protected:
 	// 드래그 완료
 	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
-	
+		
 private:
 	UFUNCTION()
 	void OnCloseClicked();
+
+	UFUNCTION()
+	void OpenDetailInfo(int InSlotIndex);
+
+	UFUNCTION()
+	void CloseDetailInfo();
 
 	UFUNCTION(BlueprintCallable, Category = "UI|Inventory")
 	inline bool IsValidIndex(int32 InSlotIndex) const {
@@ -50,14 +54,17 @@ private:
 	};
 
 protected:
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<class UButton> CloseButton = nullptr;
 
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<class UUniformGridPanel> SlotGridPanel = nullptr;
 
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<class UGoldPanelWidget> GoldPanel = nullptr;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	TObjectPtr<class UDetailInfoWidget> DetailInfoPanel = nullptr;
 
 private:
 	UPROPERTY()

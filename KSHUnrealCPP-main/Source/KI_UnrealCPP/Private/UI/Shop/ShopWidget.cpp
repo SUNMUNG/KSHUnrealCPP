@@ -2,10 +2,20 @@
 
 
 #include "UI/Shop/ShopWidget.h"
-#include "UI/Inventory/InventoryDragDropOperation.h"
-#include "Player/InventoryComponent.h"
+#include "UI/Shop/ShopItemSellWidget.h"
 #include "UI/Shop/ShopItemListWidget.h"
 #include "Components/Button.h"
+
+void UShopWidget::NativeConstruct()
+{
+	Super::NativeConstruct();
+	ResetShopItemListWidget();
+
+	if (Exit)
+	{
+		Exit->OnClicked.AddDynamic(this, &UShopWidget::OnExitButtonClicked);
+	}
+}
 
 void UShopWidget::InitializeShop(UDataTable* ItemList)
 {
@@ -13,55 +23,32 @@ void UShopWidget::InitializeShop(UDataTable* ItemList)
 	ResetShopItemListWidget();
 }
 
-void UShopWidget::OnExitClicked()
+void UShopWidget::AddToItemSellDelegate(const FScriptDelegate& Delegate)
 {
-	OnShopCloseRequested.Broadcast();
+	ItemSellWidget->OnItemSell.Add(Delegate);
 }
-
-void UShopWidget::InitializeShopWidget(UInventoryComponent* InInventoryComponent)
-{
-	TargetInventory = InInventoryComponent;
-}
-
-
 
 void UShopWidget::UpdateAllBuyButtonState(int32 _)
 {
-	if (GetVisibility() == ESlateVisibility::Visible) {
-		ItemListWidget->UpdateAllBuyButton();
+	//UE_LOG(LogTemp, Log, TEXT("UpdateAllBuyButtonState"));
+	if (GetVisibility() == ESlateVisibility::Visible
+		|| GetVisibility() == ESlateVisibility::SelfHitTestInvisible)	// 자신이 열려있으면
+	{
+		//UE_LOG(LogTemp, Log, TEXT("UpdateAllBuyButtonState : Visible"));
+		ItemListWidget->UpdateAllBuyButton();	// 아이템 리스트 위젯에게 구매 버튼 업데이트 하라고 지시
 	}
 }
 
 void UShopWidget::ResetShopItemListWidget()
 {
-	if (ShopItemList.IsValid()) {
+	if (ShopItemList.IsValid())
+	{
 		ItemListWidget->ResetItemList(ShopItemList.Get());
 	}
 }
 
-bool UShopWidget::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
+void UShopWidget::OnExitButtonClicked()
 {
-	UInventoryDragDropOperation* invenOp = Cast<UInventoryDragDropOperation>(InOperation);
-	if (invenOp && invenOp->ItemData.IsValid())
-	{
-		if (TargetInventory.IsValid()) {
-			TargetInventory->SetItemAtIndex(invenOp->StartIndex, invenOp->ItemData.Get(), invenOp->Count);
-			UE_LOG(LogTemp, Log, TEXT("인벤토리에 드랍 : 원래 슬롯(%d)으로 아이템이 돌아가야 한다."), invenOp->StartIndex);
-			return true;
-		}
-		else {
-			UE_LOG(LogTemp, Log, TEXT("TargetInventory X"), invenOp->StartIndex);
-		}
-	}
-	
-	return false;
+	//UE_LOG(LogTemp, Log, TEXT("OnExitButtonClicked"));
+	OnShopCloseRequested.Broadcast();
 }
-
-void UShopWidget::NativeConstruct()
-{
-	Super::NativeConstruct();
-	ExitButton->OnClicked.AddDynamic(this, &UShopWidget::OnExitClicked);
-
-	ResetShopItemListWidget();
-}
-

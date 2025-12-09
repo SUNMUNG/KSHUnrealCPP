@@ -23,5 +23,5 @@ public:
 	TWeakObjectPtr<UItemDataAsset> ItemData = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory|Slot")
-	int32 Count = -1;
+	int32 Count = 0;
 };

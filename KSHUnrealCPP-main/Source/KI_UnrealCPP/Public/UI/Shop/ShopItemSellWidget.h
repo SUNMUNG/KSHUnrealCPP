@@ -4,19 +4,21 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "ItemSellWidget.generated.h"
+#include "ShopItemSellWidget.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnItemSell);
 /**
  * 
  */
 UCLASS()
-class KI_UNREALCPP_API UItemSellWidget : public UUserWidget
+class KI_UNREALCPP_API UShopItemSellWidget : public UUserWidget
 {
 	GENERATED_BODY()
+public:
+	FOnItemSell OnItemSell;
+	
 protected:
+	// 드래그 완료
 	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
 
-private:
-	UPROPERTY()
-	TWeakObjectPtr<class UInventoryComponent> TargetInventory = nullptr;
 };

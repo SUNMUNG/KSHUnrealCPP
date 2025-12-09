@@ -4,9 +4,10 @@
 #include "NPC/Merchant.h"
 #include "Components/WidgetComponent.h"
 #include "Components/SphereComponent.h"
-#include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Player/Interactor.h"
+#include "Player/ActionPlayerController.h"
 
 // Sets default values
 AMerchant::AMerchant()
@@ -14,55 +15,56 @@ AMerchant::AMerchant()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-
 	TextWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("TextWidget"));
 	TextWidgetComponent->SetupAttachment(RootComponent);
 	TextWidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
 	TextWidgetComponent->SetVisibility(false);
-	
+
 	InteractionBound = CreateDefaultSubobject<USphereComponent>(TEXT("InteractionBound"));
 	InteractionBound->SetupAttachment(RootComponent);
-	InteractionBound->SetSphereRadius(500.0f);
+	InteractionBound->SetSphereRadius(300.0f);
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->SetupAttachment(RootComponent);
 
-	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-	Camera->SetupAttachment(SpringArm);
-
-	
-}
-
-void AMerchant::OnInteraction_Implementation()
-{
+	LookCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("LookCamera"));
+	LookCamera->SetupAttachment(SpringArm);
 }
 
 // Called when the game starts or when spawned
 void AMerchant::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	OnActorBeginOverlap.AddDynamic(this,&AMerchant::OnInteractionOverlap);
-	OnActorEndOverlap.AddDynamic(this, &AMerchant::OnInteractionEndOverlap);
+
+	OnActorBeginOverlap.AddDynamic(this, &AMerchant::OnInteractionBeginOverlap);
+	OnActorEndOverlap.AddDynamic(this, &AMerchant::OnInteractionEndOverlap);	
 }
 
-void AMerchant::OnInteractionOverlap(AActor* OverlappedActor, AActor* OtherActor)
+void AMerchant::OnInteraction_Implementation()
 {
-	TextWidgetComponent->SetVisibility(true);
+	// 상점 열기
+	UE_LOG(LogTemp, Log, TEXT("상점을 엽니다. (%s)"), *GetActorLabel());
+	UWorld* world = GetWorld();
+	if (AActionPlayerController* pc = world->GetFirstPlayerController<AActionPlayerController>())
+	{
+		pc->OpenShopWidget(this);
+	}
+}
 
-	if (OtherActor->Implements<UInteractor>()) {
-		IInteractor::Execute_SetInteractionTarget(OtherActor, this);
+void AMerchant::OnInteractionBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
+{
+	if (OtherActor->Implements<UInteractor>())
+	{
+		TextWidgetComponent->SetVisibility(true);
+		IInteractor::Execute_AddInteractionTarget(OtherActor, this);
 	}
 }
 
 void AMerchant::OnInteractionEndOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
-
-	if (OtherActor->Implements<UInteractor>()) {
+	if (OtherActor->Implements<UInteractor>())
+	{
 		IInteractor::Execute_ClearInteractionTarget(OtherActor, this);
+		TextWidgetComponent->SetVisibility(false);
 	}
-	TextWidgetComponent->SetVisibility(false);
 }
-
-
-

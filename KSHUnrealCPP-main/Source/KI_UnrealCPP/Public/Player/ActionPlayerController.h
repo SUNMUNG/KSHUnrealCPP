@@ -33,7 +33,7 @@ public:
 	UFUNCTION()
 	void CloseInventoryWidget();
 
-	void OpenShopWidget();
+	void OpenShopWidget(class AMerchant* TargetMerchant);
 	UFUNCTION()
 	void CloseShopWidget();
 
@@ -45,7 +45,10 @@ public:
 private:
 	void OnLookInput(const FInputActionValue& InValue);
 	void OnInventoryOnOff();	
-	void OnShopOnOff();
+
+	void FreezePlayer();
+	void UnFreezePlayer();
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputMappingContext> DefaultMappingContext = nullptr;
@@ -55,9 +58,6 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> IA_InventoryOnOff = nullptr;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
-	TObjectPtr<UInputAction> IA_ShopOnOff = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera|Pitch")
 	float VewPitchMin = -40;
@@ -69,6 +69,5 @@ private:
 	int32 GameInputPriority = 1;
 	TWeakObjectPtr<UMainHudWidget> MainHudWidget = nullptr;
 	TWeakObjectPtr<UInventoryWidget> InventoryWidget = nullptr;
-	TWeakObjectPtr<class UShopWidget> ShopWidget = nullptr;
 	TWeakObjectPtr<class UInventoryComponent> InventoryComponent = nullptr;
 };

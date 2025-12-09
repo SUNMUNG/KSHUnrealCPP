@@ -11,7 +11,6 @@
 #include "Player/StatusComponent.h"
 #include "Player/WeaponManagerComponent.h"
 #include "Player/InventoryComponent.h"
-#include "NPC/Interactable.h"
 #include "Weapon/WeaponActor.h"
 #include "Weapon/UsedWeapon.h"
 #include "Weapon/ConsumableWeapon.h"
@@ -20,6 +19,7 @@
 #include "Item/PickupWeapon.h"
 #include "Item/PickupItem.h"
 #include "Framework/PickupFactorySubsystem.h"
+#include "NPC/Interactable.h"
 
 // Sets default values
 AActionCharacter::AActionCharacter()
@@ -86,6 +86,7 @@ void AActionCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	SpendRunStamina(DeltaTime);
+	UpdateInteractionTargetOrder();
 }
 
 // Called to bind functionality to input
@@ -107,7 +108,7 @@ void AActionCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 			});
 		enhanced->BindAction(IA_Roll, ETriggerEvent::Triggered, this, &AActionCharacter::OnRollInput);
 		enhanced->BindAction(IA_Attack, ETriggerEvent::Triggered, this, &AActionCharacter::OnAttackInput);
-		enhanced->BindAction(IA_InterAction, ETriggerEvent::Triggered, this, &AActionCharacter::OnInterActionInput);
+		enhanced->BindAction(IA_Interaction, ETriggerEvent::Triggered, this, &AActionCharacter::OnInteractionInput);
 	}
 }
 
@@ -158,12 +159,9 @@ void AActionCharacter::RemoveMoney_Implementation(int32 Expense)
 	Inventory->AddMoney(-Expense);
 }
 
-bool AActionCharacter::HasEnoughMoney_Implementation(int32 InPrice)
-{
-	if (Inventory->GetMoney() - InPrice < 0) {
-		return false;
-	}
-	return true;
+bool AActionCharacter::HasEnoughMoney_Implementation(int32 Amount)
+{	
+	return Amount <= Inventory->GetMoney();
 }
 
 void AActionCharacter::HealHealth_Implementation(float InHeal)
@@ -182,52 +180,34 @@ void AActionCharacter::DamageHealth_Implementation(float InDamage)
 	}
 }
 
-void AActionCharacter::SetInteractionTarget_Implementation(AActor* Intarget)
-{
-	/*if (Intarget->Implements<UInteractable>()) {
-		InteractionTargets.Add(Intarget);
-		FVector currentLocation = GetActorLocation();
-		InteractionTargets.Sort([currentLocation](const AActor& A, const AActor& B)
-			{
-				if (!IsValid(&A) || !IsValid(&B)) return false;
-
-				float DistSqA = FVector::DistSquared(A.GetActorLocation(), currentLocation);
-				float DistSqB = FVector::DistSquared(B.GetActorLocation(), currentLocation);
-
-				return DistSqA < DistSqB;
-			});
-		
-	}*/
-
-
-	//if (InteractionTargets.IsValid()) {
-	//	float distanceOld = FVector::DistSquared(GetActorLocation(), InteractionTarget->GetActorLocation());
-	//	float distanceNew = FVector::DistSquared(GetActorLocation(), Intarget->GetActorLocation());
-	//	if (distanceNew < distanceOld) {
-	//		InteractionTarget = Intarget;
-	//	}
-	//}
-	//else {
-	//	InteractionTargets = Intarget;
-	//}
-	
-}
-
-void AActionCharacter::ClearInteractionTarget_Implementation(AActor* Intarget)
-{
-	
-}
-
-void AActionCharacter::TryInteraction_Implementation()
-{
-	
-}
-
 void AActionCharacter::RecoveryStamina_Implementation(float InRecovery)
 {
 	if (Resource)
 	{
 		Resource->AddStamina(InRecovery);
+	}
+}
+
+void AActionCharacter::AddInteractionTarget_Implementation(AActor* InTarget)
+{
+	if (InTarget->Implements<UInteractable>())
+	{
+		InteractionTargets.Add(InTarget);
+
+		UpdateInteractionTargetOrder();		
+	}	
+}
+
+void AActionCharacter::ClearInteractionTarget_Implementation(AActor* InTarget)
+{
+	InteractionTargets.RemoveSingle(InTarget);	
+}
+
+void AActionCharacter::TryInteraction_Implementation()
+{
+	if (!InteractionTargets.IsEmpty())
+	{
+		IInteractable::Execute_OnInteraction(InteractionTargets[0].Get());
 	}
 }
 
@@ -355,8 +335,9 @@ void AActionCharacter::OnAttackInput(const FInputActionValue& InValue)
 	}
 }
 
-void AActionCharacter::OnInterActionInput(const FInputActionValue& InValue)
+void AActionCharacter::OnInteractionInput(const FInputActionValue& InValue)
 {
+	IInteractor::Execute_TryInteraction(this);
 }
 
 void AActionCharacter::SetSprintMode()
@@ -469,6 +450,33 @@ void AActionCharacter::DropCurrentWeapon(EWeaponCode WeaponCode)
 			{
 				pickupWeapon->SetWeaponUseCount(consumableWeapon->GetRemainingUseCount());
 			}			
+		}
+	}
+}
+
+bool AActionCharacter::IsChangeOrder(AActor* InTarget1, AActor* InTarget2)
+{
+	float distanceOld = FVector::DistSquared(GetActorLocation(), InTarget1->GetActorLocation());
+	float distanceNew = FVector::DistSquared(GetActorLocation(), InTarget2->GetActorLocation());
+	return distanceNew < distanceOld;
+}
+
+void AActionCharacter::UpdateInteractionTargetOrder()
+{
+	if (InteractionTargets.Num() > 1)	// 최소한으로 실행하기 위해 2개 이상일 때만 처리
+	{
+		for (int32 i = InteractionTargets.Num() - 1; i > 0; i--)
+		{
+			if (IsChangeOrder(InteractionTargets[i - 1].Get(), InteractionTargets[i].Get()))
+			{
+				AActor* temp = InteractionTargets[i - 1].Get();
+				InteractionTargets[i - 1] = InteractionTargets[i].Get();
+				InteractionTargets[i] = temp;
+			}
+			else
+			{
+				break;	// 변경되지 않았다 = 적절한 위치다 = 그만 확인해도 된다
+			}
 		}
 	}
 }

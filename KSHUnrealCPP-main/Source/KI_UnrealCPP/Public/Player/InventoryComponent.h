@@ -5,8 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Data/ItemDataAsset.h"
-#include "UI/Inventory/TempSlotWidget.h"
-#include "UI/Inventory/DetailInfoWidget.h"
+#include "UI/Inventory/TemporarySlotWidget.h"
 #include "InventoryComponent.generated.h"
 
 
@@ -22,22 +21,20 @@ public:
 
 	// 헬퍼------------------------------------------------------------------------------------
 	// 이 슬롯이 비어있는지 확인하는 함수
-	bool IsEmpty() const { return ItemData == nullptr || Count < 1; }
+	inline bool IsEmpty() const { return ItemData == nullptr || Count < 1; }
 	// 이 슬롯이 가득차있는지 확인하는 함수
-	bool IsFull() const { return ItemData && Count >= ItemData->ItemMaxStackCount; }
+	inline bool IsFull() const { return ItemData && Count >= ItemData->ItemMaxStackCount; }
 	// 슬롯을 비우는 함수
-	void Clear()
+	inline void Clear()
 	{
 		ItemData = nullptr;
 		Count = 0;
 	}
 
 	// getter/setter
-	inline int32 GetRemainingCount()const { 
-		return ItemData ? ItemData->ItemMaxStackCount - Count : 0;
-	}
-	int32 GetCount() const { return Count; }
-	void SetCount(int32 NewCount) {
+	inline int32 GetRemainingCount() const { return ItemData ? ItemData->ItemMaxStackCount - Count : 0; }
+	inline int32 GetCount() const { return Count; }
+	inline void SetCount(int32 NewCount) {
 		if (ItemData && NewCount > 0)
 		{
 			Count = FMath::Min(NewCount, ItemData->ItemMaxStackCount);	// NewCount는 0~ItemMaxStackCount 범위의 값
@@ -55,6 +52,7 @@ protected:
 };
 
 DECLARE_DYNAMIC_DELEGATE_OneParam(FOnInventorySlotChanged, int32, InIndex);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventorySlotCleared);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryMoneyChanged, int32, CurrentMoney);
 
 // 여러개의 아이템 슬롯을 가진다.
@@ -75,15 +73,13 @@ public:
 	// 인벤토리에서 특정 슬롯에 변화가 있었을 때 호출되는 델리게이트
 	FOnInventorySlotChanged OnInventorySlotChanged;
 
+	// 인벤토리에서 특정 슬롯이 비워졌을 때 호출되는 델리게이트
+	FOnInventorySlotCleared OnInventorySlotCleared;
+
 	// 인벤토리 내의 금액 변화가 있을 때 호출되는 델리게이트
 	FOnInventoryMoneyChanged OnInventoryMoneyChanged;
 
 public:	
-	// 아이템을 특정칸에 추가하는 함수(초기화, 로딩 등에 사용)
-	// InSlotIndex: 아이템이 추가될 슬롯, InItemData: 추가되는 아이템의 종류, InCount: 추가되는 아이템의 갯수	
-	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	void SetItemAtIndex(int32 InSlotIndex,UItemDataAsset* InItemData, int32 InCount);
-
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void AddMoney(int32 InIncome);
 
@@ -95,9 +91,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void UseItem(int32 InUseIndex);
 		
-	UFUNCTION()
-	inline int32 GetMoney() { return Money; }
-
 	// 특정 칸에 있는 아이템의 갯수를 조절하는 함수(증가/감소)
 	// InSlotIndex: 변경할 슬롯, InDeltaCount: 변화량
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
@@ -107,6 +100,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void ClearSlotAtIndex(int32 InSlotIndex);
 
+	// 아이템을 특정칸에 추가하는 함수(초기화, 로딩 등에 사용)
+	// InSlotIndex: 아이템이 추가될 슬롯, InItemData: 추가되는 아이템의 종류, InCount: 추가되는 아이템의 갯수	
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void SetItemAtIndex(int32 InSlotIndex, UItemDataAsset* InItemData, int32 InCount);
+
 	// 특정 슬롯을 확인하기 위한 함수. 읽기 전용. (InSlotIndex: 확인할 슬롯)	
 	FInvenSlot* GetSlotData(int32 InSlotIndex);
 
@@ -115,33 +113,21 @@ public:
 		return InSlotIndex < InventorySize && InSlotIndex >= 0;
 	};
 
-
-	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	inline TSubclassOf<UTempSlotWidget> GetTempSlotWidget() {
-		return TempSlotWidgetClass;
-	};
-
-	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	inline TSubclassOf<UDetailInfoWidget> GetDetailInfoWidget() {
-		return DetailInfoWidgetClass;
-	};
-
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	inline int32 GetInventorySize() const { return InventorySize; }
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	inline TSubclassOf<UTemporarySlotWidget> GetTemporarySlotWidgetClass() const { return TemporarySlotWidgetClass; }
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	inline int32 GetMoney() { return Money; }
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
 	int32 InventorySize = 10;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
-	TSubclassOf<UTempSlotWidget> TempSlotWidgetClass = nullptr;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
-	TSubclassOf<UDetailInfoWidget> DetailInfoWidgetClass = nullptr;
-
-
-	/*UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
-	TSharedRef<UDetailInfoWidget> DetailInfoWidgetClassTest;*/
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Inventory")
+	TSubclassOf<UTemporarySlotWidget> TemporarySlotWidgetClass = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Inventory|Money")
 	int32 Money = 0;
@@ -151,11 +137,9 @@ protected:
 
 		
 private:
-	
-
 	// 같은 종류의 아이템이 있는 슬롯을 찾는 함수
 	// InItemData: 비교할 아이템의 종류, InStartIndex: 찾기 시작할 인덱스
-	int32 FindSlotWithItem(UItemDataAsset* InItemData, int32 InStartIndex = 0);
+	int32 FindSlotWithItem(const UItemDataAsset* InItemData, int32 InStartIndex = 0);
 
 	// 비어있는 슬롯을 찾는 함수
 	int32 FindEmptySlot();

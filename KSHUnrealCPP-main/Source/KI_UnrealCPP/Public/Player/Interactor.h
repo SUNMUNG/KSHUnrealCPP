@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
 #include "Interactor.generated.h"
+
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI)
 class UInteractor : public UInterface
@@ -22,13 +23,11 @@ class KI_UNREALCPP_API IInteractor
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interactor")
-	void SetInteractionTarget(AActor* Intarget);
+	void AddInteractionTarget(AActor* InTarget);
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interactor")
+	void ClearInteractionTarget(AActor* InTarget);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interactor")
 	void TryInteraction();
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interactor")
-	void ClearInteractionTarget(AActor* Intarget);
-
 };

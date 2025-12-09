@@ -37,7 +37,7 @@ public:
 	void RemoveMoney(int32 Expense);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Inventory")
-	bool HasEnoughMoney(int32 InPrice);
+	bool HasEnoughMoney(int32 Amount);
 		
 	virtual class UInventoryComponent* GetInventoryComponent() const = 0;
 };
