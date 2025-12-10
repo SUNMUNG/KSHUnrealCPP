@@ -62,9 +62,9 @@ void UMainHudWidget::OpenShop(UDataTable* ItemList)
 {
 	if (ItemList)
 	{
-		ShopState = EOpenState::Open;
 		Shop->InitializeShop(ItemList);
 		Shop->SetVisibility(ESlateVisibility::Visible);
+		ShopState = EOpenState::Open;
 	}
 }
 

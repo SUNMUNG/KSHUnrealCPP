@@ -52,11 +52,12 @@ public:
 			Shop->OnShopCloseRequested.Add(Delegate);
 		}
 	}
-	inline bool IsInventoryOpen() const { return InventoryState == EOpenState::Open; }
-	inline bool IsShopOpen() const { return ShopState == EOpenState::Open; }
-
+	
 	inline EOpenState GetInventoryState() const { return InventoryState; }	
 	inline UInventoryWidget* GetInventoryWidget() const { return Inventory; }
+
+	inline bool IsInventoryOpen() const { return InventoryState == EOpenState::Open; }
+	inline bool IsShopOpen() const { return ShopState == EOpenState::Open; }
 
 protected:
 	// meta = (BindWidget)
